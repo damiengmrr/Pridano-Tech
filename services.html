@@ -1,0 +1,188 @@
+<!doctype html><html lang="fr"><head>
+    <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Services · Pridano Tech</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script><script src="https://unpkg.com/lucide@latest"></script>
+    </head><body class="font-[Inter] min-h-screen text-gray-100 bg-gray-950">
+    <!-- Background global -->
+    <div class="fixed inset-0 -z-10 overflow-hidden">
+      <!-- Aurora Layer -->
+      <div class="absolute inset-0" style="
+        background:
+          radial-gradient(50% 80% at 30% 20%, rgba(124,58,237,.25), transparent 70%),
+          radial-gradient(60% 90% at 70% 80%, rgba(56,189,248,.18), transparent 80%),
+          radial-gradient(70% 100% at 50% 50%, rgba(236,72,153,.1), transparent 80%),
+          #080808;
+        filter: saturate(1.15) contrast(1.03);
+        animation: aurora 18s ease-in-out infinite alternate;">
+      </div>
+
+      <!-- Canvas Wireframe -->
+      <canvas id="bg-mesh" class="absolute inset-0 w-full h-full"></canvas>
+
+      <!-- Particles -->
+      <canvas id="bg-particles" class="absolute inset-0 w-full h-full"></canvas>
+    </div>
+    
+    <header class="sticky top-0 backdrop-blur border-b border-neutral-800">
+      <div class="max-w-7xl mx-auto flex items-center justify-between gap-6 px-6 py-4">
+        <a href="index.html" class="flex items-center gap-2"><i data-lucide="sparkles" class="w-5 h-5"></i><span class="text-sm font-light">Pridano Tech</span></a>
+        <nav class="hidden md:flex items-center gap-8">
+          <a class="text-sm text-neutral-300 hover:text-neutral-100 transition font-light" href="services.html">Services</a>
+          <a class="text-sm text-neutral-300 hover:text-neutral-100 transition font-light" href="projets.html">Projets</a>
+          <a class="text-sm text-neutral-300 hover:text-neutral-100 transition font-light" href="devis.html">Devis</a>
+        </nav>
+      </div>
+    </header>
+    
+    <main class="max-w-7xl mx-auto px-6 py-16 space-y-12">
+      <h1 class="text-3xl md:text-4xl font-light tracking-tight">Nos services</h1>
+    
+      <section class="grid md:grid-cols-3 gap-6">
+        <article class="p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md">
+          <div class="flex items-center gap-2 mb-3"><i data-lucide="layout-grid" class="w-5 h-5 text-indigo-300"></i><h2 class="font-light">Site vitrine & branding</h2></div>
+          <ul class="text-sm text-neutral-300 font-light space-y-2 list-disc list-inside">
+            <li>Design system Tailwind, typographies & couleurs</li>
+            <li>Pages clés : Accueil, Services, À propos, Contact</li>
+            <li>SEO on-page, perf & accessibilité</li>
+          </ul>
+        </article>
+    
+        <article class="p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md">
+          <div class="flex items-center gap-2 mb-3"><i data-lucide="shopping-bag" class="w-5 h-5 text-emerald-300"></i><h2 class="font-light">E-commerce</h2></div>
+          <ul class="text-sm text-neutral-300 font-light space-y-2 list-disc list-inside">
+            <li>Stripe/Shopify, panier, upsell, coupons</li>
+            <li>Fiches produits SEO, images optimisées</li>
+            <li>Intégrations logistique & analytics</li>
+          </ul>
+        </article>
+    
+        <article class="p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md">
+          <div class="flex items-center gap-2 mb-3"><i data-lucide="cpu" class="w-5 h-5 text-pink-300"></i><h2 class="font-light">SaaS & IA</h2></div>
+          <ul class="text-sm text-neutral-300 font-light space-y-2 list-disc list-inside">
+            <li>Auth, rôles, tableaux de bord</li>
+            <li>Chatbots, génération de contenu</li>
+            <li>Automatisations & APIs tierces</li>
+          </ul>
+        </article>
+      </section>
+    
+      <div class="text-center pt-6">
+        <a href="devis.html" class="inline-flex items-center gap-2 rounded-lg bg-neutral-100 text-black px-5 py-3 text-sm hover:bg-neutral-200 transition font-light">Demander un devis <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+      </div>
+    </main>
+    
+    <footer class="border-t border-white/10 py-8">
+      <div class="max-w-7xl mx-auto px-6 text-sm text-neutral-400">© Pridano Tech — 2025</div>
+    </footer>
+    <script>lucide.createIcons();</script>
+    <script type="module">
+    import * as THREE from 'https://cdn.skypack.dev/three@0.155.0';
+
+    // ---- Wireframe ----
+    const canvas = document.getElementById('bg-mesh');
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(55, innerWidth / innerHeight, 0.1, 100);
+    camera.position.set(0, 1.5, 3.5);
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
+    renderer.setSize(innerWidth, innerHeight);
+    renderer.setPixelRatio(window.devicePixelRatio);
+    const geometry = new THREE.PlaneGeometry(10, 10, 50, 50);
+    const material = new THREE.MeshBasicMaterial({ color: 0x6366f1, wireframe: true, opacity: 0.12, transparent: true });
+    const mesh = new THREE.Mesh(geometry, material);
+    mesh.rotation.x = -Math.PI / 2.3;
+    scene.add(mesh);
+    function animate() {
+      requestAnimationFrame(animate);
+      mesh.rotation.z += 0.0005;
+      renderer.render(scene, camera);
+    }
+    animate();
+    window.addEventListener('resize', () => {
+      camera.aspect = innerWidth / innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(innerWidth, innerHeight);
+    });
+
+    // ---- Soft Particles ----
+    (() => {
+      const c = document.getElementById('bg-particles'), ctx = c.getContext('2d');
+      let dpr = Math.max(1, window.devicePixelRatio || 1), W, H;
+      let particles = [], halos = [];
+      const mouse = {x: -9999, y: -9999};
+
+      function resize(){
+        W = c.width = innerWidth * dpr;
+        H = c.height = innerHeight * dpr;
+        c.style.width='100%'; c.style.height='100%';
+      }
+
+      function rand(a,b){ return a + Math.random()*(b-a); }
+
+      function init(n=70, h=12){
+        particles = Array.from({length:n}, _ => ({
+          x: rand(0,W), y: rand(0,H),
+          vx: rand(-.15,.15)*dpr, vy: rand(-.15,.15)*dpr,
+          r: rand(1.2,2.6)*dpr, hue: rand(200,280)
+        }));
+        halos = Array.from({length:h}, _ => ({
+          x: rand(0,W), y: rand(0,H),
+          vx: rand(-.03,.03)*dpr, vy: rand(-.03,.03)*dpr,
+          r: rand(50,140)*dpr, hue: rand(180,300)
+        }));
+      }
+
+      function drawParticle(p){
+        const grd = ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*3);
+        grd.addColorStop(0,`hsla(${p.hue},90%,70%,0.8)`);
+        grd.addColorStop(0.5,`hsla(${p.hue},90%,60%,0.25)`);
+        grd.addColorStop(1,`hsla(${p.hue},90%,60%,0)`);
+        ctx.fillStyle = grd;
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fill();
+      }
+
+      function drawHalo(h){
+        const grd = ctx.createRadialGradient(h.x,h.y,0,h.x,h.y,h.r);
+        grd.addColorStop(0,`hsla(${h.hue},100%,75%,0.08)`);
+        grd.addColorStop(0.4,`hsla(${h.hue},100%,65%,0.05)`);
+        grd.addColorStop(1,'rgba(0,0,0,0)');
+        ctx.fillStyle = grd;
+        ctx.beginPath();
+        ctx.arc(h.x,h.y,h.r,0,Math.PI*2);
+        ctx.fill();
+      }
+
+      function step(){
+        ctx.clearRect(0,0,W,H);
+        ctx.save();
+        ctx.globalCompositeOperation = 'lighter';
+        halos.forEach(h=>{
+          h.x+=h.vx; h.y+=h.vy;
+          if(h.x<0||h.x>W) h.vx*=-1;
+          if(h.y<0||h.y>H) h.vy*=-1;
+          drawHalo(h);
+        });
+        particles.forEach(p=>{
+          const dx = (mouse.x*dpr - p.x);
+          const dy = (mouse.y*dpr - p.y);
+          const dist = Math.hypot(dx,dy) || 1;
+          if(dist < 200*dpr){ p.vx += dx/dist*0.004; p.vy += dy/dist*0.004; }
+          p.x += p.vx; p.y += p.vy;
+          p.vx *= 0.985; p.vy *= 0.985;
+          if(p.x<0||p.x>W) p.vx*=-1;
+          if(p.y<0||p.y>H) p.vy*=-1;
+          drawParticle(p);
+        });
+        ctx.restore();
+        requestAnimationFrame(step);
+      }
+
+      window.addEventListener('mousemove', e=>{ mouse.x = e.clientX; mouse.y = e.clientY; }, {passive:true});
+      window.addEventListener('mouseleave', ()=>{ mouse.x = -9999; mouse.y = -9999; });
+      window.addEventListener('resize', ()=>{ resize(); init(particles.length, halos.length); });
+      resize(); init(); step();
+    })();
+    </script>
+    </body></html>

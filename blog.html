@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Blog &amp; Insights · Pridano Tech</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    /* chips + badges */
+    .chip{display:inline-flex;align-items:center;gap:.4rem;padding:.35rem .6rem;border-radius:9999px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);font-size:12px;line-height:1}
+    .chip[data-variant="guide"]{border-color:rgba(56,189,248,.25);background:rgba(56,189,248,.08);color:#bae6fd}
+    .chip[data-variant="case"]{border-color:rgba(147,197,253,.25);background:rgba(147,197,253,.08);color:#dbeafe}
+    .chip[data-variant="news"]{border-color:rgba(167,139,250,.25);background:rgba(167,139,250,.08);color:#e9d5ff}
+    .badge{display:inline-flex;align-items:center;gap:.4rem;padding:.25rem .5rem;border-radius:.5rem;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);font-size:11px}
+    /* cards */
+    .post-card{transition:transform .25s ease, box-shadow .25s ease, background .25s ease}
+    .post-card:hover{transform:translateY(-4px);box-shadow:0 10px 30px rgba(0,0,0,.35);background:rgba(255,255,255,.06)}
+    /* sticky filters */
+    .sticky-filters{position:sticky;top:64px;z-index:10;backdrop-filter:blur(10px);background:linear-gradient(180deg,rgba(10,10,10,.75),rgba(10,10,10,.35))}
+    .header-blur{backdrop-filter:blur(10px);background:linear-gradient(180deg,rgba(10,10,10,.72),rgba(10,10,10,.35))}
+    /* prose tweaks */
+    .kicker{letter-spacing:.08em}
+  </style>
+</head>
+<body class="font-[Inter] min-h-screen text-gray-100 bg-gray-950">
+  <!-- Background global -->
+  <div class="fixed inset-0 -z-10 overflow-hidden">
+    <!-- Aurora Layer -->
+    <div class="absolute inset-0" style="
+      background:
+        radial-gradient(50% 80% at 30% 20%, rgba(124,58,237,.25), transparent 70%),
+        radial-gradient(60% 90% at 70% 80%, rgba(56,189,248,.18), transparent 80%),
+        radial-gradient(70% 100% at 50% 50%, rgba(236,72,153,.1), transparent 80%),
+        #080808;
+      filter: saturate(1.15) contrast(1.03);
+      animation: aurora 18s ease-in-out infinite alternate;">
+    </div>
+
+    <!-- Canvas Wireframe -->
+    <canvas id="bg-mesh" class="absolute inset-0 w-full h-full"></canvas>
+
+    <!-- Particles -->
+    <canvas id="bg-particles" class="absolute inset-0 w-full h-full"></canvas>
+  </div>
+
+  <header class="sticky top-0 border-b border-neutral-800 header-blur">
+    <div class="max-w-7xl mx-auto flex items-center justify-between gap-6 px-6 py-4">
+      <a href="index.html" class="flex items-center gap-2"><i data-lucide="sparkles" class="w-5 h-5"></i><span class="text-sm font-light">Pridano Tech</span></a>
+      <nav class="hidden md:flex items-center gap-8">
+        <a class="text-sm text-neutral-300 hover:text-neutral-100 transition font-light" href="services.html">Services</a>
+        <a class="text-sm text-neutral-300 hover:text-neutral-100 transition font-light" href="projets.html">Projets</a>
+        <a class="text-sm text-neutral-300 hover:text-neutral-100 transition font-light" href="about.html">À propos</a>
+        <a class="text-sm text-neutral-300 hover:text-neutral-100 transition font-light" href="blog.html">Blog</a>
+        <a class="text-sm text-neutral-300 hover:text-neutral-100 transition font-light" href="devis.html">Devis</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-6 py-14 md:py-20 space-y-10">
+    <!-- Hero -->
+    <header class="space-y-4 max-w-3xl">
+      <span class="chip kicker uppercase text-white/70">Blog &amp; Insights</span>
+      <h1 class="text-3xl md:text-5xl font-semibold tracking-tight">Guides, études de cas et actus pour créer des sites qui performent</h1>
+      <p class="text-white/70">Des checklists actionnables, des retours d’expérience réels (NovaSpace, ModeX, ZenAgenda) et des actus produit Pridano. Tout ce qu’il faut pour passer un site de “beau” à “efficace”.</p>
+    </header>
+
+    <!-- Filters + search -->
+    <div class="sticky-filters rounded-xl border border-white/10 px-4 md:px-6 py-4">
+      <div class="flex flex-col md:flex-row md:items-center gap-4 md:gap-6">
+        <div class="flex flex-wrap gap-2">
+          <button class="chip" data-filter="all"><i data-lucide="rows" class="w-4 h-4"></i>Tous</button>
+          <button class="chip" data-filter="guide" data-variant="guide"><i data-lucide="check-circle-2" class="w-4 h-4"></i>Guides</button>
+          <button class="chip" data-filter="case" data-variant="case"><i data-lucide="briefcase" class="w-4 h-4"></i>Études de cas</button>
+          <button class="chip" data-filter="news" data-variant="news"><i data-lucide="megaphone" class="w-4 h-4"></i>Actus</button>
+        </div>
+        <div class="md:ml-auto flex items-center gap-2 w-full md:w-auto">
+          <i data-lucide="search" class="w-4 h-4 text-white/60"></i>
+          <input id="blog-search" type="search" placeholder="Rechercher un article..." class="w-full md:w-80 bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm outline-none focus:border-white/20">
+        </div>
+      </div>
+    </div>
+
+    <!-- Featured -->
+    <section aria-label="À la une" class="grid lg:grid-cols-2 gap-6">
+      <article class="post-card rounded-2xl border border-white/10 bg-white/5 overflow-hidden">
+        <div class="relative h-64">
+          <img class="absolute inset-0 w-full h-full object-cover" src="https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=1600&auto=format&fit=crop" alt="Étude de cas NovaSpace">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+        </div>
+        <div class="p-6 md:p-7 space-y-3">
+          <div class="flex items-center gap-2">
+            <span class="chip" data-variant="case"><i data-lucide="briefcase" class="w-4 h-4"></i>Étude de cas</span>
+            <span class="badge"><i data-lucide="timer" class="w-4 h-4"></i>6 min</span>
+            <span class="badge"><i data-lucide="calendar" class="w-4 h-4"></i>03 nov. 2025</span>
+          </div>
+          <h2 class="text-xl md:text-2xl font-semibold tracking-tight">NovaSpace : comment atteindre 100/100 Lighthouse avec un site 3D animé</h2>
+          <p class="text-white/70">Architecture Next.js, stratégie d’images, animations GSAP et optimisations réseau qui gardent l’effet “wow” sans sacrifier les perfs.</p>
+          <div class="flex items-center gap-3 pt-1">
+            <a href="novaspace.html" class="inline-flex items-center gap-2 rounded-lg bg-neutral-100 text-black px-3 py-2 text-sm hover:bg-neutral-200 transition">
+              Voir la démo <i data-lucide="external-link" class="w-4 h-4"></i>
+            </a>
+            <a href="#" class="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-black/40 text-white px-3 py-2 text-sm hover:bg-white/5 transition">
+              Lire l’article
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <aside class="rounded-2xl border border-white/10 bg-white/5 p-6 md:p-7">
+        <h3 class="text-lg font-semibold tracking-tight mb-3">Guides rapides</h3>
+        <ul class="space-y-3 text-sm">
+          <li class="flex items-start gap-3">
+            <i data-lucide="zap" class="w-4 h-4 mt-0.5 text-yellow-300"></i>
+            <a href="#" class="hover:underline">Checklist lancement : 20 points à valider avant de mettre un site en ligne</a>
+          </li>
+          <li class="flex items-start gap-3">
+            <i data-lucide="shield" class="w-4 h-4 mt-0.5 text-emerald-300"></i>
+            <a href="#" class="hover:underline">RGPD &amp; cookies : modèle simple et bonnes pratiques</a>
+          </li>
+          <li class="flex items-start gap-3">
+            <i data-lucide="line-chart" class="w-4 h-4 mt-0.5 text-sky-300"></i>
+            <a href="#" class="hover:underline">GA4 &amp; events : ce qu’on tracke sur les sites Pridano</a>
+          </li>
+        </ul>
+        <div class="mt-6 rounded-xl border border-white/10 bg-white/5 p-4">
+          <p class="text-sm text-white/70">Recevoir un guide par mois (pas de spam).</p>
+          <form class="mt-3 flex gap-2" onsubmit="event.preventDefault(); alert('Merci ! On t’envoie le prochain guide.');">
+            <input type="email" required placeholder="ton@email.fr" class="flex-1 bg-black/30 border border-white/10 rounded-lg px-3 py-2 text-sm outline-none focus:border-white/20">
+            <button class="inline-flex items-center gap-2 rounded-lg bg-neutral-100 text-black px-3 py-2 text-sm hover:bg-neutral-200 transition">
+              S’abonner <i data-lucide="mail" class="w-4 h-4"></i>
+            </button>
+          </form>
+        </div>
+      </aside>
+    </section>
+
+    <!-- Grid -->
+    <section id="posts-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Post 1: Guide -->
+      <article class="post-card rounded-2xl border border-white/10 bg-white/5 p-5" data-type="guide" data-title="Améliorer le taux de conversion d’une page d’accueil">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="chip" data-variant="guide"><i data-lucide="check-circle-2" class="w-4 h-4"></i>Guide</span>
+          <span class="badge"><i data-lucide="timer" class="w-4 h-4"></i>5 min</span>
+        </div>
+        <h3 class="text-lg font-semibold tracking-tight">Améliorer le taux de conversion d’une page d’accueil</h3>
+        <p class="text-sm text-white/70 mt-1.5">Structure AIDA, sections indispensables, hero qui convertit et CTA utiles.</p>
+        <a href="#" class="mt-4 inline-flex items-center gap-2 text-sm hover:underline">Lire <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+      </article>
+
+      <!-- Post 2: Case -->
+      <article class="post-card rounded-2xl border border-white/10 bg-white/5 p-5" data-type="case" data-title="ModeX : upsells & flows e-commerce">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="chip" data-variant="case"><i data-lucide="briefcase" class="w-4 h-4"></i>Étude de cas</span>
+          <span class="badge"><i data-lucide="timer" class="w-4 h-4"></i>7 min</span>
+        </div>
+        <h3 class="text-lg font-semibold tracking-tight">ModeX : upsells &amp; flows e‑commerce</h3>
+        <p class="text-sm text-white/70 mt-1.5">Bundles, AB testing, analytics et flows Klaviyo pour augmenter le panier moyen.</p>
+        <div class="mt-3 flex items-center gap-2">
+          <a href="modex.html" class="inline-flex items-center gap-2 rounded-lg border border-white/10 px-2.5 py-1.5 text-[13px] hover:bg-white/5">Voir la démo <i data-lucide="external-link" class="w-4 h-4"></i></a>
+          <a href="#" class="inline-flex items-center gap-2 text-sm hover:underline">Lire</a>
+        </div>
+      </article>
+
+      <!-- Post 3: Guide -->
+      <article class="post-card rounded-2xl border border-white/10 bg-white/5 p-5" data-type="guide" data-title="SEO technique de base pour un site Next.js">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="chip" data-variant="guide"><i data-lucide="check-circle-2" class="w-4 h-4"></i>Guide</span>
+          <span class="badge"><i data-lucide="timer" class="w-4 h-4"></i>4 min</span>
+        </div>
+        <h3 class="text-lg font-semibold tracking-tight">SEO technique de base pour un site Next.js</h3>
+        <p class="text-sm text-white/70 mt-1.5">Balises, OG, sitemap, robots, performances et pièges fréquents.</p>
+        <a href="#" class="mt-4 inline-flex items-center gap-2 text-sm hover:underline">Lire <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+      </article>
+
+      <!-- Post 4: News -->
+      <article class="post-card rounded-2xl border border-white/10 bg-white/5 p-5" data-type="news" data-title="Nouveau : générateur de devis connecté">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="chip" data-variant="news"><i data-lucide="megaphone" class="w-4 h-4"></i>Actu</span>
+          <span class="badge"><i data-lucide="timer" class="w-4 h-4"></i>2 min</span>
+        </div>
+        <h3 class="text-lg font-semibold tracking-tight">Nouveau : générateur de devis connecté</h3>
+        <p class="text-sm text-white/70 mt-1.5">Calcule les fourchettes, envoie un PDF propre et alerte l’équipe.</p>
+        <a href="devis.html" class="mt-4 inline-flex items-center gap-2 text-sm hover:underline">Voir <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+      </article>
+
+      <!-- Post 5: Case -->
+      <article class="post-card rounded-2xl border border-white/10 bg-white/5 p-5" data-type="case" data-title="ZenAgenda : SaaS prêt pour la prod">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="chip" data-variant="case"><i data-lucide="briefcase" class="w-4 h-4"></i>Étude de cas</span>
+          <span class="badge"><i data-lucide="timer" class="w-4 h-4"></i>8 min</span>
+        </div>
+        <h3 class="text-lg font-semibold tracking-tight">ZenAgenda : SaaS prêt pour la prod</h3>
+        <p class="text-sm text-white/70 mt-1.5">Rôles, exports, notifications, dashboard : comment on l’a structuré.</p>
+        <div class="mt-3 flex items-center gap-2">
+          <a href="zenagenda.html" class="inline-flex items-center gap-2 rounded-lg border border-white/10 px-2.5 py-1.5 text-[13px] hover:bg-white/5">Voir la démo <i data-lucide="external-link" class="w-4 h-4"></i></a>
+          <a href="#" class="inline-flex items-center gap-2 text-sm hover:underline">Lire</a>
+        </div>
+      </article>
+
+      <!-- Post 6: Guide -->
+      <article class="post-card rounded-2xl border border-white/10 bg-white/5 p-5" data-type="guide" data-title="Checklist accessibilité rapide (dev & design)">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="chip" data-variant="guide"><i data-lucide="check-circle-2" class="w-4 h-4"></i>Guide</span>
+          <span class="badge"><i data-lucide="timer" class="w-4 h-4"></i>3 min</span>
+        </div>
+        <h3 class="text-lg font-semibold tracking-tight">Checklist accessibilité rapide (dev &amp; design)</h3>
+        <p class="text-sm text-white/70 mt-1.5">Couleurs, contrastes, focus, lecteurs d’écran et pièges courants.</p>
+        <a href="#" class="mt-4 inline-flex items-center gap-2 text-sm hover:underline">Lire <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+      </article>
+    </section>
+
+    <!-- CTA -->
+    <section class="mt-10">
+      <div class="rounded-2xl border border-white/10 bg-white/5 p-6 md:p-8 flex flex-col md:flex-row md:items-center gap-6 md:gap-10">
+        <div class="flex-1">
+          <h3 class="text-xl md:text-2xl font-semibold tracking-tight">Besoin d’un site qui convertit vraiment ?</h3>
+          <p class="text-white/70 mt-1">On peut auditer votre site actuel gratuitement et vous donner 3 quick wins concrets.</p>
+        </div>
+        <a href="devis.html" class="inline-flex items-center gap-2 rounded-lg bg-neutral-100 text-black px-4 py-2 text-sm hover:bg-neutral-200 transition">
+          Demander un audit <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-white/10 py-8">
+    <div class="max-w-7xl mx-auto px-6 text-sm text-neutral-400">© Pridano Tech — 2025</div>
+  </footer>
+  <script>
+lucide.createIcons();
+
+// header blur on scroll (kept)
+const header = document.querySelector('header');
+function onScrollHeader(){ header?.classList.toggle('scrolled',(window.scrollY||0)>10); }
+window.addEventListener('scroll', onScrollHeader, {passive:true});
+onScrollHeader();
+
+// filters + search
+(function(){
+  const filterBtns = [...document.querySelectorAll('[data-filter]')];
+  const cards = [...document.querySelectorAll('#posts-grid article')];
+  const search = document.getElementById('blog-search');
+
+  let currentFilter = 'all';
+  function apply(){
+    const q = (search?.value || '').toLowerCase().trim();
+    cards.forEach(card=>{
+      const type = card.getAttribute('data-type');
+      const title = (card.getAttribute('data-title')||'').toLowerCase();
+      const matchType = (currentFilter==='all' || type===currentFilter);
+      const matchQuery = (!q || title.includes(q));
+      const show = matchType && matchQuery;
+      card.style.display = show ? '' : 'none';
+    });
+  }
+
+  filterBtns.forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      currentFilter = btn.getAttribute('data-filter');
+      filterBtns.forEach(b=>b.classList.remove('ring-1','ring-white/40'));
+      btn.classList.add('ring-1','ring-white/40');
+      apply();
+    });
+  });
+
+  search?.addEventListener('input', ()=>{
+    apply();
+  });
+
+  apply();
+})();
+  </script>
+
+  <script type="module">
+  import * as THREE from 'https://cdn.skypack.dev/three@0.155.0';
+
+  // ---- Wireframe ----
+  const canvas = document.getElementById('bg-mesh');
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(55, innerWidth / innerHeight, 0.1, 100);
+  camera.position.set(0, 1.5, 3.5);
+  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
+  renderer.setSize(innerWidth, innerHeight);
+  renderer.setPixelRatio(window.devicePixelRatio);
+  const geometry = new THREE.PlaneGeometry(10, 10, 50, 50);
+  const material = new THREE.MeshBasicMaterial({ color: 0x6366f1, wireframe: true, opacity: 0.12, transparent: true });
+  const mesh = new THREE.Mesh(geometry, material);
+  mesh.rotation.x = -Math.PI / 2.3;
+  scene.add(mesh);
+  function animate() {
+    requestAnimationFrame(animate);
+    mesh.rotation.z += 0.0005;
+    renderer.render(scene, camera);
+  }
+  animate();
+  window.addEventListener('resize', () => {
+    camera.aspect = innerWidth / innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(innerWidth, innerHeight);
+  });
+
+  // ---- Soft Particles ----
+  (() => {
+    const c = document.getElementById('bg-particles'), ctx = c.getContext('2d');
+    let dpr = Math.max(1, window.devicePixelRatio || 1), W, H;
+    let particles = [], halos = [];
+    const mouse = {x: -9999, y: -9999};
+
+    function resize(){
+      W = c.width = innerWidth * dpr;
+      H = c.height = innerHeight * dpr;
+      c.style.width='100%'; c.style.height='100%';
+    }
+
+    function rand(a,b){ return a + Math.random()*(b-a); }
+
+    function init(n=70, h=12){
+      particles = Array.from({length:n}, _ => ({
+        x: rand(0,W), y: rand(0,H),
+        vx: rand(-.15,.15)*dpr, vy: rand(-.15,.15)*dpr,
+        r: rand(1.2,2.6)*dpr, hue: rand(200,280)
+      }));
+      halos = Array.from({length:h}, _ => ({
+        x: rand(0,W), y: rand(0,H),
+        vx: rand(-.03,.03)*dpr, vy: rand(-.03,.03)*dpr,
+        r: rand(50,140)*dpr, hue: rand(180,300)
+      }));
+    }
+
+    function drawParticle(p){
+      const grd = ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*3);
+      grd.addColorStop(0,`hsla(${p.hue},90%,70%,0.8)`);
+      grd.addColorStop(0.5,`hsla(${p.hue},90%,60%,0.25)`);
+      grd.addColorStop(1,`hsla(${p.hue},90%,60%,0)`);
+      ctx.fillStyle = grd;
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fill();
+    }
+
+    function drawHalo(h){
+      const grd = ctx.createRadialGradient(h.x,h.y,0,h.x,h.y,h.r);
+      grd.addColorStop(0,`hsla(${h.hue},100%,75%,0.08)`);
+      grd.addColorStop(0.4,`hsla(${h.hue},100%,65%,0.05)`);
+      grd.addColorStop(1,'rgba(0,0,0,0)');
+      ctx.fillStyle = grd;
+      ctx.beginPath();
+      ctx.arc(h.x,h.y,h.r,0,Math.PI*2);
+      ctx.fill();
+    }
+
+    function step(){
+      ctx.clearRect(0,0,W,H);
+      ctx.save();
+      ctx.globalCompositeOperation = 'lighter';
+      halos.forEach(h=>{
+        h.x+=h.vx; h.y+=h.vy;
+        if(h.x<0||h.x>W) h.vx*=-1;
+        if(h.y<0||h.y>H) h.vy*=-1;
+        drawHalo(h);
+      });
+      particles.forEach(p=>{
+        const dx = (mouse.x*dpr - p.x);
+        const dy = (mouse.y*dpr - p.y);
+        const dist = Math.hypot(dx,dy) || 1;
+        if(dist < 200*dpr){ p.vx += dx/dist*0.004; p.vy += dy/dist*0.004; }
+        p.x += p.vx; p.y += p.vy;
+        p.vx *= 0.985; p.vy *= 0.985;
+        if(p.x<0||p.x>W) p.vx*=-1;
+        if(p.y<0||p.y>H) p.vy*=-1;
+        drawParticle(p);
+      });
+      ctx.restore();
+      requestAnimationFrame(step);
+    }
+
+    window.addEventListener('mousemove', e=>{ mouse.x = e.clientX; mouse.y = e.clientY; }, {passive:true});
+    window.addEventListener('mouseleave', ()=>{ mouse.x = -9999; mouse.y = -9999; });
+    window.addEventListener('resize', ()=>{ resize(); init(particles.length, halos.length); });
+    resize(); init(); step();
+  })();
+  </script>
+</body>
+</html>

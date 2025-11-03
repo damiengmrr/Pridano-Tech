@@ -1,0 +1,698 @@
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Pridano Tech · Sites web premium</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <meta name="description" content="Pridano Tech — agence web premium : sites vitrine, e-commerce, SaaS et IA. Design moderne, performances élevées et animations soignées.">
+<meta name="theme-color" content="#0f0f0f">
+<link rel="icon" href="/favicon.ico">
+<!-- Open Graph -->
+<meta property="og:title" content="Pridano Tech — Sites web premium">
+<meta property="og:description" content="Vitrine, e-commerce, SaaS & IA. Design moderne, perf et micro-interactions.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="/og-cover.jpg">
+<meta property="og:url" content="https://pridano.tech/">
+  
+    <!-- Utilities 3D SANS plugin JS (safe) -->
+    <style>
+      .rotate-y-20{--tw-rotate-y:20deg;transform:translate3d(var(--tw-translate-x,0),var(--tw-translate-y,0),0) rotateY(var(--tw-rotate-y)) scale(1)}
+      .-rotate-y-20{--tw-rotate-y:-20deg;transform:translate3d(var(--tw-translate-x,0),var(--tw-translate-y,0),0) rotateY(var(--tw-rotate-y)) scale(1)}
+      .rotate-z-15{--tw-rotate-z:15deg;transform:translate3d(0,0,0) rotateZ(var(--tw-rotate-z))}
+      .-rotate-z-15{--tw-rotate-z:-15deg;transform:translate3d(0,0,0) rotateZ(var(--tw-rotate-z))}
+      .transform-style-preserve-3d{transform-style:preserve-3d}
+      .perspective-normal{perspective:500px}
+      .header-blur { backdrop-filter: blur(6px); background: rgba(10,10,12,0.25); transition: background .25s ease, border-color .25s ease; }
+.header-blur.scrolled { background: rgba(10,10,12,0.55); border-color: rgba(255,255,255,0.08); }
+    </style>
+  </head>
+<body class="font-[Inter] flex flex-col min-h-screen text-gray-100 bg-gray-950 selection:bg-indigo-600/50">
+
+<!-- Background
+<div class="fixed inset-0 -z-10">
+  <iframe src="https://my.spline.design/worldplanet-inmHh7fVCul1jUFrNRYlotVU" frameborder="0" class="w-full h-full"></iframe>
+</div> -->
+
+<!-- Background combo: Aurora + Wireframe + Particles -->
+<div class="fixed inset-0 -z-10 overflow-hidden">
+    <!-- Aurora layer -->
+    <div class="absolute inset-0" style="
+      background:
+        radial-gradient(50% 80% at 30% 20%, rgba(124,58,237,.25), transparent 70%),
+        radial-gradient(60% 90% at 70% 80%, rgba(56,189,248,.18), transparent 80%),
+        radial-gradient(70% 100% at 50% 50%, rgba(236,72,153,.1), transparent 80%),
+        #080808;
+      filter: saturate(1.15) contrast(1.03);
+      animation: aurora 18s ease-in-out infinite alternate;">
+    </div>
+  
+    <!-- Wireframe layer -->
+    <canvas id="mesh" class="absolute inset-0"></canvas>
+  
+    <!-- Particle layer -->
+    <canvas id="bg-particles" class="absolute inset-0"></canvas>
+  </div>
+  
+  <style>
+    @keyframes aurora{
+      0%   { background-position: 0% 0%, 100% 20%, 60% 80%; }
+      100% { background-position: 10% 10%, 90% 25%, 55% 85%; }
+    }
+    .fixed.inset-0::after {
+      content: "";
+      position: absolute;
+      top: 40%;
+      left: 0;
+      right: 0;
+      height: 100px;
+      background: linear-gradient(to bottom, rgba(10,10,11,0) 0%, rgba(10,10,11,0.15) 50%, rgba(10,10,11,0) 100%);
+      pointer-events: none;
+    }
+  </style>
+  
+  <!-- Scripts -->
+  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+  <script>
+  /* --- Wireframe Mesh --- */
+  (() => {
+    const canvas = document.getElementById('mesh');
+    const r = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true});
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(55, innerWidth/innerHeight, 0.1, 100);
+    camera.position.set(0,1.2,3.2);
+    const geo = new THREE.PlaneGeometry(10,10,80,80); geo.rotateX(-Math.PI/2);
+    const mat = new THREE.MeshBasicMaterial({ color: 0x6ee7f9, wireframe:true, transparent:true, opacity:0.12 });
+    const mesh = new THREE.Mesh(geo, mat); scene.add(mesh);
+    let t=0;
+    function resize(){ r.setSize(innerWidth, innerHeight, false); camera.aspect = innerWidth/innerHeight; camera.updateProjectionMatrix(); }
+    window.addEventListener('resize', resize, {passive:true}); resize();
+    (function animate(){
+      t+=0.005;
+      for(let i=0;i<geo.attributes.position.count;i++){
+        const x = geo.attributes.position.getX(i);
+        const z = geo.attributes.position.getZ(i);
+        const y = Math.sin(x*0.6 + t)*0.07 + Math.cos(z*0.7 + t*1.2)*0.06;
+        geo.attributes.position.setY(i,y);
+      }
+      geo.attributes.position.needsUpdate = true;
+      r.setClearColor(0x0a0a0b, 0);
+      r.render(scene,camera);
+      requestAnimationFrame(animate);
+    })();
+  })();
+  
+  /* --- Soft Particles (Enhanced Round Orbs + Halo Layer) --- */
+  (() => {
+    const c = document.getElementById('bg-particles'), ctx = c.getContext('2d');
+    let dpr = Math.max(1, window.devicePixelRatio || 1), W, H;
+    let particles = [], halos = [];
+    const mouse = {x: -9999, y: -9999};
+
+    function resize(){
+      W = c.width = innerWidth * dpr;
+      H = c.height = innerHeight * dpr;
+      c.style.width='100%'; c.style.height='100%';
+    }
+
+    function rand(a,b){ return a + Math.random()*(b-a); }
+
+    function init(n=70, h=12){
+      particles = Array.from({length:n}, _ => ({
+        x: rand(0,W), y: rand(0,H),
+        vx: rand(-.15,.15)*dpr, vy: rand(-.15,.15)*dpr,
+        r: rand(1.2,2.6)*dpr, hue: rand(200,280)
+      }));
+      halos = Array.from({length:h}, _ => ({
+        x: rand(0,W), y: rand(0,H),
+        vx: rand(-.03,.03)*dpr, vy: rand(-.03,.03)*dpr,
+        r: rand(50,140)*dpr, hue: rand(180,300)
+      }));
+    }
+
+    function drawParticle(p){
+      const grd = ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*3);
+      grd.addColorStop(0,`hsla(${p.hue},90%,70%,0.8)`);
+      grd.addColorStop(0.5,`hsla(${p.hue},90%,60%,0.25)`);
+      grd.addColorStop(1,`hsla(${p.hue},90%,60%,0)`);
+      ctx.fillStyle = grd;
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fill();
+    }
+
+    function drawHalo(h){
+      const grd = ctx.createRadialGradient(h.x,h.y,0,h.x,h.y,h.r);
+      grd.addColorStop(0,`hsla(${h.hue},100%,75%,0.08)`);
+      grd.addColorStop(0.4,`hsla(${h.hue},100%,65%,0.05)`);
+      grd.addColorStop(1,'rgba(0,0,0,0)');
+      ctx.fillStyle = grd;
+      ctx.beginPath();
+      ctx.arc(h.x,h.y,h.r,0,Math.PI*2);
+      ctx.fill();
+    }
+
+    function step(){
+      ctx.clearRect(0,0,W,H);
+      ctx.save();
+      ctx.globalCompositeOperation = 'lighter';
+      halos.forEach(h=>{
+        h.x+=h.vx; h.y+=h.vy;
+        if(h.x<0||h.x>W) h.vx*=-1;
+        if(h.y<0||h.y>H) h.vy*=-1;
+        drawHalo(h);
+      });
+      particles.forEach(p=>{
+        const dx = (mouse.x*dpr - p.x);
+        const dy = (mouse.y*dpr - p.y);
+        const dist = Math.hypot(dx,dy) || 1;
+        if(dist < 200*dpr){ p.vx += dx/dist*0.004; p.vy += dy/dist*0.004; }
+        p.x += p.vx; p.y += p.vy;
+        p.vx *= 0.985; p.vy *= 0.985;
+        if(p.x<0||p.x>W) p.vx*=-1;
+        if(p.y<0||p.y>H) p.vy*=-1;
+        drawParticle(p);
+      });
+      ctx.restore();
+      requestAnimationFrame(step);
+    }
+
+    window.addEventListener('mousemove', e=>{ mouse.x = e.clientX; mouse.y = e.clientY; }, {passive:true});
+    window.addEventListener('mouseleave', ()=>{ mouse.x = -9999; mouse.y = -9999; });
+    window.addEventListener('resize', ()=>{ resize(); init(particles.length, halos.length); });
+    resize(); init(); step();
+  })();
+
+
+
+
+
+  (() => {
+    const aurora = document.querySelector('.fixed .absolute.inset-0');
+    if(!aurora) return;
+
+    const colors = [
+      'radial-gradient(40% 60% at 20% 20%, rgba(124,58,237,.6), transparent 60%), radial-gradient(50% 60% at 80% 30%, rgba(56,189,248,.45), transparent 60%), #0a0a0b',
+      'radial-gradient(40% 60% at 30% 40%, rgba(236,72,153,.6), transparent 60%), radial-gradient(50% 60% at 70% 60%, rgba(244,114,182,.5), transparent 60%), #0a0a0b',
+      'radial-gradient(40% 60% at 10% 60%, rgba(14,165,233,.6), transparent 60%), radial-gradient(50% 60% at 80% 20%, rgba(168,85,247,.5), transparent 60%), #0a0a0b'
+    ];
+
+    // Transition smoothing
+    aurora.style.transition = 'background 1s ease, transform 0.6s ease-out';
+
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      const idx = Math.min(colors.length - 1, Math.floor(scrollY / 800));
+      aurora.style.background = colors[idx];
+      aurora.style.transform = 'none';
+    });
+  })();
+
+
+
+
+  </script>
+<!-- Header -->
+<!-- <header role="navigation" class="sticky top-0 backdrop-blur border-b border-neutral-800" data-animate> -->
+    <header role="navigation" class="sticky top-0 border-b border-neutral-800 header-blur" data-animate></header>
+  <div class="max-w-7xl mx-auto flex items-center justify-between gap-6 px-6 py-4">
+    <a href="index.html" class="flex items-center gap-2 group" data-animate>
+      <i data-lucide="sparkles" class="w-5 h-5 text-gray-100 group-hover:text-gray-300 transition"></i>
+      <span class="text-sm font-light tracking-tight">Pridano Tech</span>
+    </a>
+    <!-- <nav class="hidden md:flex items-center gap-8">
+      <a class="text-sm text-neutral-300 hover:text-neutral-100 transition font-light tracking-tight" href="services.html" data-animate>Services</a>
+      <a class="text-sm text-neutral-300 hover:text-neutral-100 transition font-light tracking-tight" href="projets.html" data-animate>Projets</a>
+      <a class="text-sm text-neutral-300 hover:text-neutral-100 transition font-light tracking-tight" href="#stack" data-animate>Stack</a>
+      <a class="text-sm text-neutral-300 hover:text-neutral-100 transition font-light tracking-tight" href="devis.html" data-animate>Devis</a>
+    </nav> -->
+    <nav class="hidden md:flex items-center gap-8">
+        <a class="text-sm text-neutral-300 hover:text-neutral-100 transition font-light tracking-tight" href="services.html" data-animate>Services</a>
+        <a class="text-sm text-neutral-300 hover:text-neutral-100 transition font-light tracking-tight" href="projets.html" data-animate>Projets</a>
+        <a class="text-sm text-neutral-300 hover:text-neutral-100 transition font-light tracking-tight" href="about.html" data-animate>À propos</a>
+        <a class="text-sm text-neutral-300 hover:text-neutral-100 transition font-light tracking-tight" href="blog.html" data-animate>Blog</a>
+        <a class="text-sm text-neutral-300 hover:text-neutral-100 transition font-light tracking-tight" href="devis.html" data-animate>Devis</a>
+      </nav>
+    <div class="flex items-center gap-3">
+      <a class="hidden md:inline-flex text-sm text-neutral-300 hover:text-neutral-100 transition font-light tracking-tight" href="devis.html" data-animate>Se connecter</a>
+      <a class="inline-flex items-center gap-1 rounded-lg text-sm px-3 py-2 bg-neutral-100 text-black hover:bg-neutral-200 transition font-light tracking-tight" href="devis.html" data-animate>
+        Devis gratuit <i data-lucide="arrow-right" class="w-4 h-4"></i>
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- Hero + cartes 3D (inchangés dans l’esprit) -->
+<main class="flex-1">
+  <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-16 px-6 pt-24 pb-16 w-full">
+    <section class="w-full lg:max-w-md space-y-6">
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl leading-tight font-light tracking-tighter" data-animate>
+        Sites web premium, rapides & animés
+      </h1>
+      <p class="text-lg text-neutral-300 font-light tracking-tight" data-animate>
+        Vitrine, e-commerce, SaaS & IA. Design moderne (Tailwind/GSAP), SEO propre, perf et micro-interactions.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-3">
+        <a href="devis.html" class="inline-flex items-center gap-2 rounded-lg bg-neutral-100 text-black px-5 py-3 text-sm hover:bg-neutral-200 transition font-light tracking-tight" data-animate>
+          Demander un devis <i data-lucide="rocket" class="w-4 h-4"></i>
+        </a>
+        <a href="projets.html" class="inline-flex items-center gap-2 rounded-lg border border-neutral-700 bg-black text-neutral-100 px-5 py-3 text-sm hover:bg-neutral-950 transition font-light tracking-tight" data-animate>
+          Voir nos projets
+        </a>
+      </div>
+      <ul class="mt-2 grid grid-cols-2 gap-2 text-sm text-neutral-300" id="services">
+        <li class="font-light tracking-tight">• Site vitrine & brand design</li>
+        <li class="font-light tracking-tight">• E-commerce (Stripe, Shopify)</li>
+        <li class="font-light tracking-tight">• SaaS / Portails clients</li>
+        <li class="font-light tracking-tight">• IA & automatisations</li>
+      </ul>
+    </section>
+
+    <div class="relative flex flex-col items-center space-y-8" data-animate>
+      <!-- Carte étude de cas -->
+      <section aria-label="Étude de cas" class="w-full max-w-sm overflow-hidden border rounded-xl shadow-lg shadow-black/30 border-white/10 bg-white/5 backdrop-blur-md transform -rotate-y-20 -rotate-z-15" data-animate>
+        <header class="p-6">
+          <div class="flex gap-3 items-start">
+            <span class="w-9 h-9 flex items-center justify-center rounded-lg bg-indigo-950 shrink-0">
+              <i data-lucide="badge-check" class="w-5 h-5 text-emerald-400"></i>
+            </span>
+            <h2 class="text-sm leading-6 font-light tracking-tight">Étude de cas — NovaSpace Studio</h2>
+          </div>
+        </header>
+        <div class="border-t border-white/10"></div>
+        <div class="p-6 space-y-6">
+          <div>
+            <h3 class="text-xs text-neutral-400 font-light tracking-tight">RÉSUMÉ</h3>
+            <p class="mt-2 text-sm text-neutral-200 font-light tracking-tight">Refonte 3D, héros animé, scroll-interactions. Déploiement serverless, Lighthouse au vert.</p>
+          </div>
+          <div class="flex">
+            <div class="w-24"><h3 class="text-xs text-neutral-400 font-light tracking-tight">STACK</h3></div>
+            <ul class="flex flex-wrap gap-2">
+              <li class="px-2.5 py-0.5 rounded-md text-xs bg-indigo-900/40 text-indigo-200 font-light tracking-tight">Next.js</li>
+              <li class="px-2.5 py-0.5 rounded-md text-xs bg-pink-900/40 text-pink-200 font-light tracking-tight">Tailwind</li>
+              <li class="px-2.5 py-0.5 rounded-md text-xs bg-green-900/40 text-green-200 font-light tracking-tight">GSAP</li>
+              <li class="px-2.5 py-0.5 rounded-md text-xs bg-amber-900/40 text-amber-200 font-light tracking-tight">Stripe</li>
+            </ul>
+          </div>
+          <div class="flex">
+            <div class="w-24"><h3 class="text-xs text-neutral-400 font-light tracking-tight">SOURCE</h3></div>
+            <div class="flex items-center gap-2">
+              <i data-lucide="git-branch" class="w-4 h-4 text-gray-300"></i>
+              <span class="text-sm font-light tracking-tight">pridano/nova/components/Hero.tsx</span>
+            </div>
+          </div>
+          <div class="flex">
+            <div class="w-24"><h3 class="text-xs text-neutral-400 font-light tracking-tight">SCORE</h3></div>
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+              <span class="text-sm font-light tracking-tight">Lighthouse 100</span>
+            </div>
+          </div>
+          <div class="border-t border-white/10 pt-6">
+            <a href="projets.html" class="w-full inline-flex items-center justify-center gap-2 rounded-lg bg-neutral-100 text-black px-4 py-2 text-sm hover:bg-neutral-200 transition font-light tracking-tight">
+              Voir l’étude de cas <i data-lucide="external-link" class="w-4 h-4"></i>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Snippet -->
+      <section aria-label="Snippet technique" class="hidden lg:block absolute -bottom-24 left-2/3 w-full max-w-sm overflow-hidden border rounded-xl shadow-lg shadow-black/30 border-white/10 bg-white/5 backdrop-blur-md transform rotate-y-20 -rotate-z-15" data-animate>
+        <div class="flex items-center justify-between border-b border-white/10 px-6 py-3 bg-white/5 backdrop-blur-sm">
+          <div class="flex items-center gap-2">
+            <span class="text-sm font-light tracking-tight">Hero.tsx</span>
+            <i data-lucide="file-code" class="w-4 h-4 text-gray-400"></i>
+          </div>
+          <button aria-label="Copier le code" class="copy-btn flex items-center gap-1 text-xs text-neutral-300 hover:text-neutral-100 transition">
+            <i data-lucide="copy" class="w-4 h-4"></i>
+            <span class="font-light tracking-tight">Copier</span>
+          </button>
+        </div>
+        <div class="px-6 py-6 overflow-x-auto">
+<pre class="whitespace-pre text-[13px] leading-5 select-text font-light tracking-tight"><span class="select-none text-neutral-500">01</span> export default function Hero() {
+<span class="select-none text-neutral-500">02</span>   return (
+<span class="select-none text-neutral-500">03</span>     &lt;section className="max-w-7xl mx-auto px-6 py-24"&gt;
+<span class="select-none text-neutral-500">04</span>       &lt;h1 className="text-5xl tracking-tight font-light"&gt;
+<span class="select-none text-neutral-500">05</span>         Pridano Tech — sites web premium
+<span class="select-none text-neutral-500 bg-indigo-950/40">06</span><span class="bg-indigo-950/40">       &lt;/h1&gt;</span>
+<span class="select-none text-neutral-500 bg-indigo-950/40">07</span><span class="bg-indigo-950/40">       &lt;p className="mt-4 text-neutral-300 font-light"&gt;</span>
+<span class="select-none text-neutral-500 bg-indigo-950/40">08</span><span class="bg-indigo-950/40">         Vitrine, e-commerce, SaaS et IA. Performants, animés, élégants.</span>
+<span class="select-none text-neutral-500">09</span>       &lt;/p&gt;
+<span class="select-none text-neutral-500">10</span>       &lt;div className="mt-6 flex gap-3"&gt;
+<span class="select-none text-neutral-500">11</span>         &lt;a href="/devis" className="px-5 py-3 bg-white text-black rounded-lg text-sm"&gt;
+<span class="select-none text-neutral-500">12</span>           Démarrer mon devis
+<span class="select-none text-neutral-500">13</span>         &lt;/a&gt;
+<span class="select-none text-neutral-500">14</span>         &lt;a href="/projets" className="px-5 py-3 border border-neutral-700 rounded-lg text-sm"&gt;
+<span class="select-none text-neutral-500">15</span>           Voir nos projets
+<span class="select-none text-neutral-500">16</span>         &lt;/a&gt;
+<span class="select-none text-neutral-500">17</span>       &lt;/div&gt;
+<span class="select-none text-neutral-500">18</span>     &lt;/section&gt;
+<span class="select-none text-neutral-500">19</span>   );
+<span class="select-none text-neutral-500">20</span> }
+</pre>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- Carousel -->
+<div class="relative mt-12 md:mt-16">
+  <section data-section="" class="xl:pt-24 pt-32 pb-32">
+    <div class="container max-w-7xl mr-auto ml-auto pr-6 pl-6 relative">
+      <div class="reveal">
+        <div class="max-w-3xl animate-on-scroll" style="animation: fadeSlideIn 0.5s ease-in-out 0.1s both">
+          <h2 class="md:text-6xl text-4xl font-semibold text-white tracking-tight mt-5 drop-shadow-xl">
+            Featured Work Preview
+          </h2>
+          <p class="text-base md:text-lg text-white/70 mt-4">
+            A curated collection of our best work across various industries and styles.
+          </p>
+        </div>
+      </div>
+      <!-- Scroll container -->
+      <div class="relative">
+        <div class="flex snap-x snap-mandatory overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] md:gap-8 md:scroll-px-8 md:pt-16 md:px-8 max-w-7xl pt-6 pr-8 pb-6 pl-8 gap-x-6 gap-y-x-6" style="-webkit-overflow-scrolling: touch;" id="work-carousel">
+          <!-- Card 1 : NovaSpace -->
+          <article class="group relative snap-center shrink-0 w-[82vw] sm:w-[68vw] md:w-[520px] lg:w-[640px] aspect-[16/10] rounded-2xl overflow-hidden ring-1 bg-neutral-900/40" data-index="0" style="transform: scale(0.94); opacity: 0.55; transition: transform 400ms cubic-bezier(0.2, 0.8, 0.2, 1) 0s, opacity 400ms ease 0s;">
+            <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&amp;w=1600&amp;auto=format&amp;fit=crop" alt="NovaSpace 3D website cover" class="absolute inset-0 h-full w-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent"></div>
+            <!-- Content -->
+            <div class="absolute inset-x-0 bottom-0 p-5 md:p-6">
+              <div class="flex items-center gap-2 text-[11px] md:text-xs text-white/70">
+                <span class="inline-flex h-5 w-5 items-center justify-center rounded-full bg-lime-400/20 ring-1 ring-lime-300/30">
+                  <i data-lucide="sparkles" class="h-3.5 w-3.5 text-lime-300"></i>
+                </span>
+                Vitrine 3D • Interactions
+              </div>
+              <div class="mt-2.5 flex items-end justify-between gap-3">
+                <div>
+                  <h3 class="text-xl md:text-2xl lg:text-[28px] font-semibold tracking-tight">
+                    NovaSpace Studio
+                  </h3>
+                  <p class="text-sm md:text-base text-white/70">
+                    Fond 3D, scroll, devis connecté
+                  </p>
+                </div>
+                <a href="novaspace.html" class="inline-flex items-center justify-center rounded-full bg-white/10 hover:bg-white/15 transition ring-1 ring-white/20 backdrop-blur px-3.5 py-2" aria-label="Open NovaSpace case">
+                  <i data-lucide="arrow-up-right" class="h-5 w-5"></i>
+                </a>
+              </div>
+            </div>
+            <!-- Arrows (only visible on active) -->
+            <button class="js-prev absolute left-3 md:left-4 top-1/2 -translate-y-1/2 items-center justify-center h-10 w-10 md:h-11 md:w-11 rounded-full bg-white/10 hover:bg-white/15 ring-1 ring-white/20 backdrop-blur text-white" aria-label="Previous">
+              <i data-lucide="chevron-left" class="h-5 w-5"></i>
+            </button>
+            <button class="js-next absolute right-3 md:right-4 top-1/2 -translate-y-1/2 items-center justify-center h-10 w-10 md:h-11 md:w-11 rounded-full bg-white/10 hover:bg-white/15 ring-1 ring-white/20 backdrop-blur text-white" aria-label="Next">
+              <i data-lucide="chevron-right" class="h-5 w-5"></i>
+            </button>
+          </article>
+
+          <!-- Card 2 : ModeX -->
+          <article class="group relative snap-center shrink-0 w-[82vw] sm:w-[68vw] md:w-[520px] lg:w-[640px] aspect-[16/10] rounded-2xl overflow-hidden ring-1 bg-neutral-900/40" data-index="1" style="transform: scale(1); opacity: 1; transition: transform 400ms cubic-bezier(0.2, 0.8, 0.2, 1) 0s, opacity 400ms ease 0s;">
+            <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?q=80&amp;w=1600&amp;auto=format&amp;fit=crop" alt="ModeX fashion e‑commerce cover" class="absolute inset-0 h-full w-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent"></div>
+            <div class="absolute inset-x-0 bottom-0 p-5 md:p-6">
+              <div class="flex items-center gap-2 text-[11px] md:text-xs text-white/70">
+                <span class="inline-flex h-5 w-5 items-center justify-center rounded-full bg-lime-400/20 ring-1 ring-lime-300/30">
+                  <i data-lucide="shopping-bag" class="h-3.5 w-3.5 text-lime-300"></i>
+                </span>
+                E‑commerce • Fashion
+              </div>
+              <div class="mt-2.5 flex items-end justify-between gap-3">
+                <div class="">
+                  <h3 class="text-xl md:text-2xl lg:text-[28px] font-semibold tracking-tight">
+                    ModeX Shop
+                  </h3>
+                  <p class="text-sm md:text-base text-white/70">
+                    Upsells, flows &amp; analytics
+                  </p>
+                </div>
+                <a href="modex.html" class="inline-flex items-center justify-center rounded-full bg-white/10 hover:bg-white/15 transition ring-1 ring-white/20 backdrop-blur px-3.5 py-2" aria-label="Open ModeX case">
+                  <i data-lucide="arrow-up-right" class="h-5 w-5"></i>
+                </a>
+              </div>
+            </div>
+            <button class="js-prev absolute left-3 md:left-4 top-1/2 -translate-y-1/2 items-center justify-center h-10 w-10 md:h-11 md:w-11 rounded-full bg-white/10 hover:bg-white/15 ring-1 ring-white/20 backdrop-blur text-white" aria-label="Previous">
+              <i data-lucide="chevron-left" class="h-5 w-5"></i>
+            </button>
+            <button class="js-next absolute right-3 md:right-4 top-1/2 -translate-y-1/2 items-center justify-center h-10 w-10 md:h-11 md:w-11 rounded-full bg-white/10 hover:bg-white/15 ring-1 ring-white/20 backdrop-blur text-white" aria-label="Next">
+              <i data-lucide="chevron-right" class="h-5 w-5"></i>
+            </button>
+          </article>
+
+          <!-- Card 3 : ZenAgenda -->
+          <article class="group relative snap-center shrink-0 w-[82vw] sm:w-[68vw] md:w-[520px] lg:w-[640px] aspect-[16/10] rounded-2xl overflow-hidden ring-1 ring-white/10 bg-neutral-900/40" data-index="2" style="transform: scale(0.94); opacity: 0.55; transition: transform 400ms cubic-bezier(0.2, 0.8, 0.2, 1), opacity 400ms;">
+            <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&amp;w=1600&amp;auto=format&amp;fit=crop" alt="ZenAgenda SaaS cover" class="absolute inset-0 h-full w-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent"></div>
+            <div class="absolute inset-x-0 bottom-0 p-5 md:p-6">
+              <div class="flex items-center gap-2 text-[11px] md:text-xs text-white/70">
+                <span class="inline-flex h-5 w-5 items-center justify-center rounded-full bg-lime-400/20 ring-1 ring-lime-300/30">
+                  <i data-lucide="calendar" class="h-3.5 w-3.5 text-lime-300"></i>
+                </span>
+                SaaS • Booking
+              </div>
+              <div class="mt-2.5 flex items-end justify-between gap-3">
+                <div class="">
+                  <h3 class="text-xl md:text-2xl lg:text-[28px] font-semibold tracking-tight">
+                    ZenAgenda
+                  </h3>
+                  <p class="text-sm md:text-base text-white/70">
+                    Profils pro, exports, admin
+                  </p>
+                </div>
+                <a href="zenagenda.html" class="inline-flex items-center justify-center rounded-full bg-white/10 hover:bg-white/15 transition ring-1 ring-white/20 backdrop-blur px-3.5 py-2" aria-label="Open ZenAgenda case">
+                  <i data-lucide="arrow-up-right" class="h-5 w-5"></i>
+                </a>
+              </div>
+            </div>
+            <button class="js-prev absolute left-3 md:left-4 top-1/2 -translate-y-1/2 hidden items-center justify-center h-10 w-10 md:h-11 md:w-11 rounded-full bg-white/10 hover:bg-white/15 ring-1 ring-white/20 backdrop-blur text-white" aria-label="Previous">
+              <i data-lucide="chevron-left" class="h-5 w-5"></i>
+            </button>
+            <button class="js-next absolute right-3 md:right-4 top-1/2 -translate-y-1/2 hidden items-center justify-center h-10 w-10 md:h-11 md:w-11 rounded-full bg-white/10 hover:bg-white/15 ring-1 ring-white/20 backdrop-blur text-white" aria-label="Next">
+              <i data-lucide="chevron-right" class="h-5 w-5"></i>
+            </button>
+          </article>
+        </div>
+        <!-- Left edge fade -->
+        <div class="pointer-events-none absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-black to-transparent z-10"></div>
+        <!-- Right edge fade -->
+        <div class="pointer-events-none absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-black to-transparent z-10"></div>
+      </div>
+    </div>
+    <!-- Edge fade mask overlay -->
+    <div class="pointer-events-none absolute inset-0" style="mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);"></div>
+  </section>
+</div>
+  <!-- SECTION: Services (scroll) -->
+  <section class="relative border-t border-white/10 py-20" data-animate>
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex items-end justify-between mb-10">
+        <h2 class="text-2xl md:text-3xl font-light tracking-tight">Nos services</h2>
+        <a href="services.html" class="text-sm text-neutral-300 hover:text-neutral-100 transition font-light tracking-tight inline-flex items-center gap-1">
+          Tout voir <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+        </a>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        <!-- 3 cartes services -->
+        <article class="p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md">
+          <div class="flex items-center gap-2 mb-3"><i data-lucide="layout-grid" class="w-5 h-5 text-indigo-300"></i><h3 class="font-light tracking-tight">Vitrine & branding</h3></div>
+          <p class="text-sm text-neutral-300 font-light">Design pixel-perfect, landing pages, identité visuelle, SEO.</p>
+        </article>
+        <article class="p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md">
+          <div class="flex items-center gap-2 mb-3"><i data-lucide="shopping-bag" class="w-5 h-5 text-emerald-300"></i><h3 class="font-light tracking-tight">E-commerce</h3></div>
+          <p class="text-sm text-neutral-300 font-light">Stripe/Shopify, paniers, upsells, parcours optimisés.</p>
+        </article>
+        <article class="p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md">
+          <div class="flex items-center gap-2 mb-3"><i data-lucide="cpu" class="w-5 h-5 text-pink-300"></i><h3 class="font-light tracking-tight">SaaS & IA</h3></div>
+          <p class="text-sm text-neutral-300 font-light">Dashboards, automations, chatbots, intégrations API.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: Stack (marquee simple) -->
+  <section id="stack" class="relative border-t border-white/10 py-16" data-animate>
+    <div class="max-w-7xl mx-auto px-6">
+      <h2 class="text-2xl md:text-3xl font-light tracking-tight mb-8">Stack & outils</h2>
+      <div class="flex gap-6 overflow-x-auto no-scrollbar py-2">
+        <span class="px-4 py-2 rounded-lg border border-white/10 bg-white/5 text-sm">Next.js</span>
+        <span class="px-4 py-2 rounded-lg border border-white/10 bg-white/5 text-sm">Tailwind</span>
+        <span class="px-4 py-2 rounded-lg border border-white/10 bg-white/5 text-sm">GSAP</span>
+        <span class="px-4 py-2 rounded-lg border border-white/10 bg-white/5 text-sm">Stripe</span>
+        <span class="px-4 py-2 rounded-lg border border-white/10 bg-white/5 text-sm">Supabase</span>
+        <span class="px-4 py-2 rounded-lg border border-white/10 bg-white/5 text-sm">Vercel</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: Témoignages -->
+  <section class="relative border-t border-white/10 py-20" data-animate>
+    <div class="max-w-7xl mx-auto px-6">
+      <h2 class="text-2xl md:text-3xl font-light tracking-tight mb-10">Ce que disent nos clients</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        <blockquote class="p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md text-sm text-neutral-300 font-light">
+          “Design propre, animations fluides, tunnel de vente qui convertit. Pridano a livré en temps record.”
+          <footer class="mt-3 text-neutral-400">— NovaSpace Studio</footer>
+        </blockquote>
+        <blockquote class="p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md text-sm text-neutral-300 font-light">
+          “Perf au top (95–100), code maintenable, équipe réactive. On recommande.”
+          <footer class="mt-3 text-neutral-400">— Atelier K</footer>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+<!-- SECTION: Nos chiffres -->
+<section class="relative border-t border-white/10 py-20" data-animate>
+    <div class="max-w-7xl mx-auto px-6">
+      <h2 class="text-2xl md:text-3xl font-light tracking-tight mb-10">Nos chiffres</h2>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div class="p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md text-center">
+          <div class="text-3xl font-light tracking-tight">+15</div>
+          <div class="text-sm text-neutral-400 mt-1">projets livrés</div>
+        </div>
+        <div class="p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md text-center">
+          <div class="text-3xl font-light tracking-tight">100%</div>
+          <div class="text-sm text-neutral-400 mt-1">clients satisfaits</div>
+        </div>
+        <div class="p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md text-center">
+          <div class="text-3xl font-light tracking-tight">95–100</div>
+          <div class="text-sm text-neutral-400 mt-1">scores Lighthouse</div>
+        </div>
+        <div class="p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md text-center">
+          <div class="text-3xl font-light tracking-tight">24h</div>
+          <div class="text-sm text-neutral-400 mt-1">devis express</div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- SECTION: Pourquoi Pridano ? -->
+  <section class="relative border-t border-white/10 py-20" data-animate>
+    <div class="max-w-7xl mx-auto px-6">
+      <h2 class="text-2xl md:text-3xl font-light tracking-tight mb-6">Pourquoi Pridano ?</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        <article class="p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md">
+          <div class="flex items-center gap-2 mb-2"><i data-lucide="zap" class="w-5 h-5 text-emerald-300"></i><h3 class="font-light tracking-tight">Rapidité & méthode</h3></div>
+          <p class="text-sm text-neutral-300 font-light">Process clair, jalons courts, rendu propre à chaque étape.</p>
+        </article>
+        <article class="p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md">
+          <div class="flex items-center gap-2 mb-2"><i data-lucide="palette" class="w-5 h-5 text-indigo-300"></i><h3 class="font-light tracking-tight">Design premium</h3></div>
+          <p class="text-sm text-neutral-300 font-light">Animations fines, hiérarchie visuelle, détails qui font pro.</p>
+        </article>
+        <article class="p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md">
+          <div class="flex items-center gap-2 mb-2"><i data-lucide="gauge" class="w-5 h-5 text-pink-300"></i><h3 class="font-light tracking-tight">Performance</h3></div>
+          <p class="text-sm text-neutral-300 font-light">Images optimisées, lazy-load, code minimal, SEO prêt.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+  <!-- SECTION: CTA -->
+  <section class="relative border-t border-white/10 py-20" data-animate>
+    <div class="max-w-7xl mx-auto px-6 text-center">
+      <h2 class="text-2xl md:text-3xl font-light tracking-tight mb-4">Un projet en tête ?</h2>
+      <p class="text-neutral-300 font-light mb-6">Parlez-nous de votre idée et recevez une proposition sous 24h.</p>
+      <a href="devis.html" class="inline-flex items-center gap-2 rounded-lg bg-neutral-100 text-black px-5 py-3 text-sm hover:bg-neutral-200 transition font-light tracking-tight">
+        Démarrer mon devis <i data-lucide="arrow-right" class="w-4 h-4"></i>
+      </a>
+    </div>
+  </section>
+</main>
+
+<!-- Footer -->
+<footer class="border-t border-white/10 py-8">
+  <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-neutral-400">
+    <span>© Pridano Tech — 2025</span>
+    <nav class="flex items-center gap-6">
+      <a class="hover:text-neutral-200 transition" href="services.html">Services</a>
+      <a class="hover:text-neutral-200 transition" href="projets.html">Projets</a>
+      <a class="hover:text-neutral-200 transition" href="devis.html">Devis</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+lucide.createIcons();
+document.addEventListener('DOMContentLoaded', () => {
+  const elms=[...document.querySelectorAll('[data-animate]')];
+  elms.forEach((el,idx)=>{el.classList.add('opacity-0','translate-y-6','blur-sm','transition','duration-700'); setTimeout(()=>{el.classList.remove('opacity-0','translate-y-6','blur-sm')},200+idx*120);});
+  document.querySelectorAll('.copy-btn').forEach(btn=>{
+    const label=btn.querySelector('span'); btn.addEventListener('click',()=>{
+      const pre=btn.closest('section').querySelector('pre'); if(pre){navigator.clipboard.writeText(pre.innerText);}
+      const original=label.textContent; label.textContent='Copié'; btn.classList.add('text-emerald-400');
+      setTimeout(()=>{label.textContent=original; btn.classList.remove('text-emerald-400')},1500);
+    });
+  });
+});
+// Header sticky on scroll
+const header = document.querySelector('header.header-blur');
+function onScroll() {
+  if (!header) return;
+  const s = window.scrollY || document.documentElement.scrollTop;
+  header.classList.toggle('scrolled', s > 10);
+}
+window.addEventListener('scroll', onScroll, { passive: true });
+onScroll();
+
+/* ---- Work carousel behavior (precise per-card navigation) ---- */
+(function(){
+  const scroller = document.getElementById('work-carousel');
+  if(!scroller) return;
+
+  const cards = [...scroller.querySelectorAll('article[data-index]')];
+  let activeIdx = 0;
+
+  function centerOf(el){
+    // Center position of a card relative to the scroller's scrollLeft
+    return el.offsetLeft + el.clientWidth / 2;
+  }
+
+  function scrollToIndex(idx){
+    idx = Math.max(0, Math.min(cards.length - 1, idx));
+    const target = cards[idx];
+    if(!target) return;
+    const left = target.offsetLeft - (scroller.clientWidth - target.clientWidth)/2;
+    scroller.scrollTo({ left: Math.max(0, left), behavior: 'smooth' });
+  }
+
+  function updateActive(){
+    // pick the card whose center is closest to scroller middle
+    const mid = scroller.scrollLeft + scroller.clientWidth/2;
+    let best = {i:0, d:Infinity};
+    cards.forEach((el,i)=>{
+      const c = centerOf(el);
+      const d = Math.abs(c - mid);
+      if(d < best.d){ best = {i, d}; }
+    });
+    activeIdx = best.i;
+
+    // style states + arrows visibility
+    cards.forEach((el,i)=>{
+      const active = i === activeIdx;
+      el.style.transform = `scale(${active?1:0.94})`;
+      el.style.opacity = active ? '1' : '0.55';
+      el.querySelectorAll('.js-prev,.js-next').forEach(btn=>{
+        btn.classList.toggle('hidden', !active);
+        btn.classList.toggle('flex', active);
+      });
+    });
+  }
+
+  // Smoothly move one card at a time
+  scroller.addEventListener('click', (e)=>{
+    const prev = e.target.closest('.js-prev');
+    const next = e.target.closest('.js-next');
+    if(prev){ scrollToIndex(activeIdx - 1); }
+    if(next){ scrollToIndex(activeIdx + 1); }
+  });
+
+  // Update active on scroll/resize with RAF
+  let raf;
+  function onScroll(){ cancelAnimationFrame(raf); raf=requestAnimationFrame(updateActive); }
+  scroller.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('resize', updateActive, {passive:true});
+
+  // Initialize (ensure styles correct even with inline defaults)
+  updateActive();
+})();
+</script>
+</body></html>

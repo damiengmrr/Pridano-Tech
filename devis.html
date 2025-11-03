@@ -1,0 +1,64 @@
+<!doctype html><html lang="fr"><head>
+    <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Devis · Pridano Tech</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script><script src="https://unpkg.com/lucide@latest"></script>
+    </head><body class="font-[Inter] min-h-screen text-gray-100 bg-gray-950">
+    <div class="fixed inset-0 -z-10"><iframe src="https://my.spline.design/worldplanet-inmHh7fVCul1jUFrNRYlotVU" class="w-full h-full" frameborder="0"></iframe></div>
+    
+    <header class="sticky top-0 backdrop-blur border-b border-neutral-800">
+      <div class="max-w-7xl mx-auto flex items-center justify-between gap-6 px-6 py-4">
+        <a href="index.html" class="flex items-center gap-2"><i data-lucide="sparkles" class="w-5 h-5"></i><span class="text-sm font-light">Pridano Tech</span></a>
+        <nav class="hidden md:flex items-center gap-8">
+          <a class="text-sm text-neutral-300 hover:text-neutral-100 transition font-light" href="services.html">Services</a>
+          <a class="text-sm text-neutral-300 hover:text-neutral-100 transition font-light" href="projets.html">Projets</a>
+          <a class="text-sm text-neutral-300 hover:text-neutral-100 transition font-light" href="devis.html">Devis</a>
+        </nav>
+      </div>
+    </header>
+    
+    <main class="max-w-2xl mx-auto px-6 py-16">
+      <h1 class="text-3xl md:text-4xl font-light tracking-tight mb-2">Obtenir un devis</h1>
+      <p class="text-neutral-300 font-light mb-8">Dites-nous l’essentiel. On revient vers vous vite.</p>
+    
+      <form class="space-y-4 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md p-6">
+        <div>
+          <label class="text-sm text-neutral-300 font-light">Nom / Entreprise</label>
+          <input class="mt-1 w-full px-3 py-2 rounded-md bg-black/40 border border-white/10 outline-none focus:border-neutral-400" placeholder="Votre nom">
+        </div>
+        <div class="grid md:grid-cols-2 gap-4">
+          <div>
+            <label class="text-sm text-neutral-300 font-light">Email</label>
+            <input type="email" class="mt-1 w-full px-3 py-2 rounded-md bg-black/40 border border-white/10 outline-none focus:border-neutral-400" placeholder="vous@exemple.com">
+          </div>
+          <div>
+            <label class="text-sm text-neutral-300 font-light">Budget estimé</label>
+            <select class="mt-1 w-full px-3 py-2 rounded-md bg-black/40 border border-white/10 outline-none focus:border-neutral-400">
+              <option>-</option><option>1k–3k €</option><option>3k–7k €</option><option>7k–15k €</option><option>15k+ €</option>
+            </select>
+          </div>
+        </div>
+        <div>
+          <label class="text-sm text-neutral-300 font-light">Type de projet</label>
+          <div class="mt-2 grid grid-cols-2 gap-2 text-sm">
+            <label class="flex items-center gap-2"><input type="checkbox"> Vitrine</label>
+            <label class="flex items-center gap-2"><input type="checkbox"> E-commerce</label>
+            <label class="flex items-center gap-2"><input type="checkbox"> SaaS</label>
+            <label class="flex items-center gap-2"><input type="checkbox"> IA / Automations</label>
+          </div>
+        </div>
+        <div>
+          <label class="text-sm text-neutral-300 font-light">Message</label>
+          <textarea rows="4" class="mt-1 w-full px-3 py-2 rounded-md bg-black/40 border border-white/10 outline-none focus:border-neutral-400" placeholder="Décrivez brièvement votre besoin..."></textarea>
+        </div>
+        <button type="submit" class="w-full inline-flex items-center justify-center gap-2 rounded-lg bg-neutral-100 text-black px-4 py-2 text-sm hover:bg-neutral-200 transition font-light">
+          Envoyer <i data-lucide="send" class="w-4 h-4"></i>
+        </button>
+      </form>
+    </main>
+    
+    <footer class="border-t border-white/10 py-8">
+      <div class="max-w-7xl mx-auto px-6 text-sm text-neutral-400">© Pridano Tech — 2025</div>
+    </footer>
+    <script>lucide.createIcons();</script>
+    </body></html>

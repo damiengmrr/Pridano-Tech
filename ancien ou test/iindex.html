@@ -1,0 +1,337 @@
+<html lang="en"><head><meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Policy Drift Alert · GlobalCode</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+    .rotate-y-20{--tw-rotate-y:20deg;transform:translate3d(var(--tw-translate-x,0),var(--tw-translate-y,0),0) rotateY(var(--tw-rotate-y)) scale(1)}
+    .-rotate-y-20{--tw-rotate-y:-20deg;transform:translate3d(var(--tw-translate-x,0),var(--tw-translate-y,0),0) rotateY(var(--tw-rotate-y)) scale(1)}
+    .rotate-z-15{--tw-rotate-z:15deg;transform:translate3d(0,0,0) rotateZ(var(--tw-rotate-z))}
+    .-rotate-z-15{--tw-rotate-z:-15deg;transform:translate3d(0,0,0) rotateZ(var(--tw-rotate-z))}
+    </style>
+    <style>
+    /* 3D Transform utilities */
+    .rotate-y-20 { --tw-rotate-y: 20deg; transform: translate3d(var(--tw-translate-x, 0), var(--tw-translate-y, 0), var(--tw-translate-z, 0)) rotateX(var(--tw-rotate-x, 0)) rotateY(var(--tw-rotate-y, 0)) rotateZ(var(--tw-rotate-z, 0)) skewX(var(--tw-skew-x, 0)) skewY(var(--tw-skew-y, 0)) scaleX(var(--tw-scale-x, 1)) scaleY(var(--tw-scale-y, 1)) !important; }
+    .-rotate-y-20 { --tw-rotate-y: -20deg; transform: translate3d(var(--tw-translate-x, 0), var(--tw-translate-y, 0), var(--tw-translate-z, 0)) rotateX(var(--tw-rotate-x, 0)) rotateY(var(--tw-rotate-y, 0)) rotateZ(var(--tw-rotate-z, 0)) skewX(var(--tw-skew-x, 0)) skewY(var(--tw-skew-y, 0)) scaleX(var(--tw-scale-x, 1)) scaleY(var(--tw-scale-y, 1)) !important; }
+    .rotate-z-15 { --tw-rotate-z: 15deg; transform: translate3d(var(--tw-translate-x, 0), var(--tw-translate-y, 0), var(--tw-translate-z, 0)) rotateX(var(--tw-rotate-x, 0)) rotateY(var(--tw-rotate-y, 0)) rotateZ(var(--tw-rotate-z, 0)) skewX(var(--tw-skew-x, 0)) skewY(var(--tw-skew-y, 0)) scaleX(var(--tw-scale-x, 1)) scaleY(var(--tw-scale-y, 1)) !important; }
+    .-rotate-z-15 { --tw-rotate-z: -15deg; transform: translate3d(var(--tw-translate-x, 0), var(--tw-translate-y, 0), var(--tw-translate-z, 0)) rotateX(var(--tw-rotate-x, 0)) rotateY(var(--tw-rotate-y, 0)) rotateZ(var(--tw-rotate-z, 0)) skewX(var(--tw-skew-x, 0)) skewY(var(--tw-skew-y, 0)) scaleX(var(--tw-scale-x, 1)) scaleY(var(--tw-scale-y, 1)) !important; }
+    </style>
+    <script>
+    // Configure Tailwind to include our custom 3D transform utilities
+    tailwind.config = {
+    theme: {
+    extend: {
+    // Add any custom theme extensions here if needed
+    }
+    },
+    plugins: [
+    function({ addUtilities }) {
+    const rotateXUtilities = {};
+    const rotateYUtilities = {};
+    const rotateZUtilities = {};
+    const rotateValues = [0, 5, 10, 15, 20, 30, 45, 75];
+    // Generate rotate-x utilities
+    rotateValues.forEach((value) => {
+    rotateXUtilities[`.rotate-x-${value}`] = {
+    '--tw-rotate-x': `${value}deg`,
+    transform: `
+    translate3d(var(--tw-translate-x, 0), var(--tw-translate-y, 0), var(--tw-translate-z, 0))
+    rotateX(var(--tw-rotate-x, 0))
+    rotateY(var(--tw-rotate-y, 0))
+    rotateZ(var(--tw-rotate-z, 0))
+    skewX(var(--tw-skew-x, 0))
+    skewY(var(--tw-skew-y, 0))
+    scaleX(var(--tw-scale-x, 1))
+    scaleY(var(--tw-scale-y, 1))
+    `.replace(/\\s+/g, ' ').trim(),
+    };
+    if (value !== 0) {
+    rotateXUtilities[`.-rotate-x-${value}`] = {
+    '--tw-rotate-x': `-${value}deg`,
+    transform: `
+    translate3d(var(--tw-translate-x, 0), var(--tw-translate-y, 0), var(--tw-translate-z, 0))
+    rotateX(var(--tw-rotate-x, 0))
+    rotateY(var(--tw-rotate-y, 0))
+    rotateZ(var(--tw-rotate-z, 0))
+    skewX(var(--tw-skew-x, 0))
+    skewY(var(--tw-skew-y, 0))
+    scaleX(var(--tw-scale-x, 1))
+    scaleY(var(--tw-scale-y, 1))
+    `.replace(/\\s+/g, ' ').trim(),
+    };
+    }
+    });
+    // Generate rotate-y utilities
+    rotateValues.forEach((value) => {
+    rotateYUtilities[`.rotate-y-${value}`] = {
+    '--tw-rotate-y': `${value}deg`,
+    transform: `
+    translate3d(var(--tw-translate-x, 0), var(--tw-translate-y, 0), var(--tw-translate-z, 0))
+    rotateX(var(--tw-rotate-x, 0))
+    rotateY(var(--tw-rotate-y, 0))
+    rotateZ(var(--tw-rotate-z, 0))
+    skewX(var(--tw-skew-x, 0))
+    skewY(var(--tw-skew-y, 0))
+    scaleX(var(--tw-scale-x, 1))
+    scaleY(var(--tw-scale-y, 1))
+    `.replace(/\\s+/g, ' ').trim(),
+    };
+    if (value !== 0) {
+    rotateYUtilities[`.-rotate-y-${value}`] = {
+    '--tw-rotate-y': `-${value}deg`,
+    transform: `
+    translate3d(var(--tw-translate-x, 0), var(--tw-translate-y, 0), var(--tw-translate-z, 0))
+    rotateX(var(--tw-rotate-x, 0))
+    rotateY(var(--tw-rotate-y, 0))
+    rotateZ(var(--tw-rotate-z, 0))
+    skewX(var(--tw-skew-x, 0))
+    skewY(var(--tw-skew-y, 0))
+    scaleX(var(--tw-scale-x, 1))
+    scaleY(var(--tw-scale-y, 1))
+    `.replace(/\\s+/g, ' ').trim(),
+    };
+    }
+    });
+    // Generate rotate-z utilities
+    rotateValues.forEach((value) => {
+    rotateZUtilities[`.rotate-z-${value}`] = {
+    '--tw-rotate-z': `${value}deg`,
+    transform: `
+    translate3d(var(--tw-translate-x, 0), var(--tw-translate-y, 0), var(--tw-translate-z, 0))
+    rotateX(var(--tw-rotate-x, 0))
+    rotateY(var(--tw-rotate-y, 0))
+    rotateZ(var(--tw-rotate-z, 0))
+    skewX(var(--tw-skew-x, 0))
+    skewY(var(--tw-skew-y, 0))
+    scaleX(var(--tw-scale-x, 1))
+    scaleY(var(--tw-scale-y, 1))
+    `.replace(/\\s+/g, ' ').trim(),
+    };
+    if (value !== 0) {
+    rotateZUtilities[`.-rotate-z-${value}`] = {
+    '--tw-rotate-z': `-${value}deg`,
+    transform: `
+    translate3d(var(--tw-translate-x, 0), var(--tw-translate-y, 0), var(--tw-translate-z, 0))
+    rotateX(var(--tw-rotate-x, 0))
+    rotateY(var(--tw-rotate-y, 0))
+    rotateZ(var(--tw-rotate-z, 0))
+    skewX(var(--tw-skew-x, 0))
+    skewY(var(--tw-skew-y, 0))
+    scaleX(var(--tw-scale-x, 1))
+    scaleY(var(--tw-scale-y, 1))
+    `.replace(/\\s+/g, ' ').trim(),
+    };
+    }
+    });
+    // Perspective utilities
+    const perspectiveUtilities = {
+    ".perspective-none": { perspective: "none" },
+    ".perspective-dramatic": { perspective: "100px" },
+    ".perspective-near": { perspective: "300px" },
+    ".perspective-normal": { perspective: "500px" },
+    ".perspective-midrange": { perspective: "800px" },
+    ".perspective-distant": { perspective: "1200px" },
+    };
+    // Transform style utilities
+    const transformStyleUtilities = {
+    ".transform-style-preserve-3d": { "transform-style": "preserve-3d" },
+    ".transform-style-flat": { "transform-style": "flat" },
+    };
+    addUtilities({
+    ...rotateXUtilities,
+    ...rotateYUtilities,
+    ...rotateZUtilities,
+    ...perspectiveUtilities,
+    ...transformStyleUtilities,
+    });
+    }
+    ]
+    };
+    </script></head>
+    
+    <body class="font-[Inter] flex flex-col min-h-screen text-gray-100 bg-gray-950 selection:bg-indigo-600/50">
+    
+    <!-- 3-D background -->
+    <div class="spline-container fixed top-0 w-full h-screen -z-10">
+      <iframe src="https://my.spline.design/worldplanet-inmHh7fVCul1jUFrNRYlotVU" frameborder="0" width="100%" height="100%" id="aura-spline"></iframe>
+    </div>
+    
+    <!-- header -->
+    <header role="navigation" class="sticky top-0 backdrop-blur border-b border-neutral-800" data-animate>
+      <div class="max-w-7xl mx-auto flex items-center justify-between gap-6 px-6 py-4">
+        <a href="#" class="flex items-center gap-2 group" data-animate>
+          <i data-lucide="globe" class="w-5 h-5 text-gray-100 group-hover:text-gray-300 transition"></i>
+          <span class="text-sm font-light tracking-tight">GlobalCode</span>
+        </a>
+    
+        <nav class="hidden md:flex items-center gap-8">
+          <a class="text-sm text-neutral-300 hover:text-neutral-100 transition font-light tracking-tight" href="#" data-animate>Product</a>
+          <a class="text-sm text-neutral-300 hover:text-neutral-100 transition font-light tracking-tight" href="#" data-animate>Docs</a>
+          <a class="text-sm text-neutral-300 hover:text-neutral-100 transition font-light tracking-tight" href="#" data-animate>Pricing</a>
+          <a class="text-sm text-neutral-300 hover:text-neutral-100 transition font-light tracking-tight" href="#" data-animate>Blog</a>
+        </nav>
+    
+        <div class="flex items-center gap-3">
+          <a class="hidden md:inline-flex text-sm text-neutral-300 hover:text-neutral-100 transition font-light tracking-tight" href="#" data-animate>Sign in</a>
+          <a class="inline-flex items-center gap-1 rounded-lg text-sm px-3 py-2 bg-neutral-100 text-black hover:bg-neutral-200 transition font-light tracking-tight" href="#" data-animate>
+            Sign up
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </a>
+        </div>
+      </div>
+    </header>
+    
+    <!-- main -->
+    <main class="flex-1 flex items-center">
+      <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-16 px-6 pt-24 pb-16 w-full">
+    
+        <!-- hero -->
+        <section class="w-full lg:max-w-md space-y-6">
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl leading-tight font-light tracking-tighter" data-animate>
+            Detect &amp; remediate policy drift in seconds
+          </h1>
+          <p class="text-lg text-neutral-300 font-light tracking-tight" data-animate>
+            Continuously monitor your cloud for deviations from your security blueprints and remediate with one click.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-3">
+            <a href="#" class="inline-flex items-center gap-2 rounded-lg bg-neutral-100 text-black px-5 py-3 text-sm hover:bg-neutral-200 transition font-light tracking-tight" data-animate>
+              Request a demo
+              <i data-lucide="rocket" class="w-4 h-4"></i>
+            </a>
+            <button class="inline-flex items-center gap-2 rounded-lg border border-neutral-700 bg-black text-neutral-100 px-5 py-3 text-sm hover:bg-neutral-950 transition font-light tracking-tight" data-animate>
+              Learn more
+            </button>
+          </div>
+        </section>
+    
+        <!-- cards wrapper -->
+        <div class="relative flex flex-col items-center space-y-8" data-animate>
+    
+          <!-- policy card -->
+          <section aria-label="Policy drift card" class="w-full max-w-sm overflow-hidden border rounded-xl shadow-lg shadow-black/30 border-white/10 bg-white/5 backdrop-blur-md transform -rotate-y-20 -rotate-z-15" data-animate>
+            <header class="p-6">
+              <div class="flex gap-3 items-start">
+                <span class="w-9 h-9 flex items-center justify-center rounded-lg bg-indigo-950 shrink-0">
+                  <i data-lucide="shield-alert" class="w-5 h-5 text-rose-400"></i>
+                </span>
+                <h2 class="text-sm leading-6 font-light tracking-tight">Policy drift detected between live infrastructure and blueprint</h2>
+              </div>
+            </header>
+    
+            <div class="border-t border-white/10"></div>
+    
+            <div class="p-6 space-y-6">
+              <div>
+                <h3 class="text-xs text-neutral-400 font-light tracking-tight">OVERVIEW</h3>
+                <p class="mt-2 text-sm text-neutral-200 font-light tracking-tight">
+                  The live S3 bucket policy deviates from the approved security blueprint, potentially exposing data to unauthorized principals.
+                </p>
+              </div>
+    
+              <div class="flex">
+                <div class="w-24">
+                  <h3 class="text-xs text-neutral-400 font-light tracking-tight">IMPACTED</h3>
+                </div>
+                <ul class="flex flex-wrap gap-2">
+                  <li class="px-2.5 py-0.5 rounded-md text-xs bg-indigo-900/40 text-indigo-200 font-light tracking-tight">us-east-1</li>
+                  <li class="px-2.5 py-0.5 rounded-md text-xs bg-pink-900/40 text-pink-200 font-light tracking-tight">prod-logging-bucket</li>
+                  <li class="px-2.5 py-0.5 rounded-md text-xs bg-green-900/40 text-green-200 font-light tracking-tight">12 objects</li>
+                </ul>
+              </div>
+    
+              <div class="flex">
+                <div class="w-24">
+                  <h3 class="text-xs text-neutral-400 font-light tracking-tight">SOURCE</h3>
+                </div>
+                <div class="flex items-center gap-2">
+                  <i data-lucide="git-branch" class="w-4 h-4 text-gray-300"></i>
+                  <span class="text-sm font-light tracking-tight">acme-secure/bucket_policy.tf</span>
+                </div>
+              </div>
+    
+              <div class="flex">
+                <div class="w-24">
+                  <h3 class="text-xs text-neutral-400 font-light tracking-tight">SEVERITY</h3>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="w-2 h-2 rounded-full bg-indigo-400"></span>
+                  <span class="text-sm font-light tracking-tight">Critical</span>
+                </div>
+              </div>
+    
+              <div class="border-t border-white/10 pt-6">
+                <button class="w-full inline-flex items-center justify-center gap-2 rounded-lg bg-neutral-100 text-black px-4 py-2 text-sm hover:bg-neutral-200 transition font-light tracking-tight">
+                  View remediation guide
+                  <i data-lucide="external-link" class="w-4 h-4"></i>
+                </button>
+              </div>
+            </div>
+          </section>
+    
+          <!-- blueprint diff -->
+          <section aria-label="Blueprint diff" class="hidden lg:block absolute -bottom-24 left-2/3 w-full max-w-sm overflow-hidden border rounded-xl shadow-lg shadow-black/30 border-white/10 bg-white/5 backdrop-blur-md transform rotate-y-20 -rotate-z-15" data-animate>
+            <div class="flex items-center justify-between border-b border-white/10 px-6 py-3 bg-white/5 backdrop-blur-sm">
+              <div class="flex items-center gap-2">
+                <span class="text-sm font-light tracking-tight">Blueprint</span>
+                <i data-lucide="file-text" class="w-4 h-4 text-gray-400"></i>
+              </div>
+              <button aria-label="Copy snippet" class="copy-btn flex items-center gap-1 text-xs text-neutral-300 hover:text-neutral-100 transition">
+                <i data-lucide="copy" class="w-4 h-4"></i>
+                <span class="font-light tracking-tight">Copy</span>
+              </button>
+            </div>
+            <div class="px-6 py-6 overflow-x-auto">
+    <pre class="whitespace-pre text-[13px] leading-5 select-text font-light tracking-tight"><span class="select-none text-neutral-500">14</span> resource "aws_s3_bucket_policy" "logging" {
+    <span class="select-none text-neutral-500">15</span>   bucket = aws_s3_bucket.logging.id
+    <span class="select-none text-neutral-500">16</span>   policy = jsonencode({
+    <span class="select-none text-neutral-500">17</span>     Version = "2012-10-17"
+    <span class="select-none text-neutral-500 bg-indigo-950/40">18</span><span class="bg-indigo-950/40">     Statement = [</span>
+    <span class="select-none text-neutral-500 bg-indigo-950/40">19</span><span class="bg-indigo-950/40">       {</span>
+    <span class="select-none text-neutral-500 bg-indigo-950/40">20</span><span class="bg-indigo-950/40">         Effect   = "Deny"</span>
+    <span class="select-none text-neutral-500 bg-indigo-950/40">21</span><span class="bg-indigo-950/40">         Principal = "*"</span>
+    <span class="select-none text-neutral-500">22</span>         Action   = [ "s3:*" ]
+    <span class="select-none text-neutral-500">23</span>         Resource = [ "${aws_s3_bucket.logging.arn}/*" ]
+    <span class="select-none text-neutral-500 bg-indigo-950/40">24</span><span class="bg-indigo-950/40">       }</span>
+    <span class="select-none text-neutral-500">25</span>     ]
+    <span class="select-none text-neutral-500">26</span>   })
+    <span class="select-none text-neutral-500">27</span> }
+    </pre>
+            </div>
+          </section>
+    
+        </div>
+      </div>
+    </main>
+    
+    <!-- scripts -->
+    <script>
+    lucide.createIcons();
+    
+    document.addEventListener('DOMContentLoaded', () => {
+      const elms = [...document.querySelectorAll('[data-animate]')];
+      elms.forEach((el, idx) => {
+        el.classList.add('opacity-0', 'translate-y-6', 'blur-sm', 'transition', 'duration-700');
+        setTimeout(() => {
+          el.classList.remove('opacity-0', 'translate-y-6', 'blur-sm');
+        }, 200 + idx * 120);               // quicker stagger for smoother flow
+      });
+    
+      // copy-to-clipboard interactions
+      document.querySelectorAll('.copy-btn').forEach(btn => {
+        const label = btn.querySelector('span');
+        btn.addEventListener('click', () => {
+          navigator.clipboard.writeText(btn.closest('section').querySelector('pre').innerText);
+          const original = label.textContent;
+          label.textContent = 'Copied';
+          btn.classList.add('text-emerald-400');
+          setTimeout(() => {
+            label.textContent = original;
+            btn.classList.remove('text-emerald-400');
+          }, 1500);
+        });
+      });
+    });
+    </script>
+    </body></html>
+    
