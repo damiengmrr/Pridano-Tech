@@ -28,65 +28,159 @@
       <div class="max-w-7xl mx-auto flex items-center justify-between gap-6 px-6 py-4">
         <a href="index.html" class="flex items-center gap-2"><i data-lucide="sparkles" class="w-5 h-5"></i><span class="text-sm font-light">Pridano Tech</span></a>
         <nav class="hidden md:flex items-center gap-8">
+          <a class="text-sm text-neutral-300 hover:text-neutral-100 transition font-light" href="about.html">À propos</a>
           <a class="text-sm text-neutral-300 hover:text-neutral-100 transition font-light" href="services.html">Services</a>
           <a class="text-sm text-neutral-300 hover:text-neutral-100 transition font-light" href="projets.html">Projets</a>
+          <a class="text-sm text-neutral-300 hover:text-neutral-100 transition font-light" href="blog.html">Blog</a>
           <a class="text-sm text-neutral-300 hover:text-neutral-100 transition font-light" href="devis.html">Devis</a>
         </nav>
       </div>
     </header>
     
     <main class="max-w-7xl mx-auto px-6 py-16 space-y-12">
-      <h1 class="text-3xl md:text-4xl font-light tracking-tight mb-2">Nos projets</h1>
-      <p class="text-neutral-300 font-light">Quelques réalisations récentes. Plus de détails sur demande.</p>
-    
-      <section class="grid md:grid-cols-3 gap-6">
-        <!-- Projet 1 -->
-        <article class="rounded-xl border border-white/10 bg-white/5 backdrop-blur-md overflow-hidden">
-          <div class="p-6">
-            <div class="flex items-center gap-2 mb-2"><i data-lucide="badge-check" class="w-5 h-5 text-emerald-300"></i><h2 class="font-light">NovaSpace Studio</h2></div>
-            <p class="text-sm text-neutral-300 font-light">Vitrine 3D, interactions au scroll, devis connecté, perf 100.</p>
-          </div>
-          <div class="border-t border-white/10 p-6 text-sm text-neutral-400">Stack : Next.js · Tailwind · GSAP · Stripe</div>
-          <div class="border-t border-white/10 p-6">
-            <a href="novaspace.html" class="inline-flex items-center gap-1 rounded-lg bg-neutral-100 text-black px-4 py-2 text-sm hover:bg-neutral-200 transition font-light">
-              Voir le site démo <i data-lucide="external-link" class="w-4 h-4"></i>
-            </a>
-          </div>
-        </article>
-    
-        <!-- Projet 2 -->
-        <article class="rounded-xl border border-white/10 bg-white/5 backdrop-blur-md overflow-hidden">
-          <div class="p-6">
-            <div class="flex items-center gap-2 mb-2"><i data-lucide="shopping-bag" class="w-5 h-5 text-emerald-300"></i><h2 class="font-light">ModeX Shop</h2></div>
-            <p class="text-sm text-neutral-300 font-light">E-commerce mode, upsells, email flows, analytics.</p>
-          </div>
-          <div class="border-t border-white/10 p-6 text-sm text-neutral-400">Stack : Shopify · Liquid · GA4 · Klaviyo</div>
-          <div class="border-t border-white/10 p-6">
-            <a href="modex.html" class="inline-flex items-center gap-1 rounded-lg bg-neutral-100 text-black px-4 py-2 text-sm hover:bg-neutral-200 transition font-light">
-              Voir le site démo <i data-lucide="external-link" class="w-4 h-4"></i>
-            </a>
-          </div>
-        </article>
-    
-        <!-- Projet 3 -->
-        <article class="rounded-xl border border-white/10 bg-white/5 backdrop-blur-md overflow-hidden">
-          <div class="p-6">
-            <div class="flex items-center gap-2 mb-2"><i data-lucide="cpu" class="w-5 h-5 text-pink-300"></i><h2 class="font-light">ZenAgenda (SaaS)</h2></div>
-            <p class="text-sm text-neutral-300 font-light">Booking, profils pro, exports, notifications, admin.</p>
-          </div>
-          <div class="border-t border-white/10 p-6 text-sm text-neutral-400">Stack : Next.js · Supabase · Stripe</div>
-          <div class="border-t border-white/10 p-6">
-            <a href="zenagenda.html" class="inline-flex items-center gap-1 rounded-lg bg-neutral-100 text-black px-4 py-2 text-sm hover:bg-neutral-200 transition font-light">
-              Voir le site démo <i data-lucide="external-link" class="w-4 h-4"></i>
-            </a>
-          </div>
-        </article>
-      </section>
-    
-      <div class="text-center pt-6">
-        <a href="devis.html" class="inline-flex items-center gap-2 rounded-lg bg-neutral-100 text-black px-5 py-3 text-sm hover:bg-neutral-200 transition font-light">Parler d’un projet <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+  <!-- Hero / Intro -->
+  <header class="mb-2">
+    <div class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 backdrop-blur">
+      <i data-lucide="gallery-vertical" class="w-4 h-4 text-indigo-300"></i>
+      <span class="text-xs text-neutral-300">Portfolio</span>
+    </div>
+    <h1 class="mt-4 text-3xl md:text-5xl font-light tracking-tight">Nos projets premium</h1>
+    <p class="mt-3 text-neutral-300 font-light max-w-2xl">Sélection d’exemples concrets conçus pour la performance, le design et la conversion. Chaque projet peut être adapté à votre marque.</p>
+  </header>
+
+  <!-- Quick filters (visuels uniquement) -->
+  <div class="flex flex-wrap gap-3">
+    <span class="px-3 py-1.5 rounded-full text-xs border border-white/10 bg-white/5">Tous</span>
+    <span class="px-3 py-1.5 rounded-full text-xs border border-white/10 bg-white/5">Vitrine</span>
+    <span class="px-3 py-1.5 rounded-full text-xs border border-white/10 bg-white/5">E‑commerce</span>
+    <span class="px-3 py-1.5 rounded-full text-xs border border-white/10 bg-white/5">SaaS</span>
+  </div>
+
+  <!-- Grid cards -->
+  <section class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <!-- NovaSpace -->
+    <article class="group relative rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-md shadow-lg shadow-black/20">
+      <div class="aspect-[16/10] overflow-hidden">
+        <img src="
+        
+        
+        ici
+
+        
+        
+        " alt="NovaSpace Studio preview" class="w-full h-full object-cover transition duration-500 group-hover:scale-[1.04]" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent pointer-events-none"></div>
       </div>
-    </main>
+      <div class="p-6">
+        <div class="flex items-center gap-2 text-[11px] text-white/70">
+          <span class="inline-flex h-5 w-5 items-center justify-center rounded-full bg-indigo-400/20 ring-1 ring-indigo-300/30">
+            <i data-lucide="sparkles" class="w-3.5 h-3.5 text-indigo-300"></i>
+          </span>
+          Vitrine • 3D • Interactions
+        </div>
+        <h2 class="mt-2 text-xl font-medium tracking-tight">NovaSpace Studio</h2>
+        <p class="mt-1 text-sm text-neutral-300 font-light">Vitrine 3D, effets au scroll, formulaire de devis connecté, score perf 100.</p>
+        <div class="mt-3 flex flex-wrap gap-2 text-xs text-neutral-300">
+          <span class="px-2 py-1 rounded-md bg-white/5 border border-white/10">Next.js</span>
+          <span class="px-2 py-1 rounded-md bg-white/5 border border-white/10">Tailwind</span>
+          <span class="px-2 py-1 rounded-md bg-white/5 border border-white/10">GSAP</span>
+          <span class="px-2 py-1 rounded-md bg-white/5 border border-white/10">Stripe</span>
+        </div>
+        <div class="mt-5 flex items-center gap-3">
+          <a href="novaspace.html" class="inline-flex items-center gap-2 rounded-lg bg-neutral-100 text-black px-4 py-2 text-sm hover:bg-neutral-200 transition font-light">
+            Voir le site démo <i data-lucide="external-link" class="w-4 h-4"></i>
+          </a>
+          <a href="devis.html" class="inline-flex items-center gap-1 text-sm text-neutral-300 hover:text-neutral-100 transition font-light">
+            Adaptez-le à votre marque <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- ModeX Shop -->
+    <article class="group relative rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-md shadow-lg shadow-black/20">
+      <div class="aspect-[16/10] overflow-hidden">
+        <img src="
+        
+        
+        ici
+        
+        
+        " alt="ModeX Shop preview" class="w-full h-full object-cover transition duration-500 group-hover:scale-[1.04]" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent pointer-events-none"></div>
+      </div>
+      <div class="p-6">
+        <div class="flex items-center gap-2 text-[11px] text-white/70">
+          <span class="inline-flex h-5 w-5 items-center justify-center rounded-full bg-emerald-400/20 ring-1 ring-emerald-300/30">
+            <i data-lucide="shopping-bag" class="w-3.5 h-3.5 text-emerald-300"></i>
+          </span>
+          E‑commerce • Mode
+        </div>
+        <h2 class="mt-2 text-xl font-medium tracking-tight">ModeX Shop</h2>
+        <p class="mt-1 text-sm text-neutral-300 font-light">Upsells, flows email, analytics et tracking complet. Optimisé conversion.</p>
+        <div class="mt-3 flex flex-wrap gap-2 text-xs text-neutral-300">
+          <span class="px-2 py-1 rounded-md bg-white/5 border border-white/10">Shopify</span>
+          <span class="px-2 py-1 rounded-md bg-white/5 border border-white/10">Liquid</span>
+          <span class="px-2 py-1 rounded-md bg-white/5 border border-white/10">GA4</span>
+          <span class="px-2 py-1 rounded-md bg-white/5 border border-white/10">Klaviyo</span>
+        </div>
+        <div class="mt-5 flex items-center gap-3">
+          <a href="modex.html" class="inline-flex items-center gap-2 rounded-lg bg-neutral-100 text-black px-4 py-2 text-sm hover:bg-neutral-200 transition font-light">
+            Voir le site démo <i data-lucide="external-link" class="w-4 h-4"></i>
+          </a>
+          <a href="devis.html" class="inline-flex items-center gap-1 text-sm text-neutral-300 hover:text-neutral-100 transition font-light">
+            Discuter e‑commerce <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- ZenAgenda SaaS -->
+    <article class="group relative rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-md shadow-lg shadow-black/20">
+      <div class="aspect-[16/10] overflow-hidden">
+        <img src="
+        
+        
+        
+        ici
+        
+        
+        
+        " alt="ZenAgenda SaaS preview" class="w-full h-full object-cover transition duration-500 group-hover:scale-[1.04]" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent pointer-events-none"></div>
+      </div>
+      <div class="p-6">
+        <div class="flex items-center gap-2 text-[11px] text-white/70">
+          <span class="inline-flex h-5 w-5 items-center justify-center rounded-full bg-pink-400/20 ring-1 ring-pink-300/30">
+            <i data-lucide="cpu" class="w-3.5 h-3.5 text-pink-300"></i>
+          </span>
+          SaaS • Réservation
+        </div>
+        <h2 class="mt-2 text-xl font-medium tracking-tight">ZenAgenda</h2>
+        <p class="mt-1 text-sm text-neutral-300 font-light">Comptes pro & clients, exports, notifications, back‑office admin.</p>
+        <div class="mt-3 flex flex-wrap gap-2 text-xs text-neutral-300">
+          <span class="px-2 py-1 rounded-md bg-white/5 border border-white/10">Next.js</span>
+          <span class="px-2 py-1 rounded-md bg-white/5 border border-white/10">Supabase</span>
+          <span class="px-2 py-1 rounded-md bg-white/5 border border-white/10">Stripe</span>
+        </div>
+        <div class="mt-5 flex items-center gap-3">
+          <a href="zenagenda.html" class="inline-flex items-center gap-2 rounded-lg bg-neutral-100 text-black px-4 py-2 text-sm hover:bg-neutral-200 transition font-light">
+            Voir le site démo <i data-lucide="external-link" class="w-4 h-4"></i>
+          </a>
+          <a href="devis.html" class="inline-flex items-center gap-1 text-sm text-neutral-300 hover:text-neutral-100 transition font-light">
+            Discuter fonctionnalités <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </a>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <div class="text-center pt-6">
+    <a href="devis.html" class="inline-flex items-center gap-2 rounded-lg bg-neutral-100 text-black px-5 py-3 text-sm hover:bg-neutral-200 transition font-light">
+      Parler d’un projet <i data-lucide="arrow-right" class="w-4 h-4"></i>
+    </a>
+  </div>
+</main>
     
     <footer class="border-t border-white/10 py-8">
       <div class="max-w-7xl mx-auto px-6 text-sm text-neutral-400">© Pridano Tech — 2025</div>
