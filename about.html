@@ -3,6 +3,7 @@
     <title>À propos · Pridano Tech</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script><script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="icon" href=pridano.png>
     <style>
       /* Gradient border utility (no extra markup) */
       .border-gradient{
@@ -60,10 +61,13 @@
     
     <header class="sticky top-0 border-b border-neutral-800 header-blur">
       <div class="max-w-7xl mx-auto flex items-center justify-between gap-6 px-6 py-4">
-        <a href="index.html" class="flex items-center gap-2"><i data-lucide="sparkles" class="w-5 h-5"></i><span class="text-sm font-light">Pridano Tech</span></a>
+              <a href="index.html" class="flex items-center gap-2 group" data-animate>
+                <img src="pridano.png" alt="Pridano Tech logo" width="24" height="24" class="w-6 h-6 rounded-sm shadow-sm ring-1 ring-white/10" loading="eager" decoding="async" fetchpriority="high">
+                <span class="text-sm font-light tracking-tight">Pridano Tech</span>
+              </a>
         <nav class="hidden md:flex items-center gap-8">
-          <a class="text-sm text-neutral-300 hover:text-neutral-100 transition font-light" href="services.html">Services</a>
-          <a class="text-sm text-neutral-300 hover:text-neutral-100 transition font-light" href="projets.html">Projets</a>
+          <a class="text-sm text-neutral-300 hover:text-neutral-100 transition font-light tracking-tight" href="services.html">Services</a>
+          <a class="text-sm text-neutral-300 hover:text-neutral-100 transition font-light tracking-tight" href="projets.html">Projets</a>
           <!-- <a class="text-sm text-neutral-300 hover:text-neutral-100 transition font-light" href="about.html">À propos</a> -->
           <!-- <a class="text-sm text-neutral-300 hover:text-neutral-100 transition font-light" href="blog.html">Blog</a> -->
           <a class="inline-flex items-center gap-1 rounded-lg text-sm px-3 py-2 bg-neutral-100 text-black hover:bg-neutral-200 transition font-light tracking-tight" href="devis.html" data-animate>
