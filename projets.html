@@ -1,0 +1,279 @@
+<!doctype html><html lang="fr"><head>
+    <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Projets · Pridano Tech</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script><script src="https://unpkg.com/lucide@latest"></script>
+    </head><body class="font-[Inter] min-h-screen text-gray-100 bg-gray-950">
+    <!-- Background global -->
+    <div class="fixed inset-0 -z-10 overflow-hidden">
+      <!-- Aurora Layer -->
+      <div class="absolute inset-0" style="
+        background:
+          radial-gradient(50% 80% at 30% 20%, rgba(124,58,237,.25), transparent 70%),
+          radial-gradient(60% 90% at 70% 80%, rgba(56,189,248,.18), transparent 80%),
+          radial-gradient(70% 100% at 50% 50%, rgba(236,72,153,.1), transparent 80%),
+          #080808;
+        filter: saturate(1.15) contrast(1.03);
+        animation: aurora 18s ease-in-out infinite alternate;">
+      </div>
+
+      <!-- Canvas Wireframe -->
+      <canvas id="bg-mesh" class="absolute inset-0 w-full h-full"></canvas>
+
+      <!-- Particles -->
+      <canvas id="bg-particles" class="absolute inset-0 w-full h-full"></canvas>
+    </div>
+    
+    <header class="sticky top-0 backdrop-blur border-b border-neutral-800">
+      <div class="max-w-7xl mx-auto flex items-center justify-between gap-6 px-6 py-4">
+        <a href="index.html" class="flex items-center gap-2"><i data-lucide="sparkles" class="w-5 h-5"></i><span class="text-sm font-light">Pridano Tech</span></a>
+        <nav class="hidden md:flex items-center gap-8">
+          <a class="text-sm text-neutral-300 hover:text-neutral-100 transition font-light" href="about.html">À propos</a>
+          <a class="text-sm text-neutral-300 hover:text-neutral-100 transition font-light" href="services.html">Services</a>
+          <a class="text-sm text-neutral-300 hover:text-neutral-100 transition font-light" href="projets.html">Projets</a>
+          <!-- <a class="text-sm text-neutral-300 hover:text-neutral-100 transition font-light" href="blog.html">Blog</a> -->
+          <a class="inline-flex items-center gap-1 rounded-lg text-sm px-3 py-2 bg-neutral-100 text-black hover:bg-neutral-200 transition font-light tracking-tight" href="devis.html" data-animate>
+            Devis gratuit <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </a>
+        </nav>
+      </div>
+    </header>
+    
+    <main class="max-w-7xl mx-auto px-6 py-16 space-y-12">
+  <!-- Hero / Intro -->
+  <header class="mb-2">
+    <div class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 backdrop-blur">
+      <i data-lucide="gallery-vertical" class="w-4 h-4 text-indigo-300"></i>
+      <span class="text-xs text-neutral-300">Portfolio</span>
+    </div>
+    <h1 class="mt-4 text-3xl md:text-5xl font-light tracking-tight">Nos projets premium</h1>
+    <p class="mt-3 text-neutral-300 font-light max-w-2xl">Sélection d’exemples concrets conçus pour la performance, le design et la conversion. Chaque projet peut être adapté à votre marque.</p>
+  </header>
+
+  <!-- Quick filters (visuels uniquement) -->
+  <div class="flex flex-wrap gap-3">
+    <span class="px-3 py-1.5 rounded-full text-xs border border-white/10 bg-white/5">Tous</span>
+    <span class="px-3 py-1.5 rounded-full text-xs border border-white/10 bg-white/5">Vitrine</span>
+    <span class="px-3 py-1.5 rounded-full text-xs border border-white/10 bg-white/5">E‑commerce</span>
+    <span class="px-3 py-1.5 rounded-full text-xs border border-white/10 bg-white/5">SaaS</span>
+  </div>
+
+  <!-- Grid cards -->
+  <section class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <!-- NovaSpace -->
+    <article class="group relative rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-md shadow-lg shadow-black/20">
+      <div class="aspect-[16/10] overflow-hidden">
+        <img src=novaspace.png alt="NovaSpace Studio preview" class="w-full h-full object-cover transition duration-500 group-hover:scale-[1.04]" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent pointer-events-none"></div>
+      </div>
+      <div class="p-6">
+        <div class="flex items-center gap-2 text-[11px] text-white/70">
+          <span class="inline-flex h-5 w-5 items-center justify-center rounded-full bg-indigo-400/20 ring-1 ring-indigo-300/30">
+            <i data-lucide="sparkles" class="w-3.5 h-3.5 text-indigo-300"></i>
+          </span>
+          Vitrine • 3D • Interactions
+        </div>
+        <h2 class="mt-2 text-xl font-medium tracking-tight">NovaSpace Studio</h2>
+        <p class="mt-1 text-sm text-neutral-300 font-light">Vitrine 3D, effets au scroll, formulaire de devis connecté, score perf 100.</p>
+        <div class="mt-3 flex flex-wrap gap-2 text-xs text-neutral-300">
+          <span class="px-2 py-1 rounded-md bg-white/5 border border-white/10">Next.js</span>
+          <span class="px-2 py-1 rounded-md bg-white/5 border border-white/10">Tailwind</span>
+          <span class="px-2 py-1 rounded-md bg-white/5 border border-white/10">GSAP</span>
+          <span class="px-2 py-1 rounded-md bg-white/5 border border-white/10">Stripe</span>
+        </div>
+        <div class="mt-5 flex items-center gap-3">
+          <a href="novaspace.html" class="inline-flex items-center gap-2 rounded-lg bg-neutral-100 text-black px-4 py-2 text-sm hover:bg-neutral-200 transition font-light">
+            Voir le site démo <i data-lucide="external-link" class="w-4 h-4"></i>
+          </a>
+          <a href="devis.html" class="inline-flex items-center gap-1 text-sm text-neutral-300 hover:text-neutral-100 transition font-light">
+            Adaptez-le à votre marque <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- ModeX Shop -->
+    <article class="group relative rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-md shadow-lg shadow-black/20">
+      <div class="aspect-[16/10] overflow-hidden">
+        <img src=modex.png alt="ModeX Shop preview" class="w-full h-full object-cover transition duration-500 group-hover:scale-[1.04]" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent pointer-events-none"></div>
+      </div>
+      <div class="p-6">
+        <div class="flex items-center gap-2 text-[11px] text-white/70">
+          <span class="inline-flex h-5 w-5 items-center justify-center rounded-full bg-emerald-400/20 ring-1 ring-emerald-300/30">
+            <i data-lucide="shopping-bag" class="w-3.5 h-3.5 text-emerald-300"></i>
+          </span>
+          E‑commerce • Mode
+        </div>
+        <h2 class="mt-2 text-xl font-medium tracking-tight">ModeX Shop</h2>
+        <p class="mt-1 text-sm text-neutral-300 font-light">Upsells, flows email, analytics et tracking complet. Optimisé conversion.</p>
+        <div class="mt-3 flex flex-wrap gap-2 text-xs text-neutral-300">
+          <span class="px-2 py-1 rounded-md bg-white/5 border border-white/10">Shopify</span>
+          <span class="px-2 py-1 rounded-md bg-white/5 border border-white/10">Liquid</span>
+          <span class="px-2 py-1 rounded-md bg-white/5 border border-white/10">GA4</span>
+          <span class="px-2 py-1 rounded-md bg-white/5 border border-white/10">Klaviyo</span>
+        </div>
+        <div class="mt-5 flex items-center gap-3">
+          <a href="modex.html" class="inline-flex items-center gap-2 rounded-lg bg-neutral-100 text-black px-4 py-2 text-sm hover:bg-neutral-200 transition font-light">
+            Voir le site démo <i data-lucide="external-link" class="w-4 h-4"></i>
+          </a>
+          <a href="devis.html" class="inline-flex items-center gap-1 text-sm text-neutral-300 hover:text-neutral-100 transition font-light">
+            Discuter e‑commerce <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- ZenAgenda SaaS -->
+    <article class="group relative rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-md shadow-lg shadow-black/20">
+      <div class="aspect-[16/10] overflow-hidden">
+        <img src=zenagenda.png alt="ZenAgenda SaaS preview" class="w-full h-full object-cover transition duration-500 group-hover:scale-[1.04]" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent pointer-events-none"></div>
+      </div>
+      <div class="p-6">
+        <div class="flex items-center gap-2 text-[11px] text-white/70">
+          <span class="inline-flex h-5 w-5 items-center justify-center rounded-full bg-pink-400/20 ring-1 ring-pink-300/30">
+            <i data-lucide="cpu" class="w-3.5 h-3.5 text-pink-300"></i>
+          </span>
+          SaaS • Réservation
+        </div>
+        <h2 class="mt-2 text-xl font-medium tracking-tight">ZenAgenda</h2>
+        <p class="mt-1 text-sm text-neutral-300 font-light">Comptes pro & clients, exports, notifications, back‑office admin.</p>
+        <div class="mt-3 flex flex-wrap gap-2 text-xs text-neutral-300">
+          <span class="px-2 py-1 rounded-md bg-white/5 border border-white/10">Next.js</span>
+          <span class="px-2 py-1 rounded-md bg-white/5 border border-white/10">Supabase</span>
+          <span class="px-2 py-1 rounded-md bg-white/5 border border-white/10">Stripe</span>
+        </div>
+        <div class="mt-5 flex items-center gap-3">
+          <a href="zenagenda.html" class="inline-flex items-center gap-2 rounded-lg bg-neutral-100 text-black px-4 py-2 text-sm hover:bg-neutral-200 transition font-light">
+            Voir le site démo <i data-lucide="external-link" class="w-4 h-4"></i>
+          </a>
+          <a href="devis.html" class="inline-flex items-center gap-1 text-sm text-neutral-300 hover:text-neutral-100 transition font-light">
+            Discuter fonctionnalités <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </a>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <div class="text-center pt-6">
+    <a href="devis.html" class="inline-flex items-center gap-2 rounded-lg bg-neutral-100 text-black px-5 py-3 text-sm hover:bg-neutral-200 transition font-light">
+      Parler d’un projet <i data-lucide="arrow-right" class="w-4 h-4"></i>
+    </a>
+  </div>
+</main>
+    
+    <footer class="border-t border-white/10 py-8">
+      <div class="max-w-7xl mx-auto px-6 text-sm text-neutral-400">© Pridano Tech — 2025</div>
+    </footer>
+    <script>lucide.createIcons();</script>
+    <script type="module">
+    import * as THREE from 'https://cdn.skypack.dev/three@0.155.0';
+
+    // ---- Wireframe ----
+    const canvas = document.getElementById('bg-mesh');
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(55, innerWidth / innerHeight, 0.1, 100);
+    camera.position.set(0, 1.5, 3.5);
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
+    renderer.setSize(innerWidth, innerHeight);
+    renderer.setPixelRatio(window.devicePixelRatio);
+    const geometry = new THREE.PlaneGeometry(10, 10, 50, 50);
+    const material = new THREE.MeshBasicMaterial({ color: 0x6366f1, wireframe: true, opacity: 0.12, transparent: true });
+    const mesh = new THREE.Mesh(geometry, material);
+    mesh.rotation.x = -Math.PI / 2.3;
+    scene.add(mesh);
+    function animate() {
+      requestAnimationFrame(animate);
+      mesh.rotation.z += 0.0005;
+      renderer.render(scene, camera);
+    }
+    animate();
+    window.addEventListener('resize', () => {
+      camera.aspect = innerWidth / innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(innerWidth, innerHeight);
+    });
+
+    // ---- Soft Particles ----
+    (() => {
+      const c = document.getElementById('bg-particles'), ctx = c.getContext('2d');
+      let dpr = Math.max(1, window.devicePixelRatio || 1), W, H;
+      let particles = [], halos = [];
+      const mouse = {x: -9999, y: -9999};
+
+      function resize(){
+        W = c.width = innerWidth * dpr;
+        H = c.height = innerHeight * dpr;
+        c.style.width='100%'; c.style.height='100%';
+      }
+
+      function rand(a,b){ return a + Math.random()*(b-a); }
+
+      function init(n=70, h=12){
+        particles = Array.from({length:n}, _ => ({
+          x: rand(0,W), y: rand(0,H),
+          vx: rand(-.15,.15)*dpr, vy: rand(-.15,.15)*dpr,
+          r: rand(1.2,2.6)*dpr, hue: rand(200,280)
+        }));
+        halos = Array.from({length:h}, _ => ({
+          x: rand(0,W), y: rand(0,H),
+          vx: rand(-.03,.03)*dpr, vy: rand(-.03,.03)*dpr,
+          r: rand(50,140)*dpr, hue: rand(180,300)
+        }));
+      }
+
+      function drawParticle(p){
+        const grd = ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*3);
+        grd.addColorStop(0,`hsla(${p.hue},90%,70%,0.8)`);
+        grd.addColorStop(0.5,`hsla(${p.hue},90%,60%,0.25)`);
+        grd.addColorStop(1,`hsla(${p.hue},90%,60%,0)`);
+        ctx.fillStyle = grd;
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fill();
+      }
+
+      function drawHalo(h){
+        const grd = ctx.createRadialGradient(h.x,h.y,0,h.x,h.y,h.r);
+        grd.addColorStop(0,`hsla(${h.hue},100%,75%,0.08)`);
+        grd.addColorStop(0.4,`hsla(${h.hue},100%,65%,0.05)`);
+        grd.addColorStop(1,'rgba(0,0,0,0)');
+        ctx.fillStyle = grd;
+        ctx.beginPath();
+        ctx.arc(h.x,h.y,h.r,0,Math.PI*2);
+        ctx.fill();
+      }
+
+      function step(){
+        ctx.clearRect(0,0,W,H);
+        ctx.save();
+        ctx.globalCompositeOperation = 'lighter';
+        halos.forEach(h=>{
+          h.x+=h.vx; h.y+=h.vy;
+          if(h.x<0||h.x>W) h.vx*=-1;
+          if(h.y<0||h.y>H) h.vy*=-1;
+          drawHalo(h);
+        });
+        particles.forEach(p=>{
+          const dx = (mouse.x*dpr - p.x);
+          const dy = (mouse.y*dpr - p.y);
+          const dist = Math.hypot(dx,dy) || 1;
+          if(dist < 200*dpr){ p.vx += dx/dist*0.004; p.vy += dy/dist*0.004; }
+          p.x += p.vx; p.y += p.vy;
+          p.vx *= 0.985; p.vy *= 0.985;
+          if(p.x<0||p.x>W) p.vx*=-1;
+          if(p.y<0||p.y>H) p.vy*=-1;
+          drawParticle(p);
+        });
+        ctx.restore();
+        requestAnimationFrame(step);
+      }
+
+      window.addEventListener('mousemove', e=>{ mouse.x = e.clientX; mouse.y = e.clientY; }, {passive:true});
+      window.addEventListener('mouseleave', ()=>{ mouse.x = -9999; mouse.y = -9999; });
+      window.addEventListener('resize', ()=>{ resize(); init(particles.length, halos.length); });
+      resize(); init(); step();
+    })();
+    </script>
+    </body></html>
