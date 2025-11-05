@@ -50,110 +50,178 @@
           <!-- anti-spam (honeypot) -->
           <input type="text" name="_gotcha" autocomplete="off" tabindex="-1" class="hidden" aria-hidden="true">
 
-          <div class="grid md:grid-cols-2 gap-4">
-            <div>
-              <label for="name" class="block text-sm text-neutral-300 mb-1">Prénom & Nom</label>
-              <input id="name" name="name" type="text" required
-                     class="w-full rounded-xl bg-black/30 border border-white/10 px-4 py-3 text-sm focus-ring"
-                     placeholder="Ex. Damien Gamarra">
-              <p class="mt-1 text-xs text-rose-400 hidden" data-error="name">Indiquez votre nom complet.</p>
-            </div>
-            <div>
-              <label for="company" class="block text-sm text-neutral-300 mb-1">Société (optionnel)</label>
-              <input id="company" name="company" type="text"
-                     class="w-full rounded-xl bg-black/30 border border-white/10 px-4 py-3 text-sm focus-ring"
-                     placeholder="Ex. Pridano Tech">
-            </div>
-          </div>
-
-          <div class="grid md:grid-cols-2 gap-4">
-            <div>
-              <label for="email" class="block text-sm text-neutral-300 mb-1">Email</label>
-              <input id="email" name="email" type="email" required
-                     class="w-full rounded-xl bg-black/30 border border-white/10 px-4 py-3 text-sm focus-ring"
-                     placeholder="vous@exemple.com">
-              <p class="mt-1 text-xs text-rose-400 hidden" data-error="email">Saisissez un email valide.</p>
-            </div>
-            <div>
-              <label for="phone" class="block text-sm text-neutral-300 mb-1">Téléphone (optionnel)</label>
-              <input id="phone" name="phone" type="tel"
-                     class="w-full rounded-xl bg-black/30 border border-white/10 px-4 py-3 text-sm focus-ring"
-                     placeholder="+33 6 12 34 56 78">
+          <!-- Stepper -->
+          <div class="rounded-2xl bg-white/5 border border-white/10 p-4">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium bg-white/10 ring-1 ring-white/20" data-step-pin="1">1</span>
+                <span class="text-sm text-white/80 hidden sm:inline">Contact</span>
+              </div>
+              <div class="flex-1 mx-3 h-[3px] bg-white/10 relative">
+                <div class="h-full bg-gradient-to-r from-cyan-400 to-indigo-400 rounded" id="progressBar" style="width: 25%;"></div>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium bg-white/10 ring-1 ring-white/20" data-step-pin="2">2</span>
+                <span class="text-sm text-white/80 hidden sm:inline">Projet</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium bg-white/10 ring-1 ring-white/20" data-step-pin="3">3</span>
+                <span class="text-sm text-white/80 hidden sm:inline">Détails</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium bg-white/10 ring-1 ring-white/20" data-step-pin="4">4</span>
+                <span class="text-sm text-white/80 hidden sm:inline">Récap</span>
+              </div>
             </div>
           </div>
 
-          <div class="grid md:grid-cols-2 gap-4">
-            <div>
-              <label for="projectType" class="block text-sm text-neutral-300 mb-1">Type de projet</label>
-              <select id="projectType" name="projectType" required
-                      class="w-full rounded-xl bg-black/30 border border-white/10 px-4 py-3 text-sm focus-ring">
-                <option value="">Choisir…</option>
-                <option>Site vitrine</option>
-                <option>E-commerce</option>
-                <option>SaaS / Web app</option>
-                <option>Branding / Identité</option>
-                <option>Autre</option>
-              </select>
-              <p class="mt-1 text-xs text-rose-400 hidden" data-error="projectType">Sélectionnez une option.</p>
-            </div>
-            <div>
-              <label for="budget" class="block text-sm text-neutral-300 mb-1">Budget estimé</label>
-              <select id="budget" name="budget" required
-                      class="w-full rounded-xl bg-black/30 border border-white/10 px-4 py-3 text-sm focus-ring">
-                <option value="">Choisir…</option>
-                <option>&lt; 1 000 €</option>
-                <option>1 000 – 3 000 €</option>
-                <option>3 000 – 6 000 €</option>
-                <option>6 000 – 10 000 €</option>
-                <option>&gt; 10 000 €</option>
-              </select>
-              <p class="mt-1 text-xs text-rose-400 hidden" data-error="budget">Sélectionnez un budget.</p>
-            </div>
+          <!-- Steps container -->
+          <div id="steps" class="space-y-6">
+            <!-- STEP 1: Contact -->
+            <section class="step" data-step="1">
+              <div class="grid md:grid-cols-2 gap-4">
+                <div>
+                  <label for="name" class="block text-sm text-neutral-300 mb-1">Prénom & Nom</label>
+                  <input id="name" name="name" type="text" required
+                         class="w-full rounded-xl bg-black/30 border border-white/10 px-4 py-3 text-sm focus-ring"
+                         placeholder="Ex. Damien Gamarra">
+                  <p class="mt-1 text-xs text-rose-400 hidden" data-error="name">Indiquez votre nom complet.</p>
+                </div>
+                <div>
+                  <label for="company" class="block text-sm text-neutral-300 mb-1">Société (optionnel)</label>
+                  <input id="company" name="company" type="text"
+                         class="w-full rounded-xl bg-black/30 border border-white/10 px-4 py-3 text-sm focus-ring"
+                         placeholder="Ex. Pridano Tech">
+                </div>
+              </div>
+
+              <div class="grid md:grid-cols-2 gap-4 mt-4">
+                <div>
+                  <label for="email" class="block text-sm text-neutral-300 mb-1">Email</label>
+                  <input id="email" name="email" type="email" required
+                         class="w-full rounded-xl bg-black/30 border border-white/10 px-4 py-3 text-sm focus-ring"
+                         placeholder="vous@exemple.com">
+                  <p class="mt-1 text-xs text-rose-400 hidden" data-error="email">Saisissez un email valide.</p>
+                </div>
+                <div>
+                  <label for="phone" class="block text-sm text-neutral-300 mb-1">Téléphone (optionnel)</label>
+                  <input id="phone" name="phone" type="tel"
+                         class="w-full rounded-xl bg-black/30 border border-white/10 px-4 py-3 text-sm focus-ring"
+                         placeholder="+33 6 12 34 56 78">
+                </div>
+              </div>
+            </section>
+
+            <!-- STEP 2: Projet -->
+            <section class="step hidden" data-step="2">
+              <div class="grid md:grid-cols-2 gap-4">
+                <div>
+                  <label for="projectType" class="block text-sm text-neutral-300 mb-1">Type de projet</label>
+                  <select id="projectType" name="projectType" required
+                          class="w-full rounded-xl bg-black/30 border border-white/10 px-4 py-3 text-sm focus-ring">
+                    <option value="">Choisir…</option>
+                    <option>Site vitrine</option>
+                    <option>E-commerce</option>
+                    <option>SaaS / Web app</option>
+                    <option>Branding / Identité</option>
+                    <option>Autre</option>
+                  </select>
+                  <p class="mt-1 text-xs text-rose-400 hidden" data-error="projectType">Sélectionnez une option.</p>
+                </div>
+                <div>
+                  <label for="budget" class="block text-sm text-neutral-300 mb-1">Budget estimé</label>
+                  <select id="budget" name="budget" required
+                          class="w-full rounded-xl bg-black/30 border border-white/10 px-4 py-3 text-sm focus-ring">
+                    <option value="">Choisir…</option>
+                    <option>&lt; 1 000 €</option>
+                    <option>1 000 – 3 000 €</option>
+                    <option>3 000 – 6 000 €</option>
+                    <option>6 000 – 10 000 €</option>
+                    <option>&gt; 10 000 €</option>
+                  </select>
+                  <p class="mt-1 text-xs text-rose-400 hidden" data-error="budget">Sélectionnez un budget.</p>
+                </div>
+              </div>
+
+              <div class="grid md:grid-cols-2 gap-4 mt-4">
+                <div>
+                  <label for="deadline" class="block text-sm text-neutral-300 mb-1">Délai souhaité</label>
+                  <select id="deadline" name="deadline" required
+                          class="w-full rounded-xl bg-black/30 border border-white/10 px-4 py-3 text-sm focus-ring">
+                    <option value="">Choisir…</option>
+                    <option>ASAP (1–2 semaines)</option>
+                    <option>Rapide (2–4 semaines)</option>
+                    <option>Normal (1–2 mois)</option>
+                    <option>Flexible (&gt; 2 mois)</option>
+                  </select>
+                  <p class="mt-1 text-xs text-rose-400 hidden" data-error="deadline">Sélectionnez un délai.</p>
+                </div>
+                <div>
+                  <label for="ref" class="block text-sm text-neutral-300 mb-1">Références / URL (optionnel)</label>
+                  <input id="ref" name="references" type="url"
+                         class="w-full rounded-xl bg-black/30 border border-white/10 px-4 py-3 text-sm focus-ring"
+                         placeholder="https://exemple.com">
+                </div>
+              </div>
+            </section>
+
+            <!-- STEP 3: Détails -->
+            <section class="step hidden" data-step="3">
+              <div>
+                <label for="message" class="block text-sm text-neutral-300 mb-1">Votre besoin</label>
+                <textarea id="message" name="message" rows="6" required
+                          class="w-full rounded-xl bg-black/30 border border-white/10 px-4 py-3 text-sm focus-ring"
+                          placeholder="Contexte, objectifs, pages/sections, fonctionnalités clés…"></textarea>
+                <p class="mt-1 text-xs text-rose-400 hidden" data-error="message">Décrivez brièvement votre besoin.</p>
+              </div>
+
+              <div class="mt-4 grid sm:grid-cols-3 gap-3 text-xs text-white/70">
+                <label class="flex items-center gap-2 bg-white/5 border border-white/10 rounded-lg px-3 py-2">
+                  <input type="checkbox" id="opt_anim" class="accent-cyan-400"> Animations premium
+                </label>
+                <label class="flex items-center gap-2 bg-white/5 border border-white/10 rounded-lg px-3 py-2">
+                  <input type="checkbox" id="opt_seo" class="accent-cyan-400" checked> SEO technique
+                </label>
+                <label class="flex items-center gap-2 bg-white/5 border border-white/10 rounded-lg px-3 py-2">
+                  <input type="checkbox" id="opt_ai" class="accent-cyan-400"> Fonctions IA
+                </label>
+              </div>
+            </section>
+
+            <!-- STEP 4: Récap -->
+            <section class="step hidden" data-step="4">
+              <div class="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur">
+                <h3 class="text-lg font-medium tracking-tight">Récapitulatif</h3>
+                <div class="mt-4 grid sm:grid-cols-2 gap-4 text-sm text-white/80" id="summary">
+                  <!-- filled by JS -->
+                </div>
+                <div class="flex items-start gap-3 mt-5">
+                  <input id="consent" name="consent" type="checkbox" required class="mt-1">
+                  <label for="consent" class="text-sm text-neutral-300">
+                    J’accepte que mes informations soient utilisées pour être recontacté concernant ma demande.
+                    (<a href="privacy.html" class="underline hover:no-underline">Politique de confidentialité</a>)
+                  </label>
+                </div>
+                <p class="mt-1 text-xs text-rose-400 hidden" data-error="consent">Vous devez accepter pour envoyer.</p>
+              </div>
+            </section>
           </div>
 
-          <div class="grid md:grid-cols-2 gap-4">
-            <div>
-              <label for="deadline" class="block text-sm text-neutral-300 mb-1">Délai souhaité</label>
-              <select id="deadline" name="deadline" required
-                      class="w-full rounded-xl bg-black/30 border border-white/10 px-4 py-3 text-sm focus-ring">
-                <option value="">Choisir…</option>
-                <option>ASAP (1–2 semaines)</option>
-                <option>Rapide (2–4 semaines)</option>
-                <option>Normal (1–2 mois)</option>
-                <option>Flexible (&gt; 2 mois)</option>
-              </select>
-              <p class="mt-1 text-xs text-rose-400 hidden" data-error="deadline">Sélectionnez un délai.</p>
-            </div>
-            <div>
-              <label for="ref" class="block text-sm text-neutral-300 mb-1">Références / URL (optionnel)</label>
-              <input id="ref" name="references" type="url"
-                     class="w-full rounded-xl bg-black/30 border border-white/10 px-4 py-3 text-sm focus-ring"
-                     placeholder="https://exemple.com">
-            </div>
-          </div>
-
-          <div>
-            <label for="message" class="block text-sm text-neutral-300 mb-1">Votre besoin</label>
-            <textarea id="message" name="message" rows="5" required
-                      class="w-full rounded-xl bg-black/30 border border-white/10 px-4 py-3 text-sm focus-ring"
-                      placeholder="Contexte, objectifs, pages/sections, fonctionnalités clés…"></textarea>
-            <p class="mt-1 text-xs text-rose-400 hidden" data-error="message">Décrivez brièvement votre besoin.</p>
-          </div>
-
-          <div class="flex items-start gap-3">
-            <input id="consent" name="consent" type="checkbox" required class="mt-1">
-            <label for="consent" class="text-sm text-neutral-300">
-              J’accepte que mes informations soient utilisées pour être recontacté concernant ma demande. (<a href="privacy.html" class="underline hover:no-underline">Politique de confidentialité</a>)
-            </label>
-          </div>
-          <p class="mt-1 text-xs text-rose-400 hidden" data-error="consent">Vous devez accepter pour envoyer.</p>
-
+          <!-- Controls -->
           <div class="flex items-center gap-3 pt-2">
-            <button id="submitBtn" type="submit"
+            <button type="button" id="prevBtn"
+                    class="inline-flex items-center gap-2 rounded-lg border border-white/15 bg-black/40 text-neutral-100 px-5 py-3 text-sm hover:bg-black/50 transition font-light disabled:opacity-40 disabled:pointer-events-none">
+              <i data-lucide="chevron-left" class="w-4 h-4"></i> Précédent
+            </button>
+            <button type="button" id="nextBtn"
                     class="inline-flex items-center gap-2 rounded-lg bg-neutral-100 text-black px-5 py-3 text-sm hover:bg-neutral-200 transition font-light">
+              Suivant <i data-lucide="chevron-right" class="w-4 h-4"></i>
+            </button>
+            <button id="submitBtn" type="submit"
+                    class="hidden inline-flex items-center gap-2 rounded-lg bg-emerald-400 text-black px-5 py-3 text-sm hover:bg-emerald-300 transition font-medium">
               <i data-lucide="send" class="w-4 h-4"></i> Envoyer ma demande
             </button>
-            <span id="formStatus" class="text-sm text-neutral-300"></span>
+            <span id="formStatus" class="text-sm text-neutral-300 ml-2"></span>
           </div>
         </form>
       </div>
@@ -273,49 +341,123 @@
   <script>
     const form = document.getElementById('quoteForm');
     const statusEl = document.getElementById('formStatus');
-    const btn = document.getElementById('submitBtn');
+    const btnPrev = document.getElementById('prevBtn');
+    const btnNext = document.getElementById('nextBtn');
+    const btnSubmit = document.getElementById('submitBtn');
+    const progressBar = document.getElementById('progressBar');
+    const pins = document.querySelectorAll('[data-step-pin]');
+    const steps = [...document.querySelectorAll('.step')];
+    let step = 1, total = steps.length;
 
+    // utilities
     const showError = (name, on=true) => {
       const el = document.querySelector(`[data-error="${name}"]`);
       if(!el) return;
       el.classList.toggle('hidden', !on);
     };
 
+    const updateUI = () => {
+      steps.forEach(s => s.classList.toggle('hidden', parseInt(s.dataset.step,10)!==step));
+      btnPrev.disabled = (step===1);
+      btnNext.classList.toggle('hidden', step===total);
+      btnSubmit.classList.toggle('hidden', step!==total);
+      const pct = Math.round((step-1)/(total-1)*100);
+      progressBar.style.width = `${Math.max(5,pct)}%`;
+      pins.forEach(pin => {
+        const n = parseInt(pin.dataset.stepPin,10);
+        pin.classList.toggle('bg-white', n===step);
+        pin.classList.toggle('text-black', n===step);
+        pin.classList.toggle('bg-white/10', n!==step);
+        pin.classList.toggle('text-white', n!==step);
+      });
+      lucide.createIcons();
+    };
+
+    const validateStep = () => {
+      let ok = true;
+      // clear old
+      ['name','email','projectType','budget','deadline','message','consent'].forEach(id => showError(id,false));
+      if(step===1){
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        if(!name){ showError('name',true); ok=false; }
+        if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ showError('email',true); ok=false; }
+      }
+      if(step===2){
+        const type = document.getElementById('projectType').value;
+        const budget = document.getElementById('budget').value;
+        const deadline = document.getElementById('deadline').value;
+        if(!type){ showError('projectType',true); ok=false; }
+        if(!budget){ showError('budget',true); ok=false; }
+        if(!deadline){ showError('deadline',true); ok=false; }
+      }
+      if(step===3){
+        const msg = document.getElementById('message').value.trim();
+        if(!msg){ showError('message',true); ok=false; }
+      }
+      if(step===4){
+        const consent = document.getElementById('consent').checked;
+        if(!consent){ showError('consent',true); ok=false; }
+      }
+      return ok;
+    };
+
+    const fillSummary = () => {
+      const get = id => document.getElementById(id)?.value?.trim() || '';
+      const summary = document.getElementById('summary');
+      const opts = [
+        document.getElementById('opt_anim')?.checked ? 'Animations premium' : null,
+        document.getElementById('opt_seo')?.checked ? 'SEO technique' : null,
+        document.getElementById('opt_ai')?.checked ? 'Fonctions IA' : null,
+      ].filter(Boolean).join(' • ') || '—';
+
+      summary.innerHTML = `
+        <div><div class="text-white/60">Nom</div><div class="font-medium">${get('name')}</div></div>
+        <div><div class="text-white/60">Société</div><div class="font-medium">${get('company')||'—'}</div></div>
+        <div><div class="text-white/60">Email</div><div class="font-medium break-all">${get('email')}</div></div>
+        <div><div class="text-white/60">Téléphone</div><div class="font-medium">${get('phone')||'—'}</div></div>
+        <div><div class="text-white/60">Type</div><div class="font-medium">${get('projectType')}</div></div>
+        <div><div class="text-white/60">Budget</div><div class="font-medium">${get('budget')}</div></div>
+        <div><div class="text-white/60">Délai</div><div class="font-medium">${get('deadline')}</div></div>
+        <div class="sm:col-span-2"><div class="text-white/60">Références</div><div class="font-medium break-all">${get('ref')||'—'}</div></div>
+        <div class="sm:col-span-2"><div class="text-white/60">Options</div><div class="font-medium">${opts}</div></div>
+        <div class="sm:col-span-2"><div class="text-white/60">Message</div><div class="font-medium whitespace-pre-line">${get('message')}</div></div>
+      `;
+    };
+
+    btnPrev.addEventListener('click', () => { if(step>1){ step--; updateUI(); } });
+    btnNext.addEventListener('click', () => {
+      if(!validateStep()) return;
+      if(step<total){ step++; if(step===4) fillSummary(); updateUI(); }
+    });
+
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       statusEl.textContent = "";
-
-      // validation simple
-      const requiredIds = ['name','email','projectType','budget','deadline','message','consent'];
-      let valid = true;
-      requiredIds.forEach(id=>{
-        const input = document.getElementById(id);
-        const ok = (id==='consent') ? input.checked : !!input.value.trim();
-        showError(id, !ok);
-        if(!ok) valid = false;
-      });
-      // email format
-      const email = document.getElementById('email').value.trim();
-      if(email && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ showError('email', true); valid = false; }
-
-      if(!valid) { statusEl.textContent = "Complétez les champs requis."; return; }
+      if(!validateStep()) return;
 
       // collectible data
       const data = {
         name: document.getElementById('name').value.trim(),
         company: document.getElementById('company').value.trim(),
-        email,
+        email: document.getElementById('email').value.trim(),
         phone: document.getElementById('phone').value.trim(),
         projectType: document.getElementById('projectType').value,
         budget: document.getElementById('budget').value,
         deadline: document.getElementById('deadline').value,
         references: document.getElementById('ref').value.trim(),
         message: document.getElementById('message').value.trim(),
+        options: {
+          animations: !!document.getElementById('opt_anim')?.checked,
+          seo: !!document.getElementById('opt_seo')?.checked,
+          ai: !!document.getElementById('opt_ai')?.checked,
+        },
         source: 'pridano-tech/devis'
       };
 
-      btn.disabled = true;
-      btn.classList.add('opacity-60','pointer-events-none');
+      // UI lock
+      btnSubmit.disabled = true;
+      btnSubmit.classList.add('opacity-60','pointer-events-none');
       statusEl.textContent = "Envoi en cours…";
 
       try {
@@ -328,13 +470,27 @@
           });
           if(!res.ok) throw new Error('Formspree error');
           form.reset();
+          step = 1;
+          updateUI();
           statusEl.textContent = "Merci ! Votre demande a bien été envoyée. Nous revenons vers vous très vite.";
         } else {
           // fallback mailto
           const to = (window.PRIDANO_FALLBACK_EMAIL||'hello@pridano.tech').trim();
           const subject = encodeURIComponent(`Demande de devis — ${data.name} (${data.projectType})`);
           const body = encodeURIComponent(
-            `Nom: ${data.name}\nSociété: ${data.company}\nEmail: ${data.email}\nTéléphone: ${data.phone}\nType: ${data.projectType}\nBudget: ${data.budget}\nDélai: ${data.deadline}\nRéférences: ${data.references}\n\nMessage:\n${data.message}\n`
+`Nom: ${data.name}
+Société: ${data.company}
+Email: ${data.email}
+Téléphone: ${data.phone}
+Type: ${data.projectType}
+Budget: ${data.budget}
+Délai: ${data.deadline}
+Références: ${data.references}
+Options: Animations=${data.options.animations} • SEO=${data.options.seo} • IA=${data.options.ai}
+
+Message:
+${data.message}
+`
           );
           window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
           statusEl.textContent = "Ouverture de votre client mail…";
@@ -343,10 +499,13 @@
         console.error(err);
         statusEl.textContent = "Une erreur est survenue pendant l’envoi. Réessayez ou contactez-nous.";
       } finally {
-        btn.disabled = false;
-        btn.classList.remove('opacity-60','pointer-events-none');
+        btnSubmit.disabled = false;
+        btnSubmit.classList.remove('opacity-60','pointer-events-none');
       }
     });
+
+    // init
+    updateUI();
   </script>
 </body>
 </html>
