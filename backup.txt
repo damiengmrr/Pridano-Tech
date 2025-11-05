@@ -1,0 +1,19 @@
+<!-- 
+=============================================================
+  🧠 PRIDANO TECH — Site officiel (vX.X)
+  ------------------------------------------------------------
+  🔹 Créé par : Damien Gamarra & Noah Lemoing
+  🔹 Projet : Pridano Tech — Agence web premium
+  🔹 Description : Site vitrine officiel de Pridano Tech, 
+    présentant nos services, projets, technologies et devis.
+  🔹 Technologies : HTML · TailwindCSS · GSAP · Three.js · Lucide Icons
+  🔹 Date de création : Novembre 2025
+  🔹 Hébergement : Netlify
+  🔹 Dernière mise à jour : 
+  ------------------------------------------------------------
+  © 2025 Pridano Tech — Tous droits réservés
+=============================================================
+-->
+
+
+90/100 LIGHTHOUSE
