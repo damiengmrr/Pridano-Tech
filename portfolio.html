@@ -1,0 +1,1153 @@
+<html lang="fr" class="dark antialiased scroll-smooth"><head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Damien Gamarra — Étudiant & Développeur Full-Stack</title>
+    <meta name="description" content="Portfolio de Damien Gamarra (B2 Informatique, Ynov Montpellier) — Projets web modernes (Next.js, Tailwind, GSAP), DevOps (NGINX, Linux, Docker) et études de cas (Pridano Tech, SeTesT, Serveur Web, Forum Go/SQLite).">
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <meta name="theme-color" content="#000000">
+    <style>
+    @keyframes fadeInUp {
+    from {
+    opacity: 0;
+    transform: translateY(30px);
+    filter: blur(10px);
+    }
+    to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+    }
+    }
+    @keyframes fadeInLeft {
+    from {
+    opacity: 0;
+    transform: translateX(-30px);
+    filter: blur(8px);
+    }
+    to {
+    opacity: 1;
+    transform: translateX(0);
+    filter: blur(0);
+    }
+    }
+    @keyframes fadeIn {
+    from {
+    opacity: 0;
+    filter: blur(4px);
+    }
+    to {
+    opacity: 1;
+    filter: blur(0);
+    }
+    }
+    /* Scroll Reveal Animations */
+    @keyframes scrollReveal {
+    from {
+    opacity: 0;
+    transform: translateY(24px);
+    }
+    to {
+    opacity: 1;
+    transform: translateY(0);
+    }
+    }
+    .scroll-reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 700ms ease-out, transform 700ms ease-out;
+    }
+    .scroll-reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+    }
+    /* Stagger delays for child elements */
+    .scroll-reveal-stagger > *:nth-child(1) { transition-delay: 0ms; }
+    .scroll-reveal-stagger > *:nth-child(2) { transition-delay: 80ms; }
+    .scroll-reveal-stagger > *:nth-child(3) { transition-delay: 160ms; }
+    .scroll-reveal-stagger > *:nth-child(4) { transition-delay: 240ms; }
+    .scroll-reveal-stagger > *:nth-child(5) { transition-delay: 320ms; }
+    .scroll-reveal-stagger > *:nth-child(6) { transition-delay: 400ms; }
+    .scroll-reveal-stagger > *:nth-child(7) { transition-delay: 480ms; }
+    .scroll-reveal-stagger > *:nth-child(8) { transition-delay: 560ms; }
+    .scroll-reveal-stagger > *:nth-child(9) { transition-delay: 640ms; }
+    .scroll-reveal-stagger > *:nth-child(10) { transition-delay: 720ms; }
+    .animate-fade-in-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+    }
+    .animate-fade-in-left {
+    animation: fadeInLeft 0.8s ease-out forwards;
+    }
+    .animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+    }
+    .animation-delay-200 { animation-delay: 0.2s; }
+    .animation-delay-400 { animation-delay: 0.4s; }
+    .animation-delay-600 { animation-delay: 0.6s; }
+    .animation-delay-800 { animation-delay: 0.8s; }
+    .animation-delay-1000 { animation-delay: 1.0s; }
+    .animation-delay-1200 { animation-delay: 1.2s; }
+    .animation-delay-1400 { animation-delay: 1.4s; }
+    .initial-hidden {
+    opacity: 0;
+    }
+    html {
+    scroll-behavior: smooth;
+    }
+    /* Notification styles */
+    .notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 16px 20px;
+    border-radius: 12px;
+    z-index: 1000;
+    transform: translateX(400px);
+    transition: transform 0.3s ease-out;
+    backdrop-filter: blur(10px);
+    }
+    .notification.show {
+    transform: translateX(0);
+    }
+    .notification.success {
+    border-color: rgba(34, 197, 94, 0.5);
+    background: rgba(22, 163, 74, 0.2);
+    }
+    .notification.error {
+    border-color: rgba(239, 68, 68, 0.5);
+    background: rgba(220, 38, 38, 0.2);
+    }
+    /* Mobile menu styles */
+    .mobile-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(20px);
+    z-index: 100;
+    transform: translateY(-100%);
+    transition: transform 0.3s ease-out;
+    }
+    .mobile-menu.open {
+    transform: translateY(0);
+    }
+    /* Modal styles */
+    .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-out, visibility 0.3s ease-out;
+    }
+    .modal.open {
+    opacity: 1;
+    visibility: visible;
+    }
+    .modal-content {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 32px;
+    max-width: 500px;
+    width: 90%;
+    transform: scale(0.9);
+    transition: transform 0.3s ease-out;
+    }
+    .modal.open .modal-content {
+    transform: scale(1);
+    }
+    </style><link id="all-fonts-link-font-geist" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&amp;display=swap"><link id="all-fonts-link-font-roboto" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&amp;display=swap"><link id="all-fonts-link-font-montserrat" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&amp;display=swap"><link id="all-fonts-link-font-poppins" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap"><link id="all-fonts-link-font-playfair" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;900&amp;display=swap"><link id="all-fonts-link-font-instrument-serif" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:wght@400;500;600;700&amp;display=swap"><link id="all-fonts-link-font-merriweather" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&amp;display=swap"><link id="all-fonts-link-font-bricolage" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@300;400;500;600;700&amp;display=swap"><link id="all-fonts-link-font-jakarta" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap"><link id="all-fonts-link-font-manrope" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap"><link id="all-fonts-link-font-space-grotesk" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"><link id="all-fonts-link-font-work-sans" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700;800&amp;display=swap"><link id="all-fonts-link-font-pt-serif" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&amp;display=swap"><link id="all-fonts-link-font-geist-mono" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500;600;700&amp;display=swap"><link id="all-fonts-link-font-space-mono" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&amp;display=swap"><link id="all-fonts-link-font-quicksand" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&amp;display=swap"><link id="all-fonts-link-font-nunito" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&amp;display=swap"><style id="all-fonts-style-font-geist">.font-geist { font-family: 'Geist', sans-serif !important; }</style><style id="all-fonts-style-font-roboto">.font-roboto { font-family: 'Roboto', sans-serif !important; }</style><style id="all-fonts-style-font-montserrat">.font-montserrat { font-family: 'Montserrat', sans-serif !important; }</style><style id="all-fonts-style-font-poppins">.font-poppins { font-family: 'Poppins', sans-serif !important; }</style><style id="all-fonts-style-font-playfair">.font-playfair { font-family: 'Playfair Display', serif !important; }</style><style id="all-fonts-style-font-instrument-serif">.font-instrument-serif { font-family: 'Instrument Serif', serif !important; }</style><style id="all-fonts-style-font-merriweather">.font-merriweather { font-family: 'Merriweather', serif !important; }</style><style id="all-fonts-style-font-bricolage">.font-bricolage { font-family: 'Bricolage Grotesque', sans-serif !important; }</style><style id="all-fonts-style-font-jakarta">.font-jakarta { font-family: 'Plus Jakarta Sans', sans-serif !important; }</style><style id="all-fonts-style-font-manrope">.font-manrope { font-family: 'Manrope', sans-serif !important; }</style><style id="all-fonts-style-font-space-grotesk">.font-space-grotesk { font-family: 'Space Grotesk', sans-serif !important; }</style><style id="all-fonts-style-font-work-sans">.font-work-sans { font-family: 'Work Sans', sans-serif !important; }</style><style id="all-fonts-style-font-pt-serif">.font-pt-serif { font-family: 'PT Serif', serif !important; }</style><style id="all-fonts-style-font-geist-mono">.font-geist-mono { font-family: 'Geist Mono', monospace !important; }</style><style id="all-fonts-style-font-space-mono">.font-space-mono { font-family: 'Space Mono', monospace !important; }</style><style id="all-fonts-style-font-quicksand">.font-quicksand { font-family: 'Quicksand', sans-serif !important; }</style><style id="all-fonts-style-font-nunito">.font-nunito { font-family: 'Nunito', sans-serif !important; }</style></head>
+    <body class="overflow-x-hidden text-gray-100 font-[Inter] bg-black"><div class="aura-background-component top-0 w-full h-screen -z-10 absolute"><div class="spline-container absolute top-0 left-0 w-full h-full -z-10"><iframe src="https://my.spline.design/glasswave-6HLEnvJfCRsq1aKT2xqlgme7" frameborder="0" width="100%" height="100%"></iframe></div></div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu">
+          <div class="flex flex-col h-full">
+            <div class="flex items-center justify-between p-6 border-b border-white/10">
+              <span class="text-lg font-semibold text-white">Menu</span>
+              <button id="close-mobile-menu" class="p-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="x" class="lucide lucide-x h-5 w-5"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+              </button>
+            </div>
+            <nav class="flex flex-col gap-4 p-6">
+              <a href="#work" class="text-lg font-medium text-gray-300 hover:text-white transition-colors duration-300 nav-link">Projets</a>
+              <a href="#about" class="text-lg font-medium text-gray-300 hover:text-white transition-colors duration-300 nav-link">À propos</a>
+              <a href="#experience" class="text-lg font-medium text-gray-300 hover:text-white transition-colors duration-300 nav-link">Expérience</a>
+              <a href="#contact" class="text-lg font-medium text-gray-300 hover:text-white transition-colors duration-300 nav-link">Contact</a>
+            </nav>
+            <div class="p-6 mt-auto">
+              <button id="mobile-resume-btn" class="w-full flex items-center justify-center gap-2 rounded-full bg-white text-black px-6 py-3 text-base font-medium hover:bg-gray-100 transition-all duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="download" class="lucide lucide-download h-4 w-4"><path d="M12 15V3"></path><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="m7 10 5 5 5-5"></path></svg>
+                Télécharger le CV
+              </button>
+            </div>
+          </div>
+        </div>
+    
+    
+        <!-- Navigation -->
+        <header class="sticky top-0 z-50 backdrop-blur-xl bg-black/80 border-b border-white/10 animate-fade-in">
+          <div class="mx-auto max-w-6xl px-6 lg:px-8">
+            <div class="flex h-16 items-center justify-between">
+              <a href="#hero" class="group flex items-center gap-3 hover:opacity-80 transition-opacity duration-300 nav-link">
+                <div class="relative h-8 w-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 p-0.5">
+                  <div class="h-full w-full rounded-[6px] bg-black flex items-center justify-center">
+                    <span class="text-xs font-semibold text-white">DG</span>
+                  </div>
+                </div>
+                <span class="group-hover:text-white transition-colors text-sm font-medium text-gray-300">Damien Gamarra</span>
+              </a>
+    
+              <nav class="hidden md:flex items-center gap-8">
+                <a href="#work" class="text-sm font-medium text-gray-400 hover:text-white transition-colors duration-300 nav-link">Projets</a>
+                <a href="#about" class="text-sm font-medium text-gray-400 hover:text-white transition-colors duration-300 nav-link">À propos</a>
+                <a href="#experience" class="text-sm font-medium text-gray-400 hover:text-white transition-colors duration-300 nav-link">Expérience</a>
+                <a href="#contact" class="text-sm font-medium text-gray-400 hover:text-white transition-colors duration-300 nav-link">Contact</a>
+              </nav>
+
+              <div class="flex items-center gap-3">
+                <button id="resume-btn" class="hidden sm:flex items-center gap-2 rounded-full bg-white text-black px-4 py-2 text-sm font-medium hover:bg-gray-100 hover:scale-105 transition-all duration-300">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="download" class="lucide lucide-download h-4 w-4"><path d="M12 15V3"></path><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="m7 10 5 5 5-5"></path></svg>
+                  <span>CV</span>
+                </button>
+                
+                <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="menu" class="lucide lucide-menu h-5 w-5"><path d="M4 12h16"></path><path d="M4 18h16"></path><path d="M4 6h16"></path></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </header>
+    
+        <!-- Hero Section -->
+        <section id="hero" class="relative sm:py-32 pt-20 pb-20">
+          <div class="mx-auto max-w-6xl px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+              <div class="space-y-8 scroll-reveal-stagger">
+                <div class="inline-flex items-center gap-2 rounded-full bg-white/5 border border-white/10 px-4 py-2 text-sm text-gray-300 scroll-reveal revealed">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="zap" class="lucide lucide-zap h-4 w-4 text-blue-400"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"></path></svg>
+                  B2 Informatique — Ynov Montpellier • VP BDE OVNY
+                </div>
+                
+                <div class="space-y-6">
+                  <h1 class="text-5xl sm:text-7xl font-bold tracking-tight text-white leading-none scroll-reveal revealed">
+                    Je conçois & développe des
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-400">applications web modernes</span>
+                  </h1>
+                  
+                  <p class="text-xl text-gray-400 leading-relaxed max-w-lg scroll-reveal revealed">
+                    Étudiant en informatique (B2) à Ynov Montpellier. Je construis des projets concrets (NGINX/Reverse Proxy, WordPress/Flask, Go/Python/JS) avec un vrai souci de performance, d’accessibilité et d’UX.
+                  </p>
+                </div>
+    
+                <div class="flex flex-col sm:flex-row gap-4 scroll-reveal revealed">
+                  <a href="#work" class="group flex items-center justify-center gap-2 rounded-2xl bg-white text-black px-6 py-3 text-base font-medium hover:bg-gray-100 hover:scale-105 transition-all duration-300 nav-link">
+                    <span>Voir mes projets</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="arrow-right" class="lucide lucide-arrow-right h-5 w-5 group-hover:translate-x-1 transition-transform duration-300"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                  </a>
+                  <!-- <button id="hero-schedule-btn" class="group flex items-center justify-center gap-2 rounded-2xl border border-white/20 bg-white/5 text-white px-6 py-3 text-base font-medium hover:bg-white/10 hover:border-white/30 transition-all duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="message-circle" class="lucide lucide-message-circle h-5 w-5"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"></path></svg>
+                    <span>Discutons</span>
+                  </button> -->
+                </div>
+    
+                <!-- Social Links -->
+                <div class="flex items-center gap-6 pt-4 scroll-reveal revealed">
+                  <a href="https://linkedin.com/in/damien-gamarra-76979b29b" target="_blank" class="text-gray-400 hover:text-white hover:scale-110 transition-all duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="linkedin" class="lucide lucide-linkedin h-5 w-5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                  </a>
+                  <a href="https://github.com/damiengmrr" target="_blank" class="text-gray-400 hover:text-white hover:scale-110 transition-all duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="github" class="lucide lucide-github h-5 w-5"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>
+                  </a>
+                </div>
+              </div>
+    
+              <!-- Hero Image -->
+              <div class="relative scroll-reveal revealed">
+                <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-white/10 to-white/5 border border-white/10 backdrop-blur-xl">
+                  <img src=photo.jpg alt="Damien Gamarra" class="w-full h-[600px] object-cover" style="">
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                  
+                  <div class="absolute bottom-6 left-6 right-6">
+                    <div class="rounded-2xl bg-black/40 backdrop-blur-xl border border-white/10 p-4">
+                      <div class="flex items-center gap-3">
+                        <div class="h-10 w-10 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="palette" class="lucide lucide-palette h-5 w-5 text-white"><path d="M12 22a1 1 0 0 1 0-20 10 9 0 0 1 10 9 5 5 0 0 1-5 5h-2.25a1.75 1.75 0 0 0-1.4 2.8l.3.4a1.75 1.75 0 0 1-1.4 2.8z"></path><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"></circle><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"></circle><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"></circle><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"></circle></svg>
+                        </div>
+                        <div class="">
+                          <p class="text-sm font-medium text-white">Actuellement</p>
+                          <p class="text-xs text-gray-300">Co‑fondateur chez Pridano Tech — Sites web premium</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+    
+         <!-- Featured Work -->
+<section id="work" class="relative sm:py-32 pt-20 pb-20">
+    <div class="mx-auto max-w-6xl px-6 lg:px-8">
+      <div class="mb-16 scroll-reveal-stagger">
+        <h2 class="text-4xl sm:text-5xl font-bold tracking-tight text-white mb-4 scroll-reveal revealed">Mes Projets</h2>
+        <p class="text-xl text-gray-400 max-w-2xl scroll-reveal revealed">
+          Une sélection de projets personnels et académiques en développement web, infrastructure et design interactif.
+        </p>
+      </div>
+  
+      <div class="space-y-24">
+        <!-- Project 1 — Pridano Tech -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center scroll-reveal-stagger">
+          <div class="space-y-6 scroll-reveal revealed">
+            <div class="flex items-center gap-3">
+              <div class="h-8 w-8 rounded-lg bg-purple-500/20 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-globe h-4 w-4 text-purple-400"><circle cx="12" cy="12" r="10"></circle><path d="M2 12h20"></path></svg>
+              </div>
+              <span class="text-sm font-medium text-purple-400">Agence Web</span>
+            </div>
+
+            <h3 class="text-3xl font-bold text-white scroll-reveal revealed">Pridano Tech</h3>
+            <p class="text-lg text-gray-400 leading-relaxed scroll-reveal revealed">
+              Agence web fondée par Damien Gamarra & Noah Lemoing. Création de sites vitrines, e-commerce et SaaS haut de gamme (Next.js, TailwindCSS, animations GSAP, UI/UX premium).
+            </p>
+
+            <div class="flex flex-wrap gap-3 scroll-reveal revealed">
+              <span class="px-3 py-1 rounded-full bg-white/10 text-white text-sm">Next.js</span>
+              <span class="px-3 py-1 rounded-full bg-white/10 text-white text-sm">TailwindCSS</span>
+              <span class="px-3 py-1 rounded-full bg-white/10 text-white text-sm">GSAP</span>
+            </div>
+
+            <a href="https://github.com/damiengmrr/pridano-tech" target="_blank" rel="noopener noreferrer" class="case-study-btn group inline-flex items-center gap-2 text-purple-400 font-medium hover:text-purple-300 transition-colors duration-300 scroll-reveal revealed">
+              <span>Voir le projet</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-external-link h-4 w-4 group-hover:translate-x-1 transition-transform duration-300"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg>
+            </a>
+          </div>
+
+          <!-- GitHub card instead of image -->
+          <div class="relative group scroll-reveal revealed">
+            <a href="https://github.com/damiengmrr/pridano-tech" target="_blank" class="block bg-white text-black p-6 shadow-xl hover:shadow-2xl hover:scale-105 transition rounded-[2rem] border border-black/10">
+              <h3 class="text-lg font-semibold">damiengmrr/pridano-tech</h3>
+              <p class="text-sm text-gray-700 mt-2">
+                Site officiel de l’agence Pridano Tech : sites vitrines, e‑commerce et SaaS premium avec Next.js, Tailwind, GSAP.
+              </p>
+              <div class="flex items-center justify-between mt-4 text-sm text-gray-600">
+                <span>⭐ 1 Stars</span>
+                <span>🍴 0 Fork</span>
+                <span>👥 2 Contributors</span>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <!-- Project 2 — SeTesT -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center scroll-reveal-stagger">
+          <div class="space-y-6 scroll-reveal revealed">
+            <div class="flex items-center gap-3">
+              <div class="h-8 w-8 rounded-lg bg-blue-500/20 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-smartphone h-4 w-4 text-blue-400"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"></rect><path d="M12 18h.01"></path></svg>
+              </div>
+              <span class="text-sm font-medium text-blue-400">Projet Étudiant</span>
+            </div>
+
+            <h3 class="text-3xl font-bold text-white scroll-reveal revealed">Simulateur Auto — SeTesT</h3>
+            <p class="text-lg text-gray-400 leading-relaxed scroll-reveal revealed">
+              Simulateur complet des performances d’un véhicule : forces G, 0–100, usure pneus, comparateur, export PDF, animations, responsive et mode sombre.
+            </p>
+
+            <div class="flex flex-wrap gap-3 scroll-reveal revealed">
+              <span class="px-3 py-1 rounded-full bg-white/10 text-white text-sm">JS</span>
+              <span class="px-3 py-1 rounded-full bg-white/10 text-white text-sm">Charts</span>
+              <span class="px-3 py-1 rounded-full bg-white/10 text-white text-sm">UX</span>
+            </div>
+
+            <a href="https://github.com/damiengmrr/SeTesT" target="_blank" rel="noopener noreferrer" class="case-study-btn group inline-flex items-center gap-2 text-blue-400 font-medium hover:text-blue-300 transition-colors duration-300 scroll-reveal revealed">
+              <span>Voir le projet</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-external-link h-4 w-4 group-hover:translate-x-1 transition-transform duration-300"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg>
+            </a>
+          </div>
+
+          <!-- GitHub card instead of image -->
+          <div class="relative group scroll-reveal revealed">
+            <a href="https://github.com/damiengmrr/SeTesT" target="_blank" class="block bg-white text-black p-6 shadow-xl hover:shadow-2xl hover:scale-105 transition rounded-[2rem] border border-black/10">
+              <h3 class="text-lg font-semibold">damiengmrr/SeTesT</h3>
+              <p class="text-sm text-gray-700 mt-2">
+                Simulateur automobile premium avec configuration complète, graphes dynamiques, comparateur et export PDF.
+              </p>
+              <div class="flex items-center justify-between mt-4 text-sm text-gray-600">
+                <span>⭐ 1 Star</span>
+                <span>🍴 0 Forks</span>
+                <span>👥 1 Contributor</span>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <!-- Project 3 — Forum Web -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center scroll-reveal-stagger">
+          <div class="space-y-6 scroll-reveal revealed">
+            <div class="flex items-center gap-3">
+              <div class="h-8 w-8 rounded-lg bg-green-500/20 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-globe h-4 w-4 text-green-400"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg>
+              </div>
+              <span class="text-sm font-medium text-green-400">Go • SQLite • HTML/CSS</span>
+            </div>
+
+            <h3 class="text-3xl font-bold text-white scroll-reveal revealed">Forum Web</h3>
+            <p class="text-lg text-gray-400 leading-relaxed scroll-reveal revealed">
+              Forum complet avec authentification, posts/commentaires, likes/dislikes exclusifs, tri par date et réponses imbriquées.
+            </p>
+
+            <div class="flex flex-wrap gap-3 scroll-reveal revealed">
+              <span class="px-3 py-1 rounded-full bg-white/10 text-white text-sm">Go</span>
+              <span class="px-3 py-1 rounded-full bg-white/10 text-white text-sm">SQLite</span>
+              <span class="px-3 py-1 rounded-full bg-white/10 text-white text-sm">Responsive</span>
+            </div>
+
+            <a href="https://github.com/damiengmrr/forum" target="_blank" rel="noopener noreferrer" class="case-study-btn group inline-flex items-center gap-2 text-green-400 font-medium hover:text-green-300 transition-colors duration-300 scroll-reveal revealed">
+              <span>Voir le projet</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-external-link h-4 w-4 group-hover:translate-x-1 transition-transform duration-300"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg>
+            </a>
+          </div>
+
+          <!-- GitHub card instead of image -->
+          <div class="relative group scroll-reveal revealed">
+            <a href="https://github.com/damiengmrr/forum" target="_blank" class="block bg-white text-black p-6 shadow-xl hover:shadow-2xl hover:scale-105 transition rounded-[2rem] border border-black/10">
+              <h3 class="text-lg font-semibold">damiengmrr/forum</h3>
+              <p class="text-sm text-gray-700 mt-2">
+                Forum web complet avec authentification, catégories, likes, commentaires et base SQLite.
+              </p>
+              <div class="flex items-center justify-between mt-4 text-sm text-gray-600">
+                <span>⭐ 2 Stars</span>
+                <span>🍴 0 Forks</span>
+                <span>👥 4 Contributors</span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+    
+        <!-- About Section -->
+        <section id="about" class="relative sm:py-32 pt-20 pb-20">
+          <div class="mx-auto max-w-6xl px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+              <div class="space-y-8 scroll-reveal-stagger">
+                <h2 class="text-4xl sm:text-5xl font-bold tracking-tight text-white scroll-reveal revealed">À propos</h2>
+                
+                <div class="space-y-6 text-lg text-gray-400 leading-relaxed scroll-reveal revealed">
+                  <p>Je suis étudiant en Bachelor Informatique (Ynov Montpellier) et je construis des produits web concrets, propres et performants.</p>
+                  <p>J’adore relier design et technique : front (Tailwind/JS), back (Go/Python/Flask) et infra (NGINX, Linux, Docker).</p>
+                  <p>Centres d’intérêt : développement, DevOps, automobile/mécanique, rédaction et lives Twitch.</p>
+                </div>
+    
+                <div class="grid grid-cols-2 gap-6 scroll-reveal revealed">
+                  <div class="space-y-2">
+                    <h4 class="font-semibold text-white">Localisation</h4>
+                    <p class="text-gray-400 flex items-center gap-2">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="map-pin" class="lucide lucide-map-pin h-4 w-4"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                      Montpellier, France
+                    </p>
+                  </div>
+                  <div class="space-y-2">
+                    <h4 class="font-semibold text-white">Études</h4>
+                    <p class="text-gray-400 flex items-center gap-2">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="calendar" class="lucide lucide-calendar h-4 w-4"><path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M3 10h18"></path></svg>
+                      B2 (2024–2027)
+                    </p>
+                  </div>
+                </div>
+              </div>
+    
+              <div class="relative scroll-reveal revealed">
+                <div class="grid grid-cols-2 gap-8">
+                  <div class="space-y-12">
+                    <a href="https://tailwindcss.com/" target="_blank" rel="noopener noreferrer">
+                      <img src="tailwindcss.png" alt="TailwindCSS" class="hover:scale-105 transition-transform duration-300 w-full h-auto object-cover rounded-2xl">
+                    </a>
+                    <a href="https://www.python.org/" target="_blank" rel="noopener noreferrer">
+                      <img src="python.png" alt="Python" class="hover:scale-105 transition-transform duration-300 w-full h-auto object-cover rounded-2xl">
+                    </a>
+                  </div>
+                  <div class="space-y-12 pt-8">
+                    <a href="https://developer.mozilla.org/fr/docs/Web/HTML" target="_blank" rel="noopener noreferrer">
+                      <img src="html.png" alt="HTML" class="hover:scale-105 transition-transform duration-300 w-full h-auto object-cover rounded-2xl">
+                    </a>
+                    <a href="https://go.dev/" target="_blank" rel="noopener noreferrer">
+                      <img src="golang.png" alt="Golang" class="hover:scale-105 transition-transform duration-300 w-full h-auto object-cover rounded-2xl">
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+    
+        <!-- Experience Section -->
+        <section id="experience" class="relative sm:py-32 bg-white/5 pt-20 pb-20">
+          <div class="max-w-6xl lg:px-8 mr-auto ml-auto pr-6 pl-6">
+            <div class="mb-16 scroll-reveal-stagger">
+              <h2 class="text-4xl sm:text-5xl font-semibold tracking-tight text-white mb-4 scroll-reveal revealed">Expérience</h2>
+              <p class="text-xl text-gray-400 scroll-reveal revealed">Projets, rôles et responsabilités marquants.</p>
+            </div>
+    
+            <div class="relative">
+              <!-- Static Timeline line -->
+              <div class="absolute left-8 top-0 bottom-0 w-px bg-gradient-to-b from-gray-600/30 via-gray-600/20 to-gray-600/10"></div>
+              
+              <!-- Dynamic Progress line -->
+              <div id="timeline-progress" class="absolute left-8 top-0 w-px bg-gradient-to-b from-blue-500 via-purple-500 to-indigo-500 transition-all duration-300 ease-out" style="height: 0%; filter: none;"></div>
+              
+              <div class="space-y-12" id="experience-container">
+  <!-- Pridano Tech -->
+  <div class="group relative pl-20 space-y-16 experience-item scroll-reveal revealed">
+    <div class="absolute left-6 top-8 h-4 w-4 rounded-full bg-purple-500 ring-4 ring-purple-500/20 group-hover:ring-8 transition-all duration-300 z-10"></div>
+    <div class="hover:border-white/20 transition-all duration-300 bg-[radial-gradient(circle_at_top_left,var(--tw-gradient-stops))] from-white/5 to-gray-400/0 border-0 rounded-3xl p-8">
+      <div class="flex flex-between gap-4 mb-6">
+        <div class="flex items-center gap-4">
+          <div class="h-12 w-12 rounded-xl bg-purple-500 flex items-center justify-center">
+            <span class="text-white font-semibold text-lg">PT</span>
+          </div>
+          <div>
+            <h3 class="text-xl font-semibold text-white">Co‑fondateur • Développeur</h3>
+            <p class="text-purple-400 font-medium">Pridano Tech</p>
+          </div>
+        </div>
+        <div class="text-right">
+          <span class="text-sm font-medium text-gray-400">2025 – Présent</span>
+          <p class="text-xs text-gray-500">Agence web</p>
+        </div>
+      </div>
+      <p class="text-gray-400 leading-relaxed mb-4">
+        Création de sites vitrines, e‑commerce et mini‑SaaS. Stack moderne (Next.js, Tailwind, GSAP) avec performances, accessibilité et UX premium.
+      </p>
+      <div class="flex flex-wrap gap-2">
+        <span class="text-sm text-neutral-50 bg-neutral-50/10 rounded-full px-3 py-1">Next.js</span>
+        <span class="text-sm text-neutral-50 bg-neutral-50/10 rounded-full px-3 py-1">TailwindCSS</span>
+        <span class="text-sm text-neutral-50 bg-neutral-50/10 rounded-full px-3 py-1">GSAP</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ynov Campus — 2e année (B2) -->
+  <div class="group relative pl-20 space-y-16 experience-item scroll-reveal revealed">
+    <div class="absolute left-6 top-8 h-4 w-4 rounded-full bg-cyan-500 ring-4 ring-cyan-500/20 group-hover:ring-8 transition-all duration-300 z-10"></div>
+    <div class="hover:border-white/20 transition-all duration-300 bg-[radial-gradient(circle_at_top_left,var(--tw-gradient-stops))] from-white/5 to-gray-400/0 border-0 rounded-3xl p-8">
+      <div class="flex flex-between gap-4 mb-6">
+        <div class="flex items-center gap-4">
+          <div class="h-12 w-12 rounded-xl bg-cyan-500 flex items-center justify-center">
+            <span class="text-white font-semibold text-lg">B2</span>
+          </div>
+          <div>
+            <h3 class="text-xl font-semibold text-white">Étudiant — Bachelor 2 Informatique</h3>
+            <p class="text-cyan-400 font-medium">Ynov Campus — Montpellier</p>
+          </div>
+        </div>
+        <div class="text-right">
+          <span class="text-sm font-medium text-gray-400">2025 – 2026</span>
+          <p class="text-xs text-gray-500">Études (en cours)</p>
+        </div>
+      </div>
+      <p class="text-gray-400 leading-relaxed mb-4">
+        Développement web avancé (Next.js/Tailwind), DevOps/NGINX & reverse proxy, POO en Go/Python (Flask), projets YDays/YBoost et responsabilités BDE.
+      </p>
+      <div class="flex flex-wrap gap-2">
+        <span class="text-sm text-neutral-50 bg-neutral-50/10 rounded-full px-3 py-1">Next.js</span>
+        <span class="text-sm text-neutral-50 bg-neutral-50/10 rounded-full px-3 py-1">TailwindCSS</span>
+        <span class="text-sm text-neutral-50 bg-neutral-50/10 rounded-full px-3 py-1">NGINX</span>
+        <span class="text-sm text-neutral-50 bg-neutral-50/10 rounded-full px-3 py-1">Go / Flask</span>
+      </div>
+    </div>
+  </div>
+
+    <!-- BDE OVNY -->
+    <div class="group relative pl-20 space-y-16 experience-item scroll-reveal revealed">
+      <div class="absolute left-6 top-8 h-4 w-4 rounded-full bg-blue-500 ring-4 ring-blue-500/20 group-hover:ring-8 transition-all duration-300 z-10"></div>
+      <div class="hover:border-white/20 transition-all duration-300 bg-[radial-gradient(circle_at_top_left,var(--tw-gradient-stops))] from-white/5 to-gray-400/0 border-0 rounded-3xl p-8">
+        <div class="flex flex-between gap-4 mb-6">
+          <div class="flex items-center gap-4">
+            <div class="h-12 w-12 rounded-xl bg-blue-500 flex items-center justify-center">
+              <span class="text-white font-semibold text-lg">OV</span>
+            </div>
+            <div>
+              <h3 class="text-xl font-semibold text-white">Vice‑Président & Partenariats</h3>
+              <p class="text-blue-400 font-medium">BDE OVNY — Ynov Montpellier</p>
+            </div>
+          </div>
+          <div class="text-right">
+            <span class="text-sm font-medium text-gray-400">2024 – Présent</span>
+            <p class="text-xs text-gray-500">Associatif</p>
+          </div>
+        </div>
+        <p class="text-gray-400 leading-relaxed mb-4">
+          Négociation de partenariats, organisation d’événements (WEI, soirées), gestion d’équipe et communication. Mise en place d’outils et process internes.
+        </p>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-sm text-neutral-50 bg-neutral-50/10 rounded-full px-3 py-1">Gestion</span>
+          <span class="text-sm text-neutral-50 bg-neutral-50/10 rounded-full px-3 py-1">Communication</span>
+          <span class="text-sm text-neutral-50 bg-neutral-50/10 rounded-full px-3 py-1">Partenariats</span>
+        </div>
+      </div>
+    </div>
+
+  <!-- Projet Serveur Web -->
+  <div class="group relative pl-20 space-y-16 experience-item scroll-reveal revealed">
+    <div class="absolute left-6 top-8 h-4 w-4 rounded-full bg-indigo-500 ring-4 ring-indigo-500/20 group-hover:ring-8 transition-all duration-300 z-10"></div>
+    <div class="hover:border-white/20 transition-all duration-300 bg-[radial-gradient(circle_at_top_left,var(--tw-gradient-stops))] from-white/5 to-gray-400/0 border-0 rounded-3xl p-8">
+      <div class="flex flex-between gap-4 mb-6">
+        <div class="flex items-center gap-4">
+          <div class="h-12 w-12 rounded-xl bg-indigo-500 flex items-center justify-center">
+            <span class="text-white font-semibold text-lg">NW</span>
+          </div>
+          <div>
+            <h3 class="text-xl font-semibold text-white">Projet Serveur Web</h3>
+            <p class="text-indigo-400 font-medium">NGINX • Reverse Proxy • SSL</p>
+          </div>
+        </div>
+        <div class="text-right">
+          <span class="text-sm font-medium text-gray-400">2025</span>
+          <p class="text-xs text-gray-500">Études</p>
+        </div>
+      </div>
+      <p class="text-gray-400 leading-relaxed mb-4">
+        2 VMs (WordPress + Flask) derrière un reverse proxy NGINX. Certificats auto‑signés, sous‑domaines (b1.com, blog.b1.com), redirections HTTPS.
+      </p>
+      <div class="flex flex-wrap gap-2">
+        <span class="text-sm text-neutral-50 bg-neutral-50/10 rounded-full px-3 py-1">NGINX</span>
+        <span class="text-sm text-neutral-50 bg-neutral-50/10 rounded-full px-3 py-1">Linux</span>
+        <span class="text-sm text-neutral-50 bg-neutral-50/10 rounded-full px-3 py-1">DevOps</span>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Forum Go/SQLite -->
+  <div class="group relative pl-20 space-y-16 experience-item scroll-reveal revealed">
+    <div class="absolute left-6 top-8 h-4 w-4 rounded-full bg-orange-500 ring-4 ring-orange-500/20 group-hover:ring-8 transition-all duration-300 z-10"></div>
+    <div class="hover:border-white/20 transition-all duration-300 bg-[radial-gradient(circle_at_top_left,var(--tw-gradient-stops))] from-white/5 to-gray-400/0 border-0 rounded-3xl p-8">
+      <div class="flex flex-between gap-4 mb-6">
+        <div class="flex items-center gap-4">
+          <div class="h-12 w-12 rounded-xl bg-orange-500 flex items-center justify-center">
+            <span class="text-white font-semibold text-lg">FG</span>
+          </div>
+          <div>
+            <h3 class="text-xl font-semibold text-white">Forum Web</h3>
+            <p class="text-orange-400 font-medium">Go • SQLite • HTML/CSS</p>
+          </div>
+        </div>
+        <div class="text-right">
+          <span class="text-sm font-medium text-gray-400">2025</span>
+          <p class="text-xs text-gray-500">Projet d’étude</p>
+        </div>
+      </div>
+      <p class="text-gray-400 leading-relaxed mb-4">
+        Authentification, posts/commentaires, likes/dislikes, tri par date, réponses imbriquées et UI responsive.
+      </p>
+      <div class="flex flex-wrap gap-2">
+        <span class="text-sm text-neutral-50 bg-neutral-50/10 rounded-full px-3 py-1">Go</span>
+        <span class="text-sm text-neutral-50 bg-neutral-50/10 rounded-full px-3 py-1">SQLite</span>
+        <span class="text-sm text-neutral-50 bg-neutral-50/10 rounded-full px-3 py-1">Responsive</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ynov Campus — 1re année (B1) -->
+  <div class="group relative pl-20 space-y-16 experience-item scroll-reveal revealed">
+    <div class="absolute left-6 top-8 h-4 w-4 rounded-full bg-rose-500 ring-4 ring-rose-500/20 group-hover:ring-8 transition-all duration-300 z-10"></div>
+    <div class="hover:border-white/20 transition-all duration-300 bg-[radial-gradient(circle_at_top_left,var(--tw-gradient-stops))] from-white/5 to-gray-400/0 border-0 rounded-3xl p-8">
+      <div class="flex flex-between gap-4 mb-6">
+        <div class="flex items-center gap-4">
+          <div class="h-12 w-12 rounded-xl bg-rose-500 flex items-center justify-center">
+            <span class="text-white font-semibold text-lg">B1</span>
+          </div>
+          <div>
+            <h3 class="text-xl font-semibold text-white">Étudiant — Bachelor 1 Informatique</h3>
+            <p class="text-rose-400 font-medium">Ynov Campus — Montpellier</p>
+          </div>
+        </div>
+        <div class="text-right">
+          <span class="text-sm font-medium text-gray-400">2024 – 2025</span>
+          <p class="text-xs text-gray-500">Études</p>
+        </div>
+      </div>
+      <p class="text-gray-400 leading-relaxed mb-4">
+        Fondamentaux: algorithmique Python, bases Web (HTML/CSS/JS), SQL, réseaux, Git. Travaux pratiques et mini‑projets en autonomie.
+      </p>
+      <div class="flex flex-wrap gap-2">
+        <span class="text-sm text-neutral-50 bg-neutral-50/10 rounded-full px-3 py-1">Python</span>
+        <span class="text-sm text-neutral-50 bg-neutral-50/10 rounded-full px-3 py-1">HTML/CSS/JS</span>
+        <span class="text-sm text-neutral-50 bg-neutral-50/10 rounded-full px-3 py-1">SQL</span>
+        <span class="text-sm text-neutral-50 bg-neutral-50/10 rounded-full px-3 py-1">Git</span>
+      </div>
+    </div>
+  </div>
+              </div>
+            </div>
+    
+            <script>
+              (function() {
+                const timelineProgress = document.getElementById('timeline-progress');
+                const experienceContainer = document.getElementById('experience-container');
+                const experienceItems = document.querySelectorAll('.experience-item');
+                
+                if (!timelineProgress || !experienceContainer || experienceItems.length === 0) return;
+    
+                function updateTimelineProgress() {
+                  const containerRect = experienceContainer.getBoundingClientRect();
+                  const containerTop = containerRect.top + window.scrollY;
+                  const containerHeight = containerRect.height;
+                  const viewportHeight = window.innerHeight;
+                  const scrollTop = window.scrollY;
+                  
+                  // Calculate when the experience section starts to be visible
+                  const sectionStart = containerTop - viewportHeight + 200; // Start a bit before fully visible
+                  const sectionEnd = containerTop + containerHeight - 200;
+                  
+                  // Calculate progress based on scroll position
+                  let progress = 0;
+                  
+                  if (scrollTop >= sectionStart && scrollTop <= sectionEnd) {
+                    const scrollProgress = (scrollTop - sectionStart) / (sectionEnd - sectionStart);
+                    progress = Math.min(Math.max(scrollProgress, 0), 1);
+                  } else if (scrollTop > sectionEnd) {
+                    progress = 1;
+                  }
+                  
+                  // Update the timeline progress bar height
+                  const progressHeight = progress * 100;
+                  timelineProgress.style.height = `${progressHeight}%`;
+                  
+                  // Add glow effect when fully visible
+                  if (progress > 0.1) {
+                    timelineProgress.style.filter = 'drop-shadow(0 0 6px rgba(59, 130, 246, 0.5))';
+                  } else {
+                    timelineProgress.style.filter = 'none';
+                  }
+                  
+                  // Optional: Highlight current experience item
+                  experienceItems.forEach((item, index) => {
+                    const itemRect = item.getBoundingClientRect();
+                    const isInView = itemRect.top < viewportHeight * 0.7 && itemRect.bottom > viewportHeight * 0.3;
+                    
+                    const dot = item.querySelector('.absolute.left-6');
+                    if (dot) {
+                      if (isInView) {
+                        dot.style.transform = 'scale(1.2)';
+                        dot.style.filter = 'drop-shadow(0 0 8px currentColor)';
+                      } else {
+                        dot.style.transform = 'scale(1)';
+                        dot.style.filter = 'none';
+                      }
+                    }
+                  });
+                }
+                
+                // Throttle scroll event for better performance
+                let ticking = false;
+                function handleScroll() {
+                  if (!ticking) {
+                    requestAnimationFrame(() => {
+                      updateTimelineProgress();
+                      ticking = false;
+                    });
+                    ticking = true;
+                  }
+                }
+                
+                // Initialize and set up scroll listener
+                window.addEventListener('scroll', handleScroll, { passive: true });
+                window.addEventListener('resize', updateTimelineProgress, { passive: true });
+                
+                // Initial call
+                updateTimelineProgress();
+              })();
+            </script>
+          </div>
+        </section>
+    
+        <!-- FAQ Section -->
+        <section class="max-w-7xl md:py-28 mr-auto ml-auto pt-20 pr-6 pb-20 pl-6">
+          <div class="mb-8 scroll-reveal revealed">
+            <span class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/70">
+              <span class="inline-block size-2 rounded-full bg-sky-400"></span> FAQ
+            </span>
+          </div>
+    
+          <div class="grid gap-10 md:grid-cols-2 lg:gap-16 items-start">
+            <!-- Left column -->
+            <div class="scroll-reveal-stagger">
+              <h2 class="text-4xl font-semibold tracking-tight sm:text-5xl scroll-reveal revealed">
+                Questions,<span class="ml-2 bg-gradient-to-r from-violet-400 via-fuchsia-400 to-sky-400 bg-clip-text text-transparent">Réponses</span>
+              </h2>
+              <p class="mt-4 max-w-xl text-white/70 scroll-reveal revealed">
+                Voici les réponses aux questions les plus fréquentes.
+              </p>
+    
+              <!-- Testimonial card -->
+              <div class="mt-8 rounded-2xl bg-white/[0.06] ring-1 ring-white/10 backdrop-blur-md p-5 md:p-6 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.6)] scroll-reveal revealed">
+                <div class="flex items-center gap-4">
+                  <img src="https://hoirqrkdgbmvpwutwuwj-all.supabase.co/storage/v1/object/public/assets/assets/e7518623-5aeb-4f28-bace-436a99f814d4_320w.jpg" alt="Avatar" class="h-12 w-12 rounded-full ring-2 ring-white/10 object-cover" style="">
+                  <div>
+                    <p class="text-sm font-medium">Noah Lemoing</p>
+                    <p class="text-xs text-white/60">Etudiant</p>
+                  </div>
+                </div>
+                <div class="mt-3 flex items-center gap-1 text-amber-300">
+                  <!-- 4/5 stars -->
+                  <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"></path></svg>
+                  <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"></path></svg>
+                  <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"></path></svg>
+                  <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"></path></svg>
+                  <svg class="h-4 w-4 text-white/25" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"></path></svg>
+                </div>
+                <p class="mt-3 text-sm leading-6 text-white/80">
+                  Créativité au top et sens du détail. Le rendu final est propre, rapide et vraiment agréable à utiliser.
+                </p>
+              </div>
+    
+              <!-- CTAs -->
+              <div class="mt-6 flex flex-wrap items-center gap-4 scroll-reveal">
+                <a href="#work" class="group inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm ring-1 ring-white/10 hover:bg-white/10 nav-link">
+                  Voir tous les projets
+                  <svg class="h-4 w-4 transition-transform group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"></path></svg>
+                </a>
+                <a href="mailto:damien.gamarra.pro@gmail.com?subject=Candidature%20—%20Stage%2FAlternance&body=Bonjour%20Damien%2C%0A%0AJe%20vous%20contacte%20%C3%A0%20propos%20d'une%20opportunit%C3%A9%20(proposition%20de%20stage%20ou%20d'alternance).%0A%0A•%20Poste%20vis%C3%A9%20%3A%20%0A•%20P%C3%A9riode%20%2F%20rythme%20%3A%20%0A•%20Lieu%20%3A%20Montpellier%20%2B%20t%C3%A9l%C3%A9travail%20possible%0A•%20Lien%20CV%20%2F%20Portfolio%20%28facultatif%29%20%3A%20%0A•%20T%C3%A9l%C3%A9phone%20%3A%20%0A%0AMerci%20et%20au%20plaisir%20d'%C3%A9changer.%0A" class="inline-flex items-center gap-2 rounded-xl bg-white text-black px-4 py-3 text-sm font-medium hover:bg-white/90">
+                  Contactez‑moi
+                  <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+                </a>
+              </div>
+            </div>
+    
+            <!-- Right column: Accordion -->
+            <div class="space-y-4 scroll-reveal-stagger" id="faq-list">
+              <!-- FAQ Items -->
+              <div class="rounded-2xl bg-white/5 ring-1 ring-white/10 transition hover:ring-white/20 scroll-reveal revealed" data-accordion="">
+                <button class="flex w-full items-center justify-between p-6 text-left" data-accordion-trigger="" aria-expanded="false">
+                  <span class="text-base font-medium text-white/90">Quel est ton parcours à Ynov ?</span>
+                  <span class="grid size-9 place-items-center rounded-xl bg-white/5 ring-1 ring-white/10 transition" data-plus="">
+                    <svg class="transition-transform w-[16px] h-[16px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="transform: rotate(0deg); width: 16px; height: 16px; color: rgb(243, 244, 246);" data-icon-replaced="true">
+                      <path d="M12 5v14M5 12h14"></path>
+                    </svg>
+                  </span>
+                </button>
+                <div class="grid px-6 pb-6 transition-[grid-template-rows,opacity] duration-300 ease-out [grid-template-rows:0fr] opacity-0" data-accordion-panel="" style="opacity: 0; grid-template-rows: 0fr;">
+                  <div class="min-h-0 overflow-hidden text-white/70">
+                    B1 (2024–2025) : bases web (HTML/CSS/JS), Python, SQL, réseaux, Git. B2 (2025–2026, en cours) : Next.js/Tailwind, Go/Python (Flask), NGINX/Reverse‑Proxy, projets YDays/YBoost et missions BDE.
+                  </div>
+                </div>
+              </div>
+
+              <div class="rounded-2xl bg-white/5 ring-1 ring-white/10 transition hover:ring-white/20 scroll-reveal revealed" data-accordion="">
+                <button class="flex w-full items-center justify-between p-6 text-left" data-accordion-trigger="" aria-expanded="false">
+                  <span class="text-base font-medium text-white/90">Quelles sont tes compétences techniques ?</span>
+                  <span class="grid size-9 place-items-center rounded-xl bg-white/5 ring-1 ring-white/10 transition" data-plus="">
+                    <svg class="h-4 w-4 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="transform: rotate(0deg);">
+                      <path d="M12 5v14M5 12h14"></path>
+                    </svg>
+                  </span>
+                </button>
+                <div class="grid px-6 pb-6 transition-[grid-template-rows,opacity] duration-300 ease-out [grid-template-rows:0fr] opacity-0" data-accordion-panel="" style="opacity: 0; grid-template-rows: 0fr;">
+                  <div class="min-h-0 overflow-hidden text-white/70">
+                    Front : Next.js, TailwindCSS, JS. Back : Go, Python/Flask. Infra : NGINX, Docker, Linux. BD : SQLite, PostgreSQL. Outils : Git, GitHub.
+                  </div>
+                </div>
+              </div>
+
+              <div class="rounded-2xl bg-white/5 ring-1 ring-white/10 transition hover:ring-white/20 scroll-reveal revealed" data-accordion="">
+                <button class="flex w-full items-center justify-between p-6 text-left" data-accordion-trigger="" aria-expanded="false">
+                  <span class="text-base font-medium text-white/90">Quels projets marquants as‑tu réalisés ?</span>
+                  <span class="grid size-9 place-items-center rounded-xl bg-white/5 ring-1 ring-white/10 transition" data-plus="">
+                    <svg class="h-4 w-4 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="transform: rotate(0deg);">
+                      <path d="M12 5v14M5 12h14"></path>
+                    </svg>
+                  </span>
+                </button>
+                <div class="grid px-6 pb-6 transition-[grid-template-rows,opacity] duration-300 ease-out [grid-template-rows:0fr] opacity-0" data-accordion-panel="" style="opacity: 0; grid-template-rows: 0fr;">
+                  <div class="min-h-0 overflow-hidden text-white/70">
+                    Serveur Web (2 VMs WordPress+Flask derrière NGINX, SSL, sous‑domaines), Forum Go/SQLite (auth, posts, likes, réponses), SeTesT (simulateur auto : comparateur, graphes, export PDF).
+                  </div>
+                </div>
+              </div>
+
+              <div class="rounded-2xl bg-white/5 ring-1 ring-white/10 transition hover:ring-white/20 scroll-reveal" data-accordion="">
+                <button class="flex w-full items-center justify-between p-6 text-left" data-accordion-trigger="" aria-expanded="false">
+                  <span class="text-base font-medium text-white/90">Que recherches‑tu actuellement ?</span>
+                  <span class="grid size-9 place-items-center rounded-xl bg-white/5 ring-1 ring-white/10 transition" data-plus="">
+                    <svg class="h-4 w-4 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="transform: rotate(0deg);">
+                      <path d="M12 5v14M5 12h14"></path>
+                    </svg>
+                  </span>
+                </button>
+                <div class="grid px-6 pb-6 transition-[grid-template-rows,opacity] duration-300 ease-out [grid-template-rows:0fr] opacity-0" data-accordion-panel="" style="opacity: 0; grid-template-rows: 0fr;">
+                  <div class="min-h-0 overflow-hidden text-white/70">
+                    Ouvert à un stage ou une alternance en développement web (front/back) à Montpellier (ou hybride). Rythme et dates selon besoins de l’entreprise.
+                  </div>
+                </div>
+              </div>
+
+              <div class="rounded-2xl bg-white/5 ring-1 ring-white/10 transition hover:ring-white/20 scroll-reveal" data-accordion="">
+                <button class="flex w-full items-center justify-between p-6 text-left" data-accordion-trigger="" aria-expanded="false">
+                  <span class="text-base font-medium text-white/90">Disponibilités et mobilité ?</span>
+                  <span class="grid size-9 place-items-center rounded-xl bg-white/5 ring-1 ring-white/10 transition" data-plus="">
+                    <svg class="h-4 w-4 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="transform: rotate(0deg);">
+                      <path d="M12 5v14M5 12h14"></path>
+                    </svg>
+                  </span>
+                </button>
+                <div class="grid px-6 pb-6 transition-[grid-template-rows,opacity] duration-300 ease-out [grid-template-rows:0fr] opacity-0" data-accordion-panel="" style="opacity: 0; grid-template-rows: 0fr;">
+                  <div class="min-h-0 overflow-hidden text-white/70">
+                    Disponible rapidement. Basé à Montpellier, déplacements possibles et télétravail partiel OK.
+                  </div>
+                </div>
+              </div>
+
+              <div class="rounded-2xl bg-white/5 ring-1 ring-white/10 transition hover:ring-white/20 scroll-reveal" data-accordion="">
+                <button class="flex w-full items-center justify-between p-6 text-left" data-accordion-trigger="" aria-expanded="false">
+                  <span class="text-base font-medium text-white/90">Soft skills et langues ?</span>
+                  <span class="grid size-9 place-items-center rounded-xl bg-white/5 ring-1 ring-white/10 transition" data-plus="">
+                    <svg class="h-4 w-4 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="transform: rotate(0deg);">
+                      <path d="M12 5v14M5 12h14"></path>
+                    </svg>
+                  </span>
+                </button>
+                <div class="grid px-6 pb-6 transition-[grid-template-rows,opacity] duration-300 ease-out [grid-template-rows:0fr] opacity-0" data-accordion-panel="" style="opacity: 0; grid-template-rows: 0fr;">
+                  <div class="min-h-0 overflow-hidden text-white/70">
+                    Esprit d’équipe, sens des responsabilités (VP BDE), autonomie, communication. Anglais : à l’aise à l’écrit et en lecture.
+                  </div>
+                </div>
+              </div>
+
+              <div class="rounded-2xl bg-white/5 ring-1 ring-white/10 transition hover:ring-white/20 scroll-reveal" data-accordion="">
+                <button class="flex w-full items-center justify-between p-6 text-left" data-accordion-trigger="" aria-expanded="false">
+                  <span class="text-base font-medium text-white/90">Tu fais aussi le développement ?</span>
+                  <span class="grid size-9 place-items-center rounded-xl bg-white/5 ring-1 ring-white/10 transition" data-plus="">
+                    <svg class="h-4 w-4 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="transform: rotate(0deg);">
+                      <path d="M12 5v14M5 12h14"></path>
+                    </svg>
+                  </span>
+                </button>
+                <div class="grid px-6 pb-6 transition-[grid-template-rows,opacity] duration-300 ease-out [grid-template-rows:0fr] opacity-0" data-accordion-panel="" style="opacity: 0; grid-template-rows: 0fr;">
+                  <div class="min-h-0 overflow-hidden text-white/70">
+                    Oui, et je peux aussi m’associer à des devs de confiance selon la complexité. Dans tous les cas: composants ready‑to‑ship.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+    
+        <!-- Contact Section -->
+        <section id="contact" class="relative sm:py-32 pt-20 pb-20">
+          <div class="max-w-4xl lg:px-8 text-center mr-auto ml-auto pr-6 pl-6">
+            <div class="space-y-8 scroll-reveal-stagger">
+              <h2 class="text-4xl sm:text-5xl font-bold tracking-tight text-white scroll-reveal">On travaille ensemble ?</h2>
+              <p class="text-xl text-gray-400 max-w-2xl mx-auto scroll-reveal">
+                Je suis ouvert aux nouvelles opportunités (stages, projets clients, collaborations).
+              </p>
+              
+              <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4 scroll-reveal">
+                <a href="mailto:damien.gamarra.pro@gmail.com" class="group flex items-center gap-3 rounded-2xl bg-white text-black px-6 py-4 text-lg font-medium hover:bg-gray-100 hover:scale-105 transition-all duration-300">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="mail" class="lucide lucide-mail h-5 w-5"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"></path><rect x="2" y="4" width="20" height="16" rx="2"></rect></svg>
+                  <span class="">damien.gamarra.pro@gmail.com</span>
+                </a>
+                <!-- <a href="mailto:damien.gamarra.pro@gmail.com?subject=Prise%20de%20contact%20%28appel%29&body=Bonjour%20Damien%2C%0A%0AJe%20souhaite%20programmer%20un%20appel.%20Voici%20mes%20disponibilit%C3%A9s%20%3A%0A-%20Date%20%2F%20Heure%201%20%3A%0A-%20Date%20%2F%20Heure%202%20%3A%0A%0AMerci%20%21" class="group flex items-center gap-3 rounded-2xl border border-white/20 bg-white/5 text-white px-6 py-4 text-lg font-medium hover:bg-white/10 hover:border-white/30 transition-all duration-300">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="calendar" class="lucide lucide-calendar h-5 w-5"><path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M3 10h18"></path></svg>
+                  <span>Me contacter par email</span> -->
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+    
+        <!-- Footer -->
+        <footer class="relative py-12 border-t border-white/10">
+          <div class="mx-auto max-w-6xl px-6 lg:px-8">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4 scroll-reveal-stagger">
+              <p class="text-gray-400 scroll-reveal">© 2025 Damien Gamarra. Tous droits réservés.</p>
+              <div class="flex items-center gap-6 scroll-reveal">
+                <a href="https://linkedin.com/in/damien-gamarra-76979b29b" target="_blank" class="text-gray-400 hover:text-white hover:scale-110 transition-all duration-300">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="linkedin" class="lucide lucide-linkedin h-5 w-5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                </a>
+                <a href="https://github.com/damiengmrr" target="_blank" class="text-gray-400 hover:text-white hover:scale-110 transition-all duration-300">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="github" class="lucide lucide-github h-5 w-5"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </footer>
+    
+        <script>
+          // Initialize Lucide icons
+          lucide.createIcons();
+    
+          // Scroll Reveal Observer
+          const scrollRevealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+                scrollRevealObserver.unobserve(entry.target);
+              }
+            });
+          }, {
+            threshold: 0.15,
+            rootMargin: '0px 0px -50px 0px'
+          });
+    
+          // Apply scroll reveal to all elements with scroll-reveal class
+          document.querySelectorAll('.scroll-reveal').forEach(el => {
+            scrollRevealObserver.observe(el);
+          });
+    
+          // Utility function to show notifications
+          function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.innerHTML = `
+              <div class="flex items-center gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-400">
+                  ${type === 'success' ? '<path d="M20 6L9 17l-5-5"></path>' : '<circle cx="12" cy="12" r="10"></circle><line x1="15" x2="9" y1="9" y2="15"></line><line x1="9" x2="15" y1="9" y2="15"></line>'}
+                </svg>
+                <span>${message}</span>
+              </div>
+            `;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => notification.classList.add('show'), 100);
+            setTimeout(() => {
+              notification.classList.remove('show');
+              setTimeout(() => document.body.removeChild(notification), 300);
+            }, 3000);
+          }
+    
+          // Resume download functionality
+          function downloadResume() {
+            const link = document.createElement('a');
+            link.href = 'CV_Damien_Gamarra.pdf'; // placez ce fichier à la racine du projet
+            link.download = 'CV_Damien_Gamarra.pdf';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            showNotification('CV téléchargé avec succès !');
+          }
+    
+          // Attach resume download to buttons
+          document.getElementById('resume-btn').addEventListener('click', downloadResume);
+          document.getElementById('mobile-resume-btn').addEventListener('click', () => {
+            downloadResume();
+            // Close mobile menu
+            document.getElementById('mobile-menu').classList.remove('open');
+          });
+    
+          // Mobile menu functionality
+          document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.add('open');
+          });
+    
+          document.getElementById('close-mobile-menu').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.remove('open');
+          });
+    
+          // Close mobile menu when clicking nav links
+          document.querySelectorAll('#mobile-menu .nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+              document.getElementById('mobile-menu').classList.remove('open');
+            });
+          });
+    
+    
+    
+          // Enhanced smooth scrolling for navigation links
+          document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function (e) {
+              e.preventDefault();
+              
+              const targetId = this.getAttribute('href');
+              const targetSection = document.querySelector(targetId);
+              
+              if (targetSection) {
+                // Calculate offset to account for sticky header
+                const headerHeight = document.querySelector('header').offsetHeight;
+                const targetPosition = targetSection.offsetTop - headerHeight - 20;
+                
+                window.scrollTo({
+                  top: targetPosition,
+                  behavior: 'smooth'
+                });
+              }
+            });
+          });
+    
+          // Intersection Observer for animations
+          const animatedElements = document.querySelectorAll('.initial-hidden');
+          
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                entry.target.classList.remove('initial-hidden');
+                observer.unobserve(entry.target);
+              }
+            });
+          }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+          });
+    
+          animatedElements.forEach(el => {
+            observer.observe(el);
+          });
+    
+          // Escape key to close modals
+          document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+              scheduleModal.classList.remove('open');
+              document.getElementById('mobile-menu').classList.remove('open');
+            }
+          });
+    
+          // Accordion script (no frameworks)
+          const items = document.querySelectorAll('[data-accordion]');
+          items.forEach((item) => {
+            const trigger = item.querySelector('[data-accordion-trigger]');
+            const panel   = item.querySelector('[data-accordion-panel]');
+            const plus    = item.querySelector('[data-plus] svg');
+    
+            function setOpen(open) {
+              // height/opacity animation via CSS grid trick
+              panel.toggleAttribute('data-open', open);
+              panel.style.opacity = open ? '1' : '0';
+              panel.style.gridTemplateRows = open ? '1fr' : '0fr';
+              trigger.setAttribute('aria-expanded', open);
+              // rotate the + into ×
+              plus.style.transform = open ? 'rotate(45deg)' : 'rotate(0deg)';
+            }
+    
+            // start closed
+            setOpen(false);
+    
+            trigger.addEventListener('click', () => {
+              const isOpen = trigger.getAttribute('aria-expanded') === 'true';
+              setOpen(!isOpen);
+            });
+          });
+        </script>
+    
+    </body></html>
