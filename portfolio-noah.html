@@ -12,24 +12,24 @@
     0% {
     opacity: 0;
     transform: translateY(30px);
-    filter: blur(8px);
+    /* filter: blur(8px); */ /* Blur disabled */
     }
     100% {
     opacity: 1;
     transform: translateY(0);
-    filter: blur(0px);
+    /* filter: blur(0px); */ /* Blur disabled */
     }
     }
     @keyframes portraitFall {
     0% {
     opacity: 0;
     transform: translateY(-200px) scale(0.5) rotate(-10deg);
-    filter: blur(4px);
+    /* filter: blur(4px); */ /* Blur disabled */
     }
     60% {
     opacity: 1;
     transform: translateY(8px) scale(1.05) rotate(2deg);
-    filter: blur(0px);
+    /* filter: blur(0px); */ /* Blur disabled */
     }
     80% {
     transform: translateY(-4px) scale(0.98) rotate(-1deg);
@@ -37,7 +37,7 @@
     100% {
     opacity: 1;
     transform: translateY(0) scale(1) rotate(0deg);
-    filter: blur(0px);
+    /* filter: blur(0px); */ /* Blur disabled */
     }
     }
     .animate-on-scroll {
@@ -76,37 +76,37 @@
     position: absolute;
     inset: 0;
     z-index: 1;
-    backdrop-filter: blur(0.5px);
+    /* backdrop-filter: blur(0.5px); */ /* Blur disabled */
     mask: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 12.5%, rgba(0, 0, 0, 1) 25%, rgba(0, 0, 0, 0) 37.5%);
     }
     .gradient-blur>div:nth-of-type(1) {
     z-index: 2;
-    backdrop-filter: blur(1px);
+    /* backdrop-filter: blur(1px); */ /* Blur disabled */
     mask: linear-gradient(to bottom, rgba(0, 0, 0, 0) 12.5%, rgba(0, 0, 0, 1) 25%, rgba(0, 0, 0, 1) 37.5%, rgba(0, 0, 0, 0) 50%);
     }
     .gradient-blur>div:nth-of-type(2) {
     z-index: 3;
-    backdrop-filter: blur(2px);
+    /* backdrop-filter: blur(2px); */ /* Blur disabled */
     mask: linear-gradient(to bottom, rgba(0, 0, 0, 0) 25%, rgba(0, 0, 0, 1) 37.5%, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 0) 62.5%);
     }
     .gradient-blur>div:nth-of-type(3) {
     z-index: 4;
-    backdrop-filter: blur(4px);
+    /* backdrop-filter: blur(4px); */ /* Blur disabled */
     mask: linear-gradient(to bottom, rgba(0, 0, 0, 0) 37.5%, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 1) 62.5%, rgba(0, 0, 0, 0) 75%);
     }
     .gradient-blur>div:nth-of-type(4) {
     z-index: 5;
-    backdrop-filter: blur(8px);
+    /* backdrop-filter: blur(8px); */ /* Blur disabled */
     mask: linear-gradient(to bottom, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 1) 62.5%, rgba(0, 0, 0, 1) 75%, rgba(0, 0, 0, 0) 87.5%);
     }
     .gradient-blur>div:nth-of-type(5) {
     z-index: 6;
-    backdrop-filter: blur(16px);
+    /* backdrop-filter: blur(16px); */ /* Blur disabled */
     mask: linear-gradient(to bottom, rgba(0, 0, 0, 0) 62.5%, rgba(0, 0, 0, 1) 75%, rgba(0, 0, 0, 1) 87.5%, rgba(0, 0, 0, 0) 100%);
     }
     .gradient-blur>div:nth-of-type(6) {
     z-index: 7;
-    backdrop-filter: blur(32px);
+    /* backdrop-filter: blur(32px); */ /* Blur disabled */
     mask: linear-gradient(to bottom, rgba(0, 0, 0, 0) 75%, rgba(0, 0, 0, 1) 87.5%, rgba(0, 0, 0, 1) 100%);
     }
     .gradient-blur::after {
@@ -114,7 +114,7 @@
     position: absolute;
     inset: 0;
     z-index: 8;
-    backdrop-filter: blur(64px);
+    /* backdrop-filter: blur(64px); */ /* Blur disabled */
     mask: linear-gradient(to bottom, rgba(0, 0, 0, 0) 87.5%, rgba(0, 0, 0, 1) 100%);
     }
     .portfolio-item {
@@ -222,10 +222,10 @@
     section.section-visible {
     opacity: 1;
     transform: translateY(0);
-    filter: blur(0px);
+    /* filter: blur(0px); */ /* Blur disabled */
     }
     section.section-exiting {
-    filter: blur(4px);
+    /* filter: blur(4px); */ /* Blur disabled */
     transition: filter 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     }
     section:first-of-type {
@@ -236,7 +236,7 @@
     .reveal {
     opacity: 0;
     transform: translateY(40px);
-    filter: blur(10px);
+    /* filter: blur(10px); */ /* Blur disabled */
     transition:
     opacity .9s ease,
     transform 1s cubic-bezier(.2,.65,.2,1),
@@ -246,12 +246,12 @@
     .is-in .reveal {
     opacity: 1;
     transform: translateY(0);
-    filter: blur(0);
+    /* filter: blur(0); */ /* Blur disabled */
     }
     .is-out .reveal {
     opacity: 0;
     transform: translateY(-10px);
-    filter: blur(12px);
+    /* filter: blur(12px); */ /* Blur disabled */
     }
     @media (prefers-reduced-motion: reduce) {
     .reveal,
@@ -339,7 +339,7 @@
     
     
     <!-- Background (component) added by Aura -->
-    <div class="aura-background-component top-0 w-full -z-10 absolute h-screen hue-rotate-15 blur-sm"><div class="spline-container absolute top-0 left-0 w-full h-full -z-10"><iframe src="https://my.spline.design/retrofuturismbganimation-Lb3VtL1bNaYUnirKNzn0FvaW" frameborder="0" width="100%" height="100%"></iframe></div></div>
+    <div class="aura-background-component top-0 w-full -z-10 absolute h-screen hue-rotate-15"><div class="spline-container absolute top-0 left-0 w-full h-full -z-10"><iframe src="https://my.spline.design/retrofuturismbganimation-Lb3VtL1bNaYUnirKNzn0FvaW" frameborder="0" width="100%" height="100%"></iframe></div></div>
         
     
         
@@ -353,7 +353,7 @@
     
         <div class="overflow-hidden relative">
           <!-- Navigation -->
-          <header class="fixed z-20 bg-black/50 w-full top-0 backdrop-blur-xl" style="animation: fadeSlideIn 0.5s ease-in-out 0.1s both">
+          <header class="fixed z-20 bg-black/50 w-full top-0" style="animation: fadeSlideIn 0.5s ease-in-out 0.1s both">
             <div class="mx-auto max-w-7xl px-6 lg:px-8">
               <div class="flex items-center justify-between py-6 border-b border-white/[0.06]">
                 <a href="#" class="flex items-center gap-3">
@@ -380,13 +380,13 @@
                   <a href="#contact" class="hover:text-white transition">Contact</a>
                 </nav>
                 <div class="flex items-center gap-3">
-                  <a href="#contact" class="group inline-flex min-w-[140px] cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:scale-105 border-gradient hover:text-white gap-2 text-sm font-medium text-white/80 tracking-tight bg-white/5 rounded-full pt-3 pr-5 pb-3 pl-5 relative backdrop-blur-xl gap-x-2 gap-y-2 items-center justify-center hidden md:inline-flex">
+                  <a href="#contact" class="group inline-flex min-w-[140px] cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:scale-105 border-gradient hover:text-white gap-2 text-sm font-medium text-white/80 tracking-tight bg-white/5 rounded-full pt-3 pr-5 pb-3 pl-5 relative gap-x-2 gap-y-2 items-center justify-center hidden md:inline-flex">
                     Contacter
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="arrow-right" class="lucide lucide-arrow-right w-4 h-4"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
                   </a>
                 </div>
               </div>
-              <nav id="mobile-menu" class="lg:hidden hidden absolute top-full left-0 right-0 bg-black/95 backdrop-blur-xl border-b border-white/10 overflow-hidden" style="max-height: 0; transition: max-height 0.3s ease-in-out;">
+              <nav id="mobile-menu" class="lg:hidden hidden absolute top-full left-0 right-0 bg-black/95 border-b border-white/10 overflow-hidden" style="max-height: 0; transition: max-height 0.3s ease-in-out;">
                 <div class="flex flex-col p-6 space-y-4">
                   <a href="#portfolio" class="text-base text-white/70 hover:text-white transition py-2">
                     Portfolio
@@ -418,7 +418,7 @@
           <!-- HERO -->
           <section class="min-h-screen flex flex-col section-visible text-center pt-0 pr-6 pb-24 pl-6 relative items-center justify-center xl:pt-0 xl:pb-0">
             <!-- Award badge -->
-            <div class="inline-flex items-center gap-2 rounded-full bg-white/8 px-4 py-2 backdrop-blur-sm text-white/80 ring-1 ring-white/10 animate-badge">
+            <div class="inline-flex items-center gap-2 rounded-full bg-white/8 px-4 py-2 text-white/80 ring-1 ring-white/10 animate-badge">
               <span class="i-lucide-sparkles"></span>
               <span class="">
                 Étudiant Développeur — Ynov Montpellier
@@ -462,7 +462,7 @@
                   <span class="relative">Start a project</span>
                   <span aria-hidden="true" class="transition-all duration-300 group-hover:opacity-80 opacity-20 w-[70%] h-[1px] rounded-full absolute bottom-0 left-1/2 -translate-x-1/2" style="background:linear-gradient(90deg,rgba(255,255,255,0) 0%,rgba(255,255,255,1) 50%,rgba(255,255,255,0) 100%);"></span>
                 </button> -->
-                <span class="pointer-events-none absolute -bottom-3 left-1/2 z-0 h-6 w-44 -translate-x-1/2 rounded-full opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100" style="background: radial-gradient(60% 100% at 50% 50%, rgba(139,92,246,.55), rgba(139,92,246,.28) 35%, transparent 70%); filter: blur(10px) saturate(120%);" aria-hidden="true"></span>
+                <span class="pointer-events-none absolute -bottom-3 left-1/2 z-0 h-6 w-44 -translate-x-1/2 rounded-full opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100" style="background: radial-gradient(60% 100% at 50% 50%, rgba(139,92,246,.55), rgba(139,92,246,.28) 35%, transparent 70%); filter: saturate(120%);" aria-hidden="true"></span>
               </div>
             </div>
     
@@ -503,7 +503,7 @@
                 <div class="flex snap-x snap-mandatory overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] md:gap-8 md:scroll-px-8 md:pt-16 md:px-8 max-w-7xl pt-6 pr-8 pb-6 pl-8 gap-x-6 gap-y-x-6" style="-webkit-overflow-scrolling: touch;" id="work-carousel">
                   <!-- Card 1 -->
                   <article class="group relative snap-center shrink-0 w-[82vw] sm:w-[68vw] md:w-[520px] lg:w-[640px] aspect-[16/10] rounded-2xl overflow-hidden ring-1 bg-neutral-900/40" data-index="0" style="transform: scale(0.94); opacity: 0.55; transition: transform 400ms cubic-bezier(0.2, 0.8, 0.2, 1) 0s, opacity 400ms ease 0s;">
-                    <img src="https://hoirqrkdgbmvpwutwuwj-all.supabase.co/storage/v1/object/public/assets/assets/591d6a3f-93a6-4185-a67b-d397be21fd6a_1600w.jpg" alt="3D product render project cover" class="absolute inset-0 h-full w-full object-cover">
+                    <img src="forum.png" alt="3D product render project cover" class="absolute inset-0 h-full w-full object-cover">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent"></div>
     
                     <!-- Content -->
@@ -523,17 +523,17 @@
                             Auth, posts, commentaires, likes/dislikes, tri par date
                           </p>
                         </div>
-                        <a href="https://github.com/Noah34a/forum-web" class="inline-flex items-center justify-center rounded-full bg-white/10 hover:bg-white/15 transition ring-1 ring-white/20 backdrop-blur px-3.5 py-2">
+                        <a href="https://github.com/Noah34a/forum-web" class="inline-flex items-center justify-center rounded-full bg-white/10 hover:bg-white/15 transition ring-1 ring-white/20 px-3.5 py-2">
                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="arrow-up-right" class="lucide lucide-arrow-up-right h-5 w-5"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg>
                         </a>
                       </div>
                     </div>
     
                     <!-- Arrows (only visible on active) -->
-                    <button class="js-prev absolute left-3 md:left-4 top-1/2 -translate-y-1/2 items-center justify-center h-10 w-10 md:h-11 md:w-11 rounded-full bg-white/10 hover:bg-white/15 ring-1 ring-white/20 backdrop-blur text-white">
+                    <button class="js-prev absolute left-3 md:left-4 top-1/2 -translate-y-1/2 items-center justify-center h-10 w-10 md:h-11 md:w-11 rounded-full bg-white/10 hover:bg-white/15 ring-1 ring-white/20 text-white">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-left" class="lucide lucide-chevron-left h-5 w-5"><path d="m15 18-6-6 6-6"></path></svg>
                     </button>
-                    <button class="js-next absolute right-3 md:right-4 top-1/2 -translate-y-1/2 items-center justify-center h-10 w-10 md:h-11 md:w-11 rounded-full bg-white/10 hover:bg-white/15 ring-1 ring-white/20 backdrop-blur text-white">
+                    <button class="js-next absolute right-3 md:right-4 top-1/2 -translate-y-1/2 items-center justify-center h-10 w-10 md:h-11 md:w-11 rounded-full bg-white/10 hover:bg-white/15 ring-1 ring-white/20 text-white">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-right" class="lucide lucide-chevron-right h-5 w-5"><path d="m9 18 6-6-6-6"></path></svg>
                     </button>
                   </article>
@@ -559,16 +559,16 @@
                             VM WordPress + Flask, NGINX Reverse Proxy, SSL auto-signé, sous-domaines
                           </p>
                         </div>
-                        <a href="https://github.com/Noah34a/serveur-web" class="inline-flex items-center justify-center rounded-full bg-white/10 hover:bg-white/15 transition ring-1 ring-white/20 backdrop-blur px-3.5 py-2">
+                        <a href="https://github.com/Noah34a/serveur-web" class="inline-flex items-center justify-center rounded-full bg-white/10 hover:bg-white/15 transition ring-1 ring-white/20 px-3.5 py-2">
                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="arrow-up-right" class="lucide lucide-arrow-up-right h-5 w-5"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg>
                         </a>
                       </div>
                     </div>
     
-                    <button class="js-prev absolute left-3 md:left-4 top-1/2 -translate-y-1/2 items-center justify-center h-10 w-10 md:h-11 md:w-11 rounded-full bg-white/10 hover:bg-white/15 ring-1 ring-white/20 backdrop-blur text-white">
+                    <button class="js-prev absolute left-3 md:left-4 top-1/2 -translate-y-1/2 items-center justify-center h-10 w-10 md:h-11 md:w-11 rounded-full bg-white/10 hover:bg-white/15 ring-1 ring-white/20 text-white">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-left" class="lucide lucide-chevron-left h-5 w-5"><path d="m15 18-6-6 6-6"></path></svg>
                     </button>
-                    <button class="js-next absolute right-3 md:right-4 top-1/2 -translate-y-1/2 items-center justify-center h-10 w-10 md:h-11 md:w-11 rounded-full bg-white/10 hover:bg-white/15 ring-1 ring-white/20 backdrop-blur text-white">
+                    <button class="js-next absolute right-3 md:right-4 top-1/2 -translate-y-1/2 items-center justify-center h-10 w-10 md:h-11 md:w-11 rounded-full bg-white/10 hover:bg-white/15 ring-1 ring-white/20 text-white">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-right" class="lucide lucide-chevron-right h-5 w-5"><path d="m9 18 6-6-6-6"></path></svg>
                     </button>
                   </article>
@@ -594,23 +594,23 @@
                             Intégration HTML/CSS, design moderne, exécution locale (Live Server / Python / Node)
                           </p>
                         </div>
-                        <a href="https://github.com/Noah34a/horizon-3d" class="inline-flex items-center justify-center rounded-full bg-white/10 hover:bg-white/15 transition ring-1 ring-white/20 backdrop-blur px-3.5 py-2">
+                        <a href="https://github.com/Noah34a/horizon-3d" class="inline-flex items-center justify-center rounded-full bg-white/10 hover:bg-white/15 transition ring-1 ring-white/20 px-3.5 py-2">
                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="arrow-up-right" class="lucide lucide-arrow-up-right h-5 w-5"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg>
                         </a>
                       </div>
                     </div>
     
-                    <button class="js-prev absolute left-3 md:left-4 top-1/2 -translate-y-1/2 hidden items-center justify-center h-10 w-10 md:h-11 md:w-11 rounded-full bg-white/10 hover:bg-white/15 ring-1 ring-white/20 backdrop-blur text-white">
+                    <button class="js-prev absolute left-3 md:left-4 top-1/2 -translate-y-1/2 hidden items-center justify-center h-10 w-10 md:h-11 md:w-11 rounded-full bg-white/10 hover:bg-white/15 ring-1 ring-white/20 text-white">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-left" class="lucide lucide-chevron-left h-5 w-5"><path d="m15 18-6-6 6-6"></path></svg>
                     </button>
-                    <button class="js-next absolute right-3 md:right-4 top-1/2 -translate-y-1/2 hidden items-center justify-center h-10 w-10 md:h-11 md:w-11 rounded-full bg-white/10 hover:bg-white/15 ring-1 ring-white/20 backdrop-blur text-white">
+                    <button class="js-next absolute right-3 md:right-4 top-1/2 -translate-y-1/2 hidden items-center justify-center h-10 w-10 md:h-11 md:w-11 rounded-full bg-white/10 hover:bg-white/15 ring-1 ring-white/20 text-white">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-right" class="lucide lucide-chevron-right h-5 w-5"><path d="m9 18 6-6-6-6"></path></svg>
                     </button>
                   </article>
     
                   <!-- Card 4 -->
                   <article class="group relative snap-center shrink-0 w-[82vw] sm:w-[68vw] md:w-[520px] lg:w-[640px] aspect-[16/10] rounded-2xl overflow-hidden ring-1 ring-white/10 bg-neutral-900/40" data-index="3" style="transform: scale(0.94); opacity: 0.55; transition: transform 400ms cubic-bezier(0.2, 0.8, 0.2, 1), opacity 400ms;">
-                    <img src="https://hoirqrkdgbmvpwutwuwj-all.supabase.co/storage/v1/object/public/assets/assets/49aac4dd-9624-4c88-ab00-4c68f0f0bfe8_1600w.jpg" alt="AI chat neon render cover" class="absolute inset-0 h-full w-full object-cover">
+                    <img src="pridano.png" alt="AI chat neon render cover" class="absolute inset-0 h-full w-full object-cover">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent"></div>
     
                     <div class="absolute inset-x-0 bottom-0 p-5 md:p-6">
@@ -629,16 +629,16 @@
                             Exemple de site premium (Tailwind/JS), mise en avant des services
                           </p>
                         </div>
-                        <a href="https://github.com/Noah34a/pridano-tech" class="inline-flex items-center justify-center rounded-full bg-white/10 hover:bg-white/15 transition ring-1 ring-white/20 backdrop-blur px-3.5 py-2">
+                        <a href="https://github.com/Noah34a/pridano-tech" class="inline-flex items-center justify-center rounded-full bg-white/10 hover:bg-white/15 transition ring-1 ring-white/20 px-3.5 py-2">
                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="arrow-up-right" class="lucide lucide-arrow-up-right h-5 w-5"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg>
                         </a>
                       </div>
                     </div>
     
-                    <button class="js-prev absolute left-3 md:left-4 top-1/2 -translate-y-1/2 hidden items-center justify-center h-10 w-10 md:h-11 md:w-11 rounded-full bg-white/10 hover:bg-white/15 ring-1 ring-white/20 backdrop-blur text-white">
+                    <button class="js-prev absolute left-3 md:left-4 top-1/2 -translate-y-1/2 hidden items-center justify-center h-10 w-10 md:h-11 md:w-11 rounded-full bg-white/10 hover:bg-white/15 ring-1 ring-white/20 text-white">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-left" class="lucide lucide-chevron-left h-5 w-5"><path d="m15 18-6-6 6-6"></path></svg>
                     </button>
-                    <button class="js-next absolute right-3 md:right-4 top-1/2 -translate-y-1/2 hidden items-center justify-center h-10 w-10 md:h-11 md:w-11 rounded-full bg-white/10 hover:bg-white/15 ring-1 ring-white/20 backdrop-blur text-white">
+                    <button class="js-next absolute right-3 md:right-4 top-1/2 -translate-y-1/2 hidden items-center justify-center h-10 w-10 md:h-11 md:w-11 rounded-full bg-white/10 hover:bg-white/15 ring-1 ring-white/20 text-white">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-right" class="lucide lucide-chevron-right h-5 w-5"><path d="m9 18 6-6-6-6"></path></svg>
                     </button>
                   </article>
@@ -780,7 +780,7 @@
                   <!-- Slide 1 -->
                   <article class="about-content-item active snap-start min-h-[600px] flex items-center">
                     <div class="">
-                      <div class="inline-flex items-center gap-2 rounded-full border-gradient before:rounded-full bg-white/5 px-3 py-1.5 backdrop-blur">
+                  <div class="inline-flex items-center gap-2 rounded-full border-gradient before:rounded-full bg-white/5 px-3 py-1.5">
                         <span class="text-xs text-white/70">About Me</span>
                       </div>
     
@@ -799,7 +799,7 @@
                   <!-- Slide 2 -->
                   <article class="about-content-item snap-start min-h-[600px] flex items-center">
                     <div>
-                      <div class="inline-flex items-center gap-2 rounded-full border-gradient before:rounded-full bg-white/5 px-3 py-1.5 backdrop-blur">
+                      <div class="inline-flex items-center gap-2 rounded-full border-gradient before:rounded-full bg-white/5 px-3 py-1.5">
                         <span class="text-xs text-white/70">
                           Projets Web
                         </span>
@@ -819,7 +819,7 @@
                   <!-- Slide 3 -->
                   <article class="about-content-item snap-start min-h-[600px] flex items-center">
                     <div>
-                      <div class="inline-flex items-center gap-2 rounded-full border-gradient before:rounded-full bg-white/5 px-3 py-1.5 backdrop-blur">
+                      <div class="inline-flex items-center gap-2 rounded-full border-gradient before:rounded-full bg-white/5 px-3 py-1.5">
                         <span class="text-xs text-white/70">Systèmes & Réseau</span>
                       </div>
                       <h2 class="mt-5 text-4xl md:text-6xl text-white drop-shadow-xl font-semibold tracking-tight">
@@ -837,7 +837,7 @@
                   <!-- Slide 4 -->
                   <article class="about-content-item snap-start min-h-[600px] flex items-center">
                     <div>
-                      <div class="inline-flex items-center gap-2 rounded-full border-gradient before:rounded-full bg-white/5 px-3 py-1.5 backdrop-blur">
+                      <div class="inline-flex items-center gap-2 rounded-full border-gradient before:rounded-full bg-white/5 px-3 py-1.5">
                         <span class="text-xs text-white/70">
                           Outils & Méthode
                         </span>
@@ -871,7 +871,7 @@
                     </p>
                   </div>
 
-                  <div class="overflow-hidden border-gradient before:rounded-2xl bg-white/5 rounded-2xl p-6 backdrop-blur-xl">
+                  <div class="overflow-hidden border-gradient before:rounded-2xl bg-white/5 rounded-2xl p-6">
                     <div class="flex items-center gap-3 mb-3">
                       <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-cyan-500/20 to-blue-500/20 flex items-center justify-center border-gradient before:rounded-lg">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-cyan-400">
@@ -1007,7 +1007,7 @@
             </div>
     
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
-              <div class="overflow-hidden border-gradient before:rounded-2xl animate-on-scroll bg-white/5 rounded-2xl p-6 backdrop-blur-xl" style="animation: fadeSlideIn 0.5s ease-in-out 0.2s both">
+              <div class="overflow-hidden border-gradient before:rounded-2xl animate-on-scroll bg-white/5 rounded-2xl p-6" style="animation: fadeSlideIn 0.5s ease-in-out 0.2s both">
                 <div class="flex border-gradient before:rounded-lg bg-gradient-to-br from-violet-500/20 to-fuchsia-500/20 w-12 h-12 rounded-lg items-center justify-center mb-4">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-code w-6 h-6 text-violet-400"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
                 </div>
@@ -1020,7 +1020,7 @@
                 </div>
               </div>
 
-              <div class="overflow-hidden border-gradient before:rounded-2xl animate-on-scroll bg-white/5 rounded-2xl p-6 backdrop-blur-xl" style="animation: fadeSlideIn 0.5s ease-in-out 0.25s both">
+              <div class="overflow-hidden border-gradient before:rounded-2xl animate-on-scroll bg-white/5 rounded-2xl p-6" style="animation: fadeSlideIn 0.5s ease-in-out 0.25s both">
                 <div class="flex border-gradient before:rounded-lg bg-gradient-to-br from-cyan-500/20 to-blue-500/20 w-12 h-12 rounded-lg items-center justify-center mb-4">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-server w-6 h-6 text-cyan-400"><rect width="20" height="8" x="2" y="2" rx="2"/><rect width="20" height="8" x="2" y="14" rx="2"/><path d="M6 6h.01M6 18h.01"/></svg>
                 </div>
@@ -1033,7 +1033,7 @@
                 </div>
               </div>
 
-              <div class="overflow-hidden border-gradient before:rounded-2xl animate-on-scroll bg-white/5 rounded-2xl p-6 backdrop-blur-xl" style="animation: fadeSlideIn 0.5s ease-in-out 0.3s both">
+              <div class="overflow-hidden border-gradient before:rounded-2xl animate-on-scroll bg-white/5 rounded-2xl p-6" style="animation: fadeSlideIn 0.5s ease-in-out 0.3s both">
                 <div class="flex border-gradient before:rounded-lg bg-gradient-to-br from-emerald-500/20 to-teal-500/20 w-12 h-12 rounded-lg items-center justify-center mb-4">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-git-branch w-6 h-6 text-emerald-400"><path d="M6 3v12"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></svg>
                 </div>
@@ -1055,13 +1055,13 @@
             <div class="text-center mb-16 animate-on-scroll" style="animation: fadeSlideIn 0.5s ease-in-out 0.1s both">
               <div class="inline-flex items-center gap-2 bg-white/5 backdrop-blur-xl border-gradient before:rounded-full rounded-full px-4 py-2 mb-6">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="workflow" class="lucide lucide-workflow w-4 h-4 text-white-400"><rect width="8" height="8" x="3" y="3" rx="2"></rect><path d="M7 11v4a2 2 0 0 0 2 2h4"></path><rect width="8" height="8" x="13" y="13" rx="2"></rect></svg>
-                <span class="text-xs text-white/70 font-medium">Méthode de travail</span>
+                <span class="text-xs text-white/70 font-medium">Parcours</span>
               </div>
               <h2 class="text-4xl md:text-6xl font-semibold tracking-tight">
-                Du besoin à la mise en ligne
+                Mon parcours
               </h2>
               <p class="text-white/70 mt-4 text-lg">
-                Un flux simple et clair, orienté résultats : cadrage, dev, tests et déploiement.
+                Formations et dates clés
               </p>
             </div>
     
@@ -1077,12 +1077,12 @@
                     <div class="flex-shrink-0 flex z-10 bg-gradient-to-br from-blue-500 to-cyan-500 w-10 h-10 rounded-full relative items-center justify-center">
                       <span class="text-base font-bold">1</span>
                     </div>
-                    <div class="flex-1 rounded-2xl bg-white/5 backdrop-blur-xl border-gradient before:rounded-2xl p-6">
+                    <div class="flex-1 rounded-2xl bg-white/5 border-gradient before:rounded-2xl p-6">
                       <h3 class="text-xl font-semibold tracking-tight mb-2">
-                        Cadrage &amp; Cahier des charges
+                        Bachelor 2 Informatique — Ynov Campus Montpellier (2025/2026)
                       </h3>
                       <p class="text-white/60 leading-relaxed text-sm">
-                        Atelier rapide pour définir objectifs, publics, fonctionnalités et priorités. Rédaction d’un cahier des charges concis avec jalons.
+                        Approfondissement dev web (HTML/CSS/JS), back‑end Python/Flask, bases systèmes Linux/NGINX et projets tutorés.
                       </p>
                     </div>
                   </div>
@@ -1094,12 +1094,12 @@
                     <div class="flex-shrink-0 flex z-10 bg-gradient-to-br from-blue-500 to-cyan-500 w-10 h-10 rounded-full relative items-center justify-center">
                       <span class="text-base font-bold">2</span>
                     </div>
-                    <div class="flex-1 rounded-2xl bg-white/5 backdrop-blur-xl border-gradient before:rounded-2xl p-6">
+                    <div class="flex-1 rounded-2xl bg-white/5 border-gradient before:rounded-2xl p-6">
                       <h3 class="text-xl font-semibold tracking-tight mb-2">
-                        Architecture &amp; Setup
+                        Bachelor 1 Informatique — Ynov Campus Montpellier (2024/2025)
                       </h3>
                       <p class="text-white/60 leading-relaxed text-sm">
-                        Choix de la stack (HTML/CSS/JS, Flask, Tailwind), structure des routes, schéma de données, repo Git/GitHub et environnement local.
+                        Fondamentaux de l’informatique : algorithmique, POO, bases de données, intégration web et premiers projets concrets.
                       </p>
                     </div>
                   </div>
@@ -1111,33 +1111,17 @@
                     <div class="flex-shrink-0 flex z-10 bg-gradient-to-br from-blue-500 to-cyan-500 w-10 h-10 rounded-full relative items-center justify-center">
                       <span class="text-base font-bold">3</span>
                     </div>
-                    <div class="flex-1 rounded-2xl bg-white/5 backdrop-blur-xl border-gradient before:rounded-2xl p-6">
+                    <div class="flex-1 rounded-2xl bg-white/5 border-gradient before:rounded-2xl p-6">
                       <h3 class="text-xl font-semibold tracking-tight mb-2">
-                        Front‑end &amp; Intégration
+                        Baccalauréat STI2D — Systèmes d’Information et Numérique (2023/2024)
                       </h3>
                       <p class="text-white/60 leading-relaxed text-sm">
-                        Maquettes → intégration responsive. Composants réutilisables, accessibilité, interactions propres et performances de base.
+                        Lycée Georges Brassens — électronique/IoT, réseau, bases de programmation et architecture des systèmes.
                       </p>
                     </div>
                   </div>
                 </div>
 
-                <!-- Step 4 -->
-                <div class="relative animate-on-scroll" style="animation: fadeSlideIn 0.5s ease-in-out 0.3s both">
-                  <div class="flex gap-5 items-start">
-                    <div class="flex-shrink-0 flex z-10 bg-gradient-to-br from-blue-500 to-cyan-500 w-10 h-10 rounded-full relative items-center justify-center">
-                      <span class="text-base font-bold">4</span>
-                    </div>
-                    <div class="flex-1 rounded-2xl bg-white/5 backdrop-blur-xl border-gradient before:rounded-2xl p-6">
-                      <h3 class="text-xl font-semibold tracking-tight mb-2">
-                        Recette, Déploiement &amp; Handover
-                      </h3>
-                      <p class="text-white/60 leading-relaxed text-sm">
-                        Tests fonctionnels, correctifs, optimisation. Déploiement (NGINX/SSL) et passation : guides, accès, et plan d’évolution.
-                      </p>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -1146,8 +1130,8 @@
         <!-- CTA / Contact -->
         <section class="z-10 bg-center xl:pt-32 xl:pb-32 bg-cover mt-24 pt-32 pb-32 relative bg-[url(https://hoirqrkdgbmvpwutwuwj-all.supabase.co/storage/v1/object/public/assets/assets/c06498e9-85e2-4173-a1f6-86b1267897f0_3840w.jpg)]" id="contact">
           <div class="lg:px-8 max-w-4xl mr-auto ml-auto pr-6 pl-6">
-            <div class="border-gradient before:rounded-3xl md:p-12 animate-on-scroll text-center bg-white/5 rounded-3xl pt-8 pr-8 pb-8 pl-8 backdrop-blur-xl" style="animation: fadeSlideIn 0.5s ease-in-out 0.1s both">
-              <div class="inline-flex gap-2 border-gradient before:rounded-full bg-white/5 rounded-full px-3 py-1.5 backdrop-blur items-center mb-6">
+            <div class="border-gradient before:rounded-3xl md:p-12 animate-on-scroll text-center bg-white/5 rounded-3xl pt-8 pr-8 pb-8 pl-8" style="animation: fadeSlideIn 0.5s ease-in-out 0.1s both">
+              <div class="inline-flex gap-2 border-gradient before:rounded-full bg-white/5 rounded-full px-3 py-1.5 items-center mb-6">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="mail" class="lucide lucide-mail w-3.5 h-3.5 text-white-400"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"></path><rect x="2" y="4" width="20" height="16" rx="2"></rect></svg>
                 <span class="text-xs text-white/70">Contact</span>
               </div>
