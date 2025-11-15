@@ -5,27 +5,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script><script src="https://unpkg.com/lucide@latest"></script>
     </head><body class="font-[Inter] min-h-screen text-gray-100 bg-gray-950">
-    <!-- Background global -->
-    <div class="fixed inset-0 -z-10 overflow-hidden">
-      <!-- Aurora Layer -->
-      <div class="absolute inset-0" style="
-        background:
-          radial-gradient(50% 80% at 30% 20%, rgba(124,58,237,.25), transparent 70%),
-          radial-gradient(60% 90% at 70% 80%, rgba(56,189,248,.18), transparent 80%),
-          radial-gradient(70% 100% at 50% 50%, rgba(236,72,153,.1), transparent 80%),
-          #080808;
-        filter: saturate(1.15) contrast(1.03);
-        animation: aurora 18s ease-in-out infinite alternate;">
-      </div>
-
-      <!-- Canvas Wireframe -->
-      <canvas id="bg-mesh" class="absolute inset-0 w-full h-full"></canvas>
-
-      <!-- Particles -->
-      <canvas id="bg-particles" class="absolute inset-0 w-full h-full"></canvas>
-    </div>
+      <!-- BACKGROUND G : Static Luxury Noir -->
+<div class="fixed inset-0 -z-10 bg-[#0a0a0c]">
+  <div class="absolute inset-0 opacity-[0.08]"
+    style="
+      background-image:
+        linear-gradient(120deg, rgba(255,255,255,0.07), transparent 75%),
+        radial-gradient(circle at 30% 20%, rgba(124,58,237,0.15), transparent 70%),
+        radial-gradient(circle at 80% 80%, rgba(56,189,248,0.12), transparent 70%);
+      background-blend-mode: soft-light;
+    ">
+  </div>
+</div>
     
-    <header class="sticky top-0 backdrop-blur border-b border-neutral-800">
+    <header class="sticky top-0 border-b border-neutral-800 header-blur z-[9999]">
       <div class="max-w-7xl mx-auto flex items-center justify-between gap-6 px-6 py-4">
         <a href="index.html" class="flex items-center gap-2 group" data-animate>
           <img src="pridano-logo.png" alt="Pridano Tech logo" width="24" height="24" class="w-6 h-6 rounded-sm shadow-sm ring-1 ring-white/10" loading="eager" decoding="async" fetchpriority="high">
@@ -44,81 +37,162 @@
     </header>
     
     <main class="max-w-7xl mx-auto px-6 py-16 space-y-12">
-  <!-- Hero / Intro -->
-  <header class="mb-2">
+  <!-- Hero / Intro
+  <header class="mb-8">
     <div class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 backdrop-blur">
       <i data-lucide="gallery-vertical" class="w-4 h-4 text-indigo-300"></i>
-      <span class="text-xs text-neutral-300">Portfolio</span>
+      <span class="text-xs text-neutral-300 uppercase tracking-[0.2em]">Portfolio</span>
     </div>
-    <h1 class="mt-4 text-3xl md:text-5xl font-light tracking-tight">Nos projets premium</h1>
-    <p class="mt-3 text-neutral-300 font-light max-w-2xl">Sélection d’exemples concrets conçus pour la performance, le design et la conversion. Chaque projet peut être adapté à votre marque.</p>
-  </header>
-
-  <!-- Quick filters (visuels uniquement) -->
-  <div class="flex flex-wrap gap-3">
-    <span class="px-3 py-1.5 rounded-full text-xs border border-white/10 bg-white/5">Tous</span>
-    <span class="px-3 py-1.5 rounded-full text-xs border border-white/10 bg-white/5">Vitrine</span>
-    <span class="px-3 py-1.5 rounded-full text-xs border border-white/10 bg-white/5">E‑commerce</span>
-    <span class="px-3 py-1.5 rounded-full text-xs border border-white/10 bg-white/5">SaaS</span>
-  </div>
-
-  <!-- Grid cards -->
-  <section class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-    <article class="group relative rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-md shadow-lg shadow-black/20">
-      <div class="aspect-[16/10] overflow-hidden">
-        <img src=logo-nono.png alt="Portfolio noah lemoing" class="w-full h-full object-cover transition duration-500 group-hover:scale-[1.04]" />
-        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent pointer-events-none"></div>
-      </div>
-      <div class="p-6">
-        <div class="flex items-center gap-2 text-[11px] text-white/70">
-          <span class="inline-flex h-5 w-5 items-center justify-center rounded-full bg-pink-400/20 ring-1 ring-pink-300/30">
-            <i data-lucide="cpu" class="w-3.5 h-3.5 text-pink-300"></i>
+    <h1 class="mt-4 text-3xl sm:text-5xl lg:text-6xl font-semibold leading-tight tracking-tight">
+      <span class="block text-xs sm:text-sm md:text-base font-light text-indigo-200/80 mb-3 uppercase tracking-[0.3em]">
+        Nos projets premium
+      </span>
+      <span class="block text-neutral-50">
+        Des sites pensés
+      </span>
+      <span class="mt-3 inline-flex flex-wrap items-center gap-3 sm:gap-4">
+        <span class="inline-flex items-center px-4 sm:px-6 py-2 sm:py-3 rounded-2xl bg-neutral-900/90 border border-amber-300/70 shadow-[0_18px_40px_rgba(0,0,0,0.7)] ring-1 ring-white/5 -rotate-2">
+          <span class="text-xl sm:text-3xl lg:text-[2.1rem] leading-none font-semibold tracking-tight text-neutral-50">
+            pour inspirer tes futurs projets
           </span>
-          Portfolio • Développeur
+        </span>
+        <span class="text-xl sm:text-3xl lg:text-[2.1rem] leading-none font-semibold tracking-tight bg-gradient-to-r from-amber-300 via-emerald-300 to-sky-400 text-transparent bg-clip-text drop-shadow-[0_0_25px_rgba(245,245,245,0.25)]">
+          et montrer ce qu’on sait faire
+        </span>
+      </span>
+    </h1>
+    <p class="mt-4 text-base sm:text-lg text-neutral-300 font-light max-w-2xl">
+      Une sélection d’exemples concrets conçus pour la performance, le design et la conversion. Chaque projet peut être adapté à ta marque
+      et à ton niveau d’avancement.
+    </p>
+  </header> -->
+    <!-- Hero / Intro -->
+    <header class="mb-8">
+      <div class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 backdrop-blur">
+        <i data-lucide="gallery-vertical" class="w-4 h-4 text-indigo-300"></i>
+        <span class="text-xs text-neutral-300 uppercase tracking-[0.2em]">Portfolio</span>
+      </div>
+      <h1 class="mt-6 text-3xl sm:text-5xl lg:text-6xl font-semibold leading-tight tracking-tight">
+        <span class="block text-xs sm:text-sm md:text-base font-light text-indigo-200/80 mb-2 uppercase tracking-[0.3em]">
+          Nos réalisations
+        </span>
+        <span class="block text-neutral-50">
+          Des projets pensés
+        </span>
+        <span class="mt-3 inline-flex flex-wrap items-baseline gap-3 sm:gap-4">
+          <span class="text-lg sm:text-2xl text-neutral-400 font-light">
+            pour vraiment
+          </span>
+          <span class="relative inline-flex">
+            <!-- Carte décalée en arrière-plan -->
+            <span class="absolute inset-0 translate-x-1.5 translate-y-1.5 rounded-2xl bg-gradient-to-r from-emerald-400/40 via-sky-400/30 to-indigo-400/40 blur-[2px] opacity-80"></span>
+            <!-- Mot clé principal -->
+            <span class="relative px-4 sm:px-6 py-2 sm:py-2.5 rounded-2xl bg-black/80 border border-emerald-300/70 shadow-[0_18px_40px_rgba(0,0,0,0.7)] ring-1 ring-white/5 text-2xl sm:text-4xl lg:text-[2.6rem] leading-none font-semibold tracking-tight">
+              performer
+            </span>
+          </span>
+        </span>
+      </h1>
+      <p class="mt-4 text-base sm:text-lg text-neutral-300 font-light max-w-2xl">
+        Ici, tu vois ce qu’on sait réellement faire : des sites vitrines et des portfolios pensés pour donner confiance, mettre en valeur ton image
+        et convertir tes visiteurs en clients. Chaque projet est une base qu’on peut adapter à ton univers.
+      </p>
+    </header>
+
+  <!-- Liste des projets -->
+  <section class="mt-8 space-y-8">
+    <!-- Projet Noah -->
+    <article class="group relative rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md shadow-lg shadow-black/25 overflow-hidden">
+      <div class="grid md:grid-cols-[minmax(0,1.2fr)_minmax(0,1.5fr)] gap-0">
+        <!-- Visuel -->
+        <div class="relative">
+          <div class="aspect-[16/10] overflow-hidden">
+            <img src="logo-nono.png" alt="Portfolio Noah Lemoing" class="w-full h-full object-cover transition duration-500 group-hover:scale-[1.04]" />
+          </div>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none"></div>
+          <div class="absolute bottom-3 left-3 inline-flex items-center gap-2 rounded-full bg-black/70 border border-white/15 px-3 py-1 text-[11px] text-neutral-100">
+            <i data-lucide="monitor-play" class="w-3.5 h-3.5 text-emerald-300"></i>
+            <span>Site vitrine · Portfolio dev</span>
+          </div>
         </div>
-        <h2 class="mt-2 text-xl font-medium tracking-tight">Portfolio</h2>
-        <p class="mt-1 text-sm text-neutral-300 font-light">Portfolio personnel de Noah Lemoing — présentant ses projets, compétences et réalisations web.</p>
-        <div class="mt-3 flex flex-wrap gap-2 text-xs text-neutral-300">
-          <span class="px-2 py-1 rounded-md bg-white/5 border border-white/10">HTML</span>
-          <span class="px-2 py-1 rounded-md bg-white/5 border border-white/10">TailwindCSS</span>
-        </div>
-        <div class="mt-5 flex items-center gap-3">
-          <a href="portfolio-noah.html" class="inline-flex items-center gap-2 rounded-lg bg-neutral-100 text-black px-4 py-2 text-sm hover:bg-neutral-200 transition font-light">
-            Voir le site démo <i data-lucide="external-link" class="w-4 h-4"></i>
-          </a>
-          <a href="devis.html" class="inline-flex items-center gap-1 text-sm text-neutral-300 hover:text-neutral-100 transition font-light">
-            Discuter fonctionnalités <i data-lucide="arrow-right" class="w-4 h-4"></i>
-          </a>
+        <!-- Contenu -->
+        <div class="p-6 md:p-7 flex flex-col justify-center gap-4">
+          <div class="space-y-1">
+            <p class="text-[11px] uppercase tracking-[0.25em] text-neutral-400">Exemple concret</p>
+            <h2 class="text-xl md:text-2xl font-semibold tracking-tight text-neutral-50">
+              Portfolio · Noah Lemoing
+            </h2>
+            <p class="text-sm md:text-base text-neutral-300 font-light">
+              Un portfolio de développeur pensé comme une vraie vitrine professionnelle : présentation claire, hiérarchie lisible,
+              mise en avant des projets et appel à l’action dès le premier écran.
+            </p>
+          </div>
+          <div class="grid sm:grid-cols-2 gap-3 text-xs md:text-sm text-neutral-300">
+            <div class="space-y-1">
+              <p class="text-[11px] uppercase tracking-[0.18em] text-neutral-400">Objectif</p>
+              <p>Donner confiance à des recruteurs, alternances ou premiers clients avec un site simple, rapide et bien structuré.</p>
+            </div>
+            <div class="space-y-1">
+              <p class="text-[11px] uppercase tracking-[0.18em] text-neutral-400">Technos</p>
+              <p>HTML statique, TailwindCSS, mise en page responsive, sections réutilisables pour d’autres profils.</p>
+            </div>
+          </div>
+          <div class="mt-2 flex flex-wrap items-center gap-3">
+            <a href="portfolio-noah.html" class="inline-flex items-center gap-2 rounded-lg bg-neutral-100 text-black px-4 py-2 text-xs md:text-sm hover:bg-neutral-200 transition font-light">
+              Voir le site démo <i data-lucide="external-link" class="w-4 h-4"></i>
+            </a>
+            <a href="devis.html" class="inline-flex items-center gap-1 text-xs md:text-sm text-neutral-300 hover:text-neutral-100 transition font-light">
+              Adapter ce modèle à ton profil <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </a>
+          </div>
         </div>
       </div>
     </article>
 
-    <!-- Portfolio personnel -->
-    <article class="group relative rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-md shadow-lg shadow-black/20">
-      <div class="aspect-[16/10] overflow-hidden">
-        <img src=logo-dada.png alt="Portfolio Damien Gamarra preview" class="w-full h-full object-cover transition duration-500 group-hover:scale-[1.04]" />
-        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent pointer-events-none"></div>
-      </div>
-      <div class="p-6">
-        <div class="flex items-center gap-2 text-[11px] text-white/70">
-          <span class="inline-flex h-5 w-5 items-center justify-center rounded-full bg-pink-400/20 ring-1 ring-pink-300/30">
-            <i data-lucide="cpu" class="w-3.5 h-3.5 text-pink-300"></i>
-          </span>
-          Portfolio • Développeur
+    <!-- Projet Damien -->
+    <article class="group relative rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md shadow-lg shadow-black/25 overflow-hidden">
+      <div class="grid md:grid-cols-[minmax(0,1.2fr)_minmax(0,1.5fr)] gap-0 md:flex-row-reverse">
+        <!-- Visuel -->
+        <div class="relative">
+          <div class="aspect-[16/10] overflow-hidden">
+            <img src="logo-dada.png" alt="Portfolio Damien Gamarra preview" class="w-full h-full object-cover transition duration-500 group-hover:scale-[1.04]" />
+          </div>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none"></div>
+          <div class="absolute bottom-3 left-3 inline-flex items-center gap-2 rounded-full bg-black/70 border border-white/15 px-3 py-1 text-[11px] text-neutral-100">
+            <i data-lucide="sparkles" class="w-3.5 h-3.5 text-sky-300"></i>
+            <span>Site vitrine · Portfolio créatif</span>
+          </div>
         </div>
-        <h2 class="mt-2 text-xl font-medium tracking-tight">Portfolio</h2>
-        <p class="mt-1 text-sm text-neutral-300 font-light">Portfolio personnel de Damien Gamarra — présentant ses projets, compétences et réalisations web.</p>
-        <div class="mt-3 flex flex-wrap gap-2 text-xs text-neutral-300">
-          <span class="px-2 py-1 rounded-md bg-white/5 border border-white/10">HTML</span>
-          <span class="px-2 py-1 rounded-md bg-white/5 border border-white/10">TailwindCSS</span>
-        </div>
-        <div class="mt-5 flex items-center gap-3">
-          <a href="portfolio-dada.html" class="inline-flex items-center gap-2 rounded-lg bg-neutral-100 text-black px-4 py-2 text-sm hover:bg-neutral-200 transition font-light">
-            Voir le site démo <i data-lucide="external-link" class="w-4 h-4"></i>
-          </a>
-          <a href="devis.html" class="inline-flex items-center gap-1 text-sm text-neutral-300 hover:text-neutral-100 transition font-light">
-            Discuter fonctionnalités <i data-lucide="arrow-right" class="w-4 h-4"></i>
-          </a>
+        <!-- Contenu -->
+        <div class="p-6 md:p-7 flex flex-col justify-center gap-4">
+          <div class="space-y-1">
+            <p class="text-[11px] uppercase tracking-[0.25em] text-neutral-400">Exemple concret</p>
+            <h2 class="text-xl md:text-2xl font-semibold tracking-tight text-neutral-50">
+              Portfolio · Damien Gamarra
+            </h2>
+            <p class="text-sm md:text-base text-neutral-300 font-light">
+              Un portfolio orienté développeur web et projets concrets, pensé pour servir d’exemple de site vitrine à des clients,
+              avec un design moderne et des sections facilement réutilisables.
+            </p>
+          </div>
+          <div class="grid sm:grid-cols-2 gap-3 text-xs md:text-sm text-neutral-300">
+            <div class="space-y-1">
+              <p class="text-[11px] uppercase tracking-[0.18em] text-neutral-400">Objectif</p>
+              <p>Montrer les capacités en intégration, design, animations et structure de site, tout en restant lisible et pro.</p>
+            </div>
+            <div class="space-y-1">
+              <p class="text-[11px] uppercase tracking-[0.18em] text-neutral-400">Technos</p>
+              <p>HTML, TailwindCSS, animations légères et sections adaptées au contexte agence (Pridano Tech).</p>
+            </div>
+          </div>
+          <div class="mt-2 flex flex-wrap items-center gap-3">
+            <a href="portfolio-dada.html" class="inline-flex items-center gap-2 rounded-lg bg-neutral-100 text-black px-4 py-2 text-xs md:text-sm hover:bg-neutral-200 transition font-light">
+              Voir le site démo <i data-lucide="external-link" class="w-4 h-4"></i>
+            </a>
+            <a href="devis.html" class="inline-flex items-center gap-1 text-xs md:text-sm text-neutral-300 hover:text-neutral-100 transition font-light">
+              Créer un portfolio dans ce style <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </a>
+          </div>
         </div>
       </div>
     </article>
@@ -131,9 +205,18 @@
   </div>
 </main>
     
-    <footer class="border-t border-white/10 py-8">
-      <div class="max-w-7xl mx-auto px-6 text-sm text-neutral-400">© Pridano Tech — 2025</div>
-    </footer>
+    <!-- Footer -->
+<footer class="border-t border-white/10 py-8">
+  <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-neutral-400">
+    <span>Pridano Tech — tous droits réservés</span>
+    <nav class="flex items-center gap-6">
+      <a class="hover:text-neutral-200 transition" href="services.html">Services</a>
+      <a class="hover:text-neutral-200 transition" href="about.html">À propos</a>
+      <a class="hover:text-neutral-200 transition" href="devis.html">Devis</a>
+      <a class="hover:text-neutral-200 transition" href="confidentialite.html">Politique de confidentialité</a>
+    </nav>
+  </div>
+</footer>
     <script>lucide.createIcons();</script>
     <script type="module">
     import * as THREE from 'https://cdn.skypack.dev/three@0.155.0';

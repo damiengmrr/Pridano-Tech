@@ -5,25 +5,18 @@
     <script src="https://cdn.tailwindcss.com"></script><script src="https://unpkg.com/lucide@latest"></script>
     <link rel="icon" href=pridano-logo.png>
     </head><body class="font-[Inter] min-h-screen text-gray-100 bg-gray-950">
-    <!-- Background global -->
-    <div class="fixed inset-0 -z-10 overflow-hidden">
-      <!-- Aurora Layer -->
-      <div class="absolute inset-0" style="
-        background:
-          radial-gradient(50% 80% at 30% 20%, rgba(124,58,237,.25), transparent 70%),
-          radial-gradient(60% 90% at 70% 80%, rgba(56,189,248,.18), transparent 80%),
-          radial-gradient(70% 100% at 50% 50%, rgba(236,72,153,.1), transparent 80%),
-          #080808;
-        filter: saturate(1.15) contrast(1.03);
-        animation: aurora 18s ease-in-out infinite alternate;">
-      </div>
-
-      <!-- Canvas Wireframe -->
-      <canvas id="bg-mesh" class="absolute inset-0 w-full h-full"></canvas>
-
-      <!-- Particles -->
-      <canvas id="bg-particles" class="absolute inset-0 w-full h-full"></canvas>
-    </div>
+      <!-- BACKGROUND G : Static Luxury Noir -->
+<div class="fixed inset-0 -z-10 bg-[#0a0a0c]">
+  <div class="absolute inset-0 opacity-[0.08]"
+    style="
+      background-image:
+        linear-gradient(120deg, rgba(255,255,255,0.07), transparent 75%),
+        radial-gradient(circle at 30% 20%, rgba(124,58,237,0.15), transparent 70%),
+        radial-gradient(circle at 80% 80%, rgba(56,189,248,0.12), transparent 70%);
+      background-blend-mode: soft-light;
+    ">
+  </div>
+</div>
     
     <header class="sticky top-0 backdrop-blur border-b border-neutral-800">
       <div class="max-w-7xl mx-auto flex items-center justify-between gap-6 px-6 py-4">
@@ -42,153 +35,264 @@
     </header>
     
     <main class="max-w-7xl mx-auto px-6 py-16 space-y-12">
-      <h1 class="text-3xl md:text-4xl font-light tracking-tight">Nos services</h1>
-    
-      <section class="grid md:grid-cols-3 gap-6">
-        <article class="p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md">
-          <div class="flex items-center gap-2 mb-3"><i data-lucide="layout-grid" class="w-5 h-5 text-indigo-300"></i><h2 class="font-light">Site vitrine & branding</h2></div>
-          <ul class="text-sm text-neutral-300 font-light space-y-2 list-disc list-inside">
-            <li>Design system Tailwind, typographies & couleurs</li>
-            <li>Pages clés : Accueil, Services, À propos, Contact</li>
-            <li>SEO on-page, perf & accessibilité</li>
-          </ul>
-        </article>
-    
-        <article class="p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md">
-          <div class="flex items-center gap-2 mb-3"><i data-lucide="shopping-bag" class="w-5 h-5 text-emerald-300"></i><h2 class="font-light">E-commerce</h2></div>
-          <ul class="text-sm text-neutral-300 font-light space-y-2 list-disc list-inside">
-            <li>Stripe/Shopify, panier, upsell, coupons</li>
-            <li>Fiches produits SEO, images optimisées</li>
-            <li>Intégrations logistique & analytics</li>
-          </ul>
-        </article>
-    
-        <article class="p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md">
-          <div class="flex items-center gap-2 mb-3"><i data-lucide="cpu" class="w-5 h-5 text-pink-300"></i><h2 class="font-light">SaaS & IA</h2></div>
-          <ul class="text-sm text-neutral-300 font-light space-y-2 list-disc list-inside">
-            <li>Auth, rôles, tableaux de bord</li>
-            <li>Chatbots, génération de contenu</li>
-            <li>Automatisations & APIs tierces</li>
-          </ul>
-        </article>
+      <section class="w-full lg:max-w-3xl space-y-6">
+        <h1 class="text-3xl sm:text-5xl lg:text-6xl leading-tight font-semibold tracking-tight">
+          <span class="block text-xs sm:text-sm md:text-base font-light text-indigo-200/80 mb-3 uppercase tracking-[0.3em]">
+            Nos services &amp; packs
+          </span>
+          <span class="block text-neutral-50">
+            On construit ton site
+          </span>
+          <span class="mt-3 inline-flex flex-wrap items-center gap-3 sm:gap-4">
+            <span class="inline-flex items-center px-4 sm:px-6 py-2 sm:py-3 rounded-2xl bg-neutral-900/90 border border-amber-300/70 shadow-[0_18px_40px_rgba(0,0,0,0.7)] ring-1 ring-white/5 -rotate-2">
+              <span class="text-xl sm:text-3xl lg:text-[2.3rem] leading-none font-semibold tracking-tight text-neutral-50">
+                adaptés à ton niveau
+              </span>
+            </span>
+            <span class="text-xl sm:text-3xl lg:text-[2.3rem] leading-none font-semibold tracking-tight bg-gradient-to-r from-amber-300 via-emerald-300 to-sky-400 text-transparent bg-clip-text drop-shadow-[0_0_25px_rgba(245,245,245,0.25)]">
+              de lancement ou de croissance
+            </span>
+          </span>
+        </h1>
+        <p class="text-base sm:text-lg text-neutral-300 font-light tracking-tight max-w-2xl">
+          Sur cette page, on t’explique concrètement ce qu’on propose : trois packs pensés pour lancer ton activité, consolider ce qui fonctionne
+          déjà ou commencer à vendre en ligne. Starter, Essentiel et Boutique servent de base, puis on adapte sur-mesure selon ton projet et ton budget.
+        </p>
       </section>
-    
-      <div class="text-center pt-6">
-        <a href="devis.html" class="inline-flex items-center gap-2 rounded-lg bg-neutral-100 text-black px-5 py-3 text-sm hover:bg-neutral-200 transition font-light">Demander un devis <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+
+      <!-- GUIDE PACKS -->
+      <section class="mt-10 space-y-8">
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+          <div>
+            <h2 class="text-2xl md:text-4xl font-semibold tracking-tight mb-2">
+              <span class="block text-[11px] md:text-xs font-medium text-emerald-300 mb-1 uppercase tracking-[0.3em]">
+                Choisir simplement
+              </span>
+              <span class="block text-neutral-50">
+                Quel pack correspond
+              </span>
+              <span class="block bg-gradient-to-r from-emerald-300 via-sky-300 to-indigo-300 text-transparent bg-clip-text">
+                à ta situation actuelle ?
+              </span>
+            </h2>
+            <p class="text-sm md:text-base text-neutral-300 font-light max-w-2xl">
+              Tu n’as pas besoin de connaître le vocabulaire technique pour faire un bon choix.
+              On t’oriente avec des exemples concrets : tu démarres, tu consolides ou tu veux vendre en ligne.
+            </p>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+          <!-- Guide carte 1 -->
+          <article class="p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md flex flex-col">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="inline-flex h-6 w-6 items-center justify-center rounded-full bg-emerald-400/15 ring-1 ring-emerald-300/30">
+                <i data-lucide="sprout" class="w-3.5 h-3.5 text-emerald-300"></i>
+              </span>
+              <h3 class="font-light tracking-tight text-sm">Je démarre mon activité</h3>
+            </div>
+            <p class="text-sm text-neutral-300 font-light mb-3">
+              Vous lancez votre micro-entreprise, vous n’avez pas encore de site et votre priorité c’est d’être trouvable facilement.
+            </p>
+            <ul class="space-y-1.5 text-xs text-neutral-400 font-light mb-3">
+              <li>• Avoir une page claire pour expliquer ce que vous faites.</li>
+              <li>• Pouvoir envoyer un lien à vos clients (mail, WhatsApp, réseaux).</li>
+              <li>• Un design propre, qui ne fait pas “site bricolé”.</li>
+            </ul>
+            <p class="text-xs text-neutral-300 font-light mt-auto">
+              <span class="inline-flex items-center gap-1 rounded-full bg-emerald-400/10 px-2 py-1 text-[11px] text-emerald-200 ring-1 ring-emerald-300/30">
+                <i data-lucide="star" class="w-3 h-3"></i>
+                Recommandé : <span class="font-medium">Pack Starter — 149&nbsp;€</span>
+              </span>
+            </p>
+          </article>
+
+          <!-- Guide carte 2 -->
+          <article class="p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md flex flex-col">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="inline-flex h-6 w-6 items-center justify-center rounded-full bg-sky-400/15 ring-1 ring-sky-300/30">
+                <i data-lucide="briefcase" class="w-3.5 h-3.5 text-sky-300"></i>
+              </span>
+              <h3 class="font-light tracking-tight text-sm">Mon activité tourne déjà</h3>
+            </div>
+            <p class="text-sm text-neutral-300 font-light mb-3">
+              Vous avez déjà des clients (bouche-à-oreille, Insta, Google…) et vous voulez un site qui donne confiance et centralise les infos.
+            </p>
+            <ul class="space-y-1.5 text-xs text-neutral-400 font-light mb-3">
+              <li>• Présenter vos services, tarifs indicatifs et avis clients.</li>
+              <li>• Être visible sur Google avec un minimum de SEO.</li>
+              <li>• Nom de domaine pro + hébergement gérés pour vous.</li>
+            </ul>
+            <p class="text-xs text-neutral-300 font-light mt-auto">
+              <span class="inline-flex items-center gap-1 rounded-full bg-sky-400/10 px-2 py-1 text-[11px] text-sky-100 ring-1 ring-sky-300/30">
+                <i data-lucide="star" class="w-3 h-3"></i>
+                Recommandé : <span class="font-medium">Pack Essentiel — 199&nbsp;€</span>
+              </span>
+            </p>
+          </article>
+
+          <!-- Guide carte 3 -->
+          <article class="p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md flex flex-col">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="inline-flex h-6 w-6 items-center justify-center rounded-full bg-purple-400/15 ring-1 ring-purple-300/30">
+                <i data-lucide="shopping-bag" class="w-3.5 h-3.5 text-purple-300"></i>
+              </span>
+              <h3 class="font-light tracking-tight text-sm">Je veux vendre en ligne</h3>
+            </div>
+            <p class="text-sm text-neutral-300 font-light mb-3">
+              Vous avez déjà des produits (physiques ou digitaux) et vous voulez commencer à encaisser des paiements en ligne sans usine à gaz.
+            </p>
+            <ul class="space-y-1.5 text-xs text-neutral-400 font-light mb-3">
+              <li>• Fiche produit simple (photo, description, prix).</li>
+              <li>• Panier, paiement sécurisé et page de confirmation.</li>
+              <li>• Accompagnement pour gérer vos produits vous‑même.</li>
+            </ul>
+            <p class="text-xs text-neutral-300 font-light mt-auto">
+              <span class="inline-flex items-center gap-1 rounded-full bg-purple-400/10 px-2 py-1 text-[11px] text-purple-100 ring-1 ring-purple-300/30">
+                <i data-lucide="star" class="w-3 h-3"></i>
+                Recommandé : <span class="font-medium">Pack Boutique — 249&nbsp;€</span>
+              </span>
+            </p>
+          </article>
+        </div>
+
+        <div class="p-5 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md text-xs md:text-sm font-light">
+          <h3 class="text-sm md:text-base font-light tracking-tight mb-2 flex items-center gap-2">
+            <i data-lucide="info" class="w-4 h-4 text-neutral-200"></i>
+            Comment on fixe nos prix
+          </h3>
+          <p class="text-neutral-300 mb-2">
+            Les montants des packs (149&nbsp;€, 199&nbsp;€, 249&nbsp;€) sont pensés pour rester accessibles aux débuts d’activité,
+            tout en couvrant le temps de conception, de développement et de mise en ligne d’un site propre et fiable.
+          </p>
+          <ul class="space-y-1.5 text-neutral-300">
+            <li>• <span class="text-neutral-100">Pack Starter (149&nbsp;€)</span> : on va à l’essentiel, avec peu de pages, un design simple mais propre, et un accompagnement concentré au lancement.</li>
+            <li>• <span class="text-neutral-100">Pack Essentiel (199&nbsp;€)</span> : le prix inclut le nom de domaine, l’hébergement 1 an et plus de temps passé sur la structure, le contenu et les retours.</li>
+            <li>• <span class="text-neutral-100">Pack Boutique (249&nbsp;€)</span> : la différence vient surtout de la complexité supplémentaire (produits, paiement, tests, accompagnement pour vous rendre autonome).</li>
+          </ul>
+          <p class="text-neutral-400 mt-2">
+            Si votre besoin sort du cadre d’un pack (fonctionnalités spécifiques, plus de pages, outils avancés…), on part du pack le plus proche
+            puis on ajoute uniquement ce qui est nécessaire dans un devis sur-mesure.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6 text-xs md:text-sm font-light">
+          <div class="p-5 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md">
+            <h3 class="text-sm md:text-base font-light tracking-tight mb-2 flex items-center gap-2">
+              <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-300"></i>
+              Les essentiels pour bien démarrer
+            </h3>
+            <ul class="space-y-1.5 text-neutral-300">
+              <li>• Un nom de domaine clair et facile à retenir.</li>
+              <li>• Un design lisible sur téléphone (la plupart de vos visiteurs).</li>
+              <li>• Un bouton d’action clair : appeler, réserver, envoyer un message.</li>
+              <li>• Quelques textes simples qui expliquent votre valeur.</li>
+            </ul>
+          </div>
+          <div class="p-5 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md">
+            <h3 class="text-sm md:text-base font-light tracking-tight mb-2 flex items-center gap-2">
+              <i data-lucide="layers" class="w-4 h-4 text-neutral-300"></i>
+              Ce qu’on peut ajouter plus tard
+            </h3>
+            <ul class="space-y-1.5 text-neutral-300">
+              <li>• Blog, actualités, pages supplémentaires.</li>
+              <li>• Automatisations (emails, CRM, exports de données).</li>
+              <li>• IA (chatbot, aide à la rédaction de contenus) — en préparation.</li>
+              <li>• Refonte complète ou montée en gamme du design.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- DÉTAIL DES SERVICES -->
+      <section class="mt-12 space-y-6">
+        <h2 class="text-2xl md:text-3xl font-semibold tracking-tight mb-1">
+          <span class="block text-[11px] md:text-xs font-light text-neutral-400 mb-1 uppercase tracking-[0.28em]">
+            Concrètement, on fait quoi ?
+          </span>
+          <span class="block bg-gradient-to-r from-emerald-300 via-amber-200 to-sky-300 text-transparent bg-clip-text">
+            Détail de nos services
+          </span>
+        </h2>
+        <p class="text-sm md:text-base text-neutral-300 font-light max-w-3xl">
+          Ici, on rentre dans le concret : sites vitrines pour se lancer, boutiques en ligne accessibles,
+          et accompagnement pour faire évoluer ton site au fil de ta croissance. Lors de la demande de devis,
+          on part d’un pack puis on ajuste ensemble selon ta situation, tes objectifs et ton budget.
+        </p>
+
+        <div class="grid md:grid-cols-3 gap-6">
+          <article class="relative p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md">
+
+            <div class="flex items-center gap-2 mb-3">
+              <i data-lucide="layout-grid" class="w-5 h-5 text-indigo-300"></i>
+              <h3 class="font-light tracking-tight text-sm">Sites vitrines pour se lancer</h3>
+            </div>
+            <p class="text-sm text-neutral-300 font-light mb-3">
+              Idéal pour les débuts d’activité : présenter qui vous êtes, ce que vous faites et comment vous contacter.
+            </p>
+            <ul class="space-y-1.5 text-xs text-neutral-400 font-light">
+              <li>• Pages clés : accueil, services, à propos, contact.</li>
+              <li>• Design moderne, lisible et adapté au mobile.</li>
+              <li>• Intégration à votre nom de domaine + formulaire de contact.</li>
+            </ul>
+          </article>
+
+          <article class="p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md">
+            <div class="flex items-center gap-2 mb-3">
+              <i data-lucide="shopping-bag" class="w-5 h-5 text-emerald-300"></i>
+              <h3 class="font-light tracking-tight text-sm">Boutiques en ligne accessibles</h3>
+            </div>
+            <p class="text-sm text-neutral-300 font-light mb-3">
+              Pour les créateurs, artisans et petites marques qui veulent commencer à vendre en ligne simplement.
+            </p>
+            <ul class="space-y-1.5 text-xs text-neutral-400 font-light">
+              <li>• Mise en avant de vos produits (photos, descriptions, prix).</li>
+              <li>• Parcours d’achat clair : panier, paiement, confirmation.</li>
+              <li>• Intégration Stripe / PayPal selon vos besoins.</li>
+            </ul>
+          </article>
+
+          <!-- <article class="p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md"> -->
+          <article class="relative p-6 rounded-xl border border-red-400/40 bg-red-400/5 backdrop-blur-md flex flex-col shadow-[0_0_50px_rgba(248,113,113,0.35)]">
+            <div class="absolute -top-3 right-4 px-2 py-1 rounded-full bg-amber-300 text-black text-[11px] font-medium tracking-tight">
+              En préparation
+            </div>
+            <div class="flex items-center gap-2 mb-3">
+              <i data-lucide="cpu" class="w-5 h-5 text-pink-300"></i>
+              <h3 class="font-light tracking-tight text-sm">Accompagnement, évolutions &amp; IA</h3>
+            </div>
+            <p class="text-sm text-neutral-300 font-light mb-3">
+              Une fois le site en ligne, on peut aller plus loin : évolutions, automatisations et, progressivement, des briques IA.
+              Ces briques sont encore en cours de déploiement et sont discutées au cas par cas lors du devis.
+            </p>
+            <ul class="space-y-1.5 text-xs text-neutral-400 font-light">
+              <li>• Petits outils sur-mesure (formulaires avancés, exports, suivis).</li>
+              <li>• Automatisation de tâches répétitives (emails, formulaires…).</li>
+              <li>• Fonctions IA &amp; mini-outils type SaaS : en préparation, disponibles uniquement sur sélection de projets pilotes.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <div class="text-center pt-10">
+        <a href="devis.html" class="inline-flex items-center gap-2 rounded-lg bg-neutral-100 text-black px-5 py-3 text-sm hover:bg-neutral-200 transition font-light">
+          Discuter de mon projet et obtenir un devis
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </a>
       </div>
     </main>
     
-    <footer class="border-t border-white/10 py-8">
-      <div class="max-w-7xl mx-auto px-6 text-sm text-neutral-400">© Pridano Tech — 2025</div>
-    </footer>
+<!-- Footer -->
+<footer class="border-t border-white/10 py-8">
+  <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-neutral-400">
+    <span>Pridano Tech — tous droits réservés</span>
+    <nav class="flex items-center gap-6">
+      <a class="hover:text-neutral-200 transition" href="projets.html">Projets</a>
+      <a class="hover:text-neutral-200 transition" href="about.html">À propos</a>
+      <a class="hover:text-neutral-200 transition" href="devis.html">Devis</a>
+      <a class="hover:text-neutral-200 transition" href="confidentialite.html">Politique de confidentialité</a>
+    </nav>
+  </div>
+</footer>
     <script>lucide.createIcons();</script>
-    <script type="module">
-    import * as THREE from 'https://cdn.skypack.dev/three@0.155.0';
-
-    // ---- Wireframe ----
-    const canvas = document.getElementById('bg-mesh');
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(55, innerWidth / innerHeight, 0.1, 100);
-    camera.position.set(0, 1.5, 3.5);
-    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
-    renderer.setSize(innerWidth, innerHeight);
-    renderer.setPixelRatio(window.devicePixelRatio);
-    const geometry = new THREE.PlaneGeometry(10, 10, 50, 50);
-    const material = new THREE.MeshBasicMaterial({ color: 0x6366f1, wireframe: true, opacity: 0.12, transparent: true });
-    const mesh = new THREE.Mesh(geometry, material);
-    mesh.rotation.x = -Math.PI / 2.3;
-    scene.add(mesh);
-    function animate() {
-      requestAnimationFrame(animate);
-      mesh.rotation.z += 0.0005;
-      renderer.render(scene, camera);
-    }
-    animate();
-    window.addEventListener('resize', () => {
-      camera.aspect = innerWidth / innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(innerWidth, innerHeight);
-    });
-
-    // ---- Soft Particles ----
-    (() => {
-      const c = document.getElementById('bg-particles'), ctx = c.getContext('2d');
-      let dpr = Math.max(1, window.devicePixelRatio || 1), W, H;
-      let particles = [], halos = [];
-      const mouse = {x: -9999, y: -9999};
-
-      function resize(){
-        W = c.width = innerWidth * dpr;
-        H = c.height = innerHeight * dpr;
-        c.style.width='100%'; c.style.height='100%';
-      }
-
-      function rand(a,b){ return a + Math.random()*(b-a); }
-
-      function init(n=70, h=12){
-        particles = Array.from({length:n}, _ => ({
-          x: rand(0,W), y: rand(0,H),
-          vx: rand(-.15,.15)*dpr, vy: rand(-.15,.15)*dpr,
-          r: rand(1.2,2.6)*dpr, hue: rand(200,280)
-        }));
-        halos = Array.from({length:h}, _ => ({
-          x: rand(0,W), y: rand(0,H),
-          vx: rand(-.03,.03)*dpr, vy: rand(-.03,.03)*dpr,
-          r: rand(50,140)*dpr, hue: rand(180,300)
-        }));
-      }
-
-      function drawParticle(p){
-        const grd = ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*3);
-        grd.addColorStop(0,`hsla(${p.hue},90%,70%,0.8)`);
-        grd.addColorStop(0.5,`hsla(${p.hue},90%,60%,0.25)`);
-        grd.addColorStop(1,`hsla(${p.hue},90%,60%,0)`);
-        ctx.fillStyle = grd;
-        ctx.beginPath();
-        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-        ctx.fill();
-      }
-
-      function drawHalo(h){
-        const grd = ctx.createRadialGradient(h.x,h.y,0,h.x,h.y,h.r);
-        grd.addColorStop(0,`hsla(${h.hue},100%,75%,0.08)`);
-        grd.addColorStop(0.4,`hsla(${h.hue},100%,65%,0.05)`);
-        grd.addColorStop(1,'rgba(0,0,0,0)');
-        ctx.fillStyle = grd;
-        ctx.beginPath();
-        ctx.arc(h.x,h.y,h.r,0,Math.PI*2);
-        ctx.fill();
-      }
-
-      function step(){
-        ctx.clearRect(0,0,W,H);
-        ctx.save();
-        ctx.globalCompositeOperation = 'lighter';
-        halos.forEach(h=>{
-          h.x+=h.vx; h.y+=h.vy;
-          if(h.x<0||h.x>W) h.vx*=-1;
-          if(h.y<0||h.y>H) h.vy*=-1;
-          drawHalo(h);
-        });
-        particles.forEach(p=>{
-          const dx = (mouse.x*dpr - p.x);
-          const dy = (mouse.y*dpr - p.y);
-          const dist = Math.hypot(dx,dy) || 1;
-          if(dist < 200*dpr){ p.vx += dx/dist*0.004; p.vy += dy/dist*0.004; }
-          p.x += p.vx; p.y += p.vy;
-          p.vx *= 0.985; p.vy *= 0.985;
-          if(p.x<0||p.x>W) p.vx*=-1;
-          if(p.y<0||p.y>H) p.vy*=-1;
-          drawParticle(p);
-        });
-        ctx.restore();
-        requestAnimationFrame(step);
-      }
-
-      window.addEventListener('mousemove', e=>{ mouse.x = e.clientX; mouse.y = e.clientY; }, {passive:true});
-      window.addEventListener('mouseleave', ()=>{ mouse.x = -9999; mouse.y = -9999; });
-      window.addEventListener('resize', ()=>{ resize(); init(particles.length, halos.length); });
-      resize(); init(); step();
-    })();
-    </script>
     </body></html>

@@ -1,333 +1,414 @@
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Pridano Tech · Sites web premium</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <meta name="description" content="Pridano Tech — agence web premium : sites vitrine, e-commerce, SaaS et IA. Design moderne, performances élevées et animations soignées.">
-<meta name="theme-color" content="#0f0f0f">
-<link rel="icon" href=pridano-logo.png>
-<!-- Open Graph -->
-<meta property="og:title" content="Pridano Tech — Sites web premium">
-<meta property="og:description" content="Vitrine, e-commerce, SaaS & IA. Design moderne, perf et micro-interactions.">
-<meta property="og:type" content="website">
-<meta property="og:image" content="/og-cover.jpg">
-<meta property="og:url" content="https://pridano.tech/">
-  
-    <!-- Utilities 3D SANS plugin JS (safe) -->
-    <style>
-      .rotate-y-20{--tw-rotate-y:20deg;transform:translate3d(var(--tw-translate-x,0),var(--tw-translate-y,0),0) rotateY(var(--tw-rotate-y)) scale(1)}
-      .-rotate-y-20{--tw-rotate-y:-20deg;transform:translate3d(var(--tw-translate-x,0),var(--tw-translate-y,0),0) rotateY(var(--tw-rotate-y)) scale(1)}
-      .rotate-z-15{--tw-rotate-z:15deg;transform:translate3d(0,0,0) rotateZ(var(--tw-rotate-z))}
-      .-rotate-z-15{--tw-rotate-z:-15deg;transform:translate3d(0,0,0) rotateZ(var(--tw-rotate-z))}
-      .transform-style-preserve-3d{transform-style:preserve-3d}
-      .perspective-normal{perspective:500px}
-      .header-blur { backdrop-filter: blur(6px); background: rgba(10,10,12,0.25); transition: background .25s ease, border-color .25s ease; }
-.header-blur.scrolled { background: rgba(10,10,12,0.55); border-color: rgba(255,255,255,0.08); }
-    </style>
-  </head>
-<body class="font-[Inter] flex flex-col min-h-screen text-gray-100 bg-gray-950 selection:bg-indigo-600/50">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Pridano Tech · Sites web premium</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <meta name="description"
+    content="Pridano Tech — agence web premium : sites vitrine, e-commerce, SaaS et IA. Design moderne, performances élevées et animations soignées.">
+  <meta name="theme-color" content="#0f0f0f">
+  <link rel="icon" href=pridano-logo.png>
+  <!-- Open Graph -->
+  <meta property="og:title" content="Pridano Tech — Sites web premium">
+  <meta property="og:description" content="Vitrine, e-commerce, SaaS & IA. Design moderne, perf et micro-interactions.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="/og-cover.jpg">
+  <meta property="og:url" content="https://pridano.tech/">
 
-<!-- Background
-<div class="fixed inset-0 -z-10">
-  <iframe src="https://my.spline.design/worldplanet-inmHh7fVCul1jUFrNRYlotVU" frameborder="0" class="w-full h-full"></iframe>
-</div> -->
-
-<!-- Background combo: Aurora + Wireframe + Particles -->
-<div class="fixed inset-0 -z-10 overflow-hidden">
-    <!-- Aurora layer -->
-    <div class="absolute inset-0" style="
-      background:
-        radial-gradient(50% 80% at 30% 20%, rgba(124,58,237,.25), transparent 70%),
-        radial-gradient(60% 90% at 70% 80%, rgba(56,189,248,.18), transparent 80%),
-        radial-gradient(70% 100% at 50% 50%, rgba(236,72,153,.1), transparent 80%),
-        #080808;
-      filter: saturate(1.15) contrast(1.03);
-      animation: aurora 18s ease-in-out infinite alternate;">
-    </div>
-  
-    <!-- Wireframe layer -->
-    <canvas id="mesh" class="absolute inset-0"></canvas>
-  
-    <!-- Particle layer -->
-    <canvas id="bg-particles" class="absolute inset-0"></canvas>
-  </div>
-  
+  <!-- Utilities 3D SANS plugin JS (safe) -->
   <style>
-    @keyframes aurora{
-      0%   { background-position: 0% 0%, 100% 20%, 60% 80%; }
-      100% { background-position: 10% 10%, 90% 25%, 55% 85%; }
+    /* Highlight HTML-like */
+#hero-snippet-code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Courier New", monospace;
+  white-space: pre;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.token-number { color: #94a3b8; }      /* gris clair */
+.token-tag { color: #38bdf8; }         /* bleu */
+.token-attr { color: #fbbf24; }        /* jaune */
+.token-string { color: #34d399; }      /* vert */
+.token-text { color: #e5e7eb; }        /* blanc/gris */
+.token-error { color: #f87171; }       /* rouge */
+
+    .rotate-y-20 {
+      --tw-rotate-y: 20deg;
+      transform: translate3d(var(--tw-translate-x, 0), var(--tw-translate-y, 0), 0) rotateY(var(--tw-rotate-y)) scale(1)
     }
-    .fixed.inset-0::after {
+
+    .-rotate-y-20 {
+      --tw-rotate-y: -20deg;
+      transform: translate3d(var(--tw-translate-x, 0), var(--tw-translate-y, 0), 0) rotateY(var(--tw-rotate-y)) scale(1)
+    }
+
+    .rotate-z-15 {
+      --tw-rotate-z: 15deg;
+      transform: translate3d(0, 0, 0) rotateZ(var(--tw-rotate-z))
+    }
+
+    .-rotate-z-15 {
+      --tw-rotate-z: -15deg;
+      transform: translate3d(0, 0, 0) rotateZ(var(--tw-rotate-z))
+    }
+
+    .transform-style-preserve-3d {
+      transform-style: preserve-3d
+    }
+
+    .perspective-normal {
+      perspective: 500px
+    }
+
+    .header-blur {
+      backdrop-filter: blur(6px);
+      background: rgba(10, 10, 12, 0.25);
+      transition: background .25s ease, border-color .25s ease;
+    }
+
+    .header-blur.scrolled {
+      background: rgba(10, 10, 12, 0.55);
+      border-color: rgba(255, 255, 255, 0.08);
+    }
+
+    /* --- Amélioration globale de la lisibilité --- */
+
+    /* Paragraphes */
+    p {
+      font-size: 1.05rem !important;
+      /* plus grand */
+      line-height: 1.65 !important;
+      /* plus respirant */
+    }
+
+    /* Listes */
+    ul li {
+      font-size: 1.02rem !important;
+      line-height: 1.55 !important;
+    }
+
+    /* Petits textes : augmentation légère */
+    .text-sm {
+      font-size: 0.94rem !important;
+      /* avant: 0.875rem */
+    }
+
+    .text-xs {
+      font-size: 0.8rem !important;
+      /* avant: 0.75rem */
+    }
+
+    /* Sous-titres : plus premium visuellement */
+    h2 span,
+    h3 {
+      letter-spacing: -0.015em;
+      /* effet plus condensé et haut de gamme */
+    }
+
+    /* --- Hero massif + animations constantes --- */
+    .hero-animated {
+      position: relative;
+    }
+
+    .hero-animated::before {
       content: "";
       position: absolute;
-      top: 40%;
-      left: 0;
-      right: 0;
-      height: 100px;
-      background: linear-gradient(to bottom, rgba(10,10,11,0) 0%, rgba(10,10,11,0.15) 50%, rgba(10,10,11,0) 100%);
+      inset: -60px -80px auto auto;
+      max-width: 420px;
+      height: 260px;
+      background:
+        radial-gradient(circle at 0 0, rgba(129, 140, 248, 0.35), transparent 60%),
+        radial-gradient(circle at 80% 100%, rgba(45, 212, 191, 0.25), transparent 60%);
+      opacity: 0.7;
+      filter: blur(6px);
       pointer-events: none;
+      animation: heroGlow 14s ease-in-out infinite alternate;
+    }
+
+    @keyframes heroGlow {
+      0% {
+        transform: translate3d(0, 0, 0) scale(1);
+        opacity: 0.6;
+      }
+
+      100% {
+        transform: translate3d(12px, 10px, 0) scale(1.08);
+        opacity: 0.9;
+      }
+    }
+
+    .hero-pill-float {
+      animation: pillFloat 6s ease-in-out infinite alternate;
+    }
+
+    @keyframes pillFloat {
+      0% {
+        transform: translate3d(0, 0, 0) rotate(-2deg);
+      }
+
+      100% {
+        transform: translate3d(0, -8px, 0) rotate(0deg);
+      }
+    }
+
+    .hero-gradient-text {
+      background-size: 200% 200%;
+      animation: gradientShift 10s ease-in-out infinite;
+    }
+
+    @keyframes gradientShift {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    /* Micro-interactions globales */
+    .hover-lift {
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
+    }
+
+    .hover-lift:hover {
+      transform: translateY(-4px) scale(1.01);
+      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.65);
+      border-color: rgba(148, 163, 184, 0.85);
+    }
+
+    .nav-link-ghost {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .nav-link-ghost::after {
+      content: "";
+      position: absolute;
+      inset: 100% 0 auto 0;
+      height: 2px;
+      background: linear-gradient(90deg, #a855f7, #22c55e, #38bdf8);
+      opacity: 0;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      transform: translateY(4px);
+    }
+
+    .nav-link-ghost:hover::after,
+    .nav-link-ghost:focus-visible::after {
+      inset-inline: 0;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Header glass effect renforcé */
+    .header-blur {
+      backdrop-filter: blur(12px);
+      background: radial-gradient(circle at 0 0, rgba(79, 70, 229, 0.25), transparent 55%),
+        rgba(10, 10, 12, 0.65);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+      box-shadow: 0 18px 50px rgba(15, 23, 42, 0.9);
+    }
+
+    .header-blur.scrolled {
+      background: radial-gradient(circle at 100% 0, rgba(56, 189, 248, 0.2), transparent 55%),
+        rgba(10, 10, 12, 0.9);
+      border-color: rgba(148, 163, 184, 0.35);
     }
   </style>
-  
-  <!-- Scripts -->
-  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
-  <script>
-  /* --- Wireframe Mesh --- */
-  (() => {
-    const canvas = document.getElementById('mesh');
-    const r = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true});
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(55, innerWidth/innerHeight, 0.1, 100);
-    camera.position.set(0,1.2,3.2);
-    const geo = new THREE.PlaneGeometry(10,10,80,80); geo.rotateX(-Math.PI/2);
-    const mat = new THREE.MeshBasicMaterial({ color: 0x6ee7f9, wireframe:true, transparent:true, opacity:0.12 });
-    const mesh = new THREE.Mesh(geo, mat); scene.add(mesh);
-    let t=0;
-    function resize(){ r.setSize(innerWidth, innerHeight, false); camera.aspect = innerWidth/innerHeight; camera.updateProjectionMatrix(); }
-    window.addEventListener('resize', resize, {passive:true}); resize();
-    (function animate(){
-      t+=0.005;
-      for(let i=0;i<geo.attributes.position.count;i++){
-        const x = geo.attributes.position.getX(i);
-        const z = geo.attributes.position.getZ(i);
-        const y = Math.sin(x*0.6 + t)*0.07 + Math.cos(z*0.7 + t*1.2)*0.06;
-        geo.attributes.position.setY(i,y);
-      }
-      geo.attributes.position.needsUpdate = true;
-      r.setClearColor(0x0a0a0b, 0);
-      r.render(scene,camera);
-      requestAnimationFrame(animate);
-    })();
-  })();
-  
-  /* --- Soft Particles (Enhanced Round Orbs + Halo Layer) --- */
-  (() => {
-    const c = document.getElementById('bg-particles'), ctx = c.getContext('2d');
-    let dpr = Math.max(1, window.devicePixelRatio || 1), W, H;
-    let particles = [], halos = [];
-    const mouse = {x: -9999, y: -9999};
+</head>
 
-    function resize(){
-      W = c.width = innerWidth * dpr;
-      H = c.height = innerHeight * dpr;
-      c.style.width='100%'; c.style.height='100%';
-    }
+<body class="font-[Inter] flex flex-col min-h-screen text-gray-100 bg-gray-950 selection:bg-indigo-600/50">
 
-    function rand(a,b){ return a + Math.random()*(b-a); }
+  <!-- BACKGROUND G : Static Luxury Noir -->
+  <div class="fixed inset-0 -z-10 bg-[#0a0a0c]">
+    <div class="absolute inset-0 opacity-[0.08]" style="
+      background-image:
+        linear-gradient(120deg, rgba(255,255,255,0.07), transparent 75%),
+        radial-gradient(circle at 30% 20%, rgba(124,58,237,0.15), transparent 70%),
+        radial-gradient(circle at 80% 80%, rgba(56,189,248,0.12), transparent 70%);
+      background-blend-mode: soft-light;
+    ">
+    </div>
+  </div>
 
-    function init(n=70, h=12){
-      particles = Array.from({length:n}, _ => ({
-        x: rand(0,W), y: rand(0,H),
-        vx: rand(-.15,.15)*dpr, vy: rand(-.15,.15)*dpr,
-        r: rand(1.2,2.6)*dpr, hue: rand(200,280)
-      }));
-      halos = Array.from({length:h}, _ => ({
-        x: rand(0,W), y: rand(0,H),
-        vx: rand(-.03,.03)*dpr, vy: rand(-.03,.03)*dpr,
-        r: rand(50,140)*dpr, hue: rand(180,300)
-      }));
-    }
-
-    function drawParticle(p){
-      const grd = ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*3);
-      grd.addColorStop(0,`hsla(${p.hue},90%,70%,0.8)`);
-      grd.addColorStop(0.5,`hsla(${p.hue},90%,60%,0.25)`);
-      grd.addColorStop(1,`hsla(${p.hue},90%,60%,0)`);
-      ctx.fillStyle = grd;
-      ctx.beginPath();
-      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-      ctx.fill();
-    }
-
-    function drawHalo(h){
-      const grd = ctx.createRadialGradient(h.x,h.y,0,h.x,h.y,h.r);
-      grd.addColorStop(0,`hsla(${h.hue},100%,75%,0.08)`);
-      grd.addColorStop(0.4,`hsla(${h.hue},100%,65%,0.05)`);
-      grd.addColorStop(1,'rgba(0,0,0,0)');
-      ctx.fillStyle = grd;
-      ctx.beginPath();
-      ctx.arc(h.x,h.y,h.r,0,Math.PI*2);
-      ctx.fill();
-    }
-
-    function step(){
-      ctx.clearRect(0,0,W,H);
-      ctx.save();
-      ctx.globalCompositeOperation = 'lighter';
-      halos.forEach(h=>{
-        h.x+=h.vx; h.y+=h.vy;
-        if(h.x<0||h.x>W) h.vx*=-1;
-        if(h.y<0||h.y>H) h.vy*=-1;
-        drawHalo(h);
-      });
-      particles.forEach(p=>{
-        const dx = (mouse.x*dpr - p.x);
-        const dy = (mouse.y*dpr - p.y);
-        const dist = Math.hypot(dx,dy) || 1;
-        if(dist < 200*dpr){ p.vx += dx/dist*0.004; p.vy += dy/dist*0.004; }
-        p.x += p.vx; p.y += p.vy;
-        p.vx *= 0.985; p.vy *= 0.985;
-        if(p.x<0||p.x>W) p.vx*=-1;
-        if(p.y<0||p.y>H) p.vy*=-1;
-        drawParticle(p);
-      });
-      ctx.restore();
-      requestAnimationFrame(step);
-    }
-
-    window.addEventListener('mousemove', e=>{ mouse.x = e.clientX; mouse.y = e.clientY; }, {passive:true});
-    window.addEventListener('mouseleave', ()=>{ mouse.x = -9999; mouse.y = -9999; });
-    window.addEventListener('resize', ()=>{ resize(); init(particles.length, halos.length); });
-    resize(); init(); step();
-  })();
-  (() => {
-    const aurora = document.querySelector('.fixed .absolute.inset-0');
-    if(!aurora) return;
-
-    const colors = [
-      'radial-gradient(40% 60% at 20% 20%, rgba(124,58,237,.6), transparent 60%), radial-gradient(50% 60% at 80% 30%, rgba(56,189,248,.45), transparent 60%), #0a0a0b',
-      'radial-gradient(40% 60% at 30% 40%, rgba(236,72,153,.6), transparent 60%), radial-gradient(50% 60% at 70% 60%, rgba(244,114,182,.5), transparent 60%), #0a0a0b',
-      'radial-gradient(40% 60% at 10% 60%, rgba(14,165,233,.6), transparent 60%), radial-gradient(50% 60% at 80% 20%, rgba(168,85,247,.5), transparent 60%), #0a0a0b'
-    ];
-
-    // Transition smoothing
-    aurora.style.transition = 'background 1s ease, transform 0.6s ease-out';
-
-    window.addEventListener('scroll', () => {
-      const scrollY = window.scrollY;
-      const idx = Math.min(colors.length - 1, Math.floor(scrollY / 800));
-      aurora.style.background = colors[idx];
-      aurora.style.transform = 'none';
-    });
-  })();
-
-
-
-
-  </script>
-<!-- Header -->
-<!-- <header role="navigation" class="sticky top-0 backdrop-blur border-b border-neutral-800" data-animate> -->
-    <header role="navigation" class="sticky top-0 border-b border-neutral-800 header-blur" data-animate>
-  <div class="max-w-7xl mx-auto flex items-center justify-between gap-6 px-6 py-4">
-    <a href="index.html" class="flex items-center gap-2 group" data-animate>
-      <img src="pridano-logo.png" alt="Pridano Tech logo" width="24" height="24" class="w-6 h-6 rounded-sm shadow-sm ring-1 ring-white/10" loading="eager" decoding="async" fetchpriority="high">
-      <span class="text-sm font-light tracking-tight">Pridano Tech</span>
-    </a>
-    <!-- <nav class="hidden md:flex items-center gap-8">
-      <a class="text-sm text-neutral-300 hover:text-neutral-100 transition font-light tracking-tight" href="services.html" data-animate>Services</a>
-      <a class="text-sm text-neutral-300 hover:text-neutral-100 transition font-light tracking-tight" href="projets.html" data-animate>Projets</a>
-      <a class="text-sm text-neutral-300 hover:text-neutral-100 transition font-light tracking-tight" href="#stack" data-animate>Stack</a>
-      <a class="text-sm text-neutral-300 hover:text-neutral-100 transition font-light tracking-tight" href="devis.html" data-animate>Devis</a>
-    </nav> -->
-    <nav class="hidden md:flex items-center gap-8">
+  <!-- Header -->
+  <!-- <header role="navigation" class="sticky top-0 backdrop-blur border-b border-neutral-800" data-animate> -->
+  <header role="navigation" class="sticky top-0 border-b border-neutral-800 header-blur z-[9999]" data-animate>
+    <div class="max-w-7xl mx-auto flex items-center justify-between gap-6 px-6 py-4">
+      <a href="index.html" class="flex items-center gap-2 group" data-animate>
+        <img src="pridano-logo.png" alt="Pridano Tech logo" width="24" height="24"
+          class="w-6 h-6 rounded-sm shadow-sm ring-1 ring-white/10" loading="eager" decoding="async"
+          fetchpriority="high">
+        <span class="text-sm font-light tracking-tight">Pridano Tech</span>
+      </a>
+      <!-- <nav class="hidden md:flex items-center gap-8">
         <a class="text-sm text-neutral-300 hover:text-neutral-100 transition font-light tracking-tight" href="services.html" data-animate>Services</a>
         <a class="text-sm text-neutral-300 hover:text-neutral-100 transition font-light tracking-tight" href="projets.html" data-animate>Projets</a>
-        <a class="text-sm text-neutral-300 hover:text-neutral-100 transition font-light tracking-tight" href="about.html" data-animate>À propos</a>
+        <a class="text-sm text-neutral-300 hover:text-neutral-100 transition font-light tracking-tight" href="#stack" data-animate>Stack</a>
+        <a class="text-sm text-neutral-300 hover:text-neutral-100 transition font-light tracking-tight" href="devis.html" data-animate>Devis</a>
+      </nav> -->
+      <nav class="hidden md:flex items-center gap-8">
+        <a class="text-sm text-neutral-300 hover:text-neutral-100 transition font-light tracking-tight"
+          href="services.html" data-animate>Services</a>
+        <a class="text-sm text-neutral-300 hover:text-neutral-100 transition font-light tracking-tight"
+          href="projets.html" data-animate>Projets</a>
+        <a class="text-sm text-neutral-300 hover:text-neutral-100 transition font-light tracking-tight"
+          href="about.html" data-animate>À propos</a>
         <!-- <a class="text-sm text-neutral-300 hover:text-neutral-100 transition font-light tracking-tight" href="blog.html" data-animate>Blog</a> -->
         <!-- <a class="text-sm text-neutral-300 hover:text-neutral-100 transition font-light tracking-tight" href="devis.html" data-animate>Devis</a> -->
       </nav>
-    <div class="flex items-center gap-3">
-      <!-- <a class="hidden md:inline-flex text-sm text-neutral-300 hover:text-neutral-100 transition font-light tracking-tight" href="devis.html" data-animate>Se connecter</a> -->
+      <div class="flex items-center gap-3">
+        <!-- <a class="hidden md:inline-flex text-sm text-neutral-300 hover:text-neutral-100 transition font-light tracking-tight" href="devis.html" data-animate>Se connecter</a> -->
 
-<!-- ajout plus tard -->
+        <!-- ajout plus tard -->
 
-      <a class="inline-flex items-center gap-1 rounded-lg text-sm px-3 py-2 bg-neutral-100 text-black hover:bg-neutral-200 transition font-light tracking-tight" href="devis.html" data-animate>
-        Devis gratuit <i data-lucide="arrow-right" class="w-4 h-4"></i>
-      </a>
-    </div>
-  </div>
-</header>
-
-<!-- Hero + cartes 3D (inchangés dans l’esprit) -->
-<main class="flex-1">
-  <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-16 px-6 pt-24 pb-16 w-full">
-    <section class="w-full lg:max-w-md space-y-6">
-      <h1 class="text-3xl sm:text-4xl lg:text-5xl leading-tight font-light tracking-tighter" data-animate>
-        Sites web premium, rapides & animés
-      </h1>
-      <p class="text-lg text-neutral-300 font-light tracking-tight" data-animate>
-        Vitrine, e-commerce, SaaS & IA. Design moderne (Tailwind/GSAP), SEO propre, perf et micro-interactions.
-      </p>
-      <div class="flex flex-col sm:flex-row gap-3">
-        <a href="devis.html" class="inline-flex items-center gap-2 rounded-lg bg-neutral-100 text-black px-5 py-3 text-sm hover:bg-neutral-200 transition font-light tracking-tight" data-animate>
-          Demander un devis <i data-lucide="rocket" class="w-4 h-4"></i>
-        </a>
-        <a href="projets.html" class="inline-flex items-center gap-2 rounded-lg border border-neutral-700 bg-black text-neutral-100 px-5 py-3 text-sm hover:bg-neutral-950 transition font-light tracking-tight" data-animate>
-          Voir nos projets
+        <a class="inline-flex items-center gap-1 rounded-lg text-sm px-3 py-2 bg-neutral-100 text-black hover:bg-neutral-200 transition font-light tracking-tight"
+          href="devis.html" data-animate>
+          Devis gratuit <i data-lucide="arrow-right" class="w-4 h-4"></i>
         </a>
       </div>
-      <ul class="mt-2 grid grid-cols-2 gap-2 text-sm text-neutral-300" id="services">
-        <li class="font-light tracking-tight">• Site vitrine & brand design</li>
-        <li class="font-light tracking-tight">• E-commerce (Stripe, Shopify)</li>
-        <li class="font-light tracking-tight">• SaaS / Portails clients</li>
-        <li class="font-light tracking-tight">• IA & automatisations</li>
-      </ul>
-    </section>
+    </div>
+  </header>
 
-    <div class="relative flex flex-col items-center space-y-8" data-animate>
-      <!-- Carte étude de cas -->
-      <section aria-label="Étude de cas" class="w-full max-w-sm overflow-hidden border rounded-xl shadow-lg shadow-black/30 border-white/10 bg-white/5 backdrop-blur-md transform -rotate-y-20 -rotate-z-15" data-animate>
-        <header class="p-6">
-          <div class="flex gap-3 items-start">
-            <span class="w-9 h-9 flex items-center justify-center rounded-lg bg-indigo-950 shrink-0">
-              <i data-lucide="badge-check" class="w-5 h-5 text-emerald-400"></i>
+  <!-- Hero + cartes 3D (inchangés dans l’esprit) -->
+  <main class="flex-1">
+    <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-16 px-6 pt-24 pb-16 w-full">
+      <section class="w-full lg:max-w-md space-y-6">
+        <h1 class="text-3xl sm:text-5xl lg:text-6xl leading-tight font-semibold tracking-tight" data-animate>
+          <span
+            class="block text-xs sm:text-sm md:text-base font-light text-indigo-200/80 mb-3 uppercase tracking-[0.3em]">
+            Agence web pour tes débuts
+          </span>
+          <span class="block text-neutral-50">
+            On crée les sites&nbsp;web
+          </span>
+          <span class="mt-3 inline-flex flex-wrap items-center gap-3 sm:gap-4">
+            <span class="mt-3 inline-flex flex-wrap items-center gap-3 sm:gap-4">
+              <span
+                class="inline-flex items-center px-4 sm:px-6 py-2 sm:py-3 rounded-2xl bg-neutral-900/90 border border-amber-300/70 shadow-[0_18px_40px_rgba(0,0,0,0.7)] ring-1 ring-white/5 -rotate-2 hero-pill-float">
+                <span
+                  class="text-xl sm:text-3xl lg:text-[2.3rem] leading-none font-semibold tracking-tight text-neutral-50">
+                  de tes premiers clients
+                </span>
+              </span>
+              <span
+                class="text-xl sm:text-3xl lg:text-[2.3rem] leading-none font-semibold tracking-tight bg-gradient-to-r from-amber-300 via-emerald-300 to-sky-400 text-transparent bg-clip-text drop-shadow-[0_0_25px_rgba(245,245,245,0.25)] hero-gradient-text">
+                qui donnent confiance
+              </span>
             </span>
-            <h2 class="text-sm leading-6 font-light tracking-tight">Étude de cas — NovaSpace Studio</h2>
-          </div>
-        </header>
-        <div class="border-t border-white/10"></div>
-        <div class="p-6 space-y-6">
-          <div>
-            <h3 class="text-xs text-neutral-400 font-light tracking-tight">RÉSUMÉ</h3>
-            <p class="mt-2 text-sm text-neutral-200 font-light tracking-tight">Refonte 3D, héros animé, scroll-interactions. Déploiement serverless, Lighthouse au vert.</p>
-          </div>
-          <div class="flex">
-            <div class="w-24"><h3 class="text-xs text-neutral-400 font-light tracking-tight">STACK</h3></div>
-            <ul class="flex flex-wrap gap-2">
-              <a href="https://nextjs.org" target="_blank" rel="noopener noreferrer" aria-label="Ouvrir le site Next.js (nouvel onglet)" class="px-2.5 py-0.5 rounded-md text-xs bg-indigo-900/40 text-indigo-200 font-light tracking-tight">Next.js</a>
-              <a href="https://tailwindcss.com" target="_blank" rel="noopener noreferrer" aria-label="Ouvrir le site Tailwind CSS (nouvel onglet)" class="px-2.5 py-0.5 rounded-md text-xs bg-pink-900/40 text-pink-200 font-light tracking-tight">Tailwind</a>
-              <a href="https://gsap.com" target="_blank" rel="noopener noreferrer" aria-label="Ouvrir le site GSAP (nouvel onglet)" class="px-2.5 py-0.5 rounded-md text-xs bg-green-900/40 text-green-200 font-light tracking-tight">GSAP</a>
-              <a href="https://stripe.com" target="_blank" rel="noopener noreferrer" aria-label="Ouvrir le site Stripe (nouvel onglet)" class="px-2.5 py-0.5 rounded-md text-xs bg-amber-900/40 text-amber-200 font-light tracking-tight">Stripe</a>
-            </ul>
-          </div>
-          <div class="flex">
-            <div class="w-24"><h3 class="text-xs text-neutral-400 font-light tracking-tight">SOURCE</h3></div>
-            <div class="flex items-center gap-2">
-              <i data-lucide="git-branch" class="w-4 h-4 text-gray-300"></i>
-              <span class="text-sm font-light tracking-tight">pridano/nova/components/Hero.tsx</span>
-            </div>
-          </div>
-          <div class="flex">
-            <div class="w-24"><h3 class="text-xs text-neutral-400 font-light tracking-tight">SCORE</h3></div>
-            <div class="flex items-center gap-2">
-              <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-              <span class="text-sm font-light tracking-tight">Lighthouse xxx</span>
-            </div>
-          </div>
-          <div class="border-t border-white/10 pt-6">
-            <a href="projets.html" class="w-full inline-flex items-center justify-center gap-2 rounded-lg bg-neutral-100 text-black px-4 py-2 text-sm hover:bg-neutral-200 transition font-light tracking-tight">
-              Voir l’étude de cas <i data-lucide="external-link" class="w-4 h-4"></i>
-            </a>
-          </div>
+        </h1>
+        <p class="text-base sm:text-lg text-neutral-300 font-light tracking-tight max-w-xl" data-animate>
+          Vitrine, e-commerce, SaaS &amp; IA (à venir). Design moderne (Tailwind/GSAP), SEO propre, performances et
+          micro‑interactions pour un rendu pro dès le premier jour.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-3">
+          <a href="devis.html"
+            class="inline-flex items-center gap-2 rounded-lg bg-neutral-100 text-black px-5 py-3 text-sm hover:bg-neutral-200 transition font-light tracking-tight"
+            data-animate>
+            Demander un devis <i data-lucide="rocket" class="w-4 h-4"></i>
+          </a>
+          <a href="projets.html"
+            class="inline-flex items-center gap-2 rounded-lg border border-neutral-700 bg-black text-neutral-100 px-5 py-3 text-sm hover:bg-neutral-950 transition font-light tracking-tight"
+            data-animate>
+            Voir nos projets
+          </a>
         </div>
+        <ul class="mt-2 grid grid-cols-2 gap-2 text-sm text-neutral-300" id="services">
+          <li class="font-light tracking-tight">• Site vitrine & brand design</li>
+          <li class="font-light tracking-tight">• E-commerce</li>
+          <li class="font-light tracking-tight">• SaaS / Portails clients (à venir)</li>
+          <li class="font-light tracking-tight">• IA & automatisations (à venir)</li>
+        </ul>
       </section>
 
-      <!-- Snippet -->
-      <section aria-label="Snippet technique" class="hidden lg:block absolute -bottom-24 left-2/3 w-full max-w-sm overflow-hidden border rounded-xl shadow-lg shadow-black/30 border-white/10 bg-white/5 backdrop-blur-md transform rotate-y-20 -rotate-z-15" data-animate>
-        <div class="flex items-center justify-between border-b border-white/10 px-6 py-3 bg-white/5 backdrop-blur-sm">
-          <div class="flex items-center gap-2">
-            <span class="text-sm font-light tracking-tight">Hero.tsx</span>
-            <i data-lucide="file-code" class="w-4 h-4 text-gray-400"></i>
+      <div class="relative flex flex-col items-center space-y-8" data-animate>
+        <!-- Carte étude de cas -->
+        <section aria-label="Étude de cas"
+          class="w-full max-w-md overflow-hidden border rounded-xl shadow-lg shadow-black/30 border-white/10 bg-white/5 backdrop-blur-md transform -rotate-y-20 -rotate-z-15"
+          data-animate>
+          <header class="p-6">
+            <div class="flex gap-3 items-start">
+              <span class="w-9 h-9 flex items-center justify-center rounded-lg bg-indigo-950 shrink-0">
+                <i data-lucide="badge-check" class="w-5 h-5 text-emerald-400"></i>
+              </span>
+              <h2 class="text-sm leading-6 font-light tracking-tight">Étude de cas — Portfolio</h2>
+            </div>
+          </header>
+          <div class="border-t border-white/10"></div>
+          <div class="p-6 space-y-6">
+            <div>
+              <h3 class="text-xs text-neutral-400 font-light tracking-tight">RÉSUMÉ</h3>
+              <p class="mt-2 text-sm text-neutral-200 font-light tracking-tight">Refonte 3D, héros animé,
+                scroll-interactions. Déploiement serverless, Lighthouse au vert.</p>
+            </div>
+            <div class="flex">
+              <div class="w-24">
+                <h3 class="text-xs text-neutral-400 font-light tracking-tight">STACK</h3>
+              </div>
+              <ul class="flex flex-wrap gap-2">
+                <a href="https://nextjs.org" target="_blank" rel="noopener noreferrer"
+                  aria-label="Ouvrir le site Next.js (nouvel onglet)"
+                  class="px-2.5 py-0.5 rounded-md text-xs bg-indigo-900/40 text-indigo-200 font-light tracking-tight">Next.js</a>
+                <a href="https://tailwindcss.com" target="_blank" rel="noopener noreferrer"
+                  aria-label="Ouvrir le site Tailwind CSS (nouvel onglet)"
+                  class="px-2.5 py-0.5 rounded-md text-xs bg-pink-900/40 text-pink-200 font-light tracking-tight">Tailwind</a>
+                <a href="https://gsap.com" target="_blank" rel="noopener noreferrer"
+                  aria-label="Ouvrir le site GSAP (nouvel onglet)"
+                  class="px-2.5 py-0.5 rounded-md text-xs bg-green-900/40 text-green-200 font-light tracking-tight">GSAP</a>
+                <a href="https://stripe.com" target="_blank" rel="noopener noreferrer"
+                  aria-label="Ouvrir le site Stripe (nouvel onglet)"
+                  class="px-2.5 py-0.5 rounded-md text-xs bg-amber-900/40 text-amber-200 font-light tracking-tight">Stripe</a>
+              </ul>
+            </div>
+            <div class="flex">
+              <div class="w-24">
+                <h3 class="text-xs text-neutral-400 font-light tracking-tight">SOURCE</h3>
+              </div>
+              <div class="flex items-center gap-2">
+                <i data-lucide="git-branch" class="w-4 h-4 text-gray-300"></i>
+                <span class="text-sm font-light tracking-tight">pridano/portfolio/components/Hero.tsx</span>
+              </div>
+            </div>
+            <div class="flex">
+              <div class="w-24">
+                <h3 class="text-xs text-neutral-400 font-light tracking-tight">SCORE</h3>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                <span class="text-sm font-light tracking-tight">Lighthouse 97</span>
+              </div>
+            </div>
+            <div class="border-t border-white/10 pt-6">
+              <a href="projets.html"
+                class="w-full inline-flex items-center justify-center gap-2 rounded-lg bg-neutral-100 text-black px-4 py-2 text-sm hover:bg-neutral-200 transition font-light tracking-tight">
+                Voir l’étude de cas <i data-lucide="external-link" class="w-4 h-4"></i>
+              </a>
+            </div>
           </div>
-          <button aria-label="Copier le code" class="copy-btn flex items-center gap-1 text-xs text-neutral-300 hover:text-neutral-100 transition">
-            <i data-lucide="copy" class="w-4 h-4"></i>
-            <span class="font-light tracking-tight">Copier</span>
-          </button>
-        </div>
-        <div class="px-6 py-6 overflow-x-auto">
-<pre class="whitespace-pre text-[13px] leading-5 select-text font-light tracking-tight"><span class="select-none text-neutral-500">01</span> export default function Hero() {
+        </section>
+
+        <!-- Snippet -->
+        <section aria-label="Snippet technique"
+          class="hidden lg:block absolute -bottom-28 left-[58%] w-full max-w-md overflow-hidden border rounded-xl shadow-lg shadow-black/30 border-white/10 bg-white/5 backdrop-blur-md transform rotate-y-20 -rotate-z-15"
+          data-animate>
+          <div class="flex items-center justify-between border-b border-white/10 px-6 py-3 bg-white/5 backdrop-blur-sm">
+            <div class="flex items-center gap-2">
+              <span class="text-sm font-light tracking-tight">index.html</span>
+              <i data-lucide="file-code" class="w-4 h-4 text-gray-400"></i>
+            </div>
+            <button aria-label="Copier le code"
+              class="copy-btn flex items-center gap-1 text-xs text-neutral-300 hover:text-neutral-100 transition">
+              <i data-lucide="copy" class="w-4 h-4"></i>
+              <span class="font-light tracking-tight">Copier</span>
+            </button>
+          </div>
+          <div class="px-6 py-6 overflow-x-auto">
+            <!-- <pre class="whitespace-pre text-[13px] leading-5 select-text font-light tracking-tight"><span class="select-none text-neutral-500">01</span> export default function Hero() {
 <span class="select-none text-neutral-500">02</span>   return (
 <span class="select-none text-neutral-500">03</span>     &lt;section className="max-w-7xl mx-auto px-6 py-24"&gt;
 <span class="select-none text-neutral-500">04</span>       &lt;h1 className="text-5xl tracking-tight font-light"&gt;
@@ -347,310 +428,1003 @@
 <span class="select-none text-neutral-500">18</span>     &lt;/section&gt;
 <span class="select-none text-neutral-500">19</span>   );
 <span class="select-none text-neutral-500">20</span> }
+</pre> -->
+            <pre id="hero-snippet" class="whitespace-pre text-[13px] leading-5 select-text font-light tracking-tight">
+  <code id="hero-snippet-code"></code>
 </pre>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- Carousel -->
+    <div class="relative mt-12 md:mt-16">
+      <section data-section="" class="xl:pt-24 pt-32 pb-32">
+        <div class="container max-w-7xl mr-auto ml-auto pr-6 pl-6 relative">
+          <div class="reveal">
+            <div class="max-w-3xl animate-on-scroll" style="animation: fadeSlideIn 0.5s ease-in-out 0.1s both">
+              <h2 class="md:text-5xl text-3xl font-semibold text-white tracking-tight mt-5 drop-shadow-xl">
+                <span class="block text-xs md:text-sm font-light text-white/70 mb-2 uppercase tracking-[0.25em]">
+                  Projets &amp; vitrines
+                </span>
+                <span class="block">
+                  Aperçu de nos
+                </span>
+                <span class="mt-2 inline-flex flex-wrap items-center gap-3">
+                  <span
+                    class="inline-flex items-center px-4 py-2 rounded-2xl bg-neutral-900/85 border border-white/20 shadow-[0_14px_30px_rgba(0,0,0,0.7)] -rotate-1">
+                    <span class="text-xl md:text-3xl leading-none font-semibold tracking-tight">
+                      projets en ligne
+                    </span>
+                  </span>
+                </span>
+              </h2>
+              <p class="text-sm md:text-base text-white/70 mt-3 max-w-md">
+                Une sélection compacte de sites vitrines et portfolios réalisés.
+              </p>
+            </div>
+          </div>
+          <!-- Scroll container -->
+          <div class="relative">
+            <div
+              class="flex snap-x snap-mandatory overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] md:gap-8 md:scroll-px-8 md:pt-16 md:px-8 max-w-7xl pt-6 pr-8 pb-6 pl-8 gap-x-6 gap-y-x-6"
+              style="-webkit-overflow-scrolling: touch;" id="work-carousel">
+
+
+              <!-- Card 3 : Portfolio -->
+              <article
+                class="group relative snap-center shrink-0 w-[82vw] sm:w-[68vw] md:w-[520px] lg:w-[640px] aspect-[16/10] rounded-2xl overflow-hidden ring-1 ring-white/10 bg-neutral-900/50 shadow-[0_0_60px_rgba(0,0,0,0.25)] backdrop-blur-md transition-all duration-500 hover:scale-[1.01] hover:shadow-[0_0_80px_rgba(99,102,241,0.25)]"
+                data-index="2">
+                <img src="logo-nono.png" alt="Portfolio Noah" class="absolute inset-0 h-full w-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent"></div>
+                <div class="absolute inset-x-0 bottom-0 p-5 md:p-6">
+                  <div class="flex items-center gap-2 text-[11px] md:text-xs text-white/70">
+                    <span
+                      class="inline-flex h-5 w-5 items-center justify-center rounded-full bg-lime-400/20 ring-1 ring-lime-300/30">
+                      <i data-lucide="calendar" class="h-3.5 w-3.5 text-lime-300"></i>
+                    </span>
+                    Portfolio • Développeur • Site vitrine
+                  </div>
+                  <div class="mt-2.5 flex items-end justify-between gap-3">
+                    <div class="">
+                      <h3 class="text-xl md:text-2xl lg:text-[28px] font-semibold tracking-tight">
+                        Portfolio Noah Lemoing
+                      </h3>
+                      <p class="text-sm md:text-base text-white/70">
+                        Portfolio personnel — projets, compétences, réalisations
+                      </p>
+                    </div>
+                    <a href="portfolio-noah.html"
+                      class="inline-flex items-center justify-center rounded-full bg-white/10 hover:bg-white/15 transition ring-1 ring-white/20 backdrop-blur px-3.5 py-2"
+                      aria-label="Open Portfolio case">
+                      <i data-lucide="arrow-up-right" class="h-5 w-5"></i>
+                    </a>
+                  </div>
+                </div>
+                <button
+                  class="js-prev absolute left-3 md:left-4 top-1/2 -translate-y-1/2 hidden items-center justify-center h-10 w-10 md:h-11 md:w-11 rounded-full bg-white/10 hover:bg-white/15 ring-1 ring-white/20 backdrop-blur text-white"
+                  aria-label="Previous">
+                  <i data-lucide="chevron-left" class="h-5 w-5"></i>
+                </button>
+                <button
+                  class="js-next absolute right-3 md:right-4 top-1/2 -translate-y-1/2 hidden items-center justify-center h-10 w-10 md:h-11 md:w-11 rounded-full bg-white/10 hover:bg-white/15 ring-1 ring-white/20 backdrop-blur text-white"
+                  aria-label="Next">
+                  <i data-lucide="chevron-right" class="h-5 w-5"></i>
+                </button>
+              </article>
+
+              <!-- Card 3 : Portfolio -->
+              <article
+                class="group relative snap-center shrink-0 w-[82vw] sm:w-[68vw] md:w-[520px] lg:w-[640px] aspect-[16/10] rounded-2xl overflow-hidden ring-1 ring-white/10 bg-neutral-900/50 shadow-[0_0_60px_rgba(0,0,0,0.25)] backdrop-blur-md transition-all duration-500 hover:scale-[1.01] hover:shadow-[0_0_80px_rgba(99,102,241,0.25)]"
+                data-index="2">
+                <img src="logo-dada.png" alt="Portfolio Damien Gamarra cover"
+                  class="absolute inset-0 h-full w-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent"></div>
+                <div class="absolute inset-x-0 bottom-0 p-5 md:p-6">
+                  <div class="flex items-center gap-2 text-[11px] md:text-xs text-white/70">
+                    <span
+                      class="inline-flex h-5 w-5 items-center justify-center rounded-full bg-lime-400/20 ring-1 ring-lime-300/30">
+                      <i data-lucide="calendar" class="h-3.5 w-3.5 text-lime-300"></i>
+                    </span>
+                    Portfolio • Développeur • Site vitrine
+                  </div>
+                  <div class="mt-2.5 flex items-end justify-between gap-3">
+                    <div class="">
+                      <h3 class="text-xl md:text-2xl lg:text-[28px] font-semibold tracking-tight">
+                        Portfolio Damien Gamarra
+                      </h3>
+                      <p class="text-sm md:text-base text-white/70">
+                        Portfolio personnel — projets, compétences, réalisations
+                      </p>
+                    </div>
+                    <a href="portfolio-dada.html"
+                      class="inline-flex items-center justify-center rounded-full bg-white/10 hover:bg-white/15 transition ring-1 ring-white/20 backdrop-blur px-3.5 py-2"
+                      aria-label="Open Portfolio case">
+                      <i data-lucide="arrow-up-right" class="h-5 w-5"></i>
+                    </a>
+                  </div>
+                </div>
+                <button
+                  class="js-prev absolute left-3 md:left-4 top-1/2 -translate-y-1/2 hidden items-center justify-center h-10 w-10 md:h-11 md:w-11 rounded-full bg-white/10 hover:bg-white/15 ring-1 ring-white/20 backdrop-blur text-white"
+                  aria-label="Previous">
+                  <i data-lucide="chevron-left" class="h-5 w-5"></i>
+                </button>
+                <button
+                  class="js-next absolute right-3 md:right-4 top-1/2 -translate-y-1/2 hidden items-center justify-center h-10 w-10 md:h-11 md:w-11 rounded-full bg-white/10 hover:bg-white/15 ring-1 ring-white/20 backdrop-blur text-white"
+                  aria-label="Next">
+                  <i data-lucide="chevron-right" class="h-5 w-5"></i>
+                </button>
+              </article>
+            </div>
+            <!-- Left edge fade -->
+            <!-- removed -->
+            <!-- Right edge fade -->
+            <!-- removed -->
+          </div>
         </div>
+        <!-- Edge fade mask overlay -->
+        <!-- removed -->
       </section>
     </div>
-  </div>
+    <!-- SECTION: Guide packs -->
+    <section class="relative border-t border-white/10 py-20" data-animate>
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10">
+          <div>
+            <h2 class="text-2xl md:text-4xl font-semibold tracking-tight">
+              <span class="block text-[11px] md:text-xs font-medium text-emerald-300 mb-1 uppercase tracking-[0.3em]">
+                Choisir simplement
+              </span>
+              <span class="block text-neutral-50">
+                Quel pack est fait
+              </span>
+              <span
+                class="block bg-gradient-to-r from-emerald-300 via-sky-300 to-indigo-300 text-transparent bg-clip-text">
+                pour votre situation ?
+              </span>
+            </h2>
+            <p class="text-sm md:text-base text-neutral-300 font-light max-w-2xl">
+              Un petit guide simple pour vous aider à choisir entre nos packs, sans jargon technique :
+              on se concentre sur ce qui est vraiment utile pour votre situation actuelle.
+            </p>
+          </div>
+          <a href="services.html"
+            class="text-sm text-neutral-300 hover:text-neutral-100 transition font-light tracking-tight inline-flex items-center gap-1">
+            Voir le détail des services <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+          </a>
+        </div>
 
-  <!-- Carousel -->
-<div class="relative mt-12 md:mt-16">
-  <section data-section="" class="xl:pt-24 pt-32 pb-32">
-    <div class="container max-w-7xl mr-auto ml-auto pr-6 pl-6 relative">
-      <div class="reveal">
-        <div class="max-w-3xl animate-on-scroll" style="animation: fadeSlideIn 0.5s ease-in-out 0.1s both">
-          <h2 class="md:text-6xl text-4xl font-semibold text-white tracking-tight mt-5 drop-shadow-xl">
-            Aperçu des œuvres
-          </h2>
-          <p class="text-base md:text-lg text-white/70 mt-4">
-            Une sélection de nos travaux
+        <div class="grid md:grid-cols-3 gap-6 mb-10">
+          <!-- Guide carte 1 -->
+          <article class="p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md flex flex-col hover-lift">
+            <div class="flex items-center gap-2 mb-3">
+              <span
+                class="inline-flex h-6 w-6 items-center justify-center rounded-full bg-emerald-400/15 ring-1 ring-emerald-300/30">
+                <i data-lucide="sprout" class="w-3.5 h-3.5 text-emerald-300"></i>
+              </span>
+              <h3 class="font-light tracking-tight text-sm">Je démarre mon activité</h3>
+            </div>
+            <p class="text-sm text-neutral-300 font-light mb-3">
+              Vous lancez votre micro-entreprise, vous n’avez pas encore de site et votre priorité c’est d’être
+              trouvable facilement.
+            </p>
+            <ul class="space-y-1.5 text-xs text-neutral-400 font-light mb-3">
+              <li>• Avoir une page claire pour expliquer ce que vous faites.</li>
+              <li>• Pouvoir envoyer un lien à vos clients (mail, WhatsApp, réseaux).</li>
+              <li>• Un design propre, qui ne fait pas “site bricolé”.</li>
+            </ul>
+            <p class="text-xs text-neutral-300 font-light mt-auto">
+              <span
+                class="inline-flex items-center gap-1 rounded-full bg-emerald-400/10 px-2 py-1 text-[11px] text-emerald-200 ring-1 ring-emerald-300/30">
+                <i data-lucide="star" class="w-3 h-3"></i>
+                Recommandé : <span class="font-medium">Pack Starter — 159€</span>
+              </span>
+            </p>
+          </article>
+
+          <!-- Guide carte 2 -->
+          <article class="p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md flex flex-col hover-lift">
+            <div class="flex items-center gap-2 mb-3">
+              <span
+                class="inline-flex h-6 w-6 items-center justify-center rounded-full bg-sky-400/15 ring-1 ring-sky-300/30">
+                <i data-lucide="briefcase" class="w-3.5 h-3.5 text-sky-300"></i>
+              </span>
+              <h3 class="font-light tracking-tight text-sm">Mon activité tourne déjà</h3>
+            </div>
+            <p class="text-sm text-neutral-300 font-light mb-3">
+              Vous avez déjà des clients (bouche-à-oreille, Insta, Google…) et vous voulez un site qui donne confiance
+              et centralise les infos.
+            </p>
+            <ul class="space-y-1.5 text-xs text-neutral-400 font-light mb-3">
+              <li>• Présenter vos services, tarifs indicatifs et avis clients.</li>
+              <li>• Être visible sur Google avec un minimum de SEO.</li>
+              <li>• Nom de domaine pro + hébergement gérés pour vous.</li>
+            </ul>
+            <p class="text-xs text-neutral-300 font-light mt-auto">
+              <span
+                class="inline-flex items-center gap-1 rounded-full bg-sky-400/10 px-2 py-1 text-[11px] text-sky-100 ring-1 ring-sky-300/30">
+                <i data-lucide="star" class="w-3 h-3"></i>
+                Recommandé : <span class="font-medium">Pack Essentiel — 199€</span>
+              </span>
+            </p>
+          </article>
+
+          <!-- Guide carte 3 -->
+          <article class="p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md flex flex-col hover-lift">
+            <div class="flex items-center gap-2 mb-3">
+              <span
+                class="inline-flex h-6 w-6 items-center justify-center rounded-full bg-purple-400/15 ring-1 ring-purple-300/30">
+                <i data-lucide="shopping-bag" class="w-3.5 h-3.5 text-purple-300"></i>
+              </span>
+              <h3 class="font-light tracking-tight text-sm">Je veux vendre en ligne</h3>
+            </div>
+            <p class="text-sm text-neutral-300 font-light mb-3">
+              Vous avez déjà des produits (physiques ou digitaux) et vous voulez commencer à encaisser des paiements en
+              ligne sans usine à gaz.
+            </p>
+            <ul class="space-y-1.5 text-xs text-neutral-400 font-light mb-3">
+              <li>• Fiche produit simple (photo, description, prix).</li>
+              <li>• Panier, paiement sécurisé et page de confirmation.</li>
+              <li>• Accompagnement pour gérer vos produits vous‑même.</li>
+            </ul>
+            <p class="text-xs text-neutral-300 font-light mt-auto">
+              <span
+                class="inline-flex items-center gap-1 rounded-full bg-purple-400/10 px-2 py-1 text-[11px] text-purple-100 ring-1 ring-purple-300/30">
+                <i data-lucide="star" class="w-3 h-3"></i>
+                Recommandé : <span class="font-medium">Pack Boutique — 299€</span>
+              </span>
+            </p>
+          </article>
+        </div>
+
+
+        <div class="grid md:grid-cols-2 gap-6 text-xs md:text-sm font-light">
+          <div class="p-5 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md">
+            <h3 class="text-sm md:text-base font-light tracking-tight mb-2 flex items-center gap-2">
+              <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-300"></i>
+              Les essentiels pour bien démarrer
+            </h3>
+            <ul class="space-y-1.5 text-neutral-300">
+              <li>• Un nom de domaine clair et facile à retenir.</li>
+              <li>• Un design lisible sur téléphone (la plupart de vos visiteurs).</li>
+              <li>• Un bouton d’action clair : appeler, réserver, envoyer un message.</li>
+              <li>• Quelques textes simples qui expliquent votre valeur.</li>
+            </ul>
+          </div>
+          <div class="p-5 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md">
+            <h3 class="text-sm md:text-base font-light tracking-tight mb-2 flex items-center gap-2">
+              <i data-lucide="layers" class="w-4 h-4 text-neutral-300"></i>
+              Ce qu’on peut ajouter plus tard
+            </h3>
+            <ul class="space-y-1.5 text-neutral-300">
+              <li>• Blog, actualités, pages supplémentaires.</li>
+              <li>• Automatisations (emails, CRM, exports de données).</li>
+              <li>• IA (chatbot, aide à la rédaction de contenus).</li>
+              <li>• Refonte complète ou montée en gamme du design.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- SECTION: Nos tarifs & packs -->
+    <section class="relative border-t border-white/10 py-20" data-animate>
+      <div class="max-w-7xl mx-auto px-6">
+        <h2 class="text-2xl md:text-4xl font-semibold tracking-tight mb-3">
+          <div class="inline-flex flex-wrap items-baseline gap-3">
+            <span class="text-neutral-50">Nos packs</span>
+            <span
+              class="inline-flex items-center px-3 py-1 rounded-full border border-emerald-300/70 bg-neutral-900/80 text-[11px] uppercase tracking-[0.25em] text-emerald-200">
+              Tarifs clairs
+            </span>
+          </div>
+          <span class="block text-neutral-300 text-sm md:text-base font-light mt-1">
+            pour bien démarrer sans surprise
+          </span>
+        </h2>
+        <p class="text-sm md:text-base text-neutral-300 font-light mb-10 max-w-3xl">
+          Des packs pensés pour les débuts d’activité : site pro, hébergement, accompagnement.
+          Vous payez un prix clair, tout est compris pour que votre présence en ligne soit prête à l’emploi.
+        </p>
+
+        <div class="grid md:grid-cols-3 gap-6">
+          <!-- Pack Starter -->
+          <article
+            class="relative p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md flex flex-col cursor-pointer hover:border-emerald-400/50 hover:bg-white/10 transition"
+            onclick="window.location.href='devis.html?pack=starter'">
+            <div class="mb-4">
+              <h3 class="text-lg font-light tracking-tight">Pack Starter</h3>
+              <p class="text-xs text-neutral-400 mt-1">Pour se lancer simplement</p>
+            </div>
+            <div class="mb-4 space-y-1">
+              <div>
+                <span class="text-3xl font-light tracking-tight">159€</span>
+                <span class="text-xs text-neutral-400 ml-1">/ une fois</span>
+              </div>
+            </div>
+            <ul class="space-y-2 text-sm text-neutral-300 font-light flex-1">
+              <li class="flex items-start gap-2">
+                <span class="mt-1 w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                <span>Site vitrine 1–3 pages (présentation, services, contact).</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="mt-1 w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                <span>Mise en ligne sur votre nom de domaine.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="mt-1 w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                <span>Site responsive (téléphone, tablette, ordinateur).</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="mt-1 w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                <span>1 aller-retour de retouches design.</span>
+              </li>
+            </ul>
+            <p class="mt-4 text-[11px] text-neutral-400">
+              Hébergement possible via nos partenaires ou votre propre offre (OVH, o2switch, etc.).
+            </p>
+          </article>
+
+          <!-- Pack Essentiel -->
+          <article
+            class="relative p-6 rounded-xl border border-emerald-400/40 bg-emerald-400/5 backdrop-blur-md flex flex-col shadow-[0_0_50px_rgba(16,185,129,0.25)] cursor-pointer hover:bg-emerald-400/10 transition"
+            onclick="window.location.href='devis.html?pack=essentiel'">
+            <div
+              class="absolute -top-3 right-4 px-2 py-1 rounded-full bg-emerald-400 text-black text-[11px] font-medium tracking-tight">
+              Le plus choisi
+            </div>
+            <div class="mb-4">
+              <h3 class="text-lg font-light tracking-tight">Pack Essentiel</h3>
+              <p class="text-xs text-neutral-300 mt-1">Idéal pour les jeunes entreprises</p>
+            </div>
+            <div class="mb-4 space-y-1">
+              <div class="flex items-center gap-2 text-xs">
+                <span class="line-through text-emerald-200/70">249€</span>
+                <span
+                  class="inline-flex items-center gap-1 rounded-full bg-emerald-400 px-2 py-0.5 text-[11px] text-black ring-1 ring-emerald-300/80">
+                  <i data-lucide="percent" class="w-3 h-3"></i>
+                  -20%
+                </span>
+              </div>
+              <div>
+                <span class="text-3xl font-light tracking-tight">199€</span>
+                <span class="text-xs text-neutral-300 ml-1">/ une fois</span>
+              </div>
+            </div>
+            <ul class="space-y-2 text-sm text-neutral-100 font-light flex-1">
+              <li class="flex items-start gap-2">
+                <span class="mt-1 w-1.5 h-1.5 rounded-full bg-emerald-300"></span>
+                <span>Site vitrine complet 3–5 pages (accueil, services, à propos, contact, etc.).</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="mt-1 w-1.5 h-1.5 rounded-full bg-emerald-300"></span>
+                <span>Nom de domaine + hébergement 1 an <span class="text-emerald-300">(inclus dans le
+                    pack)</span>.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="mt-1 w-1.5 h-1.5 rounded-full bg-emerald-300"></span>
+                <span>Formulaire de contact optimisé (email, téléphone, message).</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="mt-1 w-1.5 h-1.5 rounded-full bg-emerald-300"></span>
+                <span>Optimisation de base pour Google (SEO technique simple).</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="mt-1 w-1.5 h-1.5 rounded-full bg-emerald-300"></span>
+                <span>Support & petites modifications pendant 30 jours après la mise en ligne.</span>
+              </li>
+            </ul>
+            <p class="mt-4 text-[11px] text-emerald-100">
+              Le meilleur compromis pour démarrer avec un site pro, prêt à être partagé à vos clients.
+            </p>
+          </article>
+
+          <!-- Pack Boutique -->
+          <article
+            class="relative p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md flex flex-col cursor-pointer hover:border-sky-400/50 hover:bg-white/10 transition"
+            onclick="window.location.href='devis.html?pack=boutique'">
+            <div class="mb-4">
+              <h3 class="text-lg font-light tracking-tight">Pack Boutique</h3>
+              <p class="text-xs text-neutral-400 mt-1">Pour vendre vos produits</p>
+            </div>
+            <div class="mb-4 space-y-1">
+              <div>
+                <span class="text-3xl font-light tracking-tight">299€</span>
+                <span class="text-xs text-neutral-400 ml-1">/ une fois</span>
+              </div>
+            </div>
+            <ul class="space-y-2 text-sm text-neutral-300 font-light flex-1">
+              <li class="flex items-start gap-2">
+                <span class="mt-1 w-1.5 h-1.5 rounded-full bg-sky-400"></span>
+                <span>Petite boutique en ligne (jusqu’à ~10 produits).</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="mt-1 w-1.5 h-1.5 rounded-full bg-sky-400"></span>
+                <span>Intégration d’un moyen de paiement (Stripe, PayPal…).</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="mt-1 w-1.5 h-1.5 rounded-full bg-sky-400"></span>
+                <span>Nom de domaine + hébergement 1 an <span class="text-sky-300">(inclus)</span>.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="mt-1 w-1.5 h-1.5 rounded-full bg-sky-400"></span>
+                <span>Page produit, panier simple, page de confirmation.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="mt-1 w-1.5 h-1.5 rounded-full bg-sky-400"></span>
+                <span>Accompagnement pour vous montrer comment gérer vos produits.</span>
+              </li>
+            </ul>
+            <p class="mt-4 text-[11px] text-neutral-400">
+              Idéal pour les créateurs, artisans, petites marques qui veulent commencer à vendre en ligne rapidement.
+            </p>
+          </article>
+        </div>
+
+        <p class="mt-8 text-xs md:text-sm text-neutral-400 font-light">
+          Besoin d’un logo, d’une identité complète ou d’un projet plus avancé (SaaS, IA, gros e-commerce) ?
+          Nous réalisons aussi des devis sur mesure en fonction de votre situation.
+        </p>
+      </div>
+    </section>
+    <!-- SECTION: Stack (marquee simple) -->
+    <!-- SECTION: Stack & outils -->
+    <section id="stack" class="relative border-t border-white/10 py-20" data-animate>
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10">
+          <div>
+            <h2 class="text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight mb-2">
+              <span
+                class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-900/80 border border-indigo-400/60 text-[11px] md:text-xs uppercase tracking-[0.28em] text-indigo-200">
+                <span class="w-1.5 h-1.5 rounded-full bg-indigo-300"></span>
+                Stack &amp; outils
+              </span>
+            </h2>
+            <p class="text-sm md:text-base text-neutral-300 font-light max-w-2xl">
+              On utilise des outils modernes qu’on maitrise vraiment, pensés pour des sites rapides, stables et faciles
+              à faire évoluer.
+            </p>
+          </div>
+          <p class="text-xs text-neutral-500 font-light">
+            Front, animations, paiement, hébergement : tout est intégré de façon propre.
           </p>
         </div>
-      </div>
-      <!-- Scroll container -->
-      <div class="relative">
-        <div class="flex snap-x snap-mandatory overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] md:gap-8 md:scroll-px-8 md:pt-16 md:px-8 max-w-7xl pt-6 pr-8 pb-6 pl-8 gap-x-6 gap-y-x-6" style="-webkit-overflow-scrolling: touch;" id="work-carousel">
-          
 
-          <!-- Card 3 : Portfolio -->
-          <article class="group relative snap-center shrink-0 w-[82vw] sm:w-[68vw] md:w-[520px] lg:w-[640px] aspect-[16/10] rounded-2xl overflow-hidden ring-1 ring-white/10 bg-neutral-900/50 shadow-[0_0_60px_rgba(0,0,0,0.25)] backdrop-blur-md transition-all duration-500 hover:scale-[1.01] hover:shadow-[0_0_80px_rgba(99,102,241,0.25)]" data-index="2">
-            <img src="logo-nono.png" alt="Portfolio Noah" class="absolute inset-0 h-full w-full object-cover">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent"></div>
-            <div class="absolute inset-x-0 bottom-0 p-5 md:p-6">
-              <div class="flex items-center gap-2 text-[11px] md:text-xs text-white/70">
-                <span class="inline-flex h-5 w-5 items-center justify-center rounded-full bg-lime-400/20 ring-1 ring-lime-300/30">
-                  <i data-lucide="calendar" class="h-3.5 w-3.5 text-lime-300"></i>
-                </span>
-                Portfolio • Développeur • Site vitrine
-              </div>
-              <div class="mt-2.5 flex items-end justify-between gap-3">
-                <div class="">
-                  <h3 class="text-xl md:text-2xl lg:text-[28px] font-semibold tracking-tight">
-                    Portfolio Noah Lemoing
-                  </h3>
-                  <p class="text-sm md:text-base text-white/70">
-                    Portfolio personnel — projets, compétences, réalisations
-                  </p>
-                </div>
-                <a href="portfolio-noah.html" class="inline-flex items-center justify-center rounded-full bg-white/10 hover:bg-white/15 transition ring-1 ring-white/20 backdrop-blur px-3.5 py-2" aria-label="Open Portfolio case">
-                  <i data-lucide="arrow-up-right" class="h-5 w-5"></i>
-                </a>
-              </div>
+        <div class="grid md:grid-cols-3 gap-6">
+          <!-- Carte Next.js & React -->
+          <article class="p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md hover-lift">
+            <div class="flex items-center gap-2 mb-3">
+              <i data-lucide="code-2" class="w-5 h-5 text-indigo-300"></i>
+              <h3 class="font-light tracking-tight text-sm">Next.js & React</h3>
             </div>
-            <button class="js-prev absolute left-3 md:left-4 top-1/2 -translate-y-1/2 hidden items-center justify-center h-10 w-10 md:h-11 md:w-11 rounded-full bg-white/10 hover:bg-white/15 ring-1 ring-white/20 backdrop-blur text-white" aria-label="Previous">
-              <i data-lucide="chevron-left" class="h-5 w-5"></i>
-            </button>
-            <button class="js-next absolute right-3 md:right-4 top-1/2 -translate-y-1/2 hidden items-center justify-center h-10 w-10 md:h-11 md:w-11 rounded-full bg-white/10 hover:bg-white/15 ring-1 ring-white/20 backdrop-blur text-white" aria-label="Next">
-              <i data-lucide="chevron-right" class="h-5 w-5"></i>
-            </button>
+            <p class="text-sm text-neutral-300 font-light mb-3">
+              Framework moderne pour des interfaces rapides, SEO-friendly et prêtes pour la scalabilité.
+            </p>
+            <ul class="space-y-1.5 text-xs text-neutral-400 font-light">
+              <li>• Pages qui se chargent vite, même sur mobile.</li>
+              <li>• Idéal pour les sites vitrines, blogs et app web.</li>
+              <li>• Architecture propre, maintenance facilitée.</li>
+            </ul>
           </article>
 
-          <!-- Card 3 : Portfolio -->
-          <article class="group relative snap-center shrink-0 w-[82vw] sm:w-[68vw] md:w-[520px] lg:w-[640px] aspect-[16/10] rounded-2xl overflow-hidden ring-1 ring-white/10 bg-neutral-900/50 shadow-[0_0_60px_rgba(0,0,0,0.25)] backdrop-blur-md transition-all duration-500 hover:scale-[1.01] hover:shadow-[0_0_80px_rgba(99,102,241,0.25)]" data-index="2">
-            <img src="logo-dada.png" alt="Portfolio Damien Gamarra cover" class="absolute inset-0 h-full w-full object-cover">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent"></div>
-            <div class="absolute inset-x-0 bottom-0 p-5 md:p-6">
-              <div class="flex items-center gap-2 text-[11px] md:text-xs text-white/70">
-                <span class="inline-flex h-5 w-5 items-center justify-center rounded-full bg-lime-400/20 ring-1 ring-lime-300/30">
-                  <i data-lucide="calendar" class="h-3.5 w-3.5 text-lime-300"></i>
-                </span>
-                Portfolio • Développeur • Site vitrine
-              </div>
-              <div class="mt-2.5 flex items-end justify-between gap-3">
-                <div class="">
-                  <h3 class="text-xl md:text-2xl lg:text-[28px] font-semibold tracking-tight">
-                    Portfolio Damien Gamarra
-                  </h3>
-                  <p class="text-sm md:text-base text-white/70">
-                    Portfolio personnel — projets, compétences, réalisations
-                  </p>
-                </div>
-                <a href="portfolio-dada.html" class="inline-flex items-center justify-center rounded-full bg-white/10 hover:bg-white/15 transition ring-1 ring-white/20 backdrop-blur px-3.5 py-2" aria-label="Open Portfolio case">
-                  <i data-lucide="arrow-up-right" class="h-5 w-5"></i>
-                </a>
-              </div>
+          <!-- Carte Tailwind & design -->
+          <article class="p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md hover-lift">
+            <div class="flex items-center gap-2 mb-3">
+              <i data-lucide="sparkles" class="w-5 h-5 text-emerald-300"></i>
+              <h3 class="font-light tracking-tight text-sm">Tailwind CSS & design système</h3>
             </div>
-            <button class="js-prev absolute left-3 md:left-4 top-1/2 -translate-y-1/2 hidden items-center justify-center h-10 w-10 md:h-11 md:w-11 rounded-full bg-white/10 hover:bg-white/15 ring-1 ring-white/20 backdrop-blur text-white" aria-label="Previous">
-              <i data-lucide="chevron-left" class="h-5 w-5"></i>
-            </button>
-            <button class="js-next absolute right-3 md:right-4 top-1/2 -translate-y-1/2 hidden items-center justify-center h-10 w-10 md:h-11 md:w-11 rounded-full bg-white/10 hover:bg-white/15 ring-1 ring-white/20 backdrop-blur text-white" aria-label="Next">
-              <i data-lucide="chevron-right" class="h-5 w-5"></i>
-            </button>
+            <p class="text-sm text-neutral-300 font-light mb-3">
+              Un design cohérent, responsive, avec des détails visuels qui donnent un rendu premium.
+            </p>
+            <ul class="space-y-1.5 text-xs text-neutral-400 font-light">
+              <li>• Mise en page propre sur téléphone, tablette, ordinateur.</li>
+              <li>• Animations légères, lisibilité et hiérarchie claire.</li>
+              <li>• Facile à faire évoluer sans tout casser.</li>
+            </ul>
+          </article>
+
+          <!-- Carte Animations & perf -->
+          <article class="p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md hover-lift">
+            <div class="flex items-center gap-2 mb-3">
+              <i data-lucide="activity" class="w-5 h-5 text-pink-300"></i>
+              <h3 class="font-light tracking-tight text-sm">GSAP, perf & micro-interactions</h3>
+            </div>
+            <p class="text-sm text-neutral-300 font-light mb-3">
+              Animations fluides et contrôlées, pour un site vivant sans sacrifier les performances.
+            </p>
+            <ul class="space-y-1.5 text-xs text-neutral-400 font-light">
+              <li>• Effets au scroll, transitions douces, détails subtils.</li>
+              <li>• Attention portée au temps de chargement.</li>
+              <li>• Expérience utilisateur agréable et mémorable.</li>
+            </ul>
+          </article>
+
+          <!-- Carte Paiement & e-commerce -->
+          <article class="p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md hover-lift">
+            <div class="flex items-center gap-2 mb-3">
+              <i data-lucide="shopping-bag" class="w-5 h-5 text-sky-300"></i>
+              <h3 class="font-light tracking-tight text-sm">Stripe, paiements & e‑commerce</h3>
+            </div>
+            <p class="text-sm text-neutral-300 font-light mb-3">
+              Pour les projets qui vendent en ligne : paiements sécurisés et parcours simple pour vos clients.
+            </p>
+            <ul class="space-y-1.5 text-xs text-neutral-400 font-light">
+              <li>• Intégration Stripe / PayPal selon vos besoins.</li>
+              <li>• Parcours d’achat clair, sans friction.</li>
+              <li>• Pages produits, panier, confirmation de commande.</li>
+            </ul>
+          </article>
+
+          <!-- Carte Données & back-end -->
+          <article class="p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md hover-lift">
+            <div class="flex items-center gap-2 mb-3">
+              <i data-lucide="database" class="w-5 h-5 text-amber-300"></i>
+              <h3 class="font-light tracking-tight text-sm">Supabase & bases de données</h3>
+            </div>
+            <p class="text-sm text-neutral-300 font-light mb-3">
+              Pour les projets avec comptes, formulaires avancés ou tableaux de bord.
+            </p>
+            <ul class="space-y-1.5 text-xs text-neutral-400 font-light">
+              <li>• Stockage fiable de vos données.</li>
+              <li>• Authentification, profils, formulaires sauvegardés.</li>
+              <li>• Structure prête pour faire grandir votre projet.</li>
+            </ul>
+          </article>
+
+          <!-- Carte Hébergement & déploiement -->
+          <article class="p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md hover-lift">
+            <div class="flex items-center gap-2 mb-3">
+              <i data-lucide="server" class="w-5 h-5 text-purple-300"></i>
+              <h3 class="font-light tracking-tight text-sm">Vercel, OVH & hébergement</h3>
+            </div>
+            <p class="text-sm text-neutral-300 font-light mb-3">
+              On déploie votre site sur des infrastructures fiables, avec un nom de domaine propre.
+            </p>
+            <ul class="space-y-1.5 text-xs text-neutral-400 font-light">
+              <li>• Vercel pour les apps modernes (Next.js).</li>
+              <li>• OVH / autres hébergeurs selon vos préférences.</li>
+              <li>• Configuration du domaine et certificat HTTPS.</li>
+            </ul>
           </article>
         </div>
-        <!-- Left edge fade -->
-        <!-- removed -->
-        <!-- Right edge fade -->
-        <!-- removed -->
       </div>
-    </div>
-    <!-- Edge fade mask overlay -->
-    <!-- removed -->
-  </section>
-</div>
-  <!-- SECTION: Services (scroll) -->
-  <section class="relative border-t border-white/10 py-20" data-animate>
-    <div class="max-w-7xl mx-auto px-6">
-      <div class="flex items-end justify-between mb-10">
-        <h2 class="text-2xl md:text-3xl font-light tracking-tight">Nos services</h2>
-        <a href="services.html" class="text-sm text-neutral-300 hover:text-neutral-100 transition font-light tracking-tight inline-flex items-center gap-1">
-          Tout voir <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+    </section>
+
+
+
+
+    <!-- SECTION: Pourquoi Pridano ? -->
+    <section class="relative border-t border-white/10 py-20" data-animate>
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8">
+          <div>
+            <h2 class="text-2xl md:text-3xl font-semibold tracking-tight mb-2">
+              <span class="block text-[11px] md:text-xs font-light text-neutral-400 mb-1 uppercase tracking-[0.28em]">
+                Ce qui nous distingue
+              </span>
+              <span
+                class="block bg-gradient-to-r from-emerald-300 via-amber-200 to-sky-300 text-transparent bg-clip-text">
+                Pourquoi choisir Pridano ?
+              </span>
+            </h2>
+            <p class="text-sm md:text-base text-neutral-300 font-light max-w-2xl">
+              On ne se contente pas de “faire un site”. On vous aide à avoir un outil clair, crédible et adapté à votre
+              niveau d’avancement :
+              début d’activité, activité qui tourne déjà, ou premiers pas dans la vente en ligne.
+            </p>
+          </div>
+          <p class="text-xs text-neutral-500 font-light">
+            Pensé pour les petites structures, créateurs, indépendants & jeunes entreprises.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+          <!-- Différence 1 -->
+          <article class="p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md hover-lift">
+            <div class="flex items-center gap-2 mb-2">
+              <i data-lucide="sprout" class="w-5 h-5 text-emerald-300"></i>
+              <h3 class="font-light tracking-tight text-sm">Adapté aux débuts d’activité</h3>
+            </div>
+            <p class="text-sm text-neutral-300 font-light mb-3">
+              Des packs accessibles, avec le minimum vital bien fait : nom de domaine, design propre, page claire pour
+              expliquer ce que vous faites.
+            </p>
+            <ul class="space-y-1.5 text-xs text-neutral-400 font-light">
+              <li>• On parle en langage simple, sans jargon technique.</li>
+              <li>• On priorise ce qui est vraiment utile au départ.</li>
+              <li>• On peut faire évoluer le site plus tard, étape par étape.</li>
+            </ul>
+          </article>
+
+          <!-- Différence 2 -->
+          <article class="p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md hover-lift">
+            <div class="flex items-center gap-2 mb-2">
+              <i data-lucide="palette" class="w-5 h-5 text-indigo-300"></i>
+              <h3 class="font-light tracking-tight text-sm">Design & technique modernes</h3>
+            </div>
+            <p class="text-sm text-neutral-300 font-light mb-3">
+              On utilise la même stack que pour des projets plus avancés (Next.js, Tailwind, GSAP), mais au service de
+              sites simples, rapides et élégants.
+            </p>
+            <ul class="space-y-1.5 text-xs text-neutral-400 font-light">
+              <li>• Navigation fluide, lisible et responsive.</li>
+              <li>• Attention portée aux performances et au SEO.</li>
+              <li>• Structure prête si vous voulez ajouter blog, outils, e‑commerce…</li>
+            </ul>
+          </article>
+
+          <!-- Différence 3 -->
+          <article class="p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md hover-lift">
+            <div class="flex items-center gap-2 mb-2">
+              <i data-lucide="hand-heart" class="w-5 h-5 text-pink-300"></i>
+              <h3 class="font-light tracking-tight text-sm">Accompagnement humain & suivi</h3>
+            </div>
+            <p class="text-sm text-neutral-300 font-light mb-3">
+              Vous n’êtes pas “livré à vous-même” : on vous aide à poser vos textes, vos sections et à comprendre
+              comment utiliser votre site.
+            </p>
+            <ul class="space-y-1.5 text-xs text-neutral-400 font-light">
+              <li>• Aller-retours de retouches inclus selon le pack choisi.</li>
+              <li>• Conseils sur quoi mettre en avant (services, avis, tarifs…).</li>
+              <li>• Possibilité de revenir vers nous plus tard pour faire évoluer le site.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: Coulisses / photos -->
+    <section class="relative border-t border-white/10 py-20" data-animate>
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8">
+          <div>
+            <h2 class="text-2xl md:text-3xl font-semibold tracking-tight mb-4">
+              <span class="block text-[11px] md:text-xs font-light text-neutral-400 mb-1 uppercase tracking-[0.28em]">
+                L’envers du décor
+              </span>
+              <span class="block text-neutral-50">
+                Dans les coulisses de Pridano
+              </span>
+              <span class="mt-2 inline-block h-px w-16 bg-gradient-to-r from-amber-300 to-transparent"></span>
+            </h2>
+            <p class="text-sm md:text-base text-neutral-300 font-light max-w-2xl">
+              Un peu de contexte sur l’endroit et l’ambiance dans lesquels on construit vos projets : postes de travail,
+              campus et moments d’équipe. Pas juste du code, mais un quotidien autour.
+            </p>
+          </div>
+          <p class="text-xs text-neutral-500 font-light">
+            Ajoutez vos propres photos : setups, Ynov, BDE, brainstorms, etc.
+          </p>
+        </div>
+
+        <div class="grid gap-4 md:grid-cols-3 md:auto-rows-[170px] lg:auto-rows-[200px]">
+          <!-- Setup / poste de travail -->
+          <article class="relative rounded-2xl overflow-hidden border border-white/10 bg-white/5 group">
+            <img src="setup-pridano.jpg" alt="Setup de travail Pridano Tech" class="w-full h-full object-cover">
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-90 group-hover:opacity-100 transition">
+            </div>
+            <div class="absolute bottom-3 left-3 right-3 text-[11px] md:text-xs text-neutral-100 font-light">
+              Nos setups de travail : écrans, Figma, code, café… c’est ici que vos sites prennent forme.
+            </div>
+          </article>
+
+          <!-- Campus / Ynov -->
+          <article class="relative rounded-2xl overflow-hidden border border-white/10 bg-white/5 group md:row-span-2">
+            <img src="campus-pridano.jpg" alt="Vie sur le campus Ynov Montpellier" class="w-full h-full object-cover">
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-transparent opacity-90 group-hover:opacity-100 transition">
+            </div>
+            <div class="absolute bottom-3 left-3 right-3 text-[11px] md:text-xs text-neutral-100 font-light">
+              Ynov Campus Montpellier : salles de projet, open space, couloirs… c’est ici qu’on croise des idées et des
+              futurs projets.
+            </div>
+          </article>
+
+          <!-- Moment d’équipe / chill -->
+          <article class="relative rounded-2xl overflow-hidden border border-white/10 bg-white/5 group">
+            <img src="team-pridano.jpg" alt="Moment d'équipe Pridano Tech" class="w-full h-full object-cover">
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-90 group-hover:opacity-100 transition">
+            </div>
+            <div class="absolute bottom-3 left-3 right-3 text-[11px] md:text-xs text-neutral-100 font-light">
+              Les moments plus chill qui font partie du projet : débriefs, idées qui arrivent sans prévenir, ambiance
+              d’équipe.
+            </div>
+          </article>
+        </div>
+
+
+      </div>
+    </section>
+
+    <!-- SECTION: Témoignages -->
+    <section class="relative border-t border-white/10 py-20" data-animate>
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10">
+          <div>
+            <h2 class="text-2xl md:text-3xl font-semibold tracking-tight mb-2 text-left md:text-left">
+              <span
+                class="inline-flex items-center gap-2 text-[11px] md:text-xs font-light text-neutral-400 mb-1 uppercase tracking-[0.28em]">
+                <i data-lucide="message-circle" class="w-3.5 h-3.5 text-emerald-300"></i>
+                Retours terrain
+              </span>
+              <span class="block text-neutral-50">
+                Ce que disent nos clients
+              </span>
+            </h2>
+            <p class="text-sm md:text-base text-neutral-300 font-light max-w-xl">
+              Premiers projets, premiers retours. On construit notre réputation avec des sites concrets, livrés à des
+              vraies entreprises.
+            </p>
+          </div>
+          <p class="text-xs text-neutral-500 font-light">
+            D’autres témoignages arrivent au fil des nouveaux projets.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+          <blockquote
+            class="p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md text-sm text-neutral-300 font-light flex flex-col h-full hover-lift">
+            <p class="leading-relaxed">
+              “On avait besoin d’un site simple pour lancer notre activité rapidement. Pridano nous a guidés sur le
+              contenu, le design et l’hébergement. Aujourd’hui on envoie le lien à tous nos clients.”
+            </p>
+            <footer class="mt-4 text-xs text-neutral-400">
+              <span class="block font-medium text-neutral-200">Micro-entreprise de services</span>
+              <span class="block">Refonte + hébergement géré</span>
+            </footer>
+          </blockquote>
+
+          <blockquote
+            class="p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md text-sm text-neutral-300 font-light flex flex-col h-full hover-lift">
+            <p class="leading-relaxed">
+              “Le site vitrine est propre, moderne, et surtout il se charge vite sur téléphone. On a pu ajouter nos
+              textes et photos facilement, tout en gardant la structure pro proposée par Pridano.”
+            </p>
+            <footer class="mt-4 text-xs text-neutral-400">
+              <span class="block font-medium text-neutral-200">Créateur de contenu</span>
+              <span class="block">Site vitrine 3 pages</span>
+            </footer>
+          </blockquote>
+
+          <blockquote
+            class="p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md text-sm text-neutral-300 font-light flex flex-col h-full hover-lift">
+            <p class="leading-relaxed">
+              “On voulait quelque chose de sobre, clair, sans prise de tête côté technique. Pridano a géré le nom de
+              domaine, l’hébergement, le formulaire de contact… On n’a plus qu’à nous concentrer sur notre activité.”
+            </p>
+            <footer class="mt-4 text-xs text-neutral-400">
+              <span class="block font-medium text-neutral-200">Jeune marque locale</span>
+              <span class="block">Pack Essentiel + support</span>
+            </footer>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+    <!-- SECTION: CTA -->
+    <section class="relative border-t border-white/10 py-20" data-animate>
+      <div class="max-w-7xl mx-auto px-6 text-center">
+        <h2 class="text-2xl md:text-3xl font-semibold tracking-tight mb-4 text-center">
+          <span class="block text-[11px] md:text-xs font-light text-neutral-400 mb-1 uppercase tracking-[0.3em]">
+            On en parle ?
+          </span>
+          <span class="block bg-gradient-to-r from-emerald-300 via-sky-300 to-indigo-300 text-transparent bg-clip-text">
+            Un projet en tête ?
+          </span>
+        </h2>
+        <p class="text-neutral-300 font-light mb-6">Parlez-nous de votre idée et recevez une proposition sous 24h.</p>
+        <a href="devis.html"
+          class="inline-flex items-center gap-2 rounded-lg bg-neutral-100 text-black px-5 py-3 text-sm hover:bg-neutral-200 transition font-light tracking-tight hover-lift">
+          Démarrer mon devis <i data-lucide="arrow-right" class="w-4 h-4"></i>
         </a>
       </div>
-      <div class="grid md:grid-cols-3 gap-6">
-        <!-- 3 cartes services -->
-        <article class="p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md">
-          <div class="flex items-center gap-2 mb-3"><i data-lucide="layout-grid" class="w-5 h-5 text-indigo-300"></i><h3 class="font-light tracking-tight">Vitrine & branding</h3></div>
-          <p class="text-sm text-neutral-300 font-light">Design pixel-perfect, landing pages, identité visuelle, SEO.</p>
-        </article>
-        <article class="p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md">
-          <div class="flex items-center gap-2 mb-3"><i data-lucide="shopping-bag" class="w-5 h-5 text-emerald-300"></i><h3 class="font-light tracking-tight">E-commerce</h3></div>
-          <p class="text-sm text-neutral-300 font-light">Stripe/Shopify, paniers, upsells, parcours optimisés.</p>
-        </article>
-        <article class="p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md">
-          <div class="flex items-center gap-2 mb-3"><i data-lucide="cpu" class="w-5 h-5 text-pink-300"></i><h3 class="font-light tracking-tight">SaaS & IA</h3></div>
-          <p class="text-sm text-neutral-300 font-light">Dashboards, automations, chatbots, intégrations API.</p>
-        </article>
-      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-white/10 py-8">
+    <div
+      class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-neutral-400">
+      <span>Pridano Tech — tous droits réservés</span>
+      <nav class="flex items-center gap-6">
+        <a class="hover:text-neutral-200 transition" href="services.html">Services</a>
+        <a class="hover:text-neutral-200 transition" href="projets.html">Projets</a>
+        <a class="hover:text-neutral-200 transition" href="about.html">À propos</a>
+        <a class="hover:text-neutral-200 transition" href="devis.html">Devis</a>
+        <a class="hover:text-neutral-200 transition" href="confidentialite.html">Politique de confidentialité</a>
+      </nav>
     </div>
-  </section>
+  </footer>
 
-  <!-- SECTION: Stack (marquee simple) -->
-  <section id="stack" class="relative border-t border-white/10 py-16" data-animate>
-    <div class="max-w-7xl mx-auto px-6">
-      <h2 class="text-2xl md:text-3xl font-light tracking-tight mb-8">Stack & outils</h2>
-      <div class="flex gap-6 overflow-x-auto no-scrollbar py-2">
-        <a href="https://nextjs.org" target="_blank" rel="noopener noreferrer" aria-label="Ouvrir le site Next.js (nouvel onglet)" class="px-4 py-2 rounded-lg border border-white/10 bg-white/5 text-sm hover:bg-white/10 hover:border-white/20 transition">Next.js</a>
-        <a href="https://tailwindcss.com" target="_blank" rel="noopener noreferrer" aria-label="Ouvrir le site Tailwind CSS (nouvel onglet)" class="px-4 py-2 rounded-lg border border-white/10 bg-white/5 text-sm hover:bg-white/10 hover:border-white/20 transition">Tailwind</a>
-        <a href="https://gsap.com" target="_blank" rel="noopener noreferrer" aria-label="Ouvrir le site GSAP (nouvel onglet)" class="px-4 py-2 rounded-lg border border-white/10 bg-white/5 text-sm hover:bg-white/10 hover:border-white/20 transition">GSAP</a>
-        <a href="https://stripe.com" target="_blank" rel="noopener noreferrer" aria-label="Ouvrir le site Stripe (nouvel onglet)" class="px-4 py-2 rounded-lg border border-white/10 bg-white/5 text-sm hover:bg-white/10 hover:border-white/20 transition">Stripe</a>
-        <a href="https://supabase.com" target="_blank" rel="noopener noreferrer" aria-label="Ouvrir le site Supabase (nouvel onglet)" class="px-4 py-2 rounded-lg border border-white/10 bg-white/5 text-sm hover:bg-white/10 hover:border-white/20 transition">Supabase</a>
-        <a href="https://vercel.com" target="_blank" rel="noopener noreferrer" aria-label="Ouvrir le site Vercel (nouvel onglet)" class="px-4 py-2 rounded-lg border border-white/10 bg-white/5 text-sm hover:bg-white/10 hover:border-white/20 transition">Vercel</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- SECTION: Témoignages -->
-  <section class="relative border-t border-white/10 py-20" data-animate>
-    <div class="max-w-7xl mx-auto px-6">
-      <h2 class="text-2xl md:text-3xl font-light tracking-tight mb-10">Ce que disent nos clients</h2>
-      <div class="grid md:grid-cols-2 gap-6">
-        <blockquote class="p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md text-sm text-neutral-300 font-light">
-          “aucun commentaires”
-          <footer class="mt-3 text-neutral-400">x</footer>
-        </blockquote>
-        <blockquote class="p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md text-sm text-neutral-300 font-light">
-          “aucun commentaires”
-          <footer class="mt-3 text-neutral-400">x</footer>
-        </blockquote>
-      </div>
-    </div>
-  </section>
-<!-- SECTION: Nos chiffres -->
-<section class="relative border-t border-white/10 py-20" data-animate>
-    <div class="max-w-7xl mx-auto px-6">
-      <h2 class="text-2xl md:text-3xl font-light tracking-tight mb-10">Nos chiffres</h2>
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-        <div class="p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md text-center">
-          <div class="text-3xl font-light tracking-tight">x</div>
-          <div class="text-sm text-neutral-400 mt-1">projets livrés</div>
-        </div>
-        <div class="p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md text-center">
-          <div class="text-3xl font-light tracking-tight">xx%</div>
-          <div class="text-sm text-neutral-400 mt-1">clients satisfaits</div>
-        </div>
-        <div class="p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md text-center">
-          <div class="text-3xl font-light tracking-tight">xx–xxx</div>
-          <div class="text-sm text-neutral-400 mt-1">scores Lighthouse</div>
-        </div>
-        <div class="p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md text-center">
-          <div class="text-3xl font-light tracking-tight">24h/48h</div>
-          <div class="text-sm text-neutral-400 mt-1">devis express</div>
-        </div>
-      </div>
-    </div>
-  </section>
-  
-  <!-- SECTION: Pourquoi Pridano ? -->
-  <section class="relative border-t border-white/10 py-20" data-animate>
-    <div class="max-w-7xl mx-auto px-6">
-      <h2 class="text-2xl md:text-3xl font-light tracking-tight mb-6">Pourquoi Pridano ?</h2>
-      <div class="grid md:grid-cols-3 gap-6">
-        <article class="p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md">
-          <div class="flex items-center gap-2 mb-2"><i data-lucide="zap" class="w-5 h-5 text-emerald-300"></i><h3 class="font-light tracking-tight">Rapidité & méthode</h3></div>
-          <p class="text-sm text-neutral-300 font-light">Process clair, jalons courts, rendu propre à chaque étape.</p>
-        </article>
-        <article class="p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md">
-          <div class="flex items-center gap-2 mb-2"><i data-lucide="palette" class="w-5 h-5 text-indigo-300"></i><h3 class="font-light tracking-tight">Design premium</h3></div>
-          <p class="text-sm text-neutral-300 font-light">Animations fines, hiérarchie visuelle, détails qui font pro.</p>
-        </article>
-        <article class="p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md">
-          <div class="flex items-center gap-2 mb-2"><i data-lucide="gauge" class="w-5 h-5 text-pink-300"></i><h3 class="font-light tracking-tight">Performance</h3></div>
-          <p class="text-sm text-neutral-300 font-light">Images optimisées, lazy-load, code minimal, SEO prêt.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-  <!-- SECTION: CTA -->
-  <section class="relative border-t border-white/10 py-20" data-animate>
-    <div class="max-w-7xl mx-auto px-6 text-center">
-      <h2 class="text-2xl md:text-3xl font-light tracking-tight mb-4">Un projet en tête ?</h2>
-      <p class="text-neutral-300 font-light mb-6">Parlez-nous de votre idée et recevez une proposition sous 24h.</p>
-      <a href="devis.html" class="inline-flex items-center gap-2 rounded-lg bg-neutral-100 text-black px-5 py-3 text-sm hover:bg-neutral-200 transition font-light tracking-tight">
-        Démarrer mon devis <i data-lucide="arrow-right" class="w-4 h-4"></i>
-      </a>
-    </div>
-  </section>
-</main>
-
-<!-- Footer -->
-<footer class="border-t border-white/10 py-8">
-  <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-neutral-400">
-    <span>© Pridano Tech — 2025</span>
-    <nav class="flex items-center gap-6">
-      <a class="hover:text-neutral-200 transition" href="services.html">Services</a>
-      <a class="hover:text-neutral-200 transition" href="projets.html">Projets</a>
-      <a class="hover:text-neutral-200 transition" href="about.html">À propos</a>
-      <a class="hover:text-neutral-200 transition" href="devis.html">Devis</a>
-    </nav>
-  </div>
-</footer>
-
-<script>
-lucide.createIcons();
-document.addEventListener('DOMContentLoaded', () => {
-  const elms=[...document.querySelectorAll('[data-animate]')];
-  elms.forEach((el,idx)=>{el.classList.add('opacity-0','translate-y-6','blur-sm','transition','duration-700'); setTimeout(()=>{el.classList.remove('opacity-0','translate-y-6','blur-sm')},200+idx*120);});
-  document.querySelectorAll('.copy-btn').forEach(btn=>{
-    const label=btn.querySelector('span'); btn.addEventListener('click',()=>{
-      const pre=btn.closest('section').querySelector('pre'); if(pre){navigator.clipboard.writeText(pre.innerText);}
-      const original=label.textContent; label.textContent='Copié'; btn.classList.add('text-emerald-400');
-      setTimeout(()=>{label.textContent=original; btn.classList.remove('text-emerald-400')},1500);
-    });
-  });
-});
-// Header sticky on scroll
-const header = document.querySelector('header.header-blur');
-function onScroll() {
-  if (!header) return;
-  const s = window.scrollY || document.documentElement.scrollTop;
-  header.classList.toggle('scrolled', s > 10);
-}
-window.addEventListener('scroll', onScroll, { passive: true });
-onScroll();
-
-/* ---- Work carousel behavior (precise per-card navigation) ---- */
-(function(){
-  const scroller = document.getElementById('work-carousel');
-  if(!scroller) return;
-
-  const cards = [...scroller.querySelectorAll('article[data-index]')];
-  let activeIdx = 0;
-
-  function centerOf(el){
-    // Center position of a card relative to the scroller's scrollLeft
-    return el.offsetLeft + el.clientWidth / 2;
-  }
-
-  function scrollToIndex(idx){
-    idx = Math.max(0, Math.min(cards.length - 1, idx));
-    const target = cards[idx];
-    if(!target) return;
-    const left = target.offsetLeft - (scroller.clientWidth - target.clientWidth)/2;
-    scroller.scrollTo({ left: Math.max(0, left), behavior: 'smooth' });
-  }
-
-  function updateActive(){
-    // pick the card whose center is closest to scroller middle
-    const mid = scroller.scrollLeft + scroller.clientWidth/2;
-    let best = {i:0, d:Infinity};
-    cards.forEach((el,i)=>{
-      const c = centerOf(el);
-      const d = Math.abs(c - mid);
-      if(d < best.d){ best = {i, d}; }
-    });
-    activeIdx = best.i;
-
-    // style states + arrows visibility
-    cards.forEach((el,i)=>{
-      const active = i === activeIdx;
-      el.style.transform = `scale(${active?1:0.94})`;
-      el.style.opacity = active ? '1' : '0.55';
-      el.querySelectorAll('.js-prev,.js-next').forEach(btn=>{
-        btn.classList.toggle('hidden', !active);
-        btn.classList.toggle('flex', active);
+  <script>
+    lucide.createIcons();
+    document.addEventListener('DOMContentLoaded', () => {
+      const elms = [...document.querySelectorAll('[data-animate]')];
+      elms.forEach((el, idx) => { el.classList.add('opacity-0', 'translate-y-6', 'blur-sm', 'transition', 'duration-700'); setTimeout(() => { el.classList.remove('opacity-0', 'translate-y-6', 'blur-sm') }, 200 + idx * 120); });
+      document.querySelectorAll('.copy-btn').forEach(btn => {
+        const label = btn.querySelector('span'); btn.addEventListener('click', () => {
+          const pre = btn.closest('section').querySelector('pre'); if (pre) { navigator.clipboard.writeText(pre.innerText); }
+          const original = label.textContent; label.textContent = 'Copié'; btn.classList.add('text-emerald-400');
+          setTimeout(() => { label.textContent = original; btn.classList.remove('text-emerald-400') }, 1500);
+        });
       });
     });
-  }
+    // Header sticky on scroll
+    const header = document.querySelector('header.header-blur');
+    function onScroll() {
+      if (!header) return;
+      const s = window.scrollY || document.documentElement.scrollTop;
+      header.classList.toggle('scrolled', s > 10);
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
 
-  // Smoothly move one card at a time
-  scroller.addEventListener('click', (e)=>{
-    const prev = e.target.closest('.js-prev');
-    const next = e.target.closest('.js-next');
-    if(prev){ scrollToIndex(activeIdx - 1); }
-    if(next){ scrollToIndex(activeIdx + 1); }
-  });
+    /* ---- Work carousel behavior (precise per-card navigation) ---- */
+    (function () {
+      const scroller = document.getElementById('work-carousel');
+      if (!scroller) return;
 
+      const cards = [...scroller.querySelectorAll('article[data-index]')];
+      let activeIdx = 0;
+
+      function centerOf(el) {
+        // Center position of a card relative to the scroller's scrollLeft
+        return el.offsetLeft + el.clientWidth / 2;
+      }
+
+      function scrollToIndex(idx) {
+        idx = Math.max(0, Math.min(cards.length - 1, idx));
+        const target = cards[idx];
+        if (!target) return;
+        const left = target.offsetLeft - (scroller.clientWidth - target.clientWidth) / 2;
+        scroller.scrollTo({ left: Math.max(0, left), behavior: 'smooth' });
+      }
+
+      function updateActive() {
+        // pick the card whose center is closest to scroller middle
+        const mid = scroller.scrollLeft + scroller.clientWidth / 2;
+        let best = { i: 0, d: Infinity };
+        cards.forEach((el, i) => {
+          const c = centerOf(el);
+          const d = Math.abs(c - mid);
+          if (d < best.d) { best = { i, d }; }
+        });
+        activeIdx = best.i;
+
+        // style states + arrows visibility
+        cards.forEach((el, i) => {
+          const active = i === activeIdx;
+          el.style.transform = `scale(${active ? 1 : 0.94})`;
+          el.style.opacity = active ? '1' : '0.55';
+          el.querySelectorAll('.js-prev,.js-next').forEach(btn => {
+            btn.classList.toggle('hidden', !active);
+            btn.classList.toggle('flex', active);
+          });
+        });
+      }
+
+      // Smoothly move one card at a time, and center card on click
+      scroller.addEventListener('click', (e) => {
+        const prev = e.target.closest('.js-prev');
+        const next = e.target.closest('.js-next');
+        if (prev) {
+          scrollToIndex(activeIdx - 1);
+          return;
+        }
+        if (next) {
+          scrollToIndex(activeIdx + 1);
+          return;
+        }
+
+        // Si on clique sur une carte, on la centre et on la met en évidence
+        const card = e.target.closest('article[data-index]');
+        if (card) {
+          const idx = cards.indexOf(card);
+          if (idx !== -1) {
+            scrollToIndex(idx);
+          }
+        }
+      });
+
+      (function () {
+        const target = document.getElementById("hero-snippet-code");
+        if (!target) return;
+      
+        target.innerHTML = "";
+      
+        // Lignes correctes (HTML faux mais propre)
+        const correctLines = [
+          '<span class="token-number">01</span> <span class="token-tag">&lt;!DOCTYPE html&gt;</span>',
+          '<span class="token-number">02</span> <span class="token-tag">&lt;html</span> <span class="token-attr">lang</span>=<span class="token-string">"fr"</span><span class="token-tag">&gt;</span>',
+          '<span class="token-number">03</span>   <span class="token-tag">&lt;head&gt;</span>',
+          '<span class="token-number">04</span>     <span class="token-tag">&lt;meta</span> <span class="token-attr">charset</span>=<span class="token-string">"UTF-8"</span><span class="token-tag"> /&gt;</span>',
+          '<span class="token-number">05</span>     <span class="token-tag">&lt;title&gt;</span><span class="token-text">Pridano Tech · Sites web premium</span><span class="token-tag">&lt;/title&gt;</span>',
+          '<span class="token-number">06</span>   <span class="token-tag">&lt;/head&gt;</span>',
+          '<span class="token-number">07</span>   <span class="token-tag">&lt;body</span> <span class="token-attr">class</span>=<span class="token-string">"bg-slate-950 text-slate-50"</span><span class="token-tag">&gt;</span>',
+          '<span class="token-number">08</span>     <span class="token-tag">&lt;main</span> <span class="token-attr">class</span>=<span class="token-string">"max-w-5xl mx-auto px-6 py-16"</span><span class="token-tag">&gt;</span>',
+          '<span class="token-number">09</span>       <span class="token-text">&lt;!-- Contenu du site Pridano --&gt;</span>',
+          '<span class="token-number">10</span>       <span class="token-tag">&lt;section</span> <span class="token-attr">id</span>=<span class="token-string">"intro"</span><span class="token-tag">&gt;</span>',
+          '<span class="token-number">11</span>         <span class="token-tag">&lt;h1&gt;</span><span class="token-text">Bienvenue sur Pridano Tech</span><span class="token-tag">&lt;/h1&gt;</span>',
+          '<span class="token-number">12</span>         <span class="token-tag">&lt;p&gt;</span><span class="token-text">Création de sites premium</span><span class="token-tag">&lt;/p&gt;</span>',
+          '<span class="token-number">13</span>       <span class="token-tag">&lt;/section&gt;</span>',
+          '<span class="token-number">14</span>       <span class="token-text">&lt;!-- Section animée --&gt;</span>',
+          '<span class="token-number">15</span>       <span class="token-tag">&lt;section</span> <span class="token-attr">id</span>=<span class="token-string">"features"</span><span class="token-tag">&gt;</span>',
+          '<span class="token-number">16</span>         <span class="token-tag">&lt;p&gt;</span><span class="token-text">Section avec animations GSAP</span><span class="token-tag">&lt;/p&gt;</span>',
+          '<span class="token-number">17</span>       <span class="token-tag">&lt;/section&gt;</span>',
+          '<span class="token-number">18</span>       <span class="token-text">&lt;!-- Fin des blocs supplémentaires --&gt;</span>',
+          '<span class="token-number">19</span>     <span class="token-tag">&lt;/main&gt;</span>',
+          '<span class="token-number">20</span>   <span class="token-tag">&lt;/body&gt;</span>',
+          '<span class="token-number">21</span> <span class="token-tag">&lt;/html&gt;</span>'
+        ];
+      
+        // Lignes volontairement fausses (index 3 et 4 -> lignes 04 et 05)
+        const wrongLines = {
+          3: '<span class="token-number">04</span> <span class="token-error">&lt;meta cherset="UT-8" /&gt;</span>',
+          4: '<span class="token-number">05</span> <span class="token-error">&lt;tittle&gt;Pridano Teh · s!tes premmium&lt;/tittle&gt;</span>'
+        };
+      
+        let lineIndex = 0;
+        let mistakesDone = 0;
+        const renderedLines = [];
+      
+        function render() {
+          target.innerHTML = renderedLines.join('<br>');
+        }
+      
+        function typeHtmlLine(html, done) {
+          let i = 0;
+          renderedLines.push("");
+      
+          function step() {
+            const current = renderedLines.length - 1;
+            renderedLines[current] += html[i];
+            render();
+            i++;
+            if (i < html.length) {
+              setTimeout(step, 7);
+            } else {
+              done && done();
+            }
+          }
+      
+          step();
+        }
+      
+        function playNextLine() {
+          if (lineIndex >= correctLines.length) return;
+      
+          // Ligne jouée d'abord en version fausse
+          if (mistakesDone < 2 && Object.prototype.hasOwnProperty.call(wrongLines, lineIndex)) {
+            const wrongHtml = wrongLines[lineIndex];
+      
+            // 1) écrire la ligne fausse
+            typeHtmlLine(wrongHtml, () => {
+              // 2) attendre puis l'effacer
+              setTimeout(() => {
+                renderedLines.pop();
+                render();
+                // 3) écrire la vraie ligne
+                typeHtmlLine(correctLines[lineIndex], () => {
+                  mistakesDone++;
+                  lineIndex++;
+                  setTimeout(playNextLine, 45);
+                });
+              }, 380);
+            });
+      
+            return;
+          }
+      
+          // Ligne normale
+          typeHtmlLine(correctLines[lineIndex], () => {
+            lineIndex++;
+            setTimeout(playNextLine, 45);
+          });
+        }
+      
+        // Petit délai avant de commencer l'animation
+        setTimeout(playNextLine, 230);
+      })();
   // Update active on scroll/resize with RAF
   let raf;
   function onScroll(){ cancelAnimationFrame(raf); raf=requestAnimationFrame(updateActive); }
@@ -659,6 +1433,8 @@ onScroll();
 
   // Initialize (ensure styles correct even with inline defaults)
   updateActive();
-})();
-</script>
-</body></html>
+  })();
+  </script>
+</body>
+
+</html>

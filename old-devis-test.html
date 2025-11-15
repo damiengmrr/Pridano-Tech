@@ -4,23 +4,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" href=pridano-logo.png>
     <script src="https://cdn.tailwindcss.com"></script><script src="https://unpkg.com/lucide@latest"></script>
-    <style>
-        .faq-card { perspective: 1000px; }
-        .faq-inner { 
-          position: relative; 
-          transform-style: preserve-3d; 
-          transition: transform 0.5s ease; 
-        }
-        .faq-card[data-open="true"] .faq-inner { 
-          transform: rotateY(180deg); 
-        }
-        .faq-face { 
-          backface-visibility: hidden; 
-        }
-        .faq-back { 
-          transform: rotateY(180deg); 
-        }
-      </style>
     </head><body class="font-[Inter] min-h-screen text-gray-100 bg-gray-950">
     <!-- <div class="fixed inset-0 -z-10"><iframe src="https://my.spline.design/worldplanet-inmHh7fVCul1jUFrNRYlotVU" class="w-full h-full" frameborder="0"></iframe></div> -->
     <!-- https://my.spline.design/worldplanet-inmHh7fVCul1jUFrNRYlotVU -->
@@ -60,76 +43,22 @@
     <div class="max-w-3xl">
       <div class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 backdrop-blur">
         <i data-lucide="file-signature" class="w-4 h-4 text-indigo-300"></i>
-        <span class="text-[11px] text-neutral-300 uppercase tracking-[0.35em]">Brief projet web</span>
+        <span class="text-xs text-neutral-300">Demande de devis</span>
       </div>
-
-      <div class="mt-6 flex flex-col gap-4 md:gap-5">
-        <!-- Ligne titre avec accent -->
-        <div class="inline-flex items-end gap-3">
-          <div class="flex-1">
-            <p class="text-[11px] md:text-xs font-light uppercase tracking-[0.3em] text-neutral-400">
-              Pridano Tech · Studio web
-            </p>
-            <h1 class="mt-2 text-3xl md:text-5xl lg:text-6xl font-semibold tracking-tight leading-tight">
-              <span class="block text-neutral-50">
-                Votre futur site
-              </span>
-              <span class="mt-1 inline-flex flex-wrap items-baseline gap-2">
-                <span class="text-sm md:text-base text-neutral-300 font-light">commence</span>
-                <span class="relative inline-flex items-center">
-                  <span class="absolute inset-x-0 -bottom-1 h-2 rounded-full bg-gradient-to-r from-emerald-400/40 via-sky-400/40 to-indigo-400/40 blur-[4px]"></span>
-                  <span class="relative text-base md:text-2xl font-semibold tracking-tight bg-gradient-to-r from-emerald-300 via-sky-300 to-indigo-300 text-transparent bg-clip-text">
-                    ici, avec un bon brief
-                  </span>
-                </span>
-              </span>
-            </h1>
-          </div>
-          <!-- Tag côté droit -->
-          <div class="hidden md:flex flex-col items-end text-right text-xs text-neutral-400 gap-1">
-            <span class="inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/5 px-3 py-1">
-              <i data-lucide="sparkles" class="w-3 h-3 text-emerald-300"></i>
-              <span>Réponse rapide</span>
-            </span>
-          </div>
-        </div>
-
-        <!-- Texte d’accroche -->
-        <p class="text-sm md:text-base text-neutral-300 font-light max-w-2xl">
-          Dites-nous où vous en êtes (idée, maquette, site existant) et ce que vous voulez obtenir : plus de crédibilité, plus de demandes,
-          une meilleure image… On transforme ça en un devis clair avec planning, livrables et options adaptées à votre budget.
-        </p>
-      </div>
+      <h1 class="mt-4 text-3xl md:text-5xl font-light tracking-tight">Parlons de votre projet</h1>
+      <p class="mt-3 text-neutral-300 font-light">
+        Donnez-nous quelques détails. Nous revenons vers vous sous 24–48h avec une proposition claire (planning, budget, livrables).
+      </p>
     </div>
 
     <!-- Form Card -->
-    <section class="mt-8 mb-12 md:mb-20 grid lg:grid-cols-3 gap-8 ">
-      <div class="lg:col-span-2 rounded-2xl border-gradient bg-white/5 p-6 md:p-8 backdrop-blur relative overflow-hidden">
-        <!-- Decorative background accents -->
-        <div class="pointer-events-none absolute -top-24 -left-24 h-56 w-56 rounded-full bg-gradient-to-br from-emerald-500/10 via-sky-500/10 to-transparent blur-3"></div>
-        <div class="pointer-events-none absolute -bottom-20 right-0 h-60 w-60 rounded-full bg-gradient-to-tr from-indigo-500/15 via-sky-400/10 to-transparent blur-3"></div>
-        <div class="pointer-events-none absolute inset-x-6 top-20 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+    <section class="mt-8 grid lg:grid-cols-3 gap-8">
+      <div class="lg:col-span-2 rounded-2xl border-gradient bg-white/5 p-6 md:p-8 backdrop-blur">
         <!-- CONFIG : endpoint + fallback email -->
         <script>
           window.FORMSPREE_ENDPOINT = "https://formspree.io/f/mrbowkbw";
           window.PRIDANO_FALLBACK_EMAIL = "pridanotech@gmail.com";
         </script>
-        <!-- Meta row -->
-        <div class="mb-4 flex flex-col gap-2 md:flex-row md:items-center md:justify-between relative z-10">
-          <div class="inline-flex items-center gap-2 text-xs text-neutral-300">
-            <span class="inline-flex items-center gap-1 rounded-full bg-black/60 border border-white/10 px-3 py-1">
-              <i data-lucide="sliders-horizontal" class="w-3 h-3 text-emerald-300"></i>
-              <span>Brief guidé en 4 étapes</span>
-            </span>
-            <span class="hidden sm:inline text-neutral-500">On pose les bases de votre projet avant de parler maquettes et développement.</span>
-          </div>
-          <div class="flex items-center gap-2 text-[11px] text-neutral-400">
-            <span class="inline-flex items-center gap-1 rounded-full bg-white/5 px-2.5 py-1 border border-white/10">
-              <i data-lucide="clock-3" class="w-3 h-3 text-neutral-300"></i>
-              <span>5–7 min à remplir</span>
-            </span>
-          </div>
-        </div>
 
         <form id="quoteForm" class="space-y-6" novalidate>
           <!-- Success banner (hidden by default) -->
@@ -180,20 +109,12 @@
           </div>
 
           <!-- Steps container -->
-          <div id="steps" class="mt-4 rounded-2xl bg-black/40 border border-white/5 p-4 md:p-5 space-y-6 relative z-10">
+          <div id="steps" class="space-y-6">
             <!-- STEP 1: Contact -->
             <section class="step" data-step="1">
-              <div class="mb-4 space-y-1">
-                <p class="text-[11px] uppercase tracking-[0.3em] text-neutral-400">Étape 1</p>
-                <h2 class="text-base md:text-lg font-medium text-neutral-50">Vos informations de contact</h2>
-                <p class="text-xs md:text-sm text-neutral-400">
-                  Qui sera notre contact principal pour ce projet ? Ces informations servent uniquement à vous répondre à propos de votre demande.
-                </p>
-              </div>
-
               <div class="grid md:grid-cols-2 gap-4">
                 <div>
-                  <label for="name" class="block text-sm text-neutral-300 mb-1">Prénom &amp; Nom</label>
+                  <label for="name" class="block text-sm text-neutral-300 mb-1">Prénom & Nom</label>
                   <input id="name" name="name" type="text" required
                          class="w-full rounded-xl bg-black/30 border border-white/10 px-4 py-3 text-sm focus-ring"
                          placeholder="Ex. Michel Dupond">
@@ -209,35 +130,23 @@
 
               <div class="grid md:grid-cols-2 gap-4 mt-4">
                 <div>
-                  <label for="email" class="block text-sm text-neutral-300 mb-1">Email professionnel</label>
+                  <label for="email" class="block text-sm text-neutral-300 mb-1">Email</label>
                   <input id="email" name="email" type="email" required
                          class="w-full rounded-xl bg-black/30 border border-white/10 px-4 py-3 text-sm focus-ring"
-                         placeholder="vous@entreprise.com">
-                  <p class="mt-1 text-xs text-rose-400 hidden" data-error="email">Saisissez un email valide (nom@domaine.com).</p>
+                         placeholder="vous@exemple.com">
+                  <p class="mt-1 text-xs text-rose-400 hidden" data-error="email">Saisissez un email valide.</p>
                 </div>
                 <div>
                   <label for="phone" class="block text-sm text-neutral-300 mb-1">Téléphone (optionnel)</label>
                   <input id="phone" name="phone" type="tel"
                          class="w-full rounded-xl bg-black/30 border border-white/10 px-4 py-3 text-sm focus-ring"
                          placeholder="+33 6 12 34 56 78">
-                  <p class="mt-1 text-xs text-neutral-500">
-                    Utile si vous préférez un premier échange rapide par téléphone.
-                  </p>
                 </div>
               </div>
             </section>
 
             <!-- STEP 2: Projet -->
             <section class="step hidden" data-step="2">
-              <div class="mb-4 space-y-1">
-                <p class="text-[11px] uppercase tracking-[0.3em] text-neutral-400">Étape 2</p>
-                <h2 class="text-base md:text-lg font-medium text-neutral-50">Votre projet &amp; votre budget</h2>
-                <p class="text-xs md:text-sm text-neutral-400">
-                  On cadre le type de site, votre budget et le timing. Pas besoin d’être précis à l’euro près : l’idée est de savoir dans quel
-                  cadre on réfléchit avec vous.
-                </p>
-              </div>
-
               <div class="grid md:grid-cols-2 gap-4">
                 <div>
                   <label for="projectType" class="block text-sm text-neutral-300 mb-1">Type de projet</label>
@@ -270,9 +179,6 @@
                     Vous avez choisi une option <span class="font-medium">sans pack</span> : le nom de domaine, l’hébergement et certains éléments ne sont pas inclus par défaut.
                     Les ajouter ensuite coûtera généralement plus cher que partir directement sur un pack Starter, Essentiel ou Boutique.
                   </p>
-                  <p class="mt-1 text-[11px] text-neutral-500">
-                    Les packs sont là pour donner un ordre de grandeur. On peut ensuite ajouter ou retirer des éléments selon vos priorités.
-                  </p>
                 </div>
               </div>
 
@@ -288,80 +194,50 @@
                     <option>Flexible (&gt; 2 mois)</option>
                   </select>
                   <p class="mt-1 text-xs text-rose-400 hidden" data-error="deadline">Sélectionnez un délai.</p>
-                  <p class="mt-1 text-[11px] text-neutral-500">
-                    Un délai “flexible” permet parfois d’optimiser le budget ou d’ajouter des options.
-                  </p>
                 </div>
                 <div>
                   <label for="ref" class="block text-sm text-neutral-300 mb-1">Références / URL (optionnel)</label>
                   <input id="ref" name="references" type="url"
                          class="w-full rounded-xl bg-black/30 border border-white/10 px-4 py-3 text-sm focus-ring"
-                         placeholder="https://un-site-que-vous-aimez.com">
-                  <p class="mt-1 text-[11px] text-neutral-500">
-                    Montrez-nous 1 à 3 sites que vous aimez (ou votre site actuel) pour mieux comprendre votre univers.
-                  </p>
+                         placeholder="https://exemple.com">
                 </div>
               </div>
             </section>
 
             <!-- STEP 3: Détails -->
             <section class="step hidden" data-step="3">
-              <div class="mb-4 space-y-1">
-                <p class="text-[11px] uppercase tracking-[0.3em] text-neutral-400">Étape 3</p>
-                <h2 class="text-base md:text-lg font-medium text-neutral-50">Détails du projet</h2>
-                <p class="text-xs md:text-sm text-neutral-400">
-                  Quelques lignes suffisent : ce que vous faites, à qui vous parlez, et ce que le site doit permettre (rassurer, prendre des rendez-vous,
-                  vendre, présenter un portfolio…).
-                </p>
-              </div>
-
               <div>
                 <label for="message" class="block text-sm text-neutral-300 mb-1">Votre besoin</label>
                 <textarea id="message" name="message" rows="6" required
                           class="w-full rounded-xl bg-black/30 border border-white/10 px-4 py-3 text-sm focus-ring"
-                          placeholder="Présentez brièvement votre activité, vos objectifs et ce que le site doit permettre concrètement."></textarea>
+                          placeholder="Contexte, objectifs, pages/sections, fonctionnalités clés…"></textarea>
                 <p class="mt-1 text-xs text-rose-400 hidden" data-error="message">Décrivez brièvement votre besoin.</p>
-                <p class="mt-2 text-[11px] text-neutral-500">
-                  Exemple : “Nous sommes un salon de coiffure à Montpellier, nous voulons un site simple pour présenter nos prestations,
-                  afficher nos tarifs et rediriger vers la prise de rendez-vous en ligne.”
-                </p>
               </div>
 
-              <div class="mt-4 space-y-2">
-                <p class="text-xs text-neutral-300 font-medium uppercase tracking-[0.2em]">Options souhaitées</p>
-                <div class="grid sm:grid-cols-3 gap-3 text-xs text-white/70">
-                  <label class="flex items-center gap-2 bg-white/5 border border-white/10 rounded-lg px-3 py-2">
-                    <input type="checkbox" id="opt_anim" class="accent-cyan-400"> Animations premium
-                  </label>
-                  <label class="flex items-center gap-2 bg-white/5 border border-white/10 rounded-lg px-3 py-2">
-                    <input type="checkbox" id="opt_seo" class="accent-cyan-400" checked> SEO technique
-                  </label>
-                  <label class="flex items-center gap-2 bg-white/5 border border-white/10 rounded-lg px-3 py-2">
-                    <input type="checkbox" id="opt_ai" class="accent-cyan-400"> Fonctions IA (en préparation / à venir)
-                  </label>
-                </div>
-                <p class="mt-2 text-xs text-neutral-400">
-                  Les fonctionnalités avancées (mini-outils type SaaS, IA, automatisations complexes) sont encore en phase de test : on en discute ensemble
-                  pour voir ce qui est possible et à quel horizon.
-                </p>
+              <div class="mt-4 grid sm:grid-cols-3 gap-3 text-xs text-white/70">
+                <label class="flex items-center gap-2 bg-white/5 border border-white/10 rounded-lg px-3 py-2">
+                  <input type="checkbox" id="opt_anim" class="accent-cyan-400"> Animations premium
+                </label>
+                <label class="flex items-center gap-2 bg-white/5 border border-white/10 rounded-lg px-3 py-2">
+                  <input type="checkbox" id="opt_seo" class="accent-cyan-400" checked> SEO technique
+                </label>
+                <label class="flex items-center gap-2 bg-white/5 border border-white/10 rounded-lg px-3 py-2">
+                  <input type="checkbox" id="opt_ai" class="accent-cyan-400"> Fonctions IA (en préparation / à venir)
+                </label>
               </div>
+              <p class="mt-2 text-xs text-neutral-400">
+                Les fonctionnalités avancées (mini-outils type SaaS, IA, automatisations complexes) sont encore en phase de test : on en discute ensemble pour voir ce qui est possible et à quel horizon.
+              </p>
             </section>
 
             <!-- STEP 4: Récap -->
             <section class="step hidden" data-step="4">
-              <div class="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur space-y-4">
-                <div>
-                  <p class="text-[11px] uppercase tracking-[0.3em] text-neutral-400">Étape 4</p>
-                  <h3 class="mt-1 text-lg font-medium tracking-tight text-neutral-50">Récapitulatif avant envoi</h3>
-                  <p class="mt-1 text-xs md:text-sm text-neutral-400">
-                    Vérifiez les informations principales de votre demande. Si quelque chose manque ou doit être précisé, vous pourrez toujours le compléter
-                    lors de notre échange.
-                  </p>
-                </div>
-                <div class="grid sm:grid-cols-2 gap-4 text-sm text-white/80" id="summary">
+              <div class="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur">
+                <h3 class="text-lg font-medium tracking-tight">Récapitulatif</h3>
+                <div class="mt-4 grid sm:grid-cols-2 gap-4 text-sm text-white/80" id="summary">
                   <!-- filled by JS -->
                 </div>
-                <div class="flex items-start gap-3 pt-2 border-t border-white/10 mt-2">
+                <div class="flex items-start gap-3 mt-5">
                   <input id="consent" name="consent" type="checkbox" required class="mt-1">
                   <label for="consent" class="text-sm text-neutral-300">
                     J’accepte que mes informations soient utilisées pour être recontacté concernant ma demande.
@@ -389,166 +265,39 @@
             </button>
             <span id="formStatus" class="text-sm text-neutral-300 ml-2"></span>
           </div>
-
-          <!-- Mini FAQ sous le formulaire -->
-          <div class="mt-6 border-t border-white/10 pt-4">
-            <div class="flex items-center justify-between gap-2 mb-3">
-              <p class="text-xs font-medium uppercase tracking-[0.25em] text-neutral-400">
-                Mini FAQ devis
-              </p>
-              <p class="text-[11px] text-neutral-500 hidden sm:block">
-                Cliquez sur une carte pour la retourner.
-              </p>
-            </div>
-            <div class="grid sm:grid-cols-2 gap-3 text-xs text-neutral-200">
-              <!-- Carte 1 -->
-              <button type="button" class="faq-card relative w-full rounded-2xl bg-white/5 border border-white/10 p-3 text-left transition hover:border-white/30"
-                      data-faq-card data-open="false">
-                <div class="faq-inner">
-                  <div class="faq-face">
-                    <p class="font-medium text-neutral-50">Mon projet est encore flou, je peux quand même remplir le devis ?</p>
-                    <p class="mt-1 text-[11px] text-neutral-400">Clique pour voir la réponse</p>
-                  </div>
-                  <div class="faq-face faq-back absolute inset-0 p-3 flex items-center">
-                    <p class="text-[11px] text-neutral-300">
-                      Oui. Ce brief sert justement à poser les bases. Donnez ce que vous avez, on complètera ensemble lors du premier échange.
-                    </p>
-                  </div>
-                </div>
-              </button>
-
-              <!-- Carte 2 -->
-              <button type="button" class="faq-card relative w-full rounded-2xl bg-white/5 border border-white/10 p-3 text-left transition hover:border-white/30"
-                      data-faq-card data-open="false">
-                <div class="faq-inner">
-                  <div class="faq-face">
-                    <p class="font-medium text-neutral-50">Votre devis est valable combien de temps ?</p>
-                    <p class="mt-1 text-[11px] text-neutral-400">Clique pour voir la réponse</p>
-                  </div>
-                  <div class="faq-face faq-back absolute inset-0 p-3 flex items-center">
-                    <p class="text-[11px] text-neutral-300">
-                      En général, nos devis sont valables 30 jours. Si votre planning décale, on réajuste ensemble sans mauvaise surprise.
-                    </p>
-                  </div>
-                </div>
-              </button>
-
-              <!-- Carte 3 -->
-              <button type="button" class="faq-card relative w-full rounded-2xl bg-white/5 border border-white/10 p-3 text-left transition hover:border-white/30"
-                      data-faq-card data-open="false">
-                <div class="faq-inner">
-                  <div class="faq-face">
-                    <p class="font-medium text-neutral-50">Vous faites aussi le logo ou l’identité visuelle ?</p>
-                    <p class="mt-1 text-[11px] text-neutral-400">Clique pour voir la réponse</p>
-                  </div>
-                  <div class="faq-face faq-back absolute inset-0 p-3 flex items-center">
-                    <p class="text-[11px] text-neutral-300">
-                      Oui, sur demande. Indiquez-le dans “Votre besoin” et on vous proposera une option identité visuelle adaptée (ou un partenaire).
-                    </p>
-                  </div>
-                </div>
-              </button>
-
-              <!-- Carte 4 -->
-              <button type="button" class="faq-card relative w-full rounded-2xl bg-white/5 border border-white/10 p-3 text-left transition hover:border-white/30"
-                      data-faq-card data-open="false">
-                <div class="faq-inner">
-                  <div class="faq-face">
-                    <p class="font-medium text-neutral-50">Comment se passe le paiement si on valide le projet ?</p>
-                    <p class="mt-1 text-[11px] text-neutral-400">Clique pour voir la réponse</p>
-                  </div>
-                  <div class="faq-face faq-back absolute inset-0 p-3 flex items-center">
-                    <p class="text-[11px] text-neutral-300">
-                      En général : acompte au lancement, puis solde à la mise en ligne. Les modalités précises sont indiquées sur le devis.
-                    </p>
-                  </div>
-                </div>
-              </button>
-            </div>
-          </div>
         </form>
       </div>
 
       <!-- Aside : garanties / process -->
       <aside class="space-y-6">
-        <!-- Bloc 1 : valeur -->
-        <div class="rounded-2xl border-gradient bg-white/5 p-6 backdrop-blur relative overflow-hidden">
-          <span class="absolute -right-10 -top-10 w-32 h-32 bg-gradient-to-br from-emerald-400/20 via-sky-400/10 to-transparent rounded-full blur-2 opacity-80 pointer-events-none"></span>
-          <h3 class="text-lg font-medium tracking-tight flex items-center gap-2">
-            <span class="inline-flex h-7 w-7 items-center justify-center rounded-full bg-emerald-400/15 border border-emerald-300/50">
-              <i data-lucide="sparkles" class="w-4 h-4 text-emerald-300"></i>
-            </span>
-            Ce que vous recevez concrètement
-          </h3>
-          <p class="mt-2 text-sm text-neutral-300 font-light">
-            L’objectif : que vous sachiez exactement ce que vous achetez, sans jargon ni mauvaise surprise.
-          </p>
+        <div class="rounded-2xl border-gradient bg-white/5 p-6 backdrop-blur">
+          <h3 class="text-lg font-medium tracking-tight">Ce que vous recevez</h3>
           <ul class="mt-3 space-y-2 text-sm text-neutral-300">
-            <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-300 mt-0.5"></i> Un devis clair avec budget, jalons et délais réalistes.</li>
-            <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-300 mt-0.5"></i> Un plan de site et des recommandations UX pour structurer vos pages.</li>
-            <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-300 mt-0.5"></i> Des conseils d’optimisation (performance, SEO, design) adaptés à votre niveau.</li>
+            <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-300"></i> Devis clair (budget, jalons, délais)</li>
+            <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-300"></i> Planning & livrables détaillés</li>
+            <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-300"></i> Conseils d’optimisation (perf/SEO/UX)</li>
           </ul>
         </div>
-
-        <!-- Bloc 2 : process -->
         <div class="rounded-2xl border-gradient bg-white/5 p-6 backdrop-blur">
-          <h3 class="text-lg font-medium tracking-tight flex items-center gap-2">
-            <span class="inline-flex h-7 w-7 items-center justify-center rounded-full bg-indigo-400/15 border border-indigo-300/50">
-              <i data-lucide="route" class="w-4 h-4 text-indigo-300"></i>
-            </span>
-            Comment ça se passe ?
-          </h3>
-          <ol class="mt-4 space-y-3 text-sm text-neutral-300">
-            <li class="flex gap-3">
-              <span class="mt-0.5 inline-flex h-6 w-6 items-center justify-center rounded-full bg-white/10 text-[11px]">1</span>
-              <div>
-                <p class="font-medium text-neutral-100">Appel de cadrage (15–30 min minimum)</p>
-                <p class="text-neutral-400">On clarifie votre projet, vos priorités, votre budget et ce qui est vraiment prioritaire pour le lancement.</p>
-              </div>
-            </li>
-            <li class="flex gap-3">
-              <span class="mt-0.5 inline-flex h-6 w-6 items-center justify-center rounded-full bg-white/10 text-[11px]">2</span>
-              <div>
-                <p class="font-medium text-neutral-100">Proposition &amp; devis personnalisé</p>
-                <p class="text-neutral-400">Vous recevez un récap visuel du projet (pages, fonctionnalités, options) + le budget associé.</p>
-              </div>
-            </li>
-            <li class="flex gap-3">
-              <span class="mt-0.5 inline-flex h-6 w-6 items-center justify-center rounded-full bg-white/10 text-[11px]">3</span>
-              <div>
-                <p class="font-medium text-neutral-100">Kickoff &amp; production</p>
-                <p class="text-neutral-400">On valide ensemble les maquettes, puis on passe au développement jusqu’à la mise en ligne.</p>
-              </div>
-            </li>
+          <h3 class="text-lg font-medium tracking-tight">Process</h3>
+          <ol class="mt-3 space-y-2 text-sm text-neutral-300">
+            <li class="flex gap-2"><i data-lucide="message-square" class="w-4 h-4 text-indigo-300"></i> 1. Appel de cadrage (15–30 min)</li>
+            <li class="flex gap-2"><i data-lucide="file-text" class="w-4 h-4 text-indigo-300"></i> 2. Devis + planning</li>
+            <li class="flex gap-2"><i data-lucide="rocket" class="w-4 h-4 text-indigo-300"></i> 3. Kickoff & production</li>
           </ol>
         </div>
-
-        <!-- Bloc 3 : infos pratiques -->
         <div class="rounded-2xl border-gradient bg-white/5 p-6 backdrop-blur">
-            <span class="absolute -left-10 -top-10 w-32 h-32 bg-gradient-to-br from-emerald-400/20 via-sky-400/10 to-transparent rounded-full blur-2 opacity-80 pointer-events-none"></span>
-          <h3 class="text-lg font-medium tracking-tight flex items-center gap-2">
-            <span class="inline-flex h-7 w-7 items-center justify-center rounded-full bg-cyan-400/15 border border-cyan-300/50">
-              <i data-lucide="info" class="w-4 h-4 text-cyan-300"></i>
-            </span>
-            Infos pratiques
-          </h3>
+          <h3 class="text-lg font-medium tracking-tight">Infos pratiques</h3>
           <ul class="mt-3 space-y-2 text-sm text-neutral-300">
-            <li class="flex gap-2">
-              <i data-lucide="clock" class="w-4 h-4 text-cyan-300 mt-0.5"></i>
-              <span>Réponse en général sous <span class="font-medium">24–48h ouvrées</span>.</span>
-            </li>
-            <li class="flex gap-2">
-              <i data-lucide="users" class="w-4 h-4 text-cyan-300 mt-0.5"></i>
-              <span>Nous prenons peu de projets en parallèle pour garder du temps pour les échanges.</span>
-            </li>
-            <li class="flex gap-2">
-              <i data-lucide="shield-check" class="w-4 h-4 text-cyan-300 mt-0.5"></i>
-              <span>Vos informations ne servent qu’à vous recontacter concernant votre demande (voir la <a href="confidentialite.html" class="underline hover:no-underline">Politique de confidentialité</a>).</span>
-            </li>
+            <li class="flex gap-2"><i data-lucide="clock" class="w-4 h-4 text-cyan-300"></i> Réponse en général sous 24–48h ouvrées.</li>
+            <li class="flex gap-2"><i data-lucide="users" class="w-4 h-4 text-cyan-300"></i> On prend peu de projets en même temps pour rester disponibles.</li>
+            <li class="flex gap-2"><i data-lucide="shield-check" class="w-4 h-4 text-cyan-300"></i> Vos données ne sont utilisées que pour vous recontacter à propos de votre demande.</li>
           </ul>
         </div>
       </aside>
     </section>
+  </main>
+
   <!-- Footer -->
 <footer class="border-t border-white/10 py-8">
   <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-neutral-400">
@@ -825,14 +574,6 @@
 
     // init
     updateUI();
-
-    // Mini FAQ : cartes qui tournent
-    document.querySelectorAll('[data-faq-card]').forEach(card => {
-      card.addEventListener('click', () => {
-        const isOpen = card.getAttribute('data-open') === 'true';
-        card.setAttribute('data-open', isOpen ? 'false' : 'true');
-      });
-    });
   </script>
 </body>
 </html>

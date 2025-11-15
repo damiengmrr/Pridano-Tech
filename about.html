@@ -39,27 +39,20 @@
       .shine:hover:after{ opacity:.9; transform: translateX(15%) rotate(25deg); }
     </style>
     </head><body class="font-[Inter] min-h-screen text-gray-100 bg-gray-950">
-    <!-- Background global -->
-    <div class="fixed inset-0 -z-10 overflow-hidden">
-      <!-- Aurora Layer -->
-      <div class="absolute inset-0" style="
-        background:
-          radial-gradient(50% 80% at 30% 20%, rgba(124,58,237,.25), transparent 70%),
-          radial-gradient(60% 90% at 70% 80%, rgba(56,189,248,.18), transparent 80%),
-          radial-gradient(70% 100% at 50% 50%, rgba(236,72,153,.1), transparent 80%),
-          #080808;
-        filter: saturate(1.15) contrast(1.03);
-        animation: aurora 18s ease-in-out infinite alternate;">
-      </div>
-
-      <!-- Canvas Wireframe -->
-      <canvas id="bg-mesh" class="absolute inset-0 w-full h-full"></canvas>
-
-      <!-- Particles -->
-      <canvas id="bg-particles" class="absolute inset-0 w-full h-full"></canvas>
-    </div>
+      <!-- BACKGROUND G : Static Luxury Noir -->
+<div class="fixed inset-0 -z-10 bg-[#0a0a0c]">
+  <div class="absolute inset-0 opacity-[0.08]"
+    style="
+      background-image:
+        linear-gradient(120deg, rgba(255,255,255,0.07), transparent 75%),
+        radial-gradient(circle at 30% 20%, rgba(124,58,237,0.15), transparent 70%),
+        radial-gradient(circle at 80% 80%, rgba(56,189,248,0.12), transparent 70%);
+      background-blend-mode: soft-light;
+    ">
+  </div>
+</div>
     
-    <header class="sticky top-0 border-b border-neutral-800 header-blur">
+    <header class="sticky top-0 border-b border-neutral-800 header-blur z-[9999]">
       <div class="max-w-7xl mx-auto flex items-center justify-between gap-6 px-6 py-4">
               <a href="index.html" class="flex items-center gap-2 group" data-animate>
                 <img src="pridano-logo.png" alt="Pridano Tech logo" width="24" height="24" class="w-6 h-6 rounded-sm shadow-sm ring-1 ring-white/10" loading="eager" decoding="async" fetchpriority="high">
@@ -77,154 +70,224 @@
       </div>
     </header>
     
-    <main class="max-w-5xl mx-auto px-6 py-16 space-y-12">
-      <section class="space-y-4">
-        <h1 class="text-3xl md:text-4xl font-light tracking-tight">À propos de Pridano Tech</h1>
-        <p class="text-neutral-300 font-light">Nous concevons des sites web premium qui allient performance, design et impact. Notre approche mêle exigence visuelle, animations fines et code propre.</p>
-      </section>
-    
-      <section class="grid md:grid-cols-2 gap-6">
-        <article class="p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md">
-          <h2 class="font-light tracking-tight mb-2">Notre histoire</h2>
-          <p class="text-sm text-neutral-300 font-light">Fondée par Damien Gamarra & Noah Lemoing, Pridano Tech naît d’un besoin simple : livrer vite, bien, et avec une vraie signature visuelle.</p>
-        </article>
-        <article class="p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md">
-          <h2 class="font-light tracking-tight mb-2">Nos valeurs</h2>
-          <ul class="text-sm text-neutral-300 font-light list-disc list-inside space-y-1">
-            <li>Design premium et cohérent</li>
-            <li>Performance et SEO dès le départ</li>
-            <li>Transparence et itérations courtes</li>
-          </ul>
-        </article>
-      </section>
-    
-      <!-- Cartes équipe — style premium -->
-      <section id="team" class="grid md:grid-cols-2 gap-6 mt-2">
-        <!-- Damien -->
-        <article class="relative border-gradient glass p-6 md:p-7 rounded-2xl overflow-hidden group">
-          <!-- decorative blobs -->
-          <span class="pointer-events-none absolute -top-16 -left-20 w-64 h-64 rounded-full bg-indigo-500/15 blur-3xl"></span>
-          <span class="pointer-events-none absolute -bottom-20 -right-20 w-72 h-72 rounded-full bg-pink-500/15 blur-3xl"></span>
-
-          <div class="flex items-start gap-5">
-            <div class="relative shrink-0">
-              <div class="w-16 h-16 rounded-xl overflow-hidden ring-1 ring-white/15 shine">
-                <img src=damien.jpg alt="Damien Gamarra" class="w-full h-full object-cover">
-              </div>
-            </div>
-
-            <div class="min-w-0">
-              <div class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 backdrop-blur">
-                <i data-lucide="sparkles" class="w-4 h-4 text-indigo-300"></i>
-                <span class="text-xs text-white/80">Lead design &amp; front</span>
-              </div>
-              <h3 class="mt-3 text-2xl font-light tracking-tight">Damien Gamarra</h3>
-              <p class="mt-2 text-sm text-neutral-300 font-light">
-                Full‑stack orienté UX. Tailwind + GSAP addict. Amoureux des micro‑interactions,
-                de la perf et des interfaces qui font “wow” sans sacrifier la clarté.
+    <main class="max-w-6xl mx-auto px-6 py-16 space-y-16">
+      <!-- HERO : carte déstructurée -->
+      <section class="relative">
+        <!-- Blobs décoratifs -->
+        <div class="pointer-events-none absolute -top-24 -left-10 w-56 h-56 rounded-full bg-indigo-500/20 blur-3xl opacity-60"></div>
+        <div class="pointer-events-none absolute -bottom-24 -right-0 w-64 h-64 rounded-full bg-cyan-500/15 blur-3xl opacity-70"></div>
+        <div class="relative grid gap-8 md:grid-cols-[1.4fr,1fr] items-stretch">
+          <!-- Bloc texte principal -->
+          <div class="border-gradient glass rounded-2xl p-6 md:p-8 flex flex-col justify-between float-slow">
+            <div class="space-y-3">
+              <p class="text-[11px] uppercase tracking-[0.3em] text-neutral-400">Inside l’équipe</p>
+              <h1 class="text-3xl md:text-4xl font-light tracking-tight">
+                Damien &amp; Noah, les deux têtes derrière Pridano Tech
+              </h1>
+              <p class="text-sm md:text-base text-neutral-300 font-light max-w-xl">
+                On est deux étudiants en informatique à Ynov Campus Montpellier. Entre les cours, les projets
+                et la vie sur le campus, on construit des sites pour des vrais clients, avec la même exigence
+                que si c’était nos propres projets.
               </p>
-
-              <div class="mt-4 flex flex-wrap gap-2">
-                <span class="px-2.5 py-1 rounded-md text-[11px] border border-indigo-400/30 text-indigo-200/90 bg-indigo-900/30">Next.js</span>
-                <span class="px-2.5 py-1 rounded-md text-[11px] border border-pink-400/30 text-pink-100/90 bg-pink-900/30">GSAP</span>
-                <span class="px-2.5 py-1 rounded-md text-[11px] border border-emerald-400/30 text-emerald-100/90 bg-emerald-900/30">Tailwind</span>
-                <span class="px-2.5 py-1 rounded-md text-[11px] border border-cyan-400/30 text-cyan-100/90 bg-cyan-900/30">Stripe</span>
+            </div>
+      
+            <div class="mt-6 grid gap-4 sm:grid-cols-3 text-xs md:text-sm font-light">
+              <div class="rounded-xl bg-white/5 border border-white/10 px-4 py-3">
+                <p class="text-neutral-400 text-[11px] uppercase tracking-[0.22em] mb-1">Où</p>
+                <p class="text-neutral-100">Ynov Campus Montpellier</p>
+                <p class="text-neutral-400 text-[11px] mt-1">Salles projet, open space, BDE…</p>
               </div>
-
-              <div class="mt-5 grid grid-cols-3 gap-3">
-                <div class="rounded-lg border border-white/10 bg-white/5 p-3 text-center">
-                  <div class="text-lg font-light">xx/xx</div>
-                  <div class="text-[11px] text-neutral-400">Perf</div>
-                </div>
-                <div class="rounded-lg border border-white/10 bg-white/5 p-3 text-center">
-                  <div class="text-lg font-light">x</div>
-                  <div class="text-[11px] text-neutral-400">Projets</div>
-                </div>
-                <div class="rounded-lg border border-white/10 bg-white/5 p-3 text-center">
-                  <div class="text-lg font-light">A/B</div>
-                  <div class="text-[11px] text-neutral-400">Tests</div>
-                </div>
+              <div class="rounded-xl bg-white/5 border border-white/10 px-4 py-3">
+                <p class="text-neutral-400 text-[11px] uppercase tracking-[0.22em] mb-1">Ce qu’on fait</p>
+                <p class="text-neutral-100">Sites vitrines &amp; petites boutiques</p>
+                <p class="text-neutral-400 text-[11px] mt-1">Avec une base propre pour la suite.</p>
               </div>
-
-              <div class="mt-6 flex items-center gap-3">
-                <a href="mailto:pridanotech@gmail.com" class="inline-flex items-center gap-1 rounded-lg border border-white/10 px-3 py-2 text-sm hover:bg-white/5 transition">
-                  <i data-lucide="mail" class="w-4 h-4"></i> Contacter
-                </a>
-                <a href="https://www.linkedin.com/in/damien-gamarra-76979b29b/" class="inline-flex items-center gap-1 rounded-lg border border-white/10 px-3 py-2 text-sm hover:bg-white/5 transition">
-                  <i data-lucide="linkedin" class="w-4 h-4"></i> LinkedIn
-                </a>
+              <div class="rounded-xl bg-white/5 border border-white/10 px-4 py-3">
+                <p class="text-neutral-400 text-[11px] uppercase tracking-[0.22em] mb-1">Pour qui</p>
+                <p class="text-neutral-100">Indés, petites structures, projets perso</p>
+                <p class="text-neutral-400 text-[11px] mt-1">Là où un “vrai” site change la donne.</p>
               </div>
             </div>
           </div>
-        </article>
+      
+          <!-- Carte duo avec photos rondes -->
+          <div class="relative rounded-2xl bg-white/5 border border-white/10 px-6 py-7 flex flex-col justify-between overflow-hidden">
+            <div class="absolute -top-10 right-0 w-40 h-40 rounded-full bg-indigo-500/25 blur-3xl opacity-70"></div>
+            <div class="absolute -bottom-16 left-4 w-40 h-40 rounded-full bg-cyan-500/20 blur-3xl opacity-80"></div>
 
-        <!-- Noah -->
-        <article class="relative border-gradient glass p-6 md:p-7 rounded-2xl overflow-hidden group">
-          <!-- decorative blobs -->
-          <span class="pointer-events-none absolute -top-16 -left-20 w-64 h-64 rounded-full bg-emerald-500/15 blur-3xl"></span>
-          <span class="pointer-events-none absolute -bottom-20 -right-20 w-72 h-72 rounded-full bg-cyan-500/15 blur-3xl"></span>
-
-          <div class="flex items-start gap-5">
-            <div class="relative shrink-0">
-              <div class="w-16 h-16 rounded-xl overflow-hidden ring-1 ring-white/15 shine">
-                <img src=noah.jpg alt="Noah Lemoing" class="w-full h-full object-cover">
+            <div class="relative space-y-5">
+              <p class="text-[11px] uppercase tracking-[0.22em] text-neutral-400">Le duo</p>
+              <div class="grid grid-cols-2 gap-4">
+                <!-- Damien -->
+                <div class="flex flex-col items-center text-center gap-2">
+                  <div class="relative w-24 h-24 rounded-2xl overflow-hidden ring-1 ring-white/20 shine">
+                    <img src="damien.jpg" alt="Damien Gamarra" class="w-full h-full object-cover">
+                  </div>
+                  <div class="space-y-0.5">
+                    <p class="text-sm text-neutral-100">Damien Gamarra</p>
+                    <p class="text-[11px] text-neutral-400">Front, design &amp; expérience</p>
+                  </div>
+                </div>
+                <!-- Noah -->
+                <div class="flex flex-col items-center text-center gap-2">
+                  <div class="relative w-24 h-24 rounded-2xl overflow-hidden ring-1 ring-white/20 shine">
+                    <img src="noah.jpg" alt="Noah Lemoing" class="w-full h-full object-cover">
+                  </div>
+                  <div class="space-y-0.5">
+                    <p class="text-sm text-neutral-100">Noah Lemoing</p>
+                    <p class="text-[11px] text-neutral-400">Front, design &amp; expérience</p>
+                  </div>
+                </div>
               </div>
             </div>
 
-            <div class="min-w-0">
-              <div class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 backdrop-blur">
-                <i data-lucide="server-cog" class="w-4 h-4 text-emerald-300"></i>
-                <span class="text-xs text-white/80">Backend &amp; intégrations</span>
-              </div>
-              <h3 class="mt-3 text-2xl font-light tracking-tight">Noah Lemoing</h3>
-              <p class="mt-2 text-sm text-neutral-300 font-light">
-                APIs, bases de données et sécurité. Intègre Stripe, Shopify, Supabase
-                et automatise tout ce qui peut l’être sans perdre en fiabilité.
+            <div class="relative mt-6 space-y-2 text-xs md:text-sm text-neutral-200 font-light">
+              <p>
+                On travaille à deux sur les mêmes tâches, surtout le front‑end : pages vitrines, animations, design,
+                organisation du contenu et optimisation de l’expérience utilisateur. Tout est fait à quatre mains pour
+                que le site soit cohérent, pro et agréable à utiliser.
               </p>
-
-              <div class="mt-4 flex flex-wrap gap-2">
-                <span class="px-2.5 py-1 rounded-md text-[11px] border border-emerald-400/30 text-emerald-100/90 bg-emerald-900/30">Supabase</span>
-                <span class="px-2.5 py-1 rounded-md text-[11px] border border-cyan-400/30 text-cyan-100/90 bg-cyan-900/30">Node</span>
-                <span class="px-2.5 py-1 rounded-md text-[11px] border border-sky-400/30 text-sky-100/90 bg-sky-900/30">Postgres</span>
-                <span class="px-2.5 py-1 rounded-md text-[11px] border border-fuchsia-400/30 text-fuchsia-100/90 bg-fuchsia-900/30">Shopify</span>
+              <p class="text-[11px] md:text-xs text-neutral-400">
+                On avance ensemble sur chaque projet, du premier écran jusqu’à la mise en ligne — pas de séparation,
+                juste un vrai duo.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Bande “où / comment / ambiance” avec formes -->
+      <section class="relative rounded-3xl border border-white/10 bg-gradient-to-br from-neutral-900/90 via-neutral-900/80 to-[#050816] overflow-hidden">
+        <div class="absolute inset-0 opacity-[0.16]"
+             style="background-image: radial-gradient(circle at 0% 0%, rgba(129,140,248,0.4), transparent 55%), radial-gradient(circle at 100% 100%, rgba(45,212,191,0.4), transparent 55%);">
+        </div>
+      
+        <div class="relative grid gap-8 md:grid-cols-[1.3fr,1fr] items-stretch px-6 md:px-8 py-10 md:py-12">
+          <!-- Texte + “chips” -->
+          <div class="space-y-5">
+            <h2 class="text-2xl md:text-3xl font-light tracking-tight">
+              D’où on bosse, et comment on voit les projets
+            </h2>
+            <p class="text-sm md:text-base text-neutral-200 font-light max-w-2xl">
+              Une grosse partie du travail se fait depuis Ynov Campus Montpellier : salles de projet, open space,
+              locaux du BDE. C’est notre terrain de jeu pour tester des idées, lancer des maquettes et améliorer les sites
+              au fil des retours.
+            </p>
+      
+            <div class="flex flex-wrap gap-2 text-[11px] md:text-xs font-light">
+              <span class="inline-flex items-center gap-1 rounded-full border border-white/15 bg-white/5 px-3 py-1">
+                <i data-lucide="map-pin" class="w-3 h-3 text-cyan-300"></i>
+                Basés à Montpellier (Ynov)
+              </span>
+              <span class="inline-flex items-center gap-1 rounded-full border border-white/15 bg-white/5 px-3 py-1">
+                <i data-lucide="laptop-2" class="w-3 h-3 text-indigo-300"></i>
+                Projets faits entre cours &amp; soirées code
+              </span>
+              <span class="inline-flex items-center gap-1 rounded-full border border-white/15 bg-white/5 px-3 py-1">
+                <i data-lucide="sparkles" class="w-3 h-3 text-pink-300"></i>
+                Focus sur le ressenti quand on visite votre site
+              </span>
+            </div>
+          </div>
+      
+          <!-- Bloc image bureau / campus -->
+          <div class="grid gap-4">
+            <div class="relative rounded-2xl overflow-hidden border border-white/15 bg-white/5">
+              <img src="ynov.jpeg" alt="Espace de travail à Ynov Campus Montpellier" class="w-full h-40 md:h-44 object-cover">
+              <div class="absolute bottom-3 left-3 rounded-full bg-black/60 px-3 py-1 text-[11px] text-neutral-100">
+                Notre “bureau” à Ynov Campus
               </div>
-
-              <div class="mt-5 grid grid-cols-3 gap-3">
-                <div class="rounded-lg border border-white/10 bg-white/5 p-3 text-center">
-                  <div class="text-lg font-light">xx%</div>
-                  <div class="text-[11px] text-neutral-400">Uptime</div>
-                </div>
-                <div class="rounded-lg border border-white/10 bg-white/5 p-3 text-center">
-                  <div class="text-lg font-light">API</div>
-                  <div class="text-[11px] text-neutral-400">First</div>
-                </div>
-                <div class="rounded-lg border border-white/10 bg-white/5 p-3 text-center">
-                  <div class="text-lg font-light">RGPD</div>
-                  <div class="text-[11px] text-neutral-400">Ready</div>
-                </div>
-              </div>
-
-              <div class="mt-6 flex items-center gap-3">
-                <a href="mailto:pridanotech@gmail.com" class="inline-flex items-center gap-1 rounded-lg border border-white/10 px-3 py-2 text-sm hover:bg-white/5 transition">
-                  <i data-lucide="mail" class="w-4 h-4"></i> Contacter
-                </a>
-                <a href="https://www.linkedin.com/in/noah-lemoing-43a7b4354/" class="inline-flex items-center gap-1 rounded-lg border border-white/10 px-3 py-2 text-sm hover:bg-white/5 transition">
-                    <i data-lucide="linkedin" class="w-4 h-4"></i> LinkedIn
-                </a>
+            </div>
+            <div class="relative rounded-2xl overflow-hidden border border-white/15 bg-white/5">
+              <img src="fika.jpeg" alt="Coulisses Pridano Tech" class="w-full h-32 md:h-36 object-cover">
+              <div class="absolute bottom-3 left-3 rounded-full bg-black/60 px-3 py-1 text-[11px] text-neutral-100">
+                Coulisses &amp; ambiance pendant les projets
               </div>
             </div>
           </div>
-        </article>
+        </div>
       </section>
+      
+      <!-- Duo détaillé : 2 colonnes cartes inclinées -->
+      <section class="space-y-8">
+        <h2 class="text-2xl md:text-3xl font-light tracking-tight">Comment on se répartit le travail</h2>
+        <p class="text-sm md:text-base text-neutral-300 font-light max-w-3xl">
+          On est tous les deux développeurs, mais on ne regarde pas les mêmes choses en premier. C’est ce mélange
+          qui fait l’ADN de Pridano Tech.
+        </p>
+      
+        <div class="grid gap-6 md:grid-cols-2">
+          <!-- Damien -->
+          <article class="relative border-gradient glass rounded-2xl p-6 md:p-7 overflow-hidden">
+            <div class="pointer-events-none absolute -top-10 -right-10 w-32 h-32 rounded-full bg-indigo-500/25 blur-3xl"></div>
+            <div class="relative space-y-3">
+              <div class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-[11px]">
+                <i data-lucide="sparkles" class="w-3 h-3 text-indigo-300"></i>
+                Damien — front &amp; design
+              </div>
+              <p class="text-sm md:text-base text-neutral-100 font-light">
+                Il s’occupe de tout ce qu’on voit : structure des pages, hiérarchie visuelle, animations, micro‑interactions,
+                sensation générale quand on scrolle.
+              </p>
+              <ul class="text-xs md:text-sm text-neutral-300 font-light space-y-1.5">
+                <li>• Choix des typos, des couleurs et du rythme des sections.</li>
+                <li>• Mise en place des animations (GSAP, transitions Tailwind, etc.).</li>
+                <li>• S’assurer que le site est agréable aussi sur téléphone.</li>
+              </ul>
+            </div>
+          </article>
+      
+          <!-- Noah -->
+          <article class="relative border-gradient glass rounded-2xl p-6 md:p-7 overflow-hidden">
+            <div class="pointer-events-none absolute -bottom-12 -left-6 w-32 h-32 rounded-full bg-emerald-500/25 blur-3xl"></div>
+            <div class="relative space-y-3">
+              <div class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-[11px]">
+                <i data-lucide="server-cog" class="w-3 h-3 text-emerald-300"></i>
+                Noah — backend &amp; intégrations
+              </div>
+              <p class="text-sm md:text-base text-neutral-100 font-light">
+                Il s’occupe de ce qu’on ne voit pas directement : bases de données, API, sécurité basique,
+                intégrations avec les bons outils pour votre activité.
+              </p>
+              <ul class="text-xs md:text-sm text-neutral-300 font-light space-y-1.5">
+                <li>• Connexions aux outils (paiement, formulaires, analytics…).</li>
+                <li>• Structuration des données pour que le site soit évolutif.</li>
+                <li>• Mise en place de petites automatisations quand c’est utile.</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </section>
+      
+      <!-- Dernier bloc + CTA -->
+      <section class="space-y-5">
+        <h2 class="text-2xl md:text-3xl font-light tracking-tight">Ce qu’on veut construire avec vous</h2>
+        <p class="text-sm md:text-base text-neutral-300 font-light max-w-3xl">
+          Des sites qui donnent une bonne première impression, qui restent simples à utiliser et qui peuvent évoluer.
+          Que vous soyez en plein lancement, en reconversion ou déjà bien en place, on adapte le projet à votre réalité :
+          budget, temps, contraintes et objectifs.
+        </p>
+        <div class="pt-1">
+          <a href="devis.html" class="inline-flex items-center gap-2 rounded-lg bg-neutral-100 text-black px-5 py-3 text-sm hover:bg-neutral-200 transition font-light">
+            Parler de votre projet avec nous
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </a>
+        </div>
+      </section>
+    </main>  
     
-      <div class="text-center">
-        <a href="devis.html" class="inline-flex items-center gap-2 rounded-lg bg-neutral-100 text-black px-5 py-3 text-sm hover:bg-neutral-200 transition font-light">Parler de votre projet <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
-      </div>
-    </main>
-    
-    <footer class="border-t border-white/10 py-8">
-      <div class="max-w-7xl mx-auto px-6 text-sm text-neutral-400">© Pridano Tech — 2025</div>
-    </footer>
+    <!-- Footer -->
+<footer class="border-t border-white/10 py-8">
+  <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-neutral-400">
+    <span>Pridano Tech — tous droits réservés</span>
+    <nav class="flex items-center gap-6">
+      <a class="hover:text-neutral-200 transition" href="services.html">Services</a>
+      <a class="hover:text-neutral-200 transition" href="projets.html">Projets</a>
+      <a class="hover:text-neutral-200 transition" href="devis.html">Devis</a>
+      <a class="hover:text-neutral-200 transition" href="confidentialite.html">Politique de confidentialité</a>
+    </nav>
+  </div>
+</footer>
     <script>
     lucide.createIcons();
     const header=document.querySelector('header');function onScroll(){header?.classList.toggle('scrolled',(window.scrollY||0)>10)};window.addEventListener('scroll',onScroll,{passive:true});onScroll();
