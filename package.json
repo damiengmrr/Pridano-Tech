@@ -1,0 +1,24 @@
+{
+  "name": "pridano",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+"scripts": {
+  "build:css": "tailwindcss -i ./input.css -o ./style.css --minify"
+},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/damiengmrr/Pridano-Tech.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/damiengmrr/Pridano-Tech/issues"
+  },
+  "homepage": "https://github.com/damiengmrr/Pridano-Tech#readme",
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.1.17",
+    "tailwindcss": "^4.1.17"
+  }
+}
