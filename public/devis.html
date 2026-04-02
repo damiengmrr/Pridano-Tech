@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Devis intelligent · Pridano Tech</title>
+    <meta
+      name="description"
+      content="Décrivez votre projet, échangez avec l'assistant IA de cadrage et construisez un brief éditable avant l'envoi."
+    />
+    <link rel="icon" href="/assets/images/pridano-logo.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/assets/css/main.css" />
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script type="module" src="/assets/js/app.js"></script>
+  </head>
+  <body data-page="quote" class="quote-page">
+    <div data-site-header></div>
+
+    <main class="page quote-page-main">
+      <section class="section-tight quote-stage">
+        <div class="shell">
+          <div class="quote-assistant" data-quote-app>
+            <!-- <header class="quote-studio-head" data-reveal>
+              <div class="quote-studio-copy">
+                <p class="eyebrow">Devis guidé</p>
+                <h1>Décrivez le projet. Le brief se construit en quelques échanges.</h1>
+                <p>
+                  Une phrase suffit pour démarrer. L'assistant clarifie le besoin, structure le
+                  brief, puis vous relisez avant l'envoi.
+                </p>
+              </div>
+
+              <div class="quote-studio-meta">
+                <div class="quote-meta-card">
+                  <p class="card-label">Parcours</p>
+                  <div class="quote-step-strip compact">
+                    <span class="step-pill">Décrire</span>
+                    <span class="step-pill">Préciser</span>
+                    <span class="step-pill">Relire</span>
+                    <span class="step-pill">Envoyer</span>
+                  </div>
+                </div>
+
+                <div class="quote-meta-card quote-meta-actions">
+                  <span class="pill-status" data-assistant-health>
+                    <i data-lucide="activity"></i>
+                    Vérification...
+                  </span>
+                  <button class="btn btn-secondary" type="button" data-open-review disabled>
+                    Ouvrir le brief
+                  </button>
+                </div>
+              </div>
+            </header> -->
+
+            <div class="quote-studio-body">
+              <section class="conversation-panel quote-chat-panel" data-reveal>
+                <div class="conversation-head">
+                  <div>
+                    <p class="eyebrow">Conversation</p>
+                    <h2>Assistant projet</h2>
+                    <p class="wizard-status" data-chat-status>
+                      Commencez par une phrase simple. Je vais ensuite orienter la qualification selon le type de projet.
+                    </p>
+                  </div>
+                  <span class="pill-status" data-assistant-health>
+                    <i data-lucide="activity"></i>
+                    Verification...
+                  </span>
+                </div>
+
+                <div class="chat-log" data-chat-log>
+                  <article class="message assistant">
+                    <span class="message-role"><i data-lucide="sparkles"></i> Assistant</span>
+                    <p>
+                      Expliquez simplement le projet. Je vais le qualifier comme un brief utile pour
+                      un studio digital, puis vous pourrez tout relire avant l'envoi.
+                    </p>
+                  </article>
+                </div>
+
+                <div class="composer">
+                  <div class="conversation-tips" data-suggestion-group>
+                    <button
+                      class="prompt-chip"
+                      type="button"
+                      data-quick-reply="Site vitrine"
+                    >
+                      Site vitrine
+                    </button>
+                    <button
+                      class="prompt-chip"
+                      type="button"
+                      data-quick-reply="SaaS"
+                    >
+                      SaaS
+                    </button>
+                    <button
+                      class="prompt-chip"
+                      type="button"
+                      data-quick-reply="Plateforme"
+                    >
+                      Plateforme
+                    </button>
+                    <button
+                      class="prompt-chip"
+                      type="button"
+                      data-quick-reply="Automatisation"
+                    >
+                      Automatisation
+                    </button>
+                    <button
+                      class="prompt-chip"
+                      type="button"
+                      data-quick-reply="Integration IA"
+                    >
+                      Integration IA
+                    </button>
+                  </div>
+
+                  <textarea
+                    data-composer-input
+                    placeholder="Ex. On veut lancer un SaaS pour automatiser la qualification de prospects B2B."
+                  ></textarea>
+
+                  <div class="composer-footer">
+                    <p class="composer-note">
+                      Cliquez sur une réponse rapide ou écrivez librement. Le brief reste toujours éditable.
+                    </p>
+                    <div class="composer-actions">
+                      <button class="btn btn-primary" type="button" data-send-message>
+                        Envoyer
+                        <i data-lucide="arrow-up-right"></i>
+                      </button>
+                      <button class="btn btn-secondary" type="button" data-reset-conversation>
+                        Recommencer
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <aside class="brief-panel brief-dock" data-reveal>
+                <div class="brief-head">
+                  <div>
+                    <p class="eyebrow">Dossier</p>
+                    <h2>Brief en construction</h2>
+                  </div>
+                  <strong class="brief-progress-value" data-brief-progress-label>0%</strong>
+                </div>
+
+                <article class="brief-primary-card">
+                  <div class="brief-state-row">
+                    <span class="brief-state-pill" data-brief-stage-label>A demarrer</span>
+                    <span class="brief-remaining" data-brief-remaining>11 points utiles a cadrer</span>
+                  </div>
+                  <p class="card-label">Prochaine etape</p>
+                  <p class="brief-focus-text" data-next-field-label>
+                    Commencez par quelques mots sur le projet.
+                  </p>
+                  <div class="progress-bar compact"><span data-brief-progress-bar></span></div>
+                </article>
+
+                <article class="brief-summary-card compact">
+                  <div class="brief-card-head">
+                    <p class="card-label">Synthèse</p>
+                    <button class="brief-inline-link" type="button" data-open-review disabled>
+                      Modifier
+                    </button>
+                  </div>
+                  <p class="brief-summary-preview" data-brief-summary-preview>
+                    Le résumé apparaîtra ici au fil de la conversation.
+                  </p>
+                </article>
+
+                <article class="brief-details-card compact">
+                  <div class="brief-card-head">
+                    <p class="card-label">Infos captées</p>
+                    <button class="brief-inline-link" type="button" data-open-review disabled>
+                      Voir tout
+                    </button>
+                  </div>
+                  <div class="brief-preview-list" data-brief-preview-list></div>
+                  <p class="brief-empty-note" data-brief-empty-note>
+                    Le dossier reste compact au départ, puis se remplit au fil des réponses.
+                  </p>
+                </article>
+
+                <div class="brief-actions">
+                  <button class="btn btn-primary" type="button" data-open-review disabled>
+                    Relire / ajuster
+                  </button>
+                </div>
+              </aside>
+            </div>
+
+            <section class="review-modal" data-review-modal hidden>
+              <div class="review-modal-backdrop" data-close-review></div>
+              <div class="review-modal-card">
+                <button class="review-close" type="button" data-close-review aria-label="Fermer">
+                  <i data-lucide="x"></i>
+                </button>
+
+                <div class="review-modal-head">
+                  <p class="eyebrow">Relecture</p>
+                  <h2>Relire, ajuster puis envoyer</h2>
+                  <p>Vous pouvez relire et modifier chaque champ avant validation. Une fois envoye, le brief part a notre equipe par email.</p>
+                  <div class="quote-step-strip review-step-strip">
+                    <span class="step-pill">Relire</span>
+                    <span class="step-pill">Ajuster</span>
+                    <span class="step-pill">Valider</span>
+                    <span class="step-pill">Envoyer</span>
+                  </div>
+                </div>
+
+                <div class="review-modal-body">
+                  <div class="brief-groups review-grid">
+                    <div class="brief-group">
+                      <div class="brief-group-title">Essentiel</div>
+                      <div class="brief-field">
+                        <label for="briefProjectType">Type de projet</label>
+                        <input id="briefProjectType" data-brief-field="projectType" type="text" />
+                      </div>
+                      <div class="brief-field">
+                        <label for="briefSector">Secteur d'activite</label>
+                        <input id="briefSector" data-brief-field="sector" type="text" />
+                      </div>
+                      <div class="brief-field">
+                        <label for="briefPrimaryGoal">Objectif principal</label>
+                        <textarea id="briefPrimaryGoal" data-brief-field="primaryGoal"></textarea>
+                      </div>
+                      <div class="brief-field">
+                        <label for="briefTargetAudience">Cible</label>
+                        <textarea id="briefTargetAudience" data-brief-field="targetAudience"></textarea>
+                      </div>
+                    </div>
+
+                    <div class="brief-group">
+                      <div class="brief-group-title">Etat & perimetre</div>
+                      <div class="brief-field">
+                        <label for="briefCurrentState">Etat du projet actuel</label>
+                        <textarea id="briefCurrentState" data-brief-field="currentState"></textarea>
+                      </div>
+                      <div class="brief-field list">
+                        <label for="briefFeatures">Fonctionnalites attendues</label>
+                        <textarea
+                          id="briefFeatures"
+                          data-brief-field="keyFeatures"
+                          placeholder="Une ligne par fonctionnalite ou priorite"
+                        ></textarea>
+                      </div>
+                      <div class="brief-field">
+                        <label for="briefBackOfficeNeeds">Besoin de back-office</label>
+                        <textarea id="briefBackOfficeNeeds" data-brief-field="backOfficeNeeds"></textarea>
+                      </div>
+                    </div>
+
+                    <div class="brief-group">
+                      <div class="brief-group-title">Technique</div>
+                      <div class="brief-field">
+                        <label for="briefAiNeeds">Besoin IA</label>
+                        <textarea id="briefAiNeeds" data-brief-field="aiNeeds"></textarea>
+                      </div>
+                      <div class="brief-field">
+                        <label for="briefAutomationNeeds">Automatisations / integrations</label>
+                        <textarea id="briefAutomationNeeds" data-brief-field="automationNeeds"></textarea>
+                      </div>
+                    </div>
+
+                    <div class="brief-group">
+                      <div class="brief-group-title">Cadre</div>
+                      <div class="brief-field">
+                        <label for="briefConstraints">Contraintes</label>
+                        <textarea id="briefConstraints" data-brief-field="constraints"></textarea>
+                      </div>
+                      <div class="contact-grid two">
+                        <div class="brief-field">
+                          <label for="briefTimeline">Délai</label>
+                          <input id="briefTimeline" data-brief-field="timeline" type="text" />
+                        </div>
+                        <div class="brief-field">
+                          <label for="briefBudget">Budget indicatif</label>
+                          <input id="briefBudget" data-brief-field="budget" type="text" />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="brief-group">
+                      <div class="brief-group-title">Synthese</div>
+                      <div class="brief-field">
+                        <label for="briefSummary">Resume global editable</label>
+                        <textarea id="briefSummary" data-brief-field="summary"></textarea>
+                      </div>
+                      <div class="brief-actions">
+                        <button class="btn btn-secondary" type="button" data-regenerate-summary>
+                          Regenerer la synthese
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <section class="quote-contact review-contact">
+                    <div>
+                      <p class="eyebrow">Validation finale</p>
+                      <h3>Derniere etape avant l'envoi</h3>
+                      <p>
+                        Relisez le brief, corrigez ce que vous voulez, puis ajoutez vos coordonnees.
+                        Rien n'est envoye tant que vous ne validez pas.
+                      </p>
+                      <p class="review-send-note">
+                        Vous gardez la main jusqu'au clic final sur “Envoyer le brief”. Une fois valide, le dossier est transmis par email a notre equipe.
+                      </p>
+                    </div>
+
+                    <div class="contact-grid two">
+                      <div class="brief-field">
+                        <label for="contactName">Nom complet</label>
+                        <input id="contactName" type="text" />
+                      </div>
+                      <div class="brief-field">
+                        <label for="contactCompany">Société</label>
+                        <input id="contactCompany" type="text" />
+                      </div>
+                    </div>
+
+                    <div class="contact-grid two">
+                      <div class="brief-field">
+                        <label for="contactEmail">Email</label>
+                        <input id="contactEmail" type="email" />
+                      </div>
+                      <div class="brief-field">
+                        <label for="contactPhone">Téléphone</label>
+                        <input id="contactPhone" type="tel" />
+                      </div>
+                    </div>
+
+                    <div class="brief-field">
+                      <label for="contactBudget">Ordre de grandeur budgétaire</label>
+                      <select id="contactBudget">
+                        <option value="">Je préfère en discuter</option>
+                        <option>Moins de 2 000 €</option>
+                        <option>2 000 à 5 000 €</option>
+                        <option>5 000 à 10 000 €</option>
+                        <option>10 000 € et plus</option>
+                      </select>
+                    </div>
+
+                    <label class="checkbox-row" for="contactConsent">
+                      <input id="contactConsent" type="checkbox" />
+                      <span>
+                        J'accepte que ces informations soient utilisées pour me recontacter dans le cadre
+                        de cette demande. Voir la
+                        <a href="/confidentialite.html" style="text-decoration: underline;">politique de confidentialité</a>.
+                      </span>
+                    </label>
+
+                    <div class="brief-actions">
+                      <button class="btn btn-secondary" type="button" data-close-review>
+                        Retour
+                      </button>
+                      <button class="btn btn-primary" type="button" data-submit-brief>
+                        Envoyer le brief
+                      </button>
+                    </div>
+                    <p class="review-submit-status" data-submit-feedback hidden aria-live="polite"></p>
+                  </section>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-tight">
+        <div class="shell">
+          <article class="alert success" data-quote-success hidden>
+            <p class="eyebrow">Brief envoyé</p>
+            <h3 style="margin: 8px 0 10px; font-family: 'Sora', system-ui, sans-serif;">Le brief a bien ete transmis.</h3>
+            <p data-success-message style="margin: 0 0 10px; color: var(--text-soft);">
+              Notre equipe a bien recu votre brief par email.
+            </p>
+            <p data-success-summary style="margin: 0 0 14px; color: var(--muted);"></p>
+            <div class="btn-row">
+              <a class="btn btn-primary" href="/index.html">Retour à l'accueil</a>
+              <a class="btn btn-secondary" href="/services.html">Voir les services</a>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <div data-site-footer></div>
+  </body>
+</html>

@@ -1,11 +1,12 @@
 {
   "name": "pridano",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-"scripts": {
-  "build:css": "tailwindcss -i ./input.css -o ./style.css --minify"
-},
+  "description": "Pridano Tech — site business premium avec cadrage projet assiste par IA",
+  "main": "server.js",
+  "scripts": {
+    "dev": "node scripts/dev.js",
+    "start": "node server.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/damiengmrr/Pridano-Tech.git"
@@ -17,8 +18,9 @@
     "url": "https://github.com/damiengmrr/Pridano-Tech/issues"
   },
   "homepage": "https://github.com/damiengmrr/Pridano-Tech#readme",
-  "devDependencies": {
-    "@tailwindcss/cli": "^4.1.17",
-    "tailwindcss": "^4.1.17"
+  "dependencies": {
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "resend": "^6.10.0"
   }
 }

@@ -1,0 +1,1363 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Politique de confidentialité · PridanoTech</title>
+    <meta
+      name="description"
+      content="Politique de confidentialité de PridanoTech : données collectées, devis assisté par IA, email, prestataires techniques, cookies, durées de conservation et droits RGPD."
+    />
+    <link rel="icon" href="/assets/images/pridano-logo.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Sora:wght@500;600;700;800&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/assets/css/main.css" />
+    <style>
+      .privacy-page {
+        padding-bottom: 96px;
+      }
+
+      .privacy-hero {
+        padding-top: 56px;
+      }
+
+      .privacy-hero-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.45fr) minmax(280px, 0.9fr);
+        gap: 24px;
+        align-items: end;
+      }
+
+      .privacy-hero-copy h1 {
+        max-width: 11.8ch;
+      }
+
+      .privacy-chip-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 24px;
+      }
+
+      .privacy-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        min-height: 38px;
+        padding: 0 14px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.76);
+        color: var(--text-soft);
+        font-size: 0.92rem;
+        font-weight: 600;
+      }
+
+      .privacy-status-card,
+      .privacy-summary-card,
+      .privacy-toc,
+      .privacy-block {
+        background: rgba(255, 255, 255, 0.84);
+        border: 1px solid rgba(28, 43, 67, 0.08);
+        border-radius: 28px;
+        box-shadow: var(--shadow-md);
+        backdrop-filter: blur(18px);
+      }
+
+      .privacy-status-card {
+        padding: 24px;
+      }
+
+      .privacy-status-card h2 {
+        margin: 8px 0 10px;
+        font-family: "Sora", system-ui, sans-serif;
+        letter-spacing: -0.04em;
+        line-height: 1.08;
+        color: var(--text-soft);
+        font-size: clamp(1.55rem, 2.5vw, 2.2rem);
+      }
+
+      .privacy-status-card p:last-child {
+        margin-top: 14px;
+      }
+
+      .privacy-summary-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .privacy-summary-card {
+        padding: 22px;
+      }
+
+      .privacy-summary-card h3 {
+        margin: 8px 0 10px;
+        font-family: "Sora", system-ui, sans-serif;
+        letter-spacing: -0.03em;
+        line-height: 1.18;
+        color: var(--text-soft);
+        font-size: 1.14rem;
+      }
+
+      .privacy-layout {
+        display: grid;
+        grid-template-columns: 280px minmax(0, 1fr);
+        gap: 24px;
+        align-items: start;
+      }
+
+      .privacy-toc {
+        position: sticky;
+        top: 100px;
+        padding: 24px;
+      }
+
+      .privacy-toc nav {
+        display: grid;
+        gap: 8px;
+        margin-top: 16px;
+      }
+
+      .privacy-toc a {
+        display: block;
+        padding: 11px 13px;
+        border: 1px solid transparent;
+        border-radius: 14px;
+        color: var(--muted);
+        background: rgba(244, 247, 252, 0.8);
+        transition:
+          background-color 180ms ease,
+          border-color 180ms ease,
+          color 180ms ease,
+          transform 180ms ease;
+      }
+
+      .privacy-toc a:hover {
+        color: var(--text-soft);
+        border-color: rgba(34, 86, 211, 0.15);
+        background: rgba(34, 86, 211, 0.08);
+        transform: translateX(2px);
+      }
+
+      .privacy-document {
+        display: grid;
+        gap: 18px;
+      }
+
+      .privacy-block {
+        padding: 28px;
+      }
+
+      .privacy-block-head {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: 16px;
+      }
+
+      .privacy-index {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 42px;
+        height: 42px;
+        border-radius: 14px;
+        background: rgba(34, 86, 211, 0.1);
+        color: var(--accent);
+        font-family: "Sora", system-ui, sans-serif;
+        font-size: 0.98rem;
+        font-weight: 700;
+        letter-spacing: -0.03em;
+        flex-shrink: 0;
+      }
+
+      .privacy-block-head h2 {
+        margin: 6px 0 0;
+        font-family: "Sora", system-ui, sans-serif;
+        letter-spacing: -0.04em;
+        line-height: 1.08;
+        color: var(--text-soft);
+        font-size: clamp(1.4rem, 2vw, 2rem);
+      }
+
+      .privacy-block p + p {
+        margin-top: 12px;
+      }
+
+      .privacy-block ul,
+      .privacy-block ol {
+        margin: 14px 0 0;
+        padding-left: 20px;
+        color: var(--muted);
+        line-height: 1.72;
+      }
+
+      .privacy-block li + li {
+        margin-top: 8px;
+      }
+
+      .privacy-grid {
+        display: grid;
+        gap: 16px;
+        margin-top: 18px;
+      }
+
+      .privacy-grid.two {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .privacy-note,
+      .privacy-callout {
+        border: 1px solid rgba(28, 43, 67, 0.08);
+        border-radius: 22px;
+        background: linear-gradient(180deg, rgba(251, 252, 255, 0.98), rgba(241, 245, 251, 0.92));
+        padding: 18px 18px 20px;
+      }
+
+      .privacy-note h3,
+      .privacy-callout h3 {
+        margin: 0 0 10px;
+        font-family: "Sora", system-ui, sans-serif;
+        letter-spacing: -0.03em;
+        line-height: 1.18;
+        color: var(--text-soft);
+        font-size: 1.02rem;
+      }
+
+      .privacy-callout {
+        margin-top: 18px;
+      }
+
+      .privacy-callout.is-warning {
+        border-color: rgba(198, 91, 91, 0.16);
+        background: linear-gradient(180deg, rgba(255, 249, 249, 0.98), rgba(253, 241, 241, 0.92));
+      }
+
+      .privacy-callout.is-accent {
+        border-color: rgba(34, 86, 211, 0.14);
+        background: linear-gradient(180deg, rgba(247, 250, 255, 0.98), rgba(237, 244, 255, 0.92));
+      }
+
+      .privacy-definition {
+        margin-top: 8px;
+      }
+
+      .privacy-definition-row {
+        display: grid;
+        grid-template-columns: minmax(160px, 220px) minmax(0, 1fr);
+        gap: 16px;
+        padding: 14px 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .privacy-definition-row:first-child {
+        border-top: 0;
+      }
+
+      .privacy-definition-row strong {
+        color: var(--text-soft);
+      }
+
+      .privacy-step-list {
+        display: grid;
+        gap: 12px;
+        margin-top: 18px;
+      }
+
+      .privacy-step {
+        display: grid;
+        grid-template-columns: 42px minmax(0, 1fr);
+        gap: 14px;
+        align-items: start;
+        padding: 16px 18px;
+        border: 1px solid rgba(28, 43, 67, 0.08);
+        border-radius: 20px;
+        background: rgba(251, 252, 255, 0.92);
+      }
+
+      .privacy-step-number {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 42px;
+        height: 42px;
+        border-radius: 14px;
+        background: rgba(21, 34, 53, 0.06);
+        color: var(--text-soft);
+        font-family: "Sora", system-ui, sans-serif;
+        font-weight: 700;
+      }
+
+      .privacy-step h3 {
+        margin: 0 0 8px;
+        font-family: "Sora", system-ui, sans-serif;
+        letter-spacing: -0.03em;
+        color: var(--text-soft);
+        font-size: 1rem;
+      }
+
+      .privacy-placeholder {
+        display: inline-block;
+        padding: 2px 8px;
+        border-radius: 999px;
+        background: rgba(21, 34, 53, 0.07);
+        color: var(--text-soft);
+        font-size: 0.92rem;
+        font-weight: 600;
+      }
+
+      .privacy-divider {
+        margin: 18px 0 0;
+        height: 1px;
+        border: 0;
+        background: var(--line);
+      }
+
+      @media (max-width: 1120px) {
+        .privacy-summary-grid,
+        .privacy-grid.two,
+        .privacy-hero-grid,
+        .privacy-layout {
+          grid-template-columns: 1fr;
+        }
+
+        .privacy-toc {
+          position: static;
+        }
+      }
+
+      @media (max-width: 720px) {
+        .privacy-page {
+          padding-bottom: 72px;
+        }
+
+        .privacy-status-card,
+        .privacy-summary-card,
+        .privacy-toc,
+        .privacy-block {
+          border-radius: 24px;
+        }
+
+        .privacy-block {
+          padding: 24px;
+        }
+
+        .privacy-definition-row,
+        .privacy-step {
+          grid-template-columns: 1fr;
+        }
+
+        .privacy-step-number {
+          width: 38px;
+          height: 38px;
+        }
+      }
+    </style>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script type="module" src="/assets/js/app.js"></script>
+  </head>
+  <body data-page="privacy">
+    <div data-site-header></div>
+
+    <main class="page privacy-page">
+      <section class="page-hero privacy-hero">
+        <div class="shell">
+          <div class="privacy-hero-grid">
+            <div class="page-hero-copy hero-simple privacy-hero-copy" data-reveal>
+              <p class="eyebrow">Protection des données</p>
+              <h1>Politique de confidentialité</h1>
+              <p>
+                Cette politique décrit de manière claire et structurée comment PridanoTech traite
+                les données personnelles collectées via son site vitrine, sa page de devis assistée
+                par IA, ses échanges commerciaux et ses outils techniques associés. Elle vise à
+                informer les utilisateurs avec sérieux, à limiter les ambiguïtés et à encadrer
+                précisément les traitements réalisés dans un contexte France / Union européenne.
+              </p>
+
+              <div class="privacy-chip-list" aria-label="Points clés">
+                <span class="privacy-chip">Site vitrine & studio digital</span>
+                <span class="privacy-chip">Devis assisté par IA</span>
+                <span class="privacy-chip">Email transactionnel</span>
+                <span class="privacy-chip">Approche RGPD</span>
+              </div>
+            </div>
+
+            <aside class="privacy-status-card" data-reveal>
+              <p class="card-label">Version en vigueur</p>
+              <h2>2 avril 2026</h2>
+              <p>
+                La présente version s'applique aux traitements actuellement identifiés sur le site.
+                Elle pourra être ajustée en cas d'évolution de l'infrastructure, des formulaires, de
+                l'assistant IA, des cookies ou des prestataires techniques.
+              </p>
+              <p>
+                En cas d'écart entre cette page et un paramétrage technique futur, le paramétrage
+                réel devra être aligné et la présente politique mise à jour sans délai excessif.
+              </p>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="shell">
+          <div class="privacy-summary-grid">
+            <article class="privacy-summary-card" data-reveal>
+              <p class="card-label">Principe</p>
+              <h3>Seulement les données utiles</h3>
+              <p>
+                PridanoTech demande uniquement les informations pertinentes pour répondre à une
+                prise de contact, cadrer un projet ou traiter un brief.
+              </p>
+            </article>
+
+            <article class="privacy-summary-card" data-reveal>
+              <p class="card-label">IA / devis</p>
+              <h3>Pas de données sensibles inutiles</h3>
+              <p>
+                Le module assisté par IA n'est pas conçu pour recevoir des mots de passe, données
+                bancaires, données de santé, secrets d'affaires non nécessaires ou documents
+                confidentiels non demandés.
+              </p>
+            </article>
+
+            <article class="privacy-summary-card" data-reveal>
+              <p class="card-label">Cookies</p>
+              <h3>Consentement si requis</h3>
+              <p>
+                Les traceurs strictement nécessaires peuvent fonctionner sans consentement. Les
+                traceurs non essentiels, s'ils sont activés à l'avenir, devront être soumis à votre
+                choix préalable lorsque la réglementation l'impose.
+              </p>
+            </article>
+
+            <article class="privacy-summary-card" data-reveal>
+              <p class="card-label">Droits</p>
+              <h3>Accès, rectification, opposition</h3>
+              <p>
+                Vous pouvez exercer vos droits RGPD et demander des précisions sur les traitements
+                via l'adresse de contact confidentialité indiquée en bas de cette page.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="shell privacy-layout">
+          <aside class="privacy-toc" data-reveal>
+            <p class="eyebrow">Sommaire</p>
+            <nav aria-label="Sommaire de la politique de confidentialité">
+              <a href="#introduction">Introduction</a>
+              <a href="#responsable">Responsable du traitement</a>
+              <a href="#donnees">Données collectées</a>
+              <a href="#finalites">Finalités des traitements</a>
+              <a href="#bases-legales">Bases légales</a>
+              <a href="#obligatoire">Données obligatoires ou facultatives</a>
+              <a href="#destinataires">Destinataires des données</a>
+              <a href="#hebergement">Hébergement et sous-traitants</a>
+              <a href="#tiers">Outils tiers et services externes</a>
+              <a href="#ia-devis">Page devis assistée par IA</a>
+              <a href="#envoi-brief">Envoi d'un brief</a>
+              <a href="#conservation">Durées de conservation</a>
+              <a href="#securite">Sécurité des données</a>
+              <a href="#droits">Droits des utilisateurs</a>
+              <a href="#cookies">Cookies et traceurs</a>
+              <a href="#transferts">Transferts hors UE</a>
+              <a href="#mineurs">Données des mineurs</a>
+              <a href="#maj">Mise à jour</a>
+              <a href="#contact">Contact confidentialité</a>
+            </nav>
+          </aside>
+
+          <article class="privacy-document">
+            <section id="introduction" class="privacy-block" data-reveal>
+              <div class="privacy-block-head">
+                <span class="privacy-index">01</span>
+                <div>
+                  <p class="card-label">Cadre général</p>
+                  <h2>Introduction</h2>
+                </div>
+              </div>
+
+              <p>
+                La présente politique s'applique au site PridanoTech, à ses pages publiques et aux
+                traitements liés aux demandes de contact, de devis et de cadrage projet, y compris
+                lorsque ces parcours mobilisent des services techniques tiers.
+              </p>
+              <p>
+                PridanoTech agit avec une logique de minimisation : seules les données nécessaires,
+                pertinentes et proportionnées au traitement de votre demande ont vocation à être
+                collectées. Le site n'a pas vocation à devenir un canal de dépôt de documents
+                sensibles, de secrets d'affaires non nécessaires ou de données réglementées hors du
+                strict besoin de prise de contact initiale.
+              </p>
+
+              <div class="privacy-callout is-warning">
+                <h3>Point d'attention important</h3>
+                <p>
+                  Si votre besoin suppose l'échange d'informations particulièrement confidentielles,
+                  stratégiques ou sensibles, il est recommandé de limiter votre premier message à un
+                  cadrage général puis d'organiser ensuite un canal dédié et adapté avec
+                  PridanoTech.
+                </p>
+              </div>
+            </section>
+
+            <section id="responsable" class="privacy-block" data-reveal>
+              <div class="privacy-block-head">
+                <span class="privacy-index">02</span>
+                <div>
+                  <p class="card-label">Identification</p>
+                  <h2>Responsable du traitement</h2>
+                </div>
+              </div>
+
+              <p>
+                Sauf mention contraire pour un traitement déterminé, PridanoTech agit en qualité de
+                responsable du traitement des données personnelles décrites dans cette politique.
+              </p>
+
+              <div class="privacy-definition">
+                <div class="privacy-definition-row">
+                  <strong>Nom commercial</strong>
+                  <span>PridanoTech</span>
+                </div>
+                <div class="privacy-definition-row">
+                  <strong>Dénomination légale</strong>
+                  <span
+                    ><span class="privacy-placeholder"
+                      >[À compléter : dénomination sociale exacte / forme juridique]</span
+                    ></span
+                  >
+                </div>
+                <div class="privacy-definition-row">
+                  <strong>Siège social</strong>
+                  <span
+                    ><span class="privacy-placeholder"
+                      >[À compléter : adresse postale complète]</span
+                    ></span
+                  >
+                </div>
+                <div class="privacy-definition-row">
+                  <strong>SIREN / SIRET</strong>
+                  <span
+                    ><span class="privacy-placeholder"
+                      >[À compléter : numéro SIREN ou SIRET]</span
+                    ></span
+                  >
+                </div>
+                <div class="privacy-definition-row">
+                  <strong>Email</strong>
+                  <span><a href="mailto:pridanotech@gmail.com">pridanotech@gmail.com</a></span>
+                </div>
+                <div class="privacy-definition-row">
+                  <strong>Contact RGPD</strong>
+                  <span>
+                    <a href="mailto:pridanotech@gmail.com">pridanotech@gmail.com</a>
+                    <span class="privacy-placeholder"
+                      >[À compléter si adresse dédiée ou DPO]</span
+                    >
+                  </span>
+                </div>
+              </div>
+
+              <div class="privacy-callout is-accent">
+                <h3>Alignement recommandé</h3>
+                <p>
+                  Les informations d'identification légale figurant ici doivent être cohérentes avec
+                  les mentions légales du site, les coordonnées affichées en pied de page, les CGV
+                  ou documents commerciaux, et les paramètres d'envoi des emails.
+                </p>
+              </div>
+            </section>
+
+            <section id="donnees" class="privacy-block" data-reveal>
+              <div class="privacy-block-head">
+                <span class="privacy-index">03</span>
+                <div>
+                  <p class="card-label">Périmètre</p>
+                  <h2>Données collectées</h2>
+                </div>
+              </div>
+
+              <p>
+                Selon votre usage du site, PridanoTech peut traiter les catégories de données
+                suivantes :
+              </p>
+
+              <div class="privacy-grid two">
+                <article class="privacy-note">
+                  <h3>Données d'identification et de contact</h3>
+                  <p>
+                    Nom, prénom ou nom complet, société, adresse email, numéro de téléphone,
+                    fonction éventuelle et toute autre information d'identification que vous décidez
+                    de partager dans le cadre d'une demande.
+                  </p>
+                </article>
+
+                <article class="privacy-note">
+                  <h3>Données de cadrage projet</h3>
+                  <p>
+                    Description du besoin, type de projet, secteur, objectif, cible, état de
+                    l'existant, fonctionnalités attendues, besoins en IA, automatisations,
+                    back-office, contraintes, délai, budget indicatif et synthèse du brief.
+                  </p>
+                </article>
+
+                <article class="privacy-note">
+                  <h3>Données issues de la conversation</h3>
+                  <p>
+                    Messages saisis dans le module de devis assisté, historique utile à la
+                    qualification, réponses rapides sélectionnées, résumé éditable et version finale
+                    validée pour envoi.
+                  </p>
+                </article>
+
+                <article class="privacy-note">
+                  <h3>Données techniques</h3>
+                  <p>
+                    Données de connexion et de journalisation strictement nécessaires au
+                    fonctionnement, à la sécurité, au diagnostic et à la prévention des abus, telles
+                    que l'adresse IP, la date et l'heure, l'URL appelée, certains en-têtes
+                    techniques et le type de navigateur transmis par votre terminal.
+                  </p>
+                </article>
+              </div>
+
+              <div class="privacy-callout is-warning">
+                <h3>Données non demandées</h3>
+                <p>
+                  PridanoTech ne demande pas, pour un premier cadrage, de mots de passe, d'accès
+                  administrateur, de données bancaires, de données de santé, de pièces d'identité,
+                  de numéros de carte, ni de données sensibles au sens du RGPD. Si de telles
+                  informations sont transmises sans nécessité, PridanoTech pourra les ignorer, les
+                  masquer ou demander leur retrait lorsqu'il est raisonnablement possible de le
+                  faire.
+                </p>
+              </div>
+
+              <div class="privacy-callout">
+                <h3>Exactitude et données de tiers</h3>
+                <p>
+                  Vous vous engagez à transmettre des informations exactes, à jour et limitées au
+                  besoin réel de votre demande. Si vous communiquez des données concernant des
+                  collaborateurs, clients, partenaires ou autres tiers, vous vous assurez d'être
+                  autorisé à le faire et de ne transmettre que les éléments strictement nécessaires.
+                </p>
+              </div>
+            </section>
+
+            <section id="finalites" class="privacy-block" data-reveal>
+              <div class="privacy-block-head">
+                <span class="privacy-index">04</span>
+                <div>
+                  <p class="card-label">Pourquoi</p>
+                  <h2>Finalités des traitements</h2>
+                </div>
+              </div>
+
+              <p>Les données collectées peuvent être utilisées pour :</p>
+              <ul>
+                <li>répondre à vos demandes de contact, de devis ou de cadrage ;</li>
+                <li>qualifier le besoin et produire un brief plus clair, exploitable commercialement, produit et techniquement ;</li>
+                <li>préparer un échange humain, une proposition commerciale, un audit de besoin ou des mesures précontractuelles ;</li>
+                <li>acheminer un brief finalisé à l'équipe PridanoTech par email ;</li>
+                <li>assurer la continuité technique du site, la sécurité, la prévention des abus et le diagnostic d'incidents ;</li>
+                <li>respecter les obligations légales, comptables, fiscales ou probatoires applicables si une relation contractuelle suit ;</li>
+                <li>mesurer l'audience ou gérer des cookies non essentiels si ces fonctionnalités sont activées ultérieurement dans des conditions conformes à la réglementation.</li>
+              </ul>
+
+              <div class="privacy-callout is-accent">
+                <h3>Limitation des finalités</h3>
+                <p>
+                  PridanoTech n'entend pas utiliser les données recueillies pour des finalités
+                  incompatibles avec celles annoncées ci-dessus. En particulier, le module IA de
+                  devis n'a pas pour finalité de profiler les personnes au sens d'une décision
+                  automatisée produisant des effets juridiques ou similaires.
+                </p>
+              </div>
+            </section>
+
+            <section id="bases-legales" class="privacy-block" data-reveal>
+              <div class="privacy-block-head">
+                <span class="privacy-index">05</span>
+                <div>
+                  <p class="card-label">Fondement juridique</p>
+                  <h2>Bases légales</h2>
+                </div>
+              </div>
+
+              <p>Selon les cas, les traitements reposent principalement sur les bases suivantes :</p>
+              <div class="privacy-grid two">
+                <article class="privacy-note">
+                  <h3>Mesures précontractuelles</h3>
+                  <p>
+                    Lorsqu'un utilisateur demande un devis, un cadrage ou une prise de contact en
+                    vue d'un projet, PridanoTech traite les données nécessaires à l'étude de cette
+                    demande et à la préparation d'éventuels échanges ou propositions.
+                  </p>
+                </article>
+
+                <article class="privacy-note">
+                  <h3>Intérêt légitime</h3>
+                  <p>
+                    Pour organiser les échanges, conserver un historique raisonnable, sécuriser les
+                    formulaires, prévenir les usages abusifs et administrer le site, PridanoTech
+                    peut s'appuyer sur son intérêt légitime, sous réserve de ne pas porter une
+                    atteinte disproportionnée aux droits des personnes.
+                  </p>
+                </article>
+
+                <article class="privacy-note">
+                  <h3>Consentement</h3>
+                  <p>
+                    Le consentement peut être requis pour certains traceurs non essentiels et, selon
+                    les cas, pour certains usages optionnels ne relevant pas strictement de la
+                    gestion de votre demande initiale.
+                  </p>
+                </article>
+
+                <article class="privacy-note">
+                  <h3>Obligation légale</h3>
+                  <p>
+                    En présence d'une relation contractuelle ou d'obligations comptables, fiscales
+                    ou probatoires, certaines données doivent être conservées ou traitées pour se
+                    conformer au droit applicable.
+                  </p>
+                </article>
+              </div>
+
+              <p>
+                La case de validation présente sur la page de devis matérialise l'information de
+                l'utilisateur et son accord pour être recontacté au sujet de sa demande ; elle ne
+                modifie pas, à elle seule, la base principale applicable lorsque le traitement est
+                objectivement nécessaire à l'étude d'une demande précontractuelle.
+              </p>
+            </section>
+
+            <section id="obligatoire" class="privacy-block" data-reveal>
+              <div class="privacy-block-head">
+                <span class="privacy-index">06</span>
+                <div>
+                  <p class="card-label">Proportionnalité</p>
+                  <h2>Caractère obligatoire ou facultatif des données</h2>
+                </div>
+              </div>
+
+              <p>
+                Certaines données sont nécessaires pour permettre à PridanoTech de comprendre votre
+                besoin et de vous recontacter utilement. D'autres restent facultatives.
+              </p>
+
+              <ul>
+                <li>
+                  Sont généralement nécessaires : les éléments essentiels de cadrage du projet, votre
+                  nom, votre adresse email et la validation de la demande avant envoi.
+                </li>
+                <li>
+                  Peuvent être facultatifs selon le contexte : le nom de société, le téléphone,
+                  certains détails de contexte, un budget indicatif ou des précisions non
+                  indispensables.
+                </li>
+                <li>
+                  L'absence de certaines données peut empêcher PridanoTech de traiter correctement
+                  la demande, d'établir un brief exploitable ou simplement de vous répondre.
+                </li>
+                <li>
+                  Les champs non obligatoires n'ont pas à être renseignés sauf mention expresse
+                  contraire.
+                </li>
+              </ul>
+
+              <div class="privacy-callout">
+                <h3>Principe de minimisation</h3>
+                <p>
+                  Merci de ne transmettre que les informations utiles au cadrage. Plus le message est
+                  pertinent et proportionné, plus le traitement de votre demande sera rapide, clair
+                  et sécurisé.
+                </p>
+              </div>
+            </section>
+
+            <section id="destinataires" class="privacy-block" data-reveal>
+              <div class="privacy-block-head">
+                <span class="privacy-index">07</span>
+                <div>
+                  <p class="card-label">Accès aux données</p>
+                  <h2>Destinataires des données</h2>
+                </div>
+              </div>
+
+              <p>Les données peuvent être communiquées, dans la stricte limite du besoin, à :</p>
+              <ul>
+                <li>PridanoTech et les personnes habilitées à traiter les demandes commerciales, produit ou techniques ;</li>
+                <li>les prestataires techniques intervenant pour l'hébergement, la délivrance des emails, la sécurité, l'infrastructure ou le fonctionnement de l'assistant IA ;</li>
+                <li>les prestataires de ressources externes chargées par le navigateur lorsque le site appelle des contenus hébergés chez eux ;</li>
+                <li>les autorités administratives, judiciaires ou organismes légalement habilités lorsque la loi l'impose.</li>
+              </ul>
+
+              <p>
+                Les destinataires n'ont pas un accès général et illimité à l'ensemble des données :
+                chaque accès doit répondre à une nécessité opérationnelle, contractuelle, légale ou
+                technique.
+              </p>
+            </section>
+
+            <section id="hebergement" class="privacy-block" data-reveal>
+              <div class="privacy-block-head">
+                <span class="privacy-index">08</span>
+                <div>
+                  <p class="card-label">Infrastructure</p>
+                  <h2>Hébergement et sous-traitants</h2>
+                </div>
+              </div>
+
+              <p>
+                Le site et certains traitements peuvent reposer sur des prestataires techniques
+                tiers agissant en qualité de sous-traitants ou de prestataires indépendants selon la
+                nature de l'opération concernée.
+              </p>
+
+              <div class="privacy-definition">
+                <div class="privacy-definition-row">
+                  <strong>Hébergement du site / serveur</strong>
+                  <span
+                    ><span class="privacy-placeholder"
+                      >[À compléter : nom de l'hébergeur, entité, pays et/ou région]</span
+                    ></span
+                  >
+                </div>
+                <div class="privacy-definition-row">
+                  <strong>Email transactionnel</strong>
+                  <span>
+                    Resend
+                    <span class="privacy-placeholder"
+                      >[À confirmer : région de traitement du compte PridanoTech]</span
+                    >
+                  </span>
+                </div>
+                <div class="privacy-definition-row">
+                  <strong>Assistant IA</strong>
+                  <span>Groq, lorsqu'il est activé dans la configuration technique du site</span>
+                </div>
+                <div class="privacy-definition-row">
+                  <strong>Ressources front externes</strong>
+                  <span>Google Fonts (`fonts.googleapis.com`, `fonts.gstatic.com`) et `unpkg.com` pour certaines bibliothèques front</span>
+                </div>
+              </div>
+
+              <div class="privacy-callout is-accent">
+                <h3>Sélection des prestataires</h3>
+                <p>
+                  PridanoTech sélectionne ses prestataires avec une diligence raisonnable et au vu
+                  des engagements, documentations et niveaux de service disponibles lors de leur
+                  intégration. Toutefois, PridanoTech ne contrôle pas en permanence leurs politiques
+                  internes, infrastructures, sous-traitants ultérieurs ou éventuelles évolutions ;
+                  chaque prestataire demeure responsable de sa propre conformité, de sa sécurité et
+                  de ses documents contractuels ou politiques de confidentialité.
+                </p>
+              </div>
+            </section>
+
+            <section id="tiers" class="privacy-block" data-reveal>
+              <div class="privacy-block-head">
+                <span class="privacy-index">09</span>
+                <div>
+                  <p class="card-label">Services externes</p>
+                  <h2>Outils tiers et services externes</h2>
+                </div>
+              </div>
+
+              <p>
+                Certains traitements ou affichages peuvent dépendre de services externes, par
+                exemple pour l'envoi d'emails, l'inférence IA, le chargement de polices, de scripts
+                ou d'icônes, et potentiellement à l'avenir pour des outils d'analyse d'audience ou
+                d'automatisation.
+              </p>
+              <p>
+                Dans ce contexte, le navigateur ou le serveur peut transmettre à ces services des
+                données techniques strictement nécessaires à la requête, telles que l'adresse IP, la
+                date et l'heure, l'URL demandée, certains en-têtes réseau et les informations de
+                navigateur.
+              </p>
+
+              <ul>
+                <li>ces services disposent de leurs propres conditions et politiques de confidentialité ;</li>
+                <li>PridanoTech ne garantit pas l'absence d'évolution de ces politiques après leur intégration ;</li>
+                <li>la responsabilité de PridanoTech ne saurait s'étendre aux politiques de confidentialité des sites ou services tiers, ni à leurs traitements propres ;</li>
+                <li>l'ajout futur de nouveaux services externes pourra entraîner une mise à jour de la présente politique.</li>
+              </ul>
+
+              <div class="privacy-callout">
+                <h3>Liens externes</h3>
+                <p>
+                  Le site peut contenir des liens vers des sites, services ou contenus tiers.
+                  L'ouverture de ces liens relève de votre choix. PridanoTech n'est pas responsable
+                  des politiques de confidentialité, du contenu, de la sécurité ou des pratiques de
+                  ces services externes.
+                </p>
+              </div>
+            </section>
+
+            <section id="ia-devis" class="privacy-block" data-reveal>
+              <div class="privacy-block-head">
+                <span class="privacy-index">10</span>
+                <div>
+                  <p class="card-label">Section dédiée</p>
+                  <h2>Fonctionnement de la page devis assistée par IA</h2>
+                </div>
+              </div>
+
+              <p>
+                La page de devis assistée par IA a pour finalité de préqualifier votre besoin et de
+                construire un brief plus clair avant transmission à l'équipe PridanoTech. Il s'agit
+                d'un outil d'aide au cadrage, pas d'un générateur d'engagement contractuel
+                automatique.
+              </p>
+
+              <div class="privacy-grid two">
+                <article class="privacy-note">
+                  <h3>Ce que vous pouvez transmettre</h3>
+                  <p>
+                    Un descriptif utile du projet, vos objectifs, votre cible, l'état de l'existant,
+                    les fonctionnalités attendues, vos besoins en IA ou en automatisation, vos
+                    contraintes, votre délai et un ordre de grandeur budgétaire si vous souhaitez le
+                    partager.
+                  </p>
+                </article>
+
+                <article class="privacy-note">
+                  <h3>Ce que vous devez éviter</h3>
+                  <p>
+                    Toute information sensible ou non nécessaire : mots de passe, accès privés,
+                    données bancaires, données de santé, informations RH sensibles, secrets
+                    d'affaires non indispensables, documents classifiés, identifiants d'API,
+                    informations couvertes par un secret professionnel si leur communication n'est
+                    pas requise à ce stade.
+                  </p>
+                </article>
+              </div>
+
+              <ul>
+                <li>les réponses de l'assistant servent à structurer, clarifier et reformuler votre besoin ;</li>
+                <li>elles peuvent être utilisées pour générer une synthèse éditable avant envoi ;</li>
+                <li>elles ne constituent ni un conseil juridique, ni une garantie de faisabilité absolue, ni une offre ferme, ni un engagement contractuel automatique ;</li>
+                <li>si l'IA n'est pas configurée ou n'est pas disponible, le site peut basculer vers un mode local ou de secours plus classique ;</li>
+                <li>aucune décision automatisée produisant des effets juridiques n'est prise sur le seul fondement des réponses du module.</li>
+              </ul>
+
+              <div class="privacy-callout is-warning">
+                <h3>Utilisation de services tiers IA</h3>
+                <p>
+                  Lorsque l'assistant IA est activé, les éléments strictement nécessaires au cadrage
+                  peuvent être transmis à un prestataire technique tiers afin de générer des
+                  questions, d'affiner le brief ou de produire une synthèse. Cette intervention est
+                  encadrée par la configuration technique choisie par PridanoTech et par la
+                  documentation contractuelle ou publique du prestataire concerné.
+                </p>
+              </div>
+            </section>
+
+            <section id="envoi-brief" class="privacy-block" data-reveal>
+              <div class="privacy-block-head">
+                <span class="privacy-index">11</span>
+                <div>
+                  <p class="card-label">Transmission</p>
+                  <h2>Données transmises lors de l'envoi d'un brief</h2>
+                </div>
+              </div>
+
+              <p>
+                Lorsque vous cliquez sur <em>Envoyer le brief</em>, les éléments suivants peuvent
+                être transmis pour étude par PridanoTech :
+              </p>
+
+              <div class="privacy-step-list" aria-label="Étapes de transmission du brief">
+                <article class="privacy-step">
+                  <span class="privacy-step-number">01</span>
+                  <div>
+                    <h3>Préparation du dossier</h3>
+                    <p>
+                      Le site rassemble le brief initial, les réponses de cadrage, la synthèse
+                      éditable, les champs structurés du projet et vos coordonnées de contact.
+                    </p>
+                  </div>
+                </article>
+
+                <article class="privacy-step">
+                  <span class="privacy-step-number">02</span>
+                  <div>
+                    <h3>Validation finale par l'utilisateur</h3>
+                    <p>
+                      Vous gardez la main jusqu'à la validation finale. L'envoi ne se déclenche pas
+                      tant que vous n'avez pas validé le brief et renseigné les éléments requis,
+                      notamment votre email et votre accord pour être recontacté.
+                    </p>
+                  </div>
+                </article>
+
+                <article class="privacy-step">
+                  <span class="privacy-step-number">03</span>
+                  <div>
+                    <h3>Transmission technique</h3>
+                    <p>
+                      Les données sont adressées au serveur de PridanoTech puis converties en email
+                      transactionnel à destination de l'équipe via le prestataire d'envoi
+                      configuré. L'adresse email renseignée peut être utilisée comme adresse de
+                      réponse dans le message transmis.
+                    </p>
+                  </div>
+                </article>
+
+                <article class="privacy-step">
+                  <span class="privacy-step-number">04</span>
+                  <div>
+                    <h3>Étude humaine</h3>
+                    <p>
+                      Le brief est ensuite lu et traité par l'équipe PridanoTech dans une logique
+                      commerciale, précontractuelle et d'analyse de faisabilité. L'envoi d'un brief
+                      n'emporte pas acceptation automatique du projet par PridanoTech.
+                    </p>
+                  </div>
+                </article>
+              </div>
+
+              <div class="privacy-callout is-accent">
+                <h3>Contenu potentiellement transmis</h3>
+                <p>
+                  Le dossier peut inclure la description initiale du projet, l'historique utile de
+                  la conversation, les champs structurés du brief, la synthèse finale, le nom, la
+                  société, l'email, le téléphone, l'information budgétaire partagée et la trace de
+                  validation du formulaire.
+                </p>
+              </div>
+            </section>
+
+            <section id="conservation" class="privacy-block" data-reveal>
+              <div class="privacy-block-head">
+                <span class="privacy-index">12</span>
+                <div>
+                  <p class="card-label">Durées</p>
+                  <h2>Durées de conservation</h2>
+                </div>
+              </div>
+
+              <p>
+                Les durées ci-dessous sont indiquées à titre de ligne directrice et doivent rester
+                cohérentes avec la réalité technique, contractuelle et réglementaire du projet.
+              </p>
+
+              <div class="privacy-definition">
+                <div class="privacy-definition-row">
+                  <strong>Demandes de contact / devis sans suite</strong>
+                  <span>
+                    Jusqu'à 3 ans à compter du dernier contact émanant de la personne concernée, sauf
+                    suppression anticipée si la demande est clôturée plus tôt et qu'aucune
+                    conservation complémentaire n'est nécessaire.
+                  </span>
+                </div>
+                <div class="privacy-definition-row">
+                  <strong>Briefs et échanges précontractuels</strong>
+                  <span>
+                    Pendant la durée utile à l'étude du projet, puis dans la limite d'un cycle
+                    commercial raisonnable ; au-delà, archivage ou suppression selon l'intérêt
+                    opérationnel et les obligations applicables.
+                  </span>
+                </div>
+                <div class="privacy-definition-row">
+                  <strong>Relation contractuelle / documents comptables</strong>
+                  <span>
+                    Pendant la relation contractuelle puis pour la durée imposée par les obligations
+                    légales, comptables, fiscales et probatoires applicables.
+                  </span>
+                </div>
+                <div class="privacy-definition-row">
+                  <strong>Logs techniques et sécurité</strong>
+                  <span>
+                    Pendant la durée strictement nécessaire au fonctionnement, à la sécurité, au
+                    diagnostic et à la prévention des abus
+                    <span class="privacy-placeholder"
+                      >[À compléter selon l'hébergeur, le proxy et les outils réellement activés]</span
+                    >.
+                  </span>
+                </div>
+                <div class="privacy-definition-row">
+                  <strong>Choix relatifs aux cookies</strong>
+                  <span>
+                    Pendant la durée nécessaire à la gestion de votre préférence, dans le respect
+                    des règles applicables et du paramétrage du futur bandeau cookies le cas échéant.
+                  </span>
+                </div>
+              </div>
+
+              <div class="privacy-callout">
+                <h3>Prestataires tiers</h3>
+                <p>
+                  Certaines données peuvent également être conservées temporairement par les
+                  prestataires techniques selon leurs propres politiques, leurs exigences de sécurité
+                  ou les paramètres du compte PridanoTech. Lorsque ces durées ne sont pas
+                  directement maîtrisées dans le projet, elles doivent être vérifiées dans la
+                  documentation du prestataire concerné.
+                </p>
+              </div>
+            </section>
+
+            <section id="securite" class="privacy-block" data-reveal>
+              <div class="privacy-block-head">
+                <span class="privacy-index">13</span>
+                <div>
+                  <p class="card-label">Mesures raisonnables</p>
+                  <h2>Sécurité des données</h2>
+                </div>
+              </div>
+
+              <p>
+                PridanoTech met en œuvre des mesures techniques et organisationnelles raisonnables,
+                adaptées à la nature du site et des données traitées, pour limiter les risques
+                d'accès non autorisé, de divulgation, d'altération ou de perte.
+              </p>
+
+              <ul>
+                <li>restriction des accès aux seules personnes habilitées ;</li>
+                <li>utilisation de prestataires techniques reconnus pour l'envoi des emails et les traitements IA lorsqu'ils sont activés ;</li>
+                <li>segmentation entre le site public, les traitements serveur et les environnements de configuration ;</li>
+                <li>mesures de journalisation, de diagnostic et de prévention des usages abusifs lorsque cela est nécessaire.</li>
+              </ul>
+
+              <div class="privacy-callout is-warning">
+                <h3>Absence de sécurité absolue</h3>
+                <p>
+                  Malgré ces mesures, aucun environnement connecté à Internet ne peut garantir une
+                  sécurité absolue ni l'absence totale de risque. En conséquence, PridanoTech ne
+                  promet pas un risque zéro. Vous demeurez également responsable du choix des
+                  informations que vous décidez de transmettre via le site.
+                </p>
+              </div>
+            </section>
+
+            <section id="droits" class="privacy-block" data-reveal>
+              <div class="privacy-block-head">
+                <span class="privacy-index">14</span>
+                <div>
+                  <p class="card-label">RGPD</p>
+                  <h2>Droits des utilisateurs</h2>
+                </div>
+              </div>
+
+              <p>
+                Sous réserve des conditions prévues par la réglementation applicable, vous disposez
+                notamment des droits suivants :
+              </p>
+              <ul>
+                <li>droit d'accès à vos données ;</li>
+                <li>droit de rectification en cas d'information inexacte ou incomplète ;</li>
+                <li>droit à l'effacement dans les cas prévus par les textes ;</li>
+                <li>droit à la limitation du traitement dans certaines hypothèses ;</li>
+                <li>droit d'opposition lorsque le traitement repose sur l'intérêt légitime ;</li>
+                <li>droit à la portabilité lorsque ce droit est applicable ;</li>
+                <li>droit de retirer votre consentement lorsque le traitement repose sur celui-ci ;</li>
+                <li>droit d'introduire une réclamation auprès de la CNIL.</li>
+              </ul>
+
+              <p>
+                Pour des raisons de sécurité et afin d'éviter toute communication non autorisée,
+                PridanoTech peut demander des éléments permettant de vérifier raisonnablement votre
+                identité avant de traiter une demande d'exercice de droits.
+              </p>
+            </section>
+
+            <section id="cookies" class="privacy-block" data-reveal>
+              <div class="privacy-block-head">
+                <span class="privacy-index">15</span>
+                <div>
+                  <p class="card-label">Traceurs</p>
+                  <h2>Cookies et traceurs</h2>
+                </div>
+              </div>
+
+              <p>
+                Le site peut utiliser ou être amené à utiliser des cookies, traceurs ou mécanismes
+                équivalents pour assurer son fonctionnement, mesurer son audience ou améliorer
+                l'expérience utilisateur.
+              </p>
+
+              <div class="privacy-grid two">
+                <article class="privacy-note">
+                  <h3>Cookies strictement nécessaires</h3>
+                  <p>
+                    Ils permettent le fonctionnement technique du site, la sécurité, l'équilibrage
+                    de charge, la prévention des abus ou la conservation de certains choix
+                    indispensables. Lorsqu'ils sont strictement nécessaires, ils ne requièrent pas
+                    votre consentement préalable.
+                  </p>
+                </article>
+
+                <article class="privacy-note">
+                  <h3>Mesure d'audience, personnalisation, marketing</h3>
+                  <p>
+                    Les cookies ou traceurs de mesure d'audience non exemptés, de personnalisation
+                    avancée, de publicité ou de ciblage ne doivent être déposés qu'après recueil de
+                    votre consentement lorsque la réglementation l'exige.
+                  </p>
+                </article>
+              </div>
+
+              <ul>
+                <li>à la date de mise à jour de cette page, aucun traceur publicitaire n'est explicitement identifié dans le code applicatif courant du site ;</li>
+                <li>si un outil d'analytics, de remarketing, de session replay, de heatmap, de pixel publicitaire ou de CMP est ajouté ultérieurement, PridanoTech devra adapter cette politique et mettre en place un bandeau cookies conforme si nécessaire ;</li>
+                <li>si des traceurs de mesure d'audience sont configurés de manière à bénéficier d'une exemption, ils devront rester paramétrés dans les limites admises par la réglementation applicable ;</li>
+                <li>le refus des cookies non essentiels ne doit pas empêcher l'accès normal au site hors fonctionnalités intrinsèquement dépendantes d'eux.</li>
+              </ul>
+
+              <div class="privacy-callout is-accent">
+                <h3>Bandeau cookies à prévoir si besoin</h3>
+                <p>
+                  Si des cookies non essentiels sont activés, le site devra prévoir un mécanisme de
+                  recueil du consentement permettant d'accepter, de refuser et de modifier ses choix
+                  aussi facilement, avec une information par finalité et par prestataire lorsque cela
+                  est requis.
+                </p>
+              </div>
+            </section>
+
+            <section id="transferts" class="privacy-block" data-reveal>
+              <div class="privacy-block-head">
+                <span class="privacy-index">16</span>
+                <div>
+                  <p class="card-label">International</p>
+                  <h2>Transferts hors Union européenne</h2>
+                </div>
+              </div>
+
+              <p>
+                Certains prestataires techniques utilisés par PridanoTech ou sollicités par votre
+                navigateur peuvent être situés hors de l'Union européenne, ou y transférer des
+                données dans le cadre de leur exploitation mondiale.
+              </p>
+
+              <ul>
+                <li>les traitements liés à l'IA peuvent, selon le prestataire activé et sa configuration, impliquer des transferts vers les États-Unis ;</li>
+                <li>l'envoi d'emails transactionnels peut également reposer sur une infrastructure internationale selon le prestataire et la région du compte ;</li>
+                <li>les ressources externes front chargées depuis des domaines tiers peuvent entraîner des connexions hors UE à l'initiative du navigateur.</li>
+              </ul>
+
+              <p>
+                Lorsque de tels transferts existent et qu'ils sont encadrés par le RGPD,
+                PridanoTech entend s'appuyer sur les mécanismes appropriés disponibles selon les cas
+                : clauses contractuelles types, décisions d'adéquation, Data Privacy Framework ou
+                garanties équivalentes fournies par le prestataire concerné.
+              </p>
+
+              <div class="privacy-callout">
+                <h3>Prudence utile</h3>
+                <p>
+                  Le périmètre exact des transferts dépend du paramétrage réel des comptes,
+                  régions, options de rétention et ressources chargées. Lorsque cette information
+                  n'est pas encore définitivement figée dans le projet, elle doit être confirmée
+                  puis mise à jour dans cette page et, le cas échéant, dans le registre des
+                  traitements de PridanoTech.
+                </p>
+              </div>
+            </section>
+
+            <section id="mineurs" class="privacy-block" data-reveal>
+              <div class="privacy-block-head">
+                <span class="privacy-index">17</span>
+                <div>
+                  <p class="card-label">Public concerné</p>
+                  <h2>Données des mineurs</h2>
+                </div>
+              </div>
+
+              <p>
+                Le site et les services PridanoTech sont principalement destinés à un public
+                professionnel, porteur de projet, entrepreneur ou décideur. Ils ne sont pas conçus
+                pour collecter sciemment des données auprès de mineurs.
+              </p>
+              <p>
+                Si vous êtes mineur, merci de ne pas transmettre de données personnelles sans
+                l'accord de votre représentant légal lorsque cet accord est requis. Si un parent ou
+                représentant légal estime qu'un mineur a transmis des données de manière inadaptée,
+                il peut contacter PridanoTech pour demander un examen de la situation.
+              </p>
+            </section>
+
+            <section id="maj" class="privacy-block" data-reveal>
+              <div class="privacy-block-head">
+                <span class="privacy-index">18</span>
+                <div>
+                  <p class="card-label">Évolutions</p>
+                  <h2>Mise à jour de la politique</h2>
+                </div>
+              </div>
+
+              <p>
+                PridanoTech peut modifier la présente politique pour tenir compte d'une évolution
+                légale, réglementaire, contractuelle, technique ou opérationnelle, notamment en cas
+                d'ajout d'un nouvel outil tiers, d'un nouveau cookie, d'un changement d'hébergeur,
+                d'un nouveau parcours de collecte, d'un changement de prestataire IA ou d'emailing,
+                ou d'une évolution des mentions légales.
+              </p>
+              <p>
+                La date de mise à jour figurant en haut de page permet d'identifier la version en
+                vigueur. En cas de changement substantiel, il est recommandé d'adapter également les
+                textes de consentement, le bandeau cookies, les mentions du formulaire et, si
+                nécessaire, les documents contractuels.
+              </p>
+            </section>
+
+            <section id="contact" class="privacy-block" data-reveal>
+              <div class="privacy-block-head">
+                <span class="privacy-index">19</span>
+                <div>
+                  <p class="card-label">Exercice des droits</p>
+                  <h2>Contact confidentialité / exercice des droits</h2>
+                </div>
+              </div>
+
+              <p>
+                Pour toute question relative à cette politique, pour exercer vos droits ou pour
+                signaler une difficulté relative à la protection des données, vous pouvez écrire à :
+              </p>
+
+              <div class="privacy-definition">
+                <div class="privacy-definition-row">
+                  <strong>Email</strong>
+                  <span><a href="mailto:pridanotech@gmail.com">pridanotech@gmail.com</a></span>
+                </div>
+                <div class="privacy-definition-row">
+                  <strong>Objet conseillé</strong>
+                  <span>Confidentialité / RGPD / Exercice des droits</span>
+                </div>
+                <div class="privacy-definition-row">
+                  <strong>Adresse postale</strong>
+                  <span
+                    ><span class="privacy-placeholder"
+                      >[À compléter : adresse postale de contact si souhaitée]</span
+                    ></span
+                  >
+                </div>
+              </div>
+
+              <hr class="privacy-divider" />
+
+              <p>
+                Si, après échange avec PridanoTech, vous estimez que vos droits ne sont pas
+                respectés, vous pouvez également introduire une réclamation auprès de la
+                <a href="https://www.cnil.fr" rel="noreferrer" target="_blank">CNIL</a>.
+              </p>
+            </section>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <div data-site-footer></div>
+  </body>
+</html>
