@@ -1,4 +1,5 @@
 [build]
+  command = "npm run build"
   publish = "public"
 
 [functions]
@@ -34,3 +35,125 @@
   from = "/api/quote/submit"
   to = "/.netlify/functions/send-brief"
   status = 200
+
+[[redirects]]
+  from = "/index.html"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/services.html"
+  to = "/sites-web"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/projets.html"
+  to = "/realisations"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/about.html"
+  to = "/a-propos"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/sites-web.html"
+  to = "/sites-web"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/realisations.html"
+  to = "/realisations"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/saas.html"
+  to = "/saas"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/crm.html"
+  to = "/crm"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/a-propos.html"
+  to = "/a-propos"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/contact.html"
+  to = "/contact"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/mentions-legales.html"
+  to = "/mentions-legales"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/confidentialite.html"
+  to = "/confidentialite"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/sites-web"
+  to = "/sites-web.html"
+  status = 200
+
+[[redirects]]
+  from = "/realisations"
+  to = "/realisations.html"
+  status = 200
+
+[[redirects]]
+  from = "/saas"
+  to = "/saas.html"
+  status = 200
+
+[[redirects]]
+  from = "/crm"
+  to = "/crm.html"
+  status = 200
+
+[[redirects]]
+  from = "/a-propos"
+  to = "/a-propos.html"
+  status = 200
+
+[[redirects]]
+  from = "/contact"
+  to = "/contact.html"
+  status = 200
+
+[[redirects]]
+  from = "/mentions-legales"
+  to = "/mentions-legales.html"
+  status = 200
+
+[[redirects]]
+  from = "/confidentialite"
+  to = "/confidentialite.html"
+  status = 200
+
+[[redirects]]
+  from = "/api/contact"
+  to = "/.netlify/functions/contact"
+  status = 200
+
+[[redirects]]
+  from = "/*"
+  to = "/404.html"
+  status = 404

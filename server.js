@@ -9,6 +9,7 @@ const {
   handleQuoteSummary,
 } = require("./server/handlers/quote");
 const { sendBriefRouter } = require("./server/routes/send-brief");
+const { handleContact } = require("./server/handlers/contact");
 
 function createApp() {
   const app = express();
@@ -20,6 +21,17 @@ function createApp() {
   app.use(express.json({ limit: "1mb" }));
   app.use(express.urlencoded({ extended: false }));
 
+  const aliases = { '/index.html': '/', '/services.html': '/sites-web', '/projets.html': '/realisations', '/about.html': '/a-propos', '/confidentialite.html': '/confidentialite' };
+  const pages = ['sites-web', 'realisations', 'saas', 'crm', 'a-propos', 'contact', 'mentions-legales', 'confidentialite'];
+  app.use((request, response, next) => {
+    const target = aliases[request.path];
+    if (target) return response.redirect(301, target + (request.originalUrl.includes('?') ? request.originalUrl.slice(request.originalUrl.indexOf('?')) : ''));
+    next();
+  });
+  pages.forEach(page => {
+    app.get(`/${page}.html`, (request, response) => response.redirect(301, `/${page}` + (request.originalUrl.includes('?') ? request.originalUrl.slice(request.originalUrl.indexOf('?')) : '')));
+    app.get(`/${page}`, (request, response) => response.sendFile(path.join(publicDir, `${page}.html`)));
+  });
   app.use(express.static(publicDir));
   app.use(express.static(imageDir));
   app.use(express.static(documentDir));
@@ -28,10 +40,12 @@ function createApp() {
   app.post("/api/quote/qualify", createExpressHandler(handleQuoteQualify));
   app.post("/api/quote/summary", createExpressHandler(handleQuoteSummary));
   app.post("/api/quote/chat", createExpressHandler(handleQuoteChat));
+  app.post("/api/contact", createExpressHandler(handleContact));
 
   app.use(sendBriefRouter);
 
   app.use((request, response) => {
+    if (!request.path.startsWith('/api/')) return response.status(404).sendFile(path.join(publicDir, '404.html'));
     response.status(404).json({
       ok: false,
       message: `Route introuvable: ${request.originalUrl}`,

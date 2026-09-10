@@ -4,8 +4,12 @@
   "description": "Pridano Tech — site business premium avec cadrage projet assiste par IA",
   "main": "server.js",
   "scripts": {
+    "build": "node scripts/build.js",
+    "lint": "node scripts/check.js && eslint .",
+    "test": "node --test tests/contact.test.js tests/routes.test.js",
     "dev": "node scripts/dev.js",
-    "start": "node server.js"
+    "start": "node server.js",
+    "test:frontend": "playwright test"
   },
   "repository": {
     "type": "git",
@@ -22,5 +26,11 @@
     "dotenv": "^17.3.1",
     "express": "^5.2.1",
     "resend": "^6.10.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.63.0",
+    "eslint": "^10.10.0",
+    "globals": "^17.12.0"
   }
 }
