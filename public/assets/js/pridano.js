@@ -114,6 +114,102 @@
     reduced.addEventListener('change',play);
     window.addEventListener('pagehide',stop);
   }
+  // Finite entrance sequences and ambient curves only run while visible.
+  const motionScenes=[...document.querySelectorAll('[data-hero-scene], [data-connection-scene], [data-product-theater]')];
+  const visibleScenes=new Set();
+  const syncScenes=()=>motionScenes.forEach(scene=>scene.classList.toggle('scene-active',visibleScenes.has(scene)&&!document.hidden&&!reduced.matches));
+  const sceneObserver=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{if(entry.isIntersecting) visibleScenes.add(entry.target);else visibleScenes.delete(entry.target);});
+    syncScenes();
+  },{threshold:.08});
+  motionScenes.forEach(scene=>sceneObserver.observe(scene));
+  document.addEventListener('visibilitychange',syncScenes);
+  reduced.addEventListener('change',syncScenes);
+
+  const finePointer=matchMedia('(hover: hover) and (pointer: fine)');
+  document.querySelectorAll('.hero-aside .button, .final-cta .button').forEach(button=>{
+    let raf;
+    const reset=()=>{cancelAnimationFrame(raf);button.style.removeProperty('--magnet-x');button.style.removeProperty('--magnet-y');};
+    button.addEventListener('pointermove',event=>{
+      if(reduced.matches||!finePointer.matches) return;
+      cancelAnimationFrame(raf);
+      raf=requestAnimationFrame(()=>{
+        const rect=button.getBoundingClientRect();
+        button.style.setProperty('--magnet-x',`${Math.max(-4,Math.min(4,(event.clientX-rect.left-rect.width/2)*.045))}px`);
+        button.style.setProperty('--magnet-y',`${Math.max(-3,Math.min(3,(event.clientY-rect.top-rect.height/2)*.08))}px`);
+      });
+    });
+    button.addEventListener('pointerleave',reset);
+    button.addEventListener('blur',reset);
+    reduced.addEventListener('change',reset);
+  });
+
+  const theater=document.querySelector('[data-product-theater]');
+  if(theater) {
+    const tabs=[...theater.querySelectorAll('[data-product-tab]')];
+    const panels=[...theater.querySelectorAll('[data-product-panel]')];
+    const play=theater.querySelector('[data-product-play]');
+    const expand=theater.querySelector('[data-product-expand]');
+    const dialog=theater.querySelector('dialog');
+    const originals=['dashboard','factures','planning','login'];
+    let active=0, requested=0, visible=false, playing=desktop.matches&&!reduced.matches, timer;
+    expand.hidden=false;
+    function stop(){clearTimeout(timer);timer=undefined;}
+    function schedule(){
+      stop();
+      play.hidden=reduced.matches;
+      play.textContent=playing?'Mettre en pause':'Lire la visite';
+      play.setAttribute('aria-pressed',String(playing));
+      const running=playing&&visible&&!document.hidden&&!reduced.matches&&!dialog.open;
+      theater.dataset.playback=running?'playing':'paused';
+      if(running) timer=setTimeout(()=>select((active+1)%panels.length,false),8000);
+    }
+    async function select(index,manual=true){
+      if(manual) playing=false;
+      stop();requested=index;
+      const panel=panels[index];
+      const img=panel.querySelector('img');
+      panel.querySelectorAll('[data-srcset]').forEach(source=>{source.srcset=source.dataset.srcset;delete source.dataset.srcset;});
+      if(img.dataset.src){img.loading='eager';img.src=img.dataset.src;delete img.dataset.src;}
+      // Keep the previous frame visible until the next actual screenshot is ready.
+      try {await img.decode();} catch { /* The alt text and original remain available if an asset fails. */ }
+      if(requested!==index) return;
+      active=index;
+      tabs.forEach((tab,i)=>{tab.setAttribute('aria-selected',String(i===index));tab.tabIndex=i===index?0:-1;});
+      panels.forEach((p,i)=>{p.hidden=i!==index;});
+      theater.dataset.active=String(index);
+      schedule();
+    }
+    tabs.forEach((tab,i)=>{
+      tab.addEventListener('click',()=>select(i));
+      tab.addEventListener('keydown',event=>{
+        let next;
+        if(event.key==='ArrowRight') next=(i+1)%tabs.length;
+        else if(event.key==='ArrowLeft') next=(i+tabs.length-1)%tabs.length;
+        else if(event.key==='Home') next=0;
+        else if(event.key==='End') next=tabs.length-1;
+        if(next!==undefined){event.preventDefault();tabs[next].focus();select(next);}
+      });
+    });
+    play.addEventListener('click',()=>{playing=!playing;schedule();});
+    expand.addEventListener('click',()=>{
+      const img=document.createElement('img');
+      img.src=`/assets/images/pridano/${originals[active]}.png`;
+      img.alt=panels[active].querySelector('img').alt.replace('cadrée sur les indicateurs et les connexions entre clients, devis et projets.','capture complète.');
+      dialog.querySelector('.dialog-image').replaceChildren(img);
+      dialog.showModal();document.documentElement.classList.add('product-modal');schedule();
+    });
+    theater.querySelector('[data-product-close]').addEventListener('click',()=>dialog.close());
+    dialog.addEventListener('close',()=>{document.documentElement.classList.remove('product-modal');schedule();expand.focus();});
+    const productObserver=new IntersectionObserver(entries=>{visible=entries[0].isIntersecting&&entries[0].intersectionRatio>=.35;schedule();},{threshold:.35});
+    productObserver.observe(theater);
+    document.addEventListener('visibilitychange',schedule);
+    reduced.addEventListener('change',()=>{if(reduced.matches) playing=false;schedule();});
+    desktop.addEventListener('change',()=>{if(!desktop.matches) playing=false;schedule();});
+    window.addEventListener('pagehide',stop);
+    theater.dataset.active='0';schedule();
+  }
+
   const form=document.querySelector('[data-contact-form]');
   if(form) {
     const type=new URLSearchParams(location.search).get('projet');

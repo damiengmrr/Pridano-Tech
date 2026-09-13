@@ -11,9 +11,19 @@ for(const [name,width,height] of [['desktop',1440,1000],['laptop',1280,800],['ta
    await expect(page.locator('h1')).toHaveCount(1);
    await expect(page.locator('h1')).toBeVisible();
    expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),route).toBe(true);
-   expect(await page.locator('img').evaluateAll(images=>images.filter(i=>i.complete && !i.naturalWidth).map(i=>i.src)),route).toEqual([]);
+   expect(await page.locator('img[src]').evaluateAll(images=>images.filter(i=>i.complete && !i.naturalWidth).map(i=>i.src)),route).toEqual([]);
    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href',/^http/);
-   if(['desktop','mobile'].includes(name)) await page.screenshot({path:`test-results/visual/${name}-${route==='/'?'home':route.slice(1)}.png`,fullPage:true});
+   if(['desktop','tablet','mobile'].includes(name)) {
+    // Visit the real scroll positions so below-the-fold lazy images are represented.
+    await page.evaluate(async()=>{
+     for(let y=0;y<document.documentElement.scrollHeight;y+=innerHeight*.8){
+      window.scrollTo({top:y,behavior:'instant'});await new Promise(resolve=>setTimeout(resolve,35));
+     }
+     await Promise.all([...document.querySelectorAll('img[src]')].map(img=>img.decode().catch(()=>{})));
+     window.scrollTo({top:0,behavior:'instant'});
+    });
+    await page.screenshot({path:`test-results/visual/${name}-${route==='/'?'home':route.slice(1)}.png`,fullPage:true});
+   }
   }
   expect(errors).toEqual([]);
  });
@@ -54,4 +64,66 @@ test('main internal links and anchors resolve',async({page,request})=>{
  for(const route of routes){await page.goto(route);const hrefs=await page.locator('a[href]').evaluateAll(links=>[...new Set(links.map(a=>a.getAttribute('href')).filter(h=>h.startsWith('/')||h.startsWith('#')))]);
   for(const href of hrefs){if(href.startsWith('#'))expect(await page.locator(href).count(),href).toBeGreaterThan(0);else expect((await request.get(href)).status(),href).toBeLessThan(400);}
  }
+});
+
+for(const width of [1440,390]) {
+ test(`product theater at ${width}: lazy assets, keyboard, real captures and motion controls`,async({page})=>{
+  await page.setViewportSize({width,height:1000});
+  await page.emulateMedia({reducedMotion:'reduce'});
+  const images=[];
+  page.on('request',request=>{if(request.url().includes('/images/pridano/')) images.push(request.url());});
+  await page.goto('/crm');
+  const theater=page.locator('[data-product-theater]');
+  await theater.scrollIntoViewIfNeeded();
+  await expect(theater).toHaveAttribute('data-playback','paused');
+  await expect(page.locator('[data-product-play]')).toBeHidden();
+  expect(images.some(url=>/factures|planning|login/.test(url))).toBe(false);
+  for(let i=0;i<4;i++){
+   await page.locator(`[data-product-tab="${i}"]`).click();
+   await expect(theater).toHaveAttribute('data-active',String(i));
+   const panel=page.locator(`[data-product-panel="${i}"]`);
+   await expect(panel).toBeVisible();
+   expect(await panel.locator('img').evaluate(img=>img.complete&&img.naturalWidth>0)).toBe(true);
+   await theater.screenshot({path:`test-results/visual/product-${width}-${i}.png`});
+  }
+  await page.locator('[data-product-tab="3"]').focus();await page.keyboard.press('Home');
+  await expect(page.locator('[data-product-tab="0"]')).toBeFocused();
+  await expect(theater).toHaveAttribute('data-active','0');
+  await page.keyboard.press('ArrowRight');await expect(theater).toHaveAttribute('data-active','1');
+  await page.locator('[data-product-expand]').click();await expect(page.locator('.product-dialog')).toBeVisible();
+  await expect(page.locator('.dialog-image img')).toHaveAttribute('src','/assets/images/pridano/factures.png');
+  await page.keyboard.press('Escape');await expect(page.locator('.product-dialog')).not.toBeVisible();
+  await expect(page.locator('[data-product-expand]')).toBeFocused();
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+  await page.emulateMedia({reducedMotion:'no-preference'});
+  await page.locator('[data-product-play]').click();await expect(theater).toHaveAttribute('data-playback','playing');
+  await page.locator('.footer').scrollIntoViewIfNeeded();
+  await expect(theater).toHaveAttribute('data-playback','paused');
+  await theater.scrollIntoViewIfNeeded();await expect(theater).toHaveAttribute('data-playback','playing');
+  await page.locator('[data-product-play]').click();await expect(theater).toHaveAttribute('data-playback','paused');
+ });
+}
+test('hero sequence resolves once and construction exposes each visual stage',async({page})=>{
+ await page.setViewportSize({width:1440,height:1000});await page.goto('/');
+ await page.waitForTimeout(6000);
+ await expect(page.locator('[data-hero-scene]')).toHaveClass(/scene-active/);
+ expect(await page.locator('.hero-scene .mock-button').evaluate(el=>Number(getComputedStyle(el).opacity))).toBe(1);
+ await page.screenshot({path:'test-results/visual/hero-motion-complete.png'});
+ for(let i=0;i<9;i++){
+  await page.locator(`[data-stage="${i}"]`).click();
+  await page.waitForTimeout(800);
+  await page.screenshot({path:`test-results/visual/construction-${i}.png`});
+ }
+});
+
+test('product visit advances after eight seconds and stays frozen outside the viewport',async({page})=>{
+ await page.setViewportSize({width:1440,height:1000});await page.clock.install();await page.goto('/crm');
+ const theater=page.locator('[data-product-theater]');await theater.scrollIntoViewIfNeeded();
+ await expect(theater).toHaveAttribute('data-playback','playing');
+ await page.clock.fastForward(8100);await expect(theater).toHaveAttribute('data-active','1');
+ await page.locator('.footer').scrollIntoViewIfNeeded();await expect(theater).toHaveAttribute('data-playback','paused');
+ await page.clock.fastForward(24000);await expect(theater).toHaveAttribute('data-active','1');
+ await page.emulateMedia({reducedMotion:'reduce'});await theater.scrollIntoViewIfNeeded();
+ await expect(theater).toHaveAttribute('data-playback','paused');await page.clock.fastForward(16000);
+ await expect(theater).toHaveAttribute('data-active','1');
 });
