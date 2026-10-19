@@ -2,6 +2,31 @@
   'use strict';
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const desktop = matchMedia('(min-width: 641px)');
+  // Mobile fonts may render these Unicode symbols as colorful emoji.
+  // VS15 requests text presentation; restore the original text on desktop.
+  const mobileSymbols = new Map();
+  function syncMobileSymbols() {
+    if (desktop.matches) {
+      for (const [node, {original, normalized}] of mobileSymbols) {
+        if (node.nodeValue === normalized) node.nodeValue = original;
+      }
+      mobileSymbols.clear();
+      return;
+    }
+    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+    while (walker.nextNode()) {
+      const node = walker.currentNode;
+      if (node.parentElement?.closest('script, style, svg, textarea, input, [contenteditable]')) continue;
+      const original = node.nodeValue;
+      const normalized = original.replace(/([✳↗↘✓©])(?:[\uFE0E\uFE0F])?/gu, '$1\uFE0E');
+      if (normalized !== original) {
+        mobileSymbols.set(node, {original, normalized});
+        node.nodeValue = normalized;
+      }
+    }
+  }
+  syncMobileSymbols();
+  desktop.addEventListener('change', syncMobileSymbols);
   const header = document.querySelector('.header');
   const menu = document.querySelector('#mobile-menu');
   const toggle = document.querySelector('.menu-toggle');

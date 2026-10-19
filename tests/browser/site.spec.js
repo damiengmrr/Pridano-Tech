@@ -127,3 +127,20 @@ test('product visit advances after eight seconds and stays frozen outside the vi
  await expect(theater).toHaveAttribute('data-playback','paused');await page.clock.fastForward(16000);
  await expect(theater).toHaveAttribute('data-active','1');
 });
+
+test('phone symbols request text presentation and restore unchanged desktop text', async ({page}) => {
+ await page.setViewportSize({width:1440,height:900});
+ await page.goto('/');
+ const star=page.locator('.asterisk');
+ await expect(star).toHaveText('✳');
+ const desktopText=await page.locator('main').textContent();
+ await page.setViewportSize({width:390,height:844});
+ await expect(star).toHaveText('✳\uFE0E');
+ await expect(page.locator('.browser-bar>span').last().first()).toHaveText('↗\uFE0E');
+ await page.setViewportSize({width:1440,height:900});
+ await expect(star).toHaveText('✳');
+ expect(await page.locator('main').textContent()).toBe(desktopText);
+ await page.setViewportSize({width:390,height:844});
+ await page.reload();
+ await expect(star).toHaveText('✳\uFE0E');
+});
