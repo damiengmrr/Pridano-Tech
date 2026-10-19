@@ -50,3 +50,32 @@ test('localhost remains non indexable and is rejected for a production build',()
  assert.match(files.get('robots.txt'),/Disallow: \/\n/);
  assert.throws(()=>build({PUBLIC_SITE_URL:'http://localhost:3000',NODE_ENV:'production'}),/PUBLIC_SITE_URL/);
 });
+
+test('brand entities are unique, carry the requested names and preserve page metadata',()=>{
+ const {files}=build({PUBLIC_SITE_URL:'https://pridanotech.fr',NODE_ENV:'production'});
+ for(const [route,page] of Object.entries(pages)){
+  const html=files.get((route==='/'?'index':route.slice(1))+'.html');
+  const blocks=[...html.matchAll(/<script type="application\/ld\+json">(.*?)<\/script>/g)];
+  assert.equal(blocks.length,1,`${route}: one JSON-LD block`);
+  const data=JSON.parse(blocks[0][1]);
+  assert.equal(data['@context'],'https://schema.org');
+  const entities=data['@graph']||[data];
+  const organizations=entities.filter(entity=>entity['@type']==='Organization');
+  const websites=entities.filter(entity=>entity['@type']==='WebSite');
+  assert.equal(organizations.length,1,route);
+  assert.equal(websites.length,route==='/'?1:0,route);
+  for(const entity of entities){
+   assert.equal(entity.name,'Pridano Tech',route);
+   assert.deepEqual(entity.alternateName,['PridanoTech','Pridano'],route);
+  }
+  assert.equal(organizations[0].email,components.brand.email);
+  assert.equal(organizations[0].logo,'https://pridanotech.fr'+components.brand.logo);
+  if(route==='/') assert.equal(websites[0].url,'https://pridanotech.fr/');
+  assert.equal((html.match(/<title>/g)||[]).length,1,route);
+  assert.equal((html.match(/rel="canonical"/g)||[]).length,1,route);
+  assert.equal((html.match(/name="description"/g)||[]).length,1,route);
+  assert.equal((html.match(/property="og:site_name"/g)||[]).length,1,route);
+  assert.ok(html.includes('property="og:site_name" content="Pridano"'),route);
+  assert.ok(html.includes(page.title.replaceAll('&','&amp;')+' · Pridano</title>'),route);
+ }
+});
