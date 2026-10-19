@@ -265,3 +265,7 @@ html.product-modal{overflow:hidden}
  .product-theater:not(.scene-active) .product-screen img{animation-play-state:paused}
 }
 @media(max-width:640px){.build-frame:not([data-phase="7"]) .mock-copy strong{font-size:24px;line-height:1.12}}
+
+/* Solaria: preserve the supplied visual without portrait styling. */
+.project-solaria .project-visual{background:#fff0d7}
+.project-solaria .project-visual>img,.project-editorial.project-solaria .project-visual>img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center;opacity:1;mix-blend-mode:normal;filter:none}
