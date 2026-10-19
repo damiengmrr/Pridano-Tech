@@ -2,6 +2,10 @@
   command = "npm run build"
   publish = "public"
 
+[build.environment]
+  NODE_ENV = "production"
+  PUBLIC_SITE_URL = "https://pridanotech.fr"
+
 [functions]
   directory = "netlify/functions"
   node_bundler = "esbuild"

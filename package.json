@@ -6,7 +6,7 @@
   "scripts": {
     "build": "node scripts/build.js",
     "lint": "node scripts/check.js && eslint .",
-    "test": "node --test tests/contact.test.js tests/routes.test.js",
+    "test": "node --test tests/contact.test.js tests/routes.test.js tests/seo.test.js",
     "dev": "node scripts/dev.js",
     "start": "node server.js",
     "test:frontend": "playwright test"

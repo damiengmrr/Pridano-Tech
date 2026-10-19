@@ -1,3 +1,4 @@
 User-agent: *
-Disallow: /
-Sitemap: http://localhost:3000/sitemap.xml
+Allow: /
+Disallow: /api/
+Sitemap: https://pridanotech.fr/sitemap.xml
