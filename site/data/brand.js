@@ -112,9 +112,19 @@ const expertises = [
  * art. 293 B du CGI ») si vous êtes en franchise de TVA.
  */
 const pricing = [
-  { id: 'site', label: 'Création de site web', from: 990, delivery: '3 à 5 jours', href: '/contact?projet=site' },
-  { id: 'refonte', label: 'Refonte de site web', from: 790, delivery: '3 à 5 jours', href: '/contact?projet=refonte' },
-  { id: 'saas', label: 'SaaS & logiciel sur mesure', from: 3900, href: '/contact?projet=saas' },
+  {
+    id: 'site', label: 'Création de site web', from: 990, delivery: '3 à 5 jours', href: '/contact?projet=site',
+    perks: ['1 an d’hébergement et de nom de domaine offerts', 'Accès au CMS : vous modifiez vos textes et photos vous-même', 'Accompagnement personnalisé', 'Assistance 7j/7 pendant 1 an', 'Le site est à vous'],
+  },
+  {
+    id: 'refonte', label: 'Refonte de site web', from: 790, delivery: '3 à 5 jours', href: '/contact?projet=refonte',
+    perks: ['Les mêmes avantages que la création', 'Audit gratuit de votre site actuel', 'Votre référencement Google conservé'],
+  },
+  {
+    id: 'saas', label: 'Logiciel sur mesure', from: 3900, href: '/contact?projet=saas',
+    perks: ['Atelier de cadrage offert', 'Prix ferme, sans surprise', '3 mois de garantie', 'Le code vous appartient'],
+    note: 'Pour un SaaS complet (paiement en ligne, espace client) : sur devis.',
+  },
 ];
 const pricingTax = 'HT';
 const pricingNote = 'Le périmètre exact est précisé dans la proposition, avant tout engagement.'; // ex. 'Prix HT, contenu et périmètre précisés dans la proposition.'
@@ -124,10 +134,12 @@ const pricingNote = 'Le périmètre exact est précisé dans la proposition, ava
  * Vide = section masquée.
  */
 const maintenance = [
-  { id: 'essentiel', name: 'Essentiel', price: 29, features: ['Hébergement et certificat HTTPS', 'Sauvegardes', 'Surveillance de la disponibilité', 'Corrections techniques'] },
-  { id: 'serenite', name: 'Sérénité', price: 59, featured: true, features: ['Tout le forfait Essentiel', '1 h de modifications par mois', 'Rapport mensuel : audience et performance'] },
-  { id: 'croissance', name: 'Croissance', price: 119, features: ['Tout le forfait Sérénité', '3 h de modifications par mois', 'Suivi SEO et fiche Google Business Profile'] },
+  { id: 'essentiel', name: 'Essentiel', price: 29, features: ['Hébergement et nom de domaine', 'Sauvegardes et sécurité', 'Assistance sous 48 h'] },
+  { id: 'serenite', name: 'Sérénité', price: 59, featured: true, features: ['Tout le forfait Essentiel', '5 petites modifications par mois, faites sous 48 h', 'Assistance 7j/7 sous 24 h'] },
+  { id: 'croissance', name: 'Croissance', price: 119, features: ['Tout le forfait Sérénité', 'Petites modifications illimitées, faites sous 24 h', '1 nouvelle page par mois', 'Référencement Google suivi'] },
 ];
+/* Définition affichée sous les formules (les demandes plus importantes passent par un devis). */
+const maintenanceNote = 'Petite modification : un texte, une photo, des horaires, un prix.';
 
 /*
  * Témoignages clients réels, avec l’accord écrit de la personne. Vide = section masquée.
@@ -201,4 +213,4 @@ const projectTypes = [
   ['crm', 'Échanger sur Pridano'],
 ];
 
-module.exports = { brand, expertises, method, softwareMethod, projects, projectTypes, pricing, pricingTax, pricingNote, maintenance, testimonials };
+module.exports = { brand, expertises, method, softwareMethod, projects, projectTypes, pricing, pricingTax, pricingNote, maintenance, maintenanceNote, testimonials };

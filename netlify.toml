@@ -10,7 +10,7 @@
   PUBLIC_SITE_URL = "https://pridanotech.fr"
   NODE_VERSION = "22"
   NPM_FLAGS = "--include=dev"
-  
+
 [functions]
   directory = "netlify/functions"
   node_bundler = "esbuild"

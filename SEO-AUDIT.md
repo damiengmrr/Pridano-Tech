@@ -59,7 +59,7 @@ Chaque page comporte :
   - `knowsAbout` (les prestations visibles sur le site) et `member` → les deux personnes présentées sur `/a-propos`.
 - Une entité **WebSite** (`#website`), avec le même nom et les mêmes variantes, reliée à l'Organization par `publisher`.
 - Chaque **WebPage** est reliée au WebSite (`isPartOf`) et à l'Organization (`about`), avec un `BreadcrumbList` sur les pages intérieures.
-- Les **Service** de `/sites-web` et `/saas` reprennent les descriptions et prestations publiées sur ces pages. Chaque prix affiché a son `Offer` : `PriceSpecification` (`minPrice`, `EUR`, `valueAddedTaxIncluded: false`) pour les prix « à partir de », `UnitPriceSpecification` mensuelle (`unitCode: MON`) pour la maintenance. Les montants du JSON-LD sont ceux de la page (vérifié par test).
+- Les **Service** de `/sites-web` et `/saas` reprennent les descriptions et prestations publiées sur ces pages. Chaque prix affiché a son `Offer` : `PriceSpecification` (`minPrice`, `EUR`, `valueAddedTaxIncluded: false`) pour les prix « à partir de », `UnitPriceSpecification` mensuelle (`unitCode: MON`) pour la maintenance. Les montants du JSON-LD sont ceux de la page (vérifié par test). Chaque offre porte aussi une `description` qui reprend la liste des avantages affichée sur la carte.
 - **FAQPage** : uniquement sur `/sites-web`, la seule page du site existant qui publie une FAQ. Questions et réponses identiques au texte visible (vérifié par test).
 - Les **Person** (Damien Gamarra, Noah Lemoing) reprennent rôle, bio, `worksFor` et `sameAs` uniquement s'ils sont confirmés (`damiengamarra.com`).
 

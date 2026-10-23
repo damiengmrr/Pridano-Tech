@@ -112,7 +112,7 @@ Textes nouveaux ou modifiés, rédigés pour ces ajouts (à relire par l'équipe
 | « Les visuels sont des captures des sites en ligne. Ouvrez chaque lien pour découvrir le site complet. » | Note sous les réalisations |
 | « En combien de temps mon site est-il livré ? » / « Votre site est livré en 3 à 5 jours. Le planning exact est précisé dans la proposition. » | FAQ Sites web |
 | « Livré en 3 à 5 jours », « Le périmètre exact est précisé dans la proposition, avant tout engagement. » | Cartes de prix |
-| « Après la mise en ligne », « Un site suivi. Sans engagement. », « Hébergement, sauvegardes, surveillance et modifications : choisissez le suivi qui correspond à votre activité, et changez de formule quand vous le souhaitez. », contenu des trois formules, « Conseillé », « Parler du suivi de mon site », « Prix HT par mois, sans durée minimale. » | Section maintenance |
+| « Après la mise en ligne », « Un site suivi. Sans engagement. », « Hébergement, sécurité et mises à jour : choisissez le suivi qui correspond à votre activité, et changez de formule quand vous le souhaitez. », « Conseillé », « Parler du suivi de mon site », « Petite modification : un texte, une photo, des horaires, un prix. Prix HT par mois, sans durée minimale. » | Section maintenance |
 | « Pour repère : maintenance sans engagement à partir de 29 € HT par mois. » | Ajouté à la réponse de FAQ d'origine |
 
 Visuels des en-têtes de pages (décoratifs, masqués aux lecteurs d'écran) : captures réelles des sites livrés et du produit maison. Les mots affichés viennent du site existant (« Stratégie », « Design », « Développement », « Votre identité » ; « Vos données », « Vos équipes », « Vos outils », « Vos clients », « Vos règles » ; onglets « Pilotez », « Facturez », « Planifiez »), plus les prénoms des fondateurs, les coordonnées de Montpellier et quatre lignes de code réel du site (`tokens.css`).
@@ -120,6 +120,19 @@ Visuels des en-têtes de pages (décoratifs, masqués aux lecteurs d'écran) : c
 Section « La première impression compte » : même titre et même paragraphe qu'à l'origine, présentés en taille normale. Les étapes du visuel reprennent des fragments du texte (« Il présente votre activité », « Inspire confiance », « Donne envie de vous choisir ») et du titre (« Le premier appel »).
 
 Film d'ouverture : uniquement des textes existants. Le générique « Studio digital indépendant · Montpellier » est l'ancien sur-titre de l'accueil ; la signature est « Des sites qui marquent. Des outils qui font avancer. » ; les écrans portent les noms des projets réels (Solaria Média, Prévenir Pour Gagner, Pridano Business OS). Ajouts d'interface : les numéros d'acte (I à IV) et le bouton « Passer l'intro ».
+
+### Contenu des offres (validé par l'équipe le 23 octobre 2026)
+
+| Offre | Ce qui est affiché |
+|---|---|
+| Création de site web, dès 990 € HT | Livré en 3 à 5 jours · 1 an d'hébergement et de nom de domaine offerts · Accès au CMS : vous modifiez vos textes et photos vous-même · Accompagnement personnalisé · Assistance 7j/7 pendant 1 an · Le site est à vous |
+| Refonte de site web, dès 790 € HT | Livré en 3 à 5 jours · Les mêmes avantages que la création · Audit gratuit de votre site actuel · Votre référencement Google conservé |
+| Logiciel sur mesure, dès 3 900 € HT | Atelier de cadrage offert · Prix ferme, sans surprise · 3 mois de garantie · Le code vous appartient · « Pour un SaaS complet (paiement en ligne, espace client) : sur devis. » |
+| Essentiel, 29 € HT/mois | Hébergement et nom de domaine · Sauvegardes et sécurité · Assistance sous 48 h |
+| Sérénité, 59 € HT/mois (Conseillé) | Tout le forfait Essentiel · 5 petites modifications par mois, faites sous 48 h · Assistance 7j/7 sous 24 h |
+| Croissance, 119 € HT/mois | Tout le forfait Sérénité · Petites modifications illimitées, faites sous 24 h · 1 nouvelle page par mois · Référencement Google suivi |
+
+Engagements confirmés par l'équipe : CMS livré aux clients, assistance 7j/7 assurée à deux. La FAQ « Que se passe-t-il après la mise en ligne ? » rappelle que la première année d'hébergement est offerte. À prévoir dans les devis ou les conditions générales : « petites modifications illimitées » s'entend pour des modifications courantes ; une refonte de page ou une nouvelle fonctionnalité fait l'objet d'un devis.
 
 ## 7. Informations à compléter
 

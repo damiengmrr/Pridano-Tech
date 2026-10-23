@@ -1,5 +1,5 @@
 /* Sections réutilisables. Tout le contenu essentiel est du HTML lisible, sans dépendre du JS. */
-const { brand, expertises, method, projects, pricing, pricingTax, pricingNote, maintenance, testimonials } = require('../data/brand');
+const { brand, expertises, method, projects, pricing, pricingTax, pricingNote, maintenance, maintenanceNote, testimonials } = require('../data/brand');
 const { nodeMap, mark, ICON_BOX, nodes } = require('../lib/logo');
 const { esc, icon, pt, words, btn, link, label, picture, extAttrs, newTab, price } = require('../lib/html');
 
@@ -276,6 +276,8 @@ function pricingSection({ ids, title = 'Combien coûte un site web ?', cta = 'D�
 <p class="label label--plain">${p.label}</p>
 <p class="price-from"><span>À partir de</span> <strong>${price(p.from)}</strong> <span>${pricingTax}</span></p>
 ${p.delivery ? `<p class="price-delay">${icon('clock')}Livré en ${p.delivery}</p>` : ''}
+${p.perks?.length ? `<ul class="care-list price-perks" role="list">${p.perks.map((f) => `<li>${icon('check')}${f}</li>`).join('')}</ul>` : ''}
+${p.note ? `<p class="fine-print">${esc(p.note)}</p>` : ''}
 ${btn({ href: p.href, label: cta, variant: 'ghost', size: 'sm', track: `cta-tarif:${p.id}` })}
 </li>`).join('');
   return `<section class="pricing" id="tarifs" data-index-label="Tarifs">
@@ -287,7 +289,6 @@ ${pricingNote ? `<p class="fine-print price-note">${esc(pricingNote)}</p>` : ''}
 </section>`;
 }
 
-/* Phrase de repère ajoutée à la réponse « Combien coûte un site web ? » quand des prix existent. */
 /* Maintenance après la mise en ligne : trois formules sans engagement, si renseignées. */
 function maintenanceSection() {
   if (!maintenance.length) return '';
@@ -298,9 +299,9 @@ function maintenanceSection() {
 </li>`).join('');
   return `<section class="care" id="maintenance" data-index-label="Maintenance">
 <div class="wrap">
-${sectionHead({ kicker: 'Après la mise en ligne', title: 'Un site suivi. Sans engagement.', lead: 'Hébergement, sauvegardes, surveillance et modifications : choisissez le suivi qui correspond à votre activité, et changez de formule quand vous le souhaitez.' })}
+${sectionHead({ kicker: 'Après la mise en ligne', title: 'Un site suivi. Sans engagement.', lead: 'Hébergement, sécurité et mises à jour : choisissez le suivi qui correspond à votre activité, et changez de formule quand vous le souhaitez.' })}
 <ul class="care-grid" role="list">${cards}</ul>
-<div class="care-foot">${btn({ href: '/contact?projet=site', label: 'Parler du suivi de mon site', variant: 'ghost', track: 'cta-maintenance' })}<p class="fine-print">Prix ${pricingTax} par mois, sans durée minimale.</p></div>
+<div class="care-foot">${btn({ href: '/contact?projet=site', label: 'Parler du suivi de mon site', variant: 'ghost', track: 'cta-maintenance' })}<p class="fine-print">${maintenanceNote ? `${esc(maintenanceNote)} ` : ''}Prix ${pricingTax} par mois, sans durée minimale.</p></div>
 </div>
 </section>`;
 }
@@ -308,9 +309,10 @@ ${sectionHead({ kicker: 'Après la mise en ligne', title: 'Un site suivi. Sans e
 /* Repère de maintenance pour la FAQ. */
 function maintenanceHint() {
   if (!maintenance.length) return '';
-  return ` Pour repère : maintenance sans engagement à partir de ${price(Math.min(...maintenance.map((m) => m.price)))} ${pricingTax} par mois.`;
+  return ` Pour repère : la première année d’hébergement est offerte, puis la maintenance est sans engagement, à partir de ${price(Math.min(...maintenance.map((m) => m.price)))} ${pricingTax} par mois.`;
 }
 
+/* Phrase de repère ajoutée à la réponse « Combien coûte un site web ? » quand des prix existent. */
 function pricingHint(ids) {
   const items = pricing.filter((p) => ids.includes(p.id) && Number(p.from) > 0);
   if (!items.length) return '';

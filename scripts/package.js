@@ -6,6 +6,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const { execFileSync } = require('node:child_process');
+const os = require('node:os');
 
 const root = path.resolve(__dirname, '..');
 const name = 'pridanotech-next-gen';
@@ -31,6 +32,12 @@ if (fs.existsSync(filmDir)) {
 
 fs.rmSync(zip, { force: true });
 const exclude = ['node_modules/*', '.claude/*', 'original/*', '*.zip', '.env', '.env.local', '.env.*.local', '.qa/*', '.tmp/*', 'test-results/*', 'playwright-report/*', '*.DS_Store'].flatMap((p) => ['-x', `${name}/${p}`]);
-execFileSync('zip', ['-r', '-q', '-9', zip, name, ...exclude], { cwd: path.join(root, '..'), stdio: 'inherit' });
+/* L'archive contient toujours un dossier « pridanotech-next-gen », quel que soit le nom du dossier de travail (copie, autre emplacement). */
+let cwd = path.join(root, '..');
+if (path.basename(root) !== name) {
+  cwd = fs.mkdtempSync(path.join(os.tmpdir(), 'pridano-pack-'));
+  fs.symlinkSync(root, path.join(cwd, name));
+}
+execFileSync('zip', ['-r', '-q', '-9', zip, name, ...exclude], { cwd, stdio: 'inherit' });
 const size = (fs.statSync(zip).size / 1024 / 1024).toFixed(1);
 console.log(`✓ ${path.basename(zip)} (${size} Mo)`);

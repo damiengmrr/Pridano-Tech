@@ -1675,6 +1675,15 @@
   font-weight: 600;
 }
 
+.price-perks {
+  justify-self: stretch;
+}
+
+/* Une seule offre (page Logiciels) : la carte garde une largeur de lecture. */
+.price-grid:has(> :only-child) {
+  max-width: 40rem;
+}
+
 .price-delay .icon {
   width: 1.05rem;
   height: 1.05rem;

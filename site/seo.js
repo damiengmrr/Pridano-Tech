@@ -80,10 +80,10 @@ function graph({ origin, route, page }) {
       ...(() => {
         /* Prix d’appel « à partir de » (HT), uniquement s’ils sont publiés sur la page. */
         const offers = pricing.filter((p) => (page.service.priceIds || []).includes(p.id) && Number(p.from) > 0)
-          .map((p) => ({ '@type': 'Offer', name: p.label, url: origin + p.href.split('?')[0], priceSpecification: { '@type': 'PriceSpecification', minPrice: Number(p.from), priceCurrency: 'EUR', valueAddedTaxIncluded: pricingTax !== 'HT' } }));
+          .map((p) => ({ '@type': 'Offer', name: p.label, ...(p.perks?.length ? { description: p.perks.join(' · ') } : {}), url: origin + p.href.split('?')[0], priceSpecification: { '@type': 'PriceSpecification', minPrice: Number(p.from), priceCurrency: 'EUR', valueAddedTaxIncluded: pricingTax !== 'HT' } }));
         /* Formules de maintenance mensuelles, publiées sur la page Sites web. */
         if (page.service.maintenance) {
-          for (const m of maintenance) offers.push({ '@type': 'Offer', name: `Maintenance ${m.name}`, url: `${url}#maintenance`, priceSpecification: { '@type': 'UnitPriceSpecification', price: m.price, priceCurrency: 'EUR', unitCode: 'MON', unitText: 'mois', valueAddedTaxIncluded: pricingTax !== 'HT' } });
+          for (const m of maintenance) offers.push({ '@type': 'Offer', name: `Maintenance ${m.name}`, description: m.features.join(' · '), url: `${url}#maintenance`, priceSpecification: { '@type': 'UnitPriceSpecification', price: m.price, priceCurrency: 'EUR', unitCode: 'MON', unitText: 'mois', valueAddedTaxIncluded: pricingTax !== 'HT' } });
         }
         return offers.length ? { offers } : {};
       })(),
