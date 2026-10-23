@@ -12,7 +12,7 @@ async function handleSendBrief({ body, method, path, ip }) {
     return json(400, {
       ok: false,
       message:
-        "Le brief est incomplet. Merci de verifier les informations essentielles avant l'envoi.",
+        "Le brief est incomplet. Merci de vérifier les informations essentielles avant l’envoi.",
       missingFields: submission.missingFields,
     });
   }
@@ -28,7 +28,7 @@ async function handleSendBrief({ body, method, path, ip }) {
 
     return json(200, {
       ok: true,
-      message: "Le brief a bien ete envoye a notre equipe.",
+      message: "Le brief a bien été envoyé à notre équipe.",
       emailId: result?.id || null,
     });
   } catch (error) {
@@ -37,7 +37,7 @@ async function handleSendBrief({ body, method, path, ip }) {
       return json(500, {
         ok: false,
         message:
-          "Le service email n'est pas configure cote serveur. Ajoutez RESEND_API_KEY puis reessayez.",
+          "Le service d’envoi est momentanément indisponible. Vous pouvez écrire directement à pridanotech@gmail.com.",
       });
     }
 
@@ -46,7 +46,7 @@ async function handleSendBrief({ body, method, path, ip }) {
     return json(502, {
       ok: false,
       message:
-        "L'envoi du brief a echoue cote serveur. Merci de reessayer dans un instant.",
+        "L’envoi du brief a échoué côté serveur. Merci de réessayer dans un instant.",
     });
   }
 }

@@ -1,0 +1,128 @@
+/*
+ * PRIDANO TECH — Design tokens
+ * Palette extraite des logos officiels : dégradé cyan → azur du symbole,
+ * encre du logotype, carré ultramarine du point final. Voir DESIGN-SYSTEM.md.
+ */
+
+@font-face {
+  font-family: 'Archivo';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('/assets/fonts/archivo-latin-wght.woff2') format('woff2-variations'), url('/assets/fonts/archivo-latin-wght.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* Police de repli calibrée sur Archivo pour éviter tout décalage au chargement. */
+@font-face {
+  font-family: 'Archivo Fallback';
+  src: local('Arial'), local('Helvetica Neue'), local('Helvetica');
+  size-adjust: 103%;
+  ascent-override: 85%;
+  descent-override: 21%;
+  line-gap-override: 0%;
+}
+
+:root {
+  color-scheme: light;
+
+  /* Couleurs de marque */
+  --c-ink: #0a0c10;
+  --c-ink-2: #161a22;
+  --c-ink-3: #262b36;
+  --c-muted: #565e6c;
+  --c-muted-2: #7a8291;
+  --c-paper: #f2f3f5;
+  --c-paper-2: #e8eaee;
+  --c-paper-3: #dde0e6;
+  --c-white: #ffffff;
+  --c-cyan: #1fdcff;
+  --c-azure: #08a2ff;
+  --c-blue: #0a78ee;
+  --c-ultra: #1b45ff;
+  --c-ultra-deep: #1233c7;
+  --c-line: rgb(10 12 16 / 0.12);
+  --c-line-strong: rgb(10 12 16 / 0.22);
+  --c-line-dark: rgb(255 255 255 / 0.14);
+  --c-on-dark: #f4f6fa;
+  --c-on-dark-muted: #a8b0bf;
+  --c-success: #0f7a4a;
+  --c-error: #b42318;
+
+  --g-brand: linear-gradient(45deg, var(--c-blue) 0%, var(--c-azure) 50%, var(--c-cyan) 100%);
+  --g-brand-soft: linear-gradient(45deg, rgb(10 120 238 / 0.14), rgb(31 220 255 / 0.18));
+  --g-ink: radial-gradient(120% 90% at 80% 0%, #17223a 0%, var(--c-ink) 55%);
+
+  /* Typographie */
+  --f-sans: 'Archivo', 'Archivo Fallback', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --f-mono: ui-monospace, 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace;
+
+  --fs-display: clamp(3rem, 1.05rem + 8.4vw, 10.75rem);
+  --fs-h1: clamp(2.6rem, 1.3rem + 5.6vw, 7.25rem);
+  --fs-h2: clamp(2.15rem, 1.25rem + 3.9vw, 5.25rem);
+  --fs-h3: clamp(1.35rem, 1.1rem + 0.9vw, 1.95rem);
+  --fs-h4: clamp(1.125rem, 1.04rem + 0.35vw, 1.3rem);
+  --fs-lead: clamp(1.125rem, 1.02rem + 0.45vw, 1.42rem);
+  --fs-body: 1.0625rem;
+  --fs-small: 0.9375rem;
+  --fs-xs: 0.8125rem;
+  --fs-label: 0.75rem;
+
+  --lh-display: 0.88;
+  --lh-heading: 0.95;
+  --lh-body: 1.6;
+
+  --ls-display: -0.058em;
+  --ls-heading: -0.045em;
+  --ls-h3: -0.022em;
+  --ls-label: 0.14em;
+
+  /* Espacements (base 4 px) */
+  --s-1: 0.25rem;
+  --s-2: 0.5rem;
+  --s-3: 0.75rem;
+  --s-4: 1rem;
+  --s-5: 1.5rem;
+  --s-6: 2rem;
+  --s-7: 3rem;
+  --s-8: 4rem;
+  --s-9: 6rem;
+  --s-10: 8rem;
+  --section-y: clamp(5rem, 2.6rem + 9vw, 11rem);
+  --gutter: clamp(1rem, 0.35rem + 3.1vw, 3.5rem);
+  --wrap: 1440px;
+
+  /* Formes : rayons dérivés des nœuds circulaires du symbole */
+  --r-xs: 6px;
+  --r-sm: 12px;
+  --r-md: 20px;
+  --r-lg: 32px;
+  --r-xl: 48px;
+  --r-pill: 999px;
+
+  /* Profondeur (lumière de studio, ombres bleutées comme le rendu 3D officiel) */
+  --sh-1: 0 1px 2px rgb(10 12 16 / 0.06), 0 10px 26px -14px rgb(10 30 70 / 0.22);
+  --sh-2: 0 2px 6px rgb(10 12 16 / 0.06), 0 30px 60px -28px rgb(10 50 120 / 0.32);
+  --sh-float: 0 50px 90px -40px rgb(8 60 160 / 0.42);
+
+  /* Mouvement */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-goo: linear(0, 0.006, 0.025 2.8%, 0.101 6.1%, 0.539 18.9%, 0.721 25.3%, 0.849 31.5%, 0.937 38.1%, 0.968 41.8%, 0.991 45.7%, 1.006 50.1%, 1.015 55%, 1.017 63.9%, 1.001 85.9%, 1);
+  --dur-1: 160ms;
+  --dur-2: 320ms;
+  --dur-3: 640ms;
+  --dur-4: 960ms;
+
+  --header-h: 76px;
+  --focus: 0 0 0 3px var(--c-paper), 0 0 0 6px var(--c-ultra);
+  --focus-dark: 0 0 0 3px var(--c-ink), 0 0 0 6px var(--c-cyan);
+}
+
+@media (max-width: 767px) {
+  :root {
+    --header-h: 64px;
+    --fs-body: 1rem;
+  }
+}

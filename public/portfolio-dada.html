@@ -1,4 +1,5 @@
 <html lang="fr" class="dark antialiased scroll-smooth"><head><meta charset="utf-8">
+  <meta name="robots" content="noindex, nofollow">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Damien Gamarra — Étudiant & Développeur Full-Stack</title>
     <meta name="description" content="Portfolio de Damien Gamarra (B2 Informatique, Ynov Montpellier) — Projets web modernes (Next.js, Tailwind, GSAP), DevOps (NGINX, Linux, Docker) et études de cas (Pridano Tech, SeTesT, Serveur Web, Forum Go/SQLite).">
@@ -486,18 +487,18 @@
                 <div class="grid grid-cols-2 gap-8">
                   <div class="space-y-12">
                     <a href="https://tailwindcss.com/" target="_blank" rel="noopener noreferrer">
-                      <img src="tailwindcss.png" alt="TailwindCSS" class="hover:scale-105 transition-transform duration-300 w-full h-auto object-cover rounded-2xl">
+                      <img src="/assets/img/legacy/tailwindcss.png" alt="TailwindCSS" class="hover:scale-105 transition-transform duration-300 w-full h-auto object-cover rounded-2xl">
                     </a>
                     <a href="https://www.python.org/" target="_blank" rel="noopener noreferrer">
-                      <img src="python.png" alt="Python" class="hover:scale-105 transition-transform duration-300 w-full h-auto object-cover rounded-2xl">
+                      <img src="/assets/img/legacy/python.png" alt="Python" class="hover:scale-105 transition-transform duration-300 w-full h-auto object-cover rounded-2xl">
                     </a>
                   </div>
                   <div class="space-y-12 pt-8">
                     <a href="https://developer.mozilla.org/fr/docs/Web/HTML" target="_blank" rel="noopener noreferrer">
-                      <img src="html.png" alt="HTML" class="hover:scale-105 transition-transform duration-300 w-full h-auto object-cover rounded-2xl">
+                      <img src="/assets/img/legacy/html.png" alt="HTML" class="hover:scale-105 transition-transform duration-300 w-full h-auto object-cover rounded-2xl">
                     </a>
                     <a href="https://go.dev/" target="_blank" rel="noopener noreferrer">
-                      <img src="golang.png" alt="Golang" class="hover:scale-105 transition-transform duration-300 w-full h-auto object-cover rounded-2xl">
+                      <img src="/assets/img/legacy/golang.png" alt="Golang" class="hover:scale-105 transition-transform duration-300 w-full h-auto object-cover rounded-2xl">
                     </a>
                   </div>
                 </div>
@@ -809,7 +810,7 @@
               <!-- Testimonial card -->
               <div class="mt-8 rounded-2xl bg-white/[0.06] ring-1 ring-white/10 backdrop-blur-md p-5 md:p-6 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.6)] scroll-reveal revealed">
                 <div class="flex items-center gap-4">
-                  <img src="noah.jpg" alt="Avatar" class="h-12 w-12 rounded-full ring-2 ring-white/10 object-cover" style="">
+                  <img src="/assets/img/legacy/noah.jpg" alt="Avatar" class="h-12 w-12 rounded-full ring-2 ring-white/10 object-cover" style="">
                   <div>
                     <p class="text-sm font-medium">Noah Lemoing</p>
                     <p class="text-xs text-white/60">Etudiant</p>
@@ -1045,7 +1046,7 @@
           // Resume download functionality
           function downloadResume() {
             const link = document.createElement('a');
-            link.href = 'CV_Damien_Gamarra.pdf'; // placez ce fichier à la racine du projet
+            link.href = '/assets/documents/CV_Damien_Gamarra.pdf'; // placez ce fichier à la racine du projet
             link.download = 'CV_Damien_Gamarra.pdf';
             document.body.appendChild(link);
             link.click();

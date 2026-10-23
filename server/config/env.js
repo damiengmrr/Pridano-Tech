@@ -1,8 +1,8 @@
 const path = require("node:path");
 const dotenv = require("dotenv");
 
-dotenv.config({ path: path.resolve(process.cwd(), ".env") });
-dotenv.config({ path: path.resolve(process.cwd(), ".env.local"), override: true });
+dotenv.config({ path: path.resolve(process.cwd(), ".env"), quiet: true });
+dotenv.config({ path: path.resolve(process.cwd(), ".env.local"), override: true, quiet: true });
 
 const defaultPort = Number(process.env.PORT || 3000);
 

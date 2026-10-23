@@ -1,5 +1,6 @@
 const path = require("node:path");
 const express = require("express");
+const compression = require("compression");
 const { config } = require("./server/config/env");
 const { createExpressHandler } = require("./server/handlers/http");
 const {
@@ -14,15 +15,26 @@ const { handleContact } = require("./server/handlers/contact");
 function createApp() {
   const app = express();
   const publicDir = path.join(__dirname, "public");
-  const imageDir = path.join(publicDir, "assets", "images");
-  const documentDir = path.join(publicDir, "assets", "documents");
 
   app.disable("x-powered-by");
+  app.use(compression());
+  /* En-têtes de sécurité (miroir de netlify.toml). */
+  app.use((request, response, next) => {
+    response.setHeader("X-Content-Type-Options", "nosniff");
+    response.setHeader("Referrer-Policy", "strict-origin-when-cross-origin");
+    response.setHeader("X-Frame-Options", "DENY");
+    response.setHeader("Permissions-Policy", "camera=(), microphone=(), geolocation=(), interest-cohort=()");
+    response.setHeader("Cross-Origin-Opener-Policy", "same-origin");
+    /* Portfolios personnels historiques : exclus des moteurs (miroir de netlify.toml). */
+    if (request.path.startsWith("/portfolio-")) response.setHeader("X-Robots-Tag", "noindex, nofollow");
+    next();
+  });
   app.use(express.json({ limit: "1mb" }));
   app.use(express.urlencoded({ extended: false }));
 
+  /* Anciennes URLs : redirections permanentes (miroir de netlify.toml). */
   const aliases = { '/index.html': '/', '/services.html': '/sites-web', '/projets.html': '/realisations', '/about.html': '/a-propos', '/confidentialite.html': '/confidentialite' };
-  const pages = ['sites-web', 'realisations', 'saas', 'crm', 'a-propos', 'contact', 'mentions-legales', 'confidentialite'];
+  const pages = ['sites-web', 'realisations', 'saas', 'crm', 'a-propos', 'contact', 'devis', 'mentions-legales', 'confidentialite'];
   app.use((request, response, next) => {
     const target = aliases[request.path];
     if (target) return response.redirect(301, target + (request.originalUrl.includes('?') ? request.originalUrl.slice(request.originalUrl.indexOf('?')) : ''));
@@ -32,9 +44,10 @@ function createApp() {
     app.get(`/${page}.html`, (request, response) => response.redirect(301, `/${page}` + (request.originalUrl.includes('?') ? request.originalUrl.slice(request.originalUrl.indexOf('?')) : '')));
     app.get(`/${page}`, (request, response) => response.sendFile(path.join(publicDir, `${page}.html`)));
   });
-  app.use(express.static(publicDir));
-  app.use(express.static(imageDir));
-  app.use(express.static(documentDir));
+  app.use('/assets/js/build', express.static(path.join(publicDir, 'assets', 'js', 'build'), { immutable: true, maxAge: '1y' }));
+  app.use('/assets/fonts', express.static(path.join(publicDir, 'assets', 'fonts'), { immutable: true, maxAge: '1y' }));
+  app.use('/assets/img', express.static(path.join(publicDir, 'assets', 'img'), { maxAge: '30d' }));
+  app.use(express.static(publicDir, { extensions: false }));
 
   app.get("/api/health", createExpressHandler(handleHealth));
   app.post("/api/quote/qualify", createExpressHandler(handleQuoteQualify));

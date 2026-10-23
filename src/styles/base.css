@@ -1,0 +1,340 @@
+/* Base, typographie et utilitaires */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-padding-top: calc(var(--header-h) + 1rem);
+  background: var(--c-paper);
+  interpolate-size: allow-keywords;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--c-paper);
+  color: var(--c-ink);
+  font-family: var(--f-sans);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  font-weight: 400;
+  font-kerning: normal;
+  font-optical-sizing: auto;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
+}
+
+img,
+svg,
+video,
+canvas,
+picture {
+  display: block;
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+  letter-spacing: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+ol,
+ul,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+ul[role='list'],
+ol[role='list'] {
+  list-style: none;
+  padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 760;
+  text-wrap: balance;
+}
+
+p,
+li,
+dd {
+  text-wrap: pretty;
+}
+
+::selection {
+  background: var(--c-ultra);
+  color: var(--c-white);
+}
+
+:focus-visible {
+  outline: none;
+  box-shadow: var(--focus);
+  border-radius: var(--r-xs);
+}
+
+.on-dark :focus-visible,
+.section--dark :focus-visible {
+  box-shadow: var(--focus-dark);
+}
+
+/* Typographie de marque */
+.display {
+  font-size: var(--fs-display);
+  line-height: var(--lh-display);
+  letter-spacing: var(--ls-display);
+  font-weight: 820;
+}
+
+.h1 {
+  font-size: var(--fs-h1);
+  line-height: var(--lh-display);
+  letter-spacing: var(--ls-display);
+  font-weight: 800;
+}
+
+.h2 {
+  font-size: var(--fs-h2);
+  line-height: var(--lh-heading);
+  letter-spacing: var(--ls-heading);
+  font-weight: 780;
+}
+
+.h3 {
+  font-size: var(--fs-h3);
+  line-height: 1.08;
+  letter-spacing: var(--ls-h3);
+  font-weight: 700;
+}
+
+.h4 {
+  font-size: var(--fs-h4);
+  line-height: 1.2;
+  letter-spacing: -0.012em;
+  font-weight: 680;
+}
+
+.lead {
+  font-size: var(--fs-lead);
+  line-height: 1.45;
+  letter-spacing: -0.012em;
+  color: var(--c-ink-3);
+  max-width: 38ch;
+}
+
+.on-dark .lead,
+.section--dark .lead {
+  color: var(--c-on-dark-muted);
+}
+
+.muted {
+  color: var(--c-muted);
+}
+
+.small {
+  font-size: var(--fs-small);
+}
+
+/*
+ * Signature : le point final de chaque titre reprend le carré ultramarine du logotype.
+ * Le caractère « . » reste présent dans le texte (lecteurs d’écran, moteurs, copier-coller).
+ */
+.nowrap {
+  white-space: nowrap;
+}
+
+.pt {
+  position: relative;
+  display: inline-block;
+  color: transparent;
+  width: 0.26em;
+}
+
+.pt::after {
+  content: '';
+  position: absolute;
+  left: 0.03em;
+  bottom: 0.06em;
+  width: 0.16em;
+  height: 0.145em;
+  background: var(--c-ultra);
+}
+
+.section--dark .pt::after,
+.on-dark .pt::after {
+  background: var(--c-cyan);
+}
+
+.grad-text {
+  background: var(--g-brand);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+em.accent,
+.accent {
+  font-style: normal;
+  color: var(--c-ultra);
+}
+
+.section--dark em.accent,
+.on-dark em.accent {
+  color: var(--c-cyan);
+}
+
+/* Étiquette : le petit point du symbole devant chaque surtitre */
+.label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7em;
+  font-size: var(--fs-label);
+  line-height: 1.2;
+  font-weight: 640;
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--c-ink-3);
+}
+
+.label::before {
+  content: '';
+  width: 0.62em;
+  height: 0.62em;
+  flex: none;
+  border-radius: 50%;
+  background: var(--g-brand);
+}
+
+.label--plain::before {
+  display: none;
+}
+
+.section--dark .label,
+.on-dark .label {
+  color: var(--c-on-dark-muted);
+}
+
+.index-num {
+  font-family: var(--f-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.04em;
+  color: var(--c-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.section--dark .index-num {
+  color: var(--c-on-dark-muted);
+}
+
+/* Utilitaires */
+.wrap {
+  width: min(100% - 2 * var(--gutter), var(--wrap));
+  margin-inline: auto;
+}
+
+.wrap--narrow {
+  width: min(100% - 2 * var(--gutter), 920px);
+  margin-inline: auto;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+.sprite {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.skip-link {
+  position: fixed;
+  left: var(--s-4);
+  top: var(--s-4);
+  z-index: 200;
+  padding: 0.85rem 1.2rem;
+  border-radius: var(--r-pill);
+  background: var(--c-ink);
+  color: var(--c-white);
+  font-weight: 600;
+  text-decoration: none;
+  transform: translateY(-160%);
+  transition: transform var(--dur-2) var(--ease-out);
+}
+
+.skip-link:focus {
+  transform: none;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.noscript-note {
+  padding: var(--s-4);
+  border-radius: var(--r-md);
+  background: var(--c-white);
+  font-size: var(--fs-small);
+}
+
+/* Réduction des mouvements : on garde les états, on supprime les déplacements. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    scroll-behavior: auto !important;
+  }
+}

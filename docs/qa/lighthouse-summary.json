@@ -1,0 +1,339 @@
+{
+  "date": "2026-10-22T19:58:11.989Z",
+  "lighthouse": "12.8.2",
+  "chromium": "chromium-1243",
+  "rows": [
+    {
+      "formFactor": "mobile",
+      "route": "/",
+      "performance": 99,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "FCP": "1.2 s",
+      "LCP": "2.1 s",
+      "TBT": "0 ms",
+      "CLS": "0.001",
+      "SI": "2.0 s",
+      "failing": [
+        "uses-long-cache-ttl (0.5)",
+        "unused-css-rules (0.5)",
+        "image-delivery-insight (0)",
+        "network-dependency-tree-insight (0)"
+      ]
+    },
+    {
+      "formFactor": "mobile",
+      "route": "/sites-web",
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "FCP": "1.0 s",
+      "LCP": "1.7 s",
+      "TBT": "0 ms",
+      "CLS": "0",
+      "SI": "1.0 s",
+      "failing": [
+        "uses-long-cache-ttl (0.5)",
+        "unused-css-rules (0.5)",
+        "dom-size (0.5)",
+        "image-delivery-insight (0)",
+        "network-dependency-tree-insight (0)"
+      ]
+    },
+    {
+      "formFactor": "mobile",
+      "route": "/saas",
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "FCP": "1.0 s",
+      "LCP": "1.7 s",
+      "TBT": "0 ms",
+      "CLS": "0",
+      "SI": "1.0 s",
+      "failing": [
+        "uses-long-cache-ttl (0.5)",
+        "unused-css-rules (0.5)",
+        "network-dependency-tree-insight (0)"
+      ]
+    },
+    {
+      "formFactor": "mobile",
+      "route": "/crm",
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "FCP": "1.0 s",
+      "LCP": "1.7 s",
+      "TBT": "0 ms",
+      "CLS": "0",
+      "SI": "1.0 s",
+      "failing": [
+        "uses-long-cache-ttl (0.5)",
+        "unused-css-rules (0.5)",
+        "image-delivery-insight (0.5)",
+        "lcp-discovery-insight (0)",
+        "network-dependency-tree-insight (0)"
+      ]
+    },
+    {
+      "formFactor": "mobile",
+      "route": "/realisations",
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "FCP": "1.0 s",
+      "LCP": "1.7 s",
+      "TBT": "0 ms",
+      "CLS": "0",
+      "SI": "1.0 s",
+      "failing": [
+        "uses-long-cache-ttl (0.5)",
+        "unused-css-rules (0.5)",
+        "image-delivery-insight (0.5)",
+        "network-dependency-tree-insight (0)"
+      ]
+    },
+    {
+      "formFactor": "mobile",
+      "route": "/a-propos",
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "FCP": "1.0 s",
+      "LCP": "1.5 s",
+      "TBT": "0 ms",
+      "CLS": "0",
+      "SI": "1.0 s",
+      "failing": [
+        "uses-long-cache-ttl (0.5)",
+        "unused-css-rules (0.5)",
+        "image-delivery-insight (0.5)",
+        "network-dependency-tree-insight (0)"
+      ]
+    },
+    {
+      "formFactor": "mobile",
+      "route": "/contact",
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "FCP": "1.0 s",
+      "LCP": "1.4 s",
+      "TBT": "0 ms",
+      "CLS": "0",
+      "SI": "1.0 s",
+      "failing": [
+        "unused-css-rules (0.5)",
+        "network-dependency-tree-insight (0)"
+      ]
+    },
+    {
+      "formFactor": "mobile",
+      "route": "/devis",
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "FCP": "1.1 s",
+      "LCP": "1.8 s",
+      "TBT": "0 ms",
+      "CLS": "0.003",
+      "SI": "1.1 s",
+      "failing": [
+        "unused-css-rules (0.5)",
+        "network-dependency-tree-insight (0)"
+      ]
+    },
+    {
+      "formFactor": "mobile",
+      "route": "/mentions-legales",
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 66,
+      "FCP": "1.0 s",
+      "LCP": "1.4 s",
+      "TBT": "0 ms",
+      "CLS": "0",
+      "SI": "1.0 s",
+      "failing": [
+        "unused-css-rules (0.5)",
+        "is-crawlable (0)",
+        "network-dependency-tree-insight (0)"
+      ]
+    },
+    {
+      "formFactor": "desktop",
+      "route": "/",
+      "performance": 99,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "FCP": "0.3 s",
+      "LCP": "0.4 s",
+      "TBT": "0 ms",
+      "CLS": "0",
+      "SI": "1.4 s",
+      "failing": [
+        "speed-index (0.87)",
+        "uses-long-cache-ttl (0.5)",
+        "unused-css-rules (0.5)",
+        "uses-responsive-images (0.5)",
+        "image-delivery-insight (0.5)",
+        "network-dependency-tree-insight (0)"
+      ]
+    },
+    {
+      "formFactor": "desktop",
+      "route": "/sites-web",
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "FCP": "0.3 s",
+      "LCP": "0.4 s",
+      "TBT": "0 ms",
+      "CLS": "0",
+      "SI": "0.3 s",
+      "failing": [
+        "uses-long-cache-ttl (0.5)",
+        "unused-css-rules (0.5)",
+        "dom-size (0.5)",
+        "network-dependency-tree-insight (0)"
+      ]
+    },
+    {
+      "formFactor": "desktop",
+      "route": "/saas",
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "FCP": "0.3 s",
+      "LCP": "0.4 s",
+      "TBT": "0 ms",
+      "CLS": "0",
+      "SI": "0.3 s",
+      "failing": [
+        "uses-long-cache-ttl (0.5)",
+        "unused-css-rules (0.5)",
+        "network-dependency-tree-insight (0)"
+      ]
+    },
+    {
+      "formFactor": "desktop",
+      "route": "/crm",
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "FCP": "0.3 s",
+      "LCP": "0.4 s",
+      "TBT": "0 ms",
+      "CLS": "0",
+      "SI": "0.3 s",
+      "failing": [
+        "uses-long-cache-ttl (0.5)",
+        "unused-css-rules (0.5)",
+        "uses-responsive-images (0.5)",
+        "network-dependency-tree-insight (0)"
+      ]
+    },
+    {
+      "formFactor": "desktop",
+      "route": "/realisations",
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "FCP": "0.3 s",
+      "LCP": "0.4 s",
+      "TBT": "0 ms",
+      "CLS": "0",
+      "SI": "0.3 s",
+      "failing": [
+        "uses-long-cache-ttl (0.5)",
+        "unused-css-rules (0.5)",
+        "network-dependency-tree-insight (0)"
+      ]
+    },
+    {
+      "formFactor": "desktop",
+      "route": "/a-propos",
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "FCP": "0.3 s",
+      "LCP": "0.3 s",
+      "TBT": "0 ms",
+      "CLS": "0",
+      "SI": "0.3 s",
+      "failing": [
+        "uses-long-cache-ttl (0.5)",
+        "unused-css-rules (0.5)",
+        "network-dependency-tree-insight (0)"
+      ]
+    },
+    {
+      "formFactor": "desktop",
+      "route": "/contact",
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "FCP": "0.3 s",
+      "LCP": "0.3 s",
+      "TBT": "0 ms",
+      "CLS": "0",
+      "SI": "0.3 s",
+      "failing": [
+        "unused-css-rules (0.5)",
+        "network-dependency-tree-insight (0)"
+      ]
+    },
+    {
+      "formFactor": "desktop",
+      "route": "/devis",
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "FCP": "0.3 s",
+      "LCP": "0.3 s",
+      "TBT": "0 ms",
+      "CLS": "0.002",
+      "SI": "0.3 s",
+      "failing": [
+        "unused-css-rules (0.5)",
+        "network-dependency-tree-insight (0)"
+      ]
+    },
+    {
+      "formFactor": "desktop",
+      "route": "/mentions-legales",
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 66,
+      "FCP": "0.3 s",
+      "LCP": "0.3 s",
+      "TBT": "0 ms",
+      "CLS": "0",
+      "SI": "0.3 s",
+      "failing": [
+        "unused-css-rules (0.5)",
+        "is-crawlable (0)",
+        "network-dependency-tree-insight (0)"
+      ]
+    }
+  ]
+}

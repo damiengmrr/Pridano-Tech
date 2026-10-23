@@ -1,0 +1,183 @@
+{
+  "damien": {
+    "widths": [
+      400,
+      640,
+      960
+    ],
+    "width": 1536,
+    "height": 2048,
+    "formats": [
+      "avif",
+      "webp"
+    ]
+  },
+  "noah": {
+    "widths": [
+      400,
+      640,
+      960
+    ],
+    "width": 1536,
+    "height": 2048,
+    "formats": [
+      "avif",
+      "webp"
+    ]
+  },
+  "solaria": {
+    "widths": [
+      640,
+      960,
+      1400
+    ],
+    "width": 1400,
+    "height": 763,
+    "formats": [
+      "avif",
+      "webp"
+    ]
+  },
+  "ppg": {
+    "widths": [
+      640,
+      960,
+      1400
+    ],
+    "width": 3456,
+    "height": 1986,
+    "formats": [
+      "avif",
+      "webp"
+    ]
+  },
+  "dashboard": {
+    "widths": [
+      640,
+      1000,
+      1440
+    ],
+    "width": 1440,
+    "height": 1000,
+    "formats": [
+      "avif",
+      "webp"
+    ]
+  },
+  "factures": {
+    "widths": [
+      640,
+      1000,
+      1440
+    ],
+    "width": 1440,
+    "height": 1000,
+    "formats": [
+      "avif",
+      "webp"
+    ]
+  },
+  "planning": {
+    "widths": [
+      640,
+      1000,
+      1440
+    ],
+    "width": 1440,
+    "height": 1685,
+    "formats": [
+      "avif",
+      "webp"
+    ]
+  },
+  "login": {
+    "widths": [
+      640,
+      1200,
+      1800
+    ],
+    "width": 2870,
+    "height": 1852,
+    "formats": [
+      "avif",
+      "webp"
+    ]
+  },
+  "logo-3d": {
+    "widths": [
+      480,
+      940
+    ],
+    "width": 940,
+    "height": 900,
+    "formats": [
+      "avif",
+      "webp"
+    ]
+  },
+  "solaria-site": {
+    "widths": [
+      640,
+      900,
+      1440
+    ],
+    "width": 1440,
+    "height": 900,
+    "formats": [
+      "avif",
+      "webp"
+    ]
+  },
+  "solaria-site-m": {
+    "widths": [
+      300,
+      560
+    ],
+    "width": 780,
+    "height": 1688,
+    "formats": [
+      "avif",
+      "webp"
+    ]
+  },
+  "ppg-site": {
+    "widths": [
+      640,
+      900,
+      1440
+    ],
+    "width": 1440,
+    "height": 900,
+    "formats": [
+      "avif",
+      "webp"
+    ]
+  },
+  "ppg-site-m": {
+    "widths": [
+      300,
+      560
+    ],
+    "width": 780,
+    "height": 1688,
+    "formats": [
+      "avif",
+      "webp"
+    ]
+  },
+  "hero-poster": {
+    "widths": [
+      420,
+      640,
+      860,
+      1100,
+      1300
+    ],
+    "width": 1300,
+    "height": 1300,
+    "formats": [
+      "avif",
+      "webp"
+    ]
+  }
+}

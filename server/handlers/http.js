@@ -99,7 +99,7 @@ function createNetlifyHandler({ methods = ["GET"], handler }) {
 
     try {
       body = parseNetlifyBody(event);
-    } catch (error) {
+    } catch {
       return json(400, {
         ok: false,
         message: "Corps JSON invalide.",

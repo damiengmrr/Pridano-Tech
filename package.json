@@ -1,15 +1,22 @@
 {
-  "name": "pridano",
-  "version": "1.0.0",
-  "description": "Pridano Tech — site business premium avec cadrage projet assiste par IA",
+  "name": "pridanotech-next-gen",
+  "version": "2.0.0",
+  "description": "Pridano Tech — site officiel (refonte next-gen) : sites web, logiciels sur mesure et automatisation.",
   "main": "server.js",
   "scripts": {
+    "assets": "node scripts/assets/build-assets.js",
+    "poster": "node scripts/assets/render-poster.js",
+    "og": "node scripts/assets/render-og.js",
     "build": "node scripts/build.js",
-    "lint": "node scripts/check.js && eslint .",
-    "test": "node --test tests/contact.test.js tests/routes.test.js tests/seo.test.js",
     "dev": "node scripts/dev.js",
     "start": "node server.js",
-    "test:frontend": "playwright test"
+    "lint": "node scripts/check.js && eslint .",
+    "test": "node --test tests/contact.test.js tests/routes.test.js tests/seo.test.js tests/content.test.js",
+    "test:frontend": "playwright test",
+    "qa:visual": "node scripts/qa/visual.js",
+    "qa:lighthouse": "node scripts/qa/lighthouse.js",
+    "package": "node scripts/package.js",
+    "captures": "node scripts/assets/capture-realisations.js"
   },
   "repository": {
     "type": "git",
@@ -23,15 +30,23 @@
   },
   "homepage": "https://github.com/damiengmrr/Pridano-Tech#readme",
   "dependencies": {
-    "dotenv": "^17.3.1",
-    "express": "^5.2.1",
-    "resend": "^6.10.0"
+    "compression": "^1.8.2",
+    "dotenv": "^17.4.2",
+    "express": "^5.3.0",
+    "resend": "^6.34.1"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@fontsource-variable/archivo": "^5.3.0",
     "@playwright/test": "^1.63.0",
-    "eslint": "^10.10.0",
-    "globals": "^17.12.0",
+    "esbuild": "^0.28.2",
+    "eslint": "^10.13.0",
+    "globals": "^17.13.0",
+    "lighthouse": "^12.8.2",
+    "potrace": "^2.1.8",
     "sharp": "^0.35.4"
+  },
+  "engines": {
+    "node": ">=20"
   }
 }

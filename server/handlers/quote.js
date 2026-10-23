@@ -38,7 +38,7 @@ async function handleQuoteQualify({ body }) {
   if (projectDescription.length < MIN_PROJECT_DESCRIPTION_LENGTH) {
     return json(400, {
       ok: false,
-      message: "Ajoutez juste quelques mots de plus pour lancer l'analyse.",
+      message: "Ajoutez juste quelques mots de plus pour lancer l’analyse.",
     });
   }
 
@@ -53,7 +53,7 @@ async function handleQuoteSummary({ body }) {
   if (projectDescription.length < MIN_PROJECT_DESCRIPTION_LENGTH) {
     return json(400, {
       ok: false,
-      message: "Le brief initial est encore trop court pour produire une synthese utile.",
+      message: "Le brief initial est encore trop court pour produire une synthèse utile.",
     });
   }
 
@@ -84,7 +84,7 @@ async function handleQuoteChat({ body }) {
   if (!userMessage) {
     return json(400, {
       ok: false,
-      message: "Votre reponse est vide. Ajoutez simplement quelques mots pour continuer.",
+      message: "Votre réponse est vide. Ajoutez simplement quelques mots pour continuer.",
     });
   }
 

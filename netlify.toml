@@ -1,3 +1,6 @@
+# Pridano Tech — déploiement Netlify
+# Build statique (public/) + fonctions serverless (netlify/functions/) pour le contact et le brief guidé.
+
 [build]
   command = "npm run build"
   publish = "public"
@@ -5,11 +8,13 @@
 [build.environment]
   NODE_ENV = "production"
   PUBLIC_SITE_URL = "https://pridanotech.fr"
+  NODE_VERSION = "22"
 
 [functions]
   directory = "netlify/functions"
   node_bundler = "esbuild"
 
+# ---------- API (inchangées) ----------
 [[redirects]]
   from = "/api/health"
   to = "/.netlify/functions/health"
@@ -40,6 +45,12 @@
   to = "/.netlify/functions/send-brief"
   status = 200
 
+[[redirects]]
+  from = "/api/contact"
+  to = "/.netlify/functions/contact"
+  status = 200
+
+# ---------- Anciennes URLs : redirections permanentes ----------
 [[redirects]]
   from = "/index.html"
   to = "/"
@@ -101,6 +112,12 @@
   force = true
 
 [[redirects]]
+  from = "/devis.html"
+  to = "/devis"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/mentions-legales.html"
   to = "/mentions-legales"
   status = 301
@@ -112,6 +129,7 @@
   status = 301
   force = true
 
+# ---------- URLs propres ----------
 [[redirects]]
   from = "/sites-web"
   to = "/sites-web.html"
@@ -143,6 +161,11 @@
   status = 200
 
 [[redirects]]
+  from = "/devis"
+  to = "/devis.html"
+  status = 200
+
+[[redirects]]
   from = "/mentions-legales"
   to = "/mentions-legales.html"
   status = 200
@@ -153,11 +176,46 @@
   status = 200
 
 [[redirects]]
-  from = "/api/contact"
-  to = "/.netlify/functions/contact"
-  status = 200
-
-[[redirects]]
   from = "/*"
   to = "/404.html"
   status = 404
+
+# ---------- En-têtes ----------
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Frame-Options = "DENY"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), interest-cohort=()"
+    Strict-Transport-Security = "max-age=31536000"
+    Cross-Origin-Opener-Policy = "same-origin"
+
+# Portfolios personnels historiques : accessibles par lien direct, exclus des moteurs.
+[[headers]]
+  for = "/portfolio-*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
+# Bundles JS nommés par empreinte : cache immuable d’un an.
+[[headers]]
+  for = "/assets/js/build/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/assets/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    Access-Control-Allow-Origin = "*"
+
+# Images et marque : cache long, revalidé (noms non versionnés).
+[[headers]]
+  for = "/assets/img/*"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000, stale-while-revalidate=86400"
+
+[[headers]]
+  for = "/assets/brand/*"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000, stale-while-revalidate=86400"

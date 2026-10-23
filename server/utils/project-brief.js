@@ -37,7 +37,7 @@ const PROJECT_TYPE_OPTIONS = [
   {
     id: "integration_ia",
     label: "Integration IA",
-    keywords: ["integration ia", "assistant ia", "chatbot", "llm", "rag", "gpt", "intelligence artificielle"],
+    keywords: ["integration ia", "intégration ia", "assistant ia", "chatbot", "llm", "rag", "gpt", "intelligence artificielle"],
   },
   {
     id: "ecommerce",
@@ -439,7 +439,7 @@ function enrichBriefFromText(brief = {}, source = "", options = {}) {
   return safeBrief;
 }
 
-function mapFieldValue(field, value, brief = {}, projectDescription = "") {
+function mapFieldValue(field, value, _brief = {}, _projectDescription = "") {
   const cleaned = String(value || "").trim();
 
   if (!cleaned) {
