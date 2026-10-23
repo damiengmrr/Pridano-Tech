@@ -130,3 +130,4 @@ Lighthouse arrive comme un nouveau visiteur sans GPU (rendu logiciel). La mesure
 | CLS | ≤ 0,1 | 0 à 0,003 |
 
 L'INP et les valeurs au 75e percentile se vérifient uniquement sur données terrain, après la mise en ligne.
+
