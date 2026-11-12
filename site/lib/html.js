@@ -12,6 +12,8 @@ const icons = {
   arrow: '<path d="M4.5 12h15m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>',
   'arrow-up-right': '<path d="M7 17 17 7m-8.5 0H17v8.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>',
   'arrow-down': '<path d="M12 4.5v15m6-6-6 6-6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>',
+  chevron: '<path d="m6.5 9.5 5.5 5.5 5.5-5.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" fill="none"/>',
+  search: '<circle cx="10.8" cy="10.8" r="6.4" stroke="currentColor" stroke-width="1.7" fill="none"/><path d="m16 16 4.6 4.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>',
   close: '<path d="m6 6 12 12M18 6 6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/>',
   phone: '<path d="M6.6 3.5h2.7l1.4 4-2 1.3a12 12 0 0 0 6.5 6.5l1.3-2 4 1.4v2.7a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4.6 5.7a2 2 0 0 1 2-2.2Z" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linejoin="round"/>',
   cursor: '<path d="M5.5 3.5 19 10.2l-6.1 1.8-2.9 6.5Z" fill="currentColor" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"/>',
@@ -39,15 +41,18 @@ const newTab = (href) => (isExternal(href) ? '<span class="visually-hidden"> (no
 function btn({ href, label, variant = 'primary', size = '', icon: iconName = 'arrow', attrs = '', type, cls: extra = '', track = '' }) {
   const cls = ['btn', `btn--${variant}`, size ? `btn--${size}` : '', extra].filter(Boolean).join(' ');
   if (track) attrs += ` data-umami-event="${esc(track)}"`;
-  const inner = `<span class="btn-label">${label}</span><span class="btn-icon" aria-hidden="true">${icon(isExternal(href || '') ? 'arrow-up-right' : iconName)}</span>`;
-  if (type) return `<button class="${cls}" type="${type}" data-magnetic ${attrs}>${inner}</button>`;
-  return `<a class="${cls}" href="${esc(href)}" data-magnetic${extAttrs(href)} ${attrs}>${inner}${newTab(href)}</a>`;
+  const text = `<span class="btn-label">${label}</span>`;
+  /* Pas de flèche décorative sur les boutons. Les boutons de formulaire gardent l’icône : elle ne s’affiche que pendant l’envoi (aria-busy). */
+  if (type) return `<button class="${cls}" type="${type}" data-magnetic ${attrs}>${text}<span class="btn-icon" aria-hidden="true">${icon(iconName)}</span></button>`;
+  return `<a class="${cls}" href="${esc(href)}" data-magnetic${extAttrs(href)} ${attrs}>${text}${newTab(href)}</a>`;
 }
 
-function link({ href, label, cls = '', track = '' }) {
+/* Flèche ↗ seulement pour un lien externe (nouvel onglet) ; `arrow` la force sur un lien interne. */
+function link({ href, label, cls = '', track = '', arrow = false }) {
   const ext = isExternal(href);
   const event = track || (href === '/devis' ? 'lien:devis-guide' : '');
-  return `<a class="link${ext ? ' link--ext' : ''}${cls ? ` ${cls}` : ''}" href="${esc(href)}"${extAttrs(href)}${event ? ` data-umami-event="${esc(event)}"` : ''}>${label}${newTab(href)}${icon(ext ? 'arrow-up-right' : 'arrow')}</a>`;
+  const glyph = ext ? icon('arrow-up-right') : arrow ? icon('arrow') : '';
+  return `<a class="link${ext ? ' link--ext' : ''}${cls ? ` ${cls}` : ''}" href="${esc(href)}"${extAttrs(href)}${event ? ` data-umami-event="${esc(event)}"` : ''}>${label}${newTab(href)}${glyph}</a>`;
 }
 
 /* Téléphone : affiché tel quel, lien tel: au format international sans espaces. */
@@ -81,7 +86,8 @@ function picture(name, { alt = '', sizes = '100vw', cls = '', imgCls = '', loadi
 
 /*
  * Révélation mot à mot : chaque mot est enveloppé (le titre reste un seul texte pour les
- * lecteurs d’écran et les moteurs). Les balises existantes (point final, retours) sont conservées.
+ * lecteurs d’écran et les moteurs). À appeler avant pt() : le carré du point final se retrouve
+ * ainsi dans le mot qui bouge, au lieu de flotter seul avant l’arrivée du mot.
  */
 function words(html) {
   let i = 0;

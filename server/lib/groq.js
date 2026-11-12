@@ -1,4 +1,5 @@
 const {
+  alignNextField,
   advanceFallbackConversation,
   buildFallbackConversationStart,
   buildFallbackSummary,
@@ -8,6 +9,32 @@ const {
   sanitizeBrief,
 } = require("../utils/project-brief");
 const { config } = require("../config/env");
+const { needById, normalizeNeeds } = require("../../site/data/needs");
+
+/* Besoins cochés : décrits au modèle pour qu'il remplisse serviceDetails et pose les bonnes questions. */
+function servicesContext(services = []) {
+  return services.map((id) => ({ field: `service:${id}`, besoin: needById[id].label, question: needById[id].question.question }));
+}
+
+/*
+ * Après une réponse du modèle, avec des besoins cochés : on garde les besoins et les précisions
+ * déjà connues, on n'accepte que des questions du parcours, et le brief n'est complet que si
+ * chaque besoin a reçu sa précision. Sans besoin coché, la réponse du modèle est utilisée telle quelle.
+ */
+function alignAiTurn({ aiResponse, brief, projectDescription }) {
+  const { field, replaced } = alignNextField(brief, projectDescription, aiResponse.nextField || null);
+  const meta = field ? buildQuestionMeta(field, brief, projectDescription) : null;
+  const strict = brief.services?.length > 0;
+  return {
+    nextField: strict ? field : aiResponse.nextField || null,
+    nextQuestion: replaced ? meta?.question || "" : aiResponse.nextQuestion || "",
+    quickReplies: !replaced && Array.isArray(aiResponse.quickReplies) && aiResponse.quickReplies.length
+      ? aiResponse.quickReplies.slice(0, 6)
+      : meta?.quickReplies || [],
+    inputPlaceholder: (!replaced && aiResponse.inputPlaceholder) || meta?.placeholder || "",
+    isComplete: strict ? !field : Boolean(aiResponse.isComplete),
+  };
+}
 
 function parseJsonContent(content) {
   const raw = String(content || "").trim();
@@ -171,7 +198,8 @@ async function generateSummary({ projectDescription, answers }) {
   }
 }
 
-async function startBriefConversation(projectDescription) {
+async function startBriefConversation(projectDescription, rawServices = []) {
+  const services = normalizeNeeds(rawServices);
   try {
     const aiResponse = await runGroqJson({
       systemPrompt:
@@ -194,6 +222,7 @@ async function startBriefConversation(projectDescription) {
             timeline: "string",
             budget: "string",
             summary: "string",
+            serviceDetails: { "<id du besoin>": "string" },
           },
           nextField: "string",
           nextQuestion: "string",
@@ -211,8 +240,10 @@ async function startBriefConversation(projectDescription) {
           "La premiere question doit donner une vraie direction de cadrage",
           "Les quickReplies doivent etre contextuelles a la question, pas generiques, et laisser la place a une reponse libre",
           "Montrer qu'une reponse courte peut suffire",
+          "Si des besoins sont fournis (services), poser pour chacun la question indiquee (champ service:<id>) et ranger la reponse dans brief.serviceDetails[<id>]",
         ],
         projectDescription,
+        services: servicesContext(services),
       }),
       maxCompletionTokens: 1700,
     });
@@ -221,27 +252,19 @@ async function startBriefConversation(projectDescription) {
       throw new Error("GROQ_BRIEF_START_INCOMPLETE");
     }
 
-    const brief = sanitizeBrief(aiResponse.brief, projectDescription);
-    const meta = aiResponse.nextField
-      ? buildQuestionMeta(aiResponse.nextField, brief, projectDescription)
-      : null;
+    const brief = sanitizeBrief({ ...aiResponse.brief, services }, projectDescription);
+    const turn = alignAiTurn({ aiResponse, brief, projectDescription });
 
     return {
       mode: "ai",
       assistantMessage: aiResponse.assistantMessage,
       brief,
-      nextField: aiResponse.nextField || null,
-      nextQuestion: aiResponse.nextQuestion || "",
-      quickReplies: Array.isArray(aiResponse.quickReplies) && aiResponse.quickReplies.length
-        ? aiResponse.quickReplies.slice(0, 6)
-        : meta?.quickReplies || [],
-      inputPlaceholder: aiResponse.inputPlaceholder || meta?.placeholder || "",
-      isComplete: Boolean(aiResponse.isComplete),
+      ...turn,
       progress: Number(aiResponse.progress) || 0,
     };
   } catch (error) {
     return {
-      ...buildFallbackConversationStart(projectDescription),
+      ...buildFallbackConversationStart(projectDescription, services),
       error: error.message,
     };
   }
@@ -276,6 +299,7 @@ async function advanceBriefConversation({
             timeline: "string",
             budget: "string",
             summary: "string",
+            serviceDetails: { "<id du besoin>": "string" },
           },
           nextField: "string",
           nextQuestion: "string",
@@ -292,8 +316,10 @@ async function advanceBriefConversation({
           "Les quickReplies doivent changer selon la question en cours",
           "Pas de phrases longues ni de style conversationnel artificiel",
           "Rassurer sans surjouer et accepter les reponses courtes",
+          "Si des besoins sont fournis (services), poser pour chacun la question indiquee (champ service:<id>) et ranger la reponse dans brief.serviceDetails[<id>]",
         ],
         projectDescription,
+        services: servicesContext(normalizeNeeds(brief?.services)),
         activeField,
         userMessage,
         brief,
@@ -306,22 +332,20 @@ async function advanceBriefConversation({
       throw new Error("GROQ_BRIEF_TURN_INCOMPLETE");
     }
 
-    const nextBrief = sanitizeBrief(aiResponse.brief, projectDescription);
-    const meta = aiResponse.nextField
-      ? buildQuestionMeta(aiResponse.nextField, nextBrief, projectDescription)
-      : null;
+    /* Besoins et précisions déjà connus conservés ; la réponse au besoin en cours est toujours rangée. */
+    const services = normalizeNeeds(brief?.services);
+    const details = { ...(brief?.serviceDetails || {}), ...(aiResponse.brief.serviceDetails || {}) };
+    if (typeof activeField === "string" && activeField.startsWith("service:") && !details[activeField.slice(8)]) {
+      details[activeField.slice(8)] = userMessage;
+    }
+    const nextBrief = sanitizeBrief({ ...aiResponse.brief, services, serviceDetails: details, projectTypeAuto: brief?.projectTypeAuto }, projectDescription);
+    const turn = alignAiTurn({ aiResponse, brief: nextBrief, projectDescription });
 
     return {
       mode: "ai",
       assistantMessage: aiResponse.assistantMessage,
       brief: nextBrief,
-      nextField: aiResponse.nextField || null,
-      nextQuestion: aiResponse.nextQuestion || "",
-      quickReplies: Array.isArray(aiResponse.quickReplies) && aiResponse.quickReplies.length
-        ? aiResponse.quickReplies.slice(0, 6)
-        : meta?.quickReplies || [],
-      inputPlaceholder: aiResponse.inputPlaceholder || meta?.placeholder || "",
-      isComplete: Boolean(aiResponse.isComplete),
+      ...turn,
       progress: Number(aiResponse.progress) || 0,
     };
   } catch (error) {

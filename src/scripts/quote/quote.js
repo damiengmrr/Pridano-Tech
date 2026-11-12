@@ -29,6 +29,49 @@ const FIELD_SEQUENCE = [
 
 const REVIEW_SEQUENCE = [...FIELD_SEQUENCE, "budget"];
 
+/* Plusieurs besoins cochés : questions communes, une question par besoin, puis le délai (même règle que le serveur). */
+function getSequence(brief) {
+  const services = brief.services || [];
+  if (!services.length) {
+    return FIELD_SEQUENCE;
+  }
+
+  return ["projectType", "sector", "primaryGoal", "targetAudience", "currentState", ...services.map((id) => `service:${id}`), "timeline"];
+}
+
+function isFieldFilled(brief, field) {
+  if (field.startsWith("service:")) {
+    return isFilled(brief.serviceDetails?.[field.slice(8)]);
+  }
+
+  return isFilled(brief[field]);
+}
+
+/* Brouillon conservé dans l'onglet (sans les coordonnées) : rien n'est perdu en changeant de page. */
+const DRAFT_KEY = "pt-devis-brouillon";
+const DRAFT_TTL = 24 * 60 * 60 * 1000;
+
+function readDraft() {
+  try {
+    const draft = JSON.parse(sessionStorage.getItem(DRAFT_KEY) || "null");
+    return draft && Date.now() - draft.savedAt < DRAFT_TTL ? draft : null;
+  } catch {
+    return null;
+  }
+}
+
+function clearDraft() {
+  try {
+    sessionStorage.removeItem(DRAFT_KEY);
+  } catch {
+    /* stockage indisponible */
+  }
+}
+
+function newSubmissionId() {
+  return globalThis.crypto?.randomUUID?.() || `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`;
+}
+
 const PREVIEW_SECTIONS = [
   { key: "projectType", label: "Type de projet" },
   { key: "sector", label: "Secteur" },
@@ -57,6 +100,10 @@ const INITIAL_QUICK_REPLIES = [
 ];
 const INITIAL_PLACEHOLDER =
   "Ex. On veut lancer un SaaS pour automatiser la qualification de prospects B2B.";
+const PARCOURS_MESSAGE =
+  "Décrivez votre entreprise ou votre idée en une phrase, et cochez au-dessus les besoins qui vous intéressent. Je poserai ensuite une question pour chacun, puis nous parlerons délai et budget.";
+const PARCOURS_PLACEHOLDER =
+  "Ex. J'ouvre un restaurant en mars : il me faut un site avec réservation et un outil de commandes.";
 
 function escapeHtml(value = "") {
   return String(value)
@@ -91,6 +138,9 @@ function createEmptyBrief() {
     timeline: "",
     budget: "",
     summary: "",
+    services: [],
+    serviceDetails: {},
+    projectTypeAuto: false,
   };
 }
 
@@ -98,6 +148,8 @@ function normalizeBrief(brief = {}) {
   return {
     ...createEmptyBrief(),
     ...brief,
+    services: Array.isArray(brief.services) ? brief.services : [],
+    serviceDetails: brief.serviceDetails && typeof brief.serviceDetails === "object" ? brief.serviceDetails : {},
     keyFeatures: Array.isArray(brief.keyFeatures)
       ? brief.keyFeatures.filter(Boolean).slice(0, 8)
       : splitList(brief.keyFeatures),
@@ -113,11 +165,11 @@ function isFilled(value) {
 }
 
 function getFilledFieldCount(brief) {
-  return FIELD_SEQUENCE.filter((field) => isFilled(brief[field])).length;
+  return getSequence(brief).filter((field) => isFieldFilled(brief, field)).length;
 }
 
 function getCompletionScore(brief) {
-  return Math.round((getFilledFieldCount(brief) / FIELD_SEQUENCE.length) * 100);
+  return Math.round((getFilledFieldCount(brief) / getSequence(brief).length) * 100);
 }
 
 function getPreviewValue(key, brief) {
@@ -138,10 +190,12 @@ function getPreviewValue(key, brief) {
   return String(value || "").trim();
 }
 
-function summarizeBrief(brief) {
+function summarizeBrief(brief, labels = {}) {
   const parts = [];
 
-  if (brief.projectType) {
+  if (brief.services?.length) {
+    parts.push(`Besoins : ${brief.services.map((id) => labels[id] || id).join(", ")}${brief.sector ? ` (secteur : ${brief.sector.toLowerCase()})` : ""}.`);
+  } else if (brief.projectType) {
     parts.push(
       brief.sector
         ? `Projet de ${brief.projectType.toLowerCase()} dans ${brief.sector.toLowerCase()}.`
@@ -159,6 +213,12 @@ function summarizeBrief(brief) {
         .filter(Boolean)
         .join(" ; ") + ".",
     );
+  }
+
+  for (const id of brief.services || []) {
+    if (isFilled(brief.serviceDetails?.[id])) {
+      parts.push(`${labels[id] || id} : ${brief.serviceDetails[id]}.`);
+    }
   }
 
   if (brief.keyFeatures.length) {
@@ -223,6 +283,7 @@ async function postJson(url, payload) {
 }
 
 export function initPage() {
+  const initialMessage = () => (new URLSearchParams(location.search).get("parcours") === "projet" ? PARCOURS_MESSAGE : INITIAL_ASSISTANT_MESSAGE);
   const root = document.querySelector("[data-quote-app]");
 
   if (!root) {
@@ -254,6 +315,13 @@ export function initPage() {
   const successMessage = document.querySelector("[data-success-message]");
   const successSummary = document.querySelector("[data-success-summary]");
   const briefFields = [...root.querySelectorAll("[data-brief-field]")];
+  const needInputs = [...document.querySelectorAll("[data-need]")];
+  const needLabels = Object.fromEntries(needInputs.map((input) => [input.value, input.nextElementSibling?.textContent.trim() || input.value]));
+  const serviceGroup = root.querySelector("[data-service-group]");
+  const serviceFieldsBox = root.querySelector("[data-service-fields]");
+  const parcoursNote = document.querySelector("[data-parcours-note]");
+  const params = new URLSearchParams(location.search);
+  const parcours = params.get("parcours") === "projet";
   const reviewButtonDefaults = new Map(
     reviewButtons.map((button) => [button, button.textContent.trim()]),
   );
@@ -293,7 +361,48 @@ export function initPage() {
     ],
     brief: createEmptyBrief(),
     summaryManuallyEdited: false,
+    submissionId: "",
   };
+
+  /* Besoins : libellé du type de projet (même règle que le serveur) et lecture du sélecteur. */
+  function needsLabel(services) {
+    const labels = services.filter((id) => id !== "projet-complet").map((id) => needLabels[id]);
+    if (services.includes("projet-complet")) {
+      return labels.length ? `Projet numérique complet : ${labels.join(", ")}` : "Projet numérique complet";
+    }
+    return labels.join(" + ");
+  }
+
+  function selectedNeeds() {
+    return needInputs.filter((input) => input.checked).map((input) => input.value);
+  }
+
+  function applyNeeds(services) {
+    const brief = normalizeBrief(state.brief);
+    brief.services = services;
+    brief.serviceDetails = Object.fromEntries(Object.entries(brief.serviceDetails).filter(([id]) => services.includes(id)));
+    if (services.length && (!brief.projectType || brief.projectTypeAuto)) {
+      brief.projectType = needsLabel(services);
+      brief.projectTypeAuto = true;
+    } else if (!services.length && brief.projectTypeAuto) {
+      brief.projectType = "";
+      brief.projectTypeAuto = false;
+    }
+    state.brief = brief;
+  }
+
+  function saveDraft() {
+    try {
+      if (!state.started && !state.brief.services.length) {
+        sessionStorage.removeItem(DRAFT_KEY);
+        return;
+      }
+      const { isSending, isSubmittingBrief, ...draft } = state;
+      sessionStorage.setItem(DRAFT_KEY, JSON.stringify({ ...draft, savedAt: Date.now() }));
+    } catch {
+      /* stockage indisponible : le brouillon n'est simplement pas conservé */
+    }
+  }
 
   function setStatus(message, isError = false) {
     chatStatus.className = `wizard-status${isError ? " is-error" : ""}`;
@@ -358,10 +467,14 @@ export function initPage() {
   }
 
   function renderPreviewList(brief) {
-    const items = PREVIEW_SECTIONS.map((section) => ({
+    const needItems = brief.services.length
+      ? [{ label: "Besoins", value: brief.services.map((id) => needLabels[id]).join(" · ") },
+        ...brief.services.filter((id) => isFilled(brief.serviceDetails[id])).map((id) => ({ label: needLabels[id], value: brief.serviceDetails[id] }))]
+      : [];
+    const items = [...needItems, ...PREVIEW_SECTIONS.map((section) => ({
       label: section.label,
       value: getPreviewValue(section.key, brief),
-    })).filter((section) => section.value);
+    }))].filter((section) => section.value && !(brief.services.length && section.label === "Type de projet"));
 
     previewList.innerHTML = items
       .map(
@@ -448,6 +561,10 @@ export function initPage() {
     composerInput.placeholder = state.inputPlaceholder || INITIAL_PLACEHOLDER;
     renderQuickReplies();
     renderPreviewList(brief);
+    renderServiceFields(brief);
+    needInputs.forEach((input) => {
+      input.checked = brief.services.includes(input.value);
+    });
 
     reviewButtons.forEach((button) => {
       button.disabled = !state.started;
@@ -456,11 +573,38 @@ export function initPage() {
 
     root.classList.toggle("is-started", state.started);
     root.classList.toggle("is-complete", state.isComplete);
+    saveDraft();
+  }
+
+  /* Relecture : un champ par besoin coché, reconstruit seulement quand la sélection change. */
+  function renderServiceFields(brief) {
+    if (!serviceGroup || !serviceFieldsBox) {
+      return;
+    }
+    serviceGroup.hidden = brief.services.length === 0;
+    const key = brief.services.join(",");
+    if (serviceFieldsBox.dataset.key !== key) {
+      serviceFieldsBox.dataset.key = key;
+      serviceFieldsBox.innerHTML = brief.services
+        .map((id) => `<div class="brief-field"><label for="brief-service-${id}">${escapeHtml(needLabels[id])}</label><textarea class="input" id="brief-service-${id}" data-service-field="${id}"></textarea></div>`)
+        .join("");
+      serviceFieldsBox.querySelectorAll("[data-service-field]").forEach((field) => {
+        field.addEventListener("input", () => {
+          setSubmitFeedback("");
+          syncBriefFromInputs("serviceDetails");
+        });
+      });
+    }
+    serviceFieldsBox.querySelectorAll("[data-service-field]").forEach((field) => {
+      if (document.activeElement !== field) {
+        field.value = brief.serviceDetails[field.dataset.serviceField] || "";
+      }
+    });
   }
 
   function applyLocalSummary(force = false) {
     if (!state.summaryManuallyEdited || force) {
-      state.brief.summary = summarizeBrief(normalizeBrief(state.brief));
+      state.brief.summary = summarizeBrief(normalizeBrief(state.brief), needLabels);
     }
   }
 
@@ -476,6 +620,22 @@ export function initPage() {
       } else {
         nextBrief[key] = value;
       }
+    });
+
+    /* Type de projet réécrit à la main : il n'est plus déduit des besoins. */
+    if (changedField === "projectType") {
+      nextBrief.projectTypeAuto = false;
+    }
+
+    serviceFieldsBox?.querySelectorAll("[data-service-field]").forEach((field) => {
+      const value = field.value.trim();
+      const details = { ...nextBrief.serviceDetails };
+      if (value) {
+        details[field.dataset.serviceField] = value;
+      } else {
+        delete details[field.dataset.serviceField];
+      }
+      nextBrief.serviceDetails = details;
     });
 
     state.brief = nextBrief;
@@ -538,6 +698,7 @@ export function initPage() {
     const payload = await postJson("/api/quote/chat", {
       action: "start",
       projectDescription: initialMessage,
+      services: state.brief.services,
     });
 
     state.projectDescription = initialMessage;
@@ -574,13 +735,15 @@ export function initPage() {
     state.isSending = false;
     state.isSubmittingBrief = false;
     state.summaryManuallyEdited = false;
+    state.submissionId = "";
     state.brief = createEmptyBrief();
     state.conversation = [
       {
         role: "assistant",
-        content: INITIAL_ASSISTANT_MESSAGE,
+        content: initialMessage(),
       },
     ];
+    clearDraft();
 
     composerInput.value = "";
     composerInput.placeholder = INITIAL_PLACEHOLDER;
@@ -687,6 +850,8 @@ export function initPage() {
     setSubmitFeedback("Envoi du brief à notre équipe…", "loading");
     setLoading("J’envoie le brief…");
     state.isSubmittingBrief = true;
+    state.submissionId = state.submissionId || newSubmissionId();
+    saveDraft();
     submitButton.disabled = true;
     submitButton.setAttribute("aria-busy", "true");
     submitButton.innerHTML =
@@ -694,6 +859,7 @@ export function initPage() {
 
     try {
       const result = await postJson("/api/send-brief", {
+        submissionId: state.submissionId,
         projectDescription: state.projectDescription,
         summary: normalizeBrief(state.brief),
         brief: normalizeBrief(state.brief),
@@ -709,6 +875,7 @@ export function initPage() {
       });
 
       setSubmitFeedback("Brief envoyé avec succès.", "success");
+      clearDraft();
       closeReviewModal();
       root.hidden = true;
       successPanel.hidden = false;
@@ -716,7 +883,7 @@ export function initPage() {
         successMessage.textContent =
           result.message || "Notre équipe a bien reçu votre brief par email.";
       }
-      successSummary.textContent = state.brief.summary || summarizeBrief(state.brief);
+      successSummary.textContent = state.brief.summary || summarizeBrief(state.brief, needLabels);
       window.scrollTo({ top: 0, behavior: "smooth" });
     } catch (error) {
       setSubmitFeedback(
@@ -805,7 +972,39 @@ export function initPage() {
       }
     });
 
+  needInputs.forEach((input) => {
+    input.addEventListener("change", () => {
+      applyNeeds(selectedNeeds());
+      applyLocalSummary();
+      renderBrief();
+      setStatus(
+        state.started
+          ? "Besoins mis à jour : je poserai une question pour chacun."
+          : "Besoins notés. Décrivez maintenant le projet en une phrase.",
+      );
+    });
+  });
+
+  const draft = readDraft();
+  if (draft) {
+    /* Retour sur la page : la conversation et le brief reprennent là où ils en étaient. */
+    Object.assign(state, draft, { isSending: false, isSubmittingBrief: false, brief: normalizeBrief(draft.brief) });
+    setStatus("Votre brouillon a été conservé : vous pouvez reprendre où vous en étiez.");
+  } else {
+    const preset = [...(params.get("besoins") || params.get("besoin") || "").split(","), ...(parcours ? ["projet-complet"] : [])]
+      .map((id) => id.trim())
+      .filter((id) => needLabels[id]);
+    applyNeeds(needInputs.map((input) => input.value).filter((id) => preset.includes(id)));
+    state.conversation = [{ role: "assistant", content: initialMessage() }];
+    if (parcours) {
+      state.inputPlaceholder = PARCOURS_PLACEHOLDER;
+    }
+    setStatus(INITIAL_STATUS_MESSAGE);
+  }
+  if (parcoursNote) {
+    parcoursNote.hidden = !parcours;
+  }
+
   renderChat();
   renderBrief();
-  setStatus(INITIAL_STATUS_MESSAGE);
 }

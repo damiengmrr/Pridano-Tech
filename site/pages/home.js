@@ -1,7 +1,9 @@
 /* Accueil : textes repris du site existant (pridanotech.fr), mis en scène autour du symbole. */
-const { brand, expertises } = require('../data/brand');
+const { brand, expertises, pricing, pricingTax } = require('../data/brand');
+const { categories } = require('../data/catalog');
+const { products } = require('../data/software');
 const { glGeometry } = require('../lib/logo');
-const { esc, icon, btn, picture, images } = require('../lib/html');
+const { esc, btn, link, picture, images } = require('../lib/html');
 const s = require('../components/sections');
 const { film } = require('../components/film');
 
@@ -17,46 +19,57 @@ ${poster}
 <div class="wrap hero-grid">
 <h1 class="hero-title">
 <span class="label hero-kicker">Création de sites web & logiciels sur mesure · ${brand.city}</span>
-<span class="hero-line">Des sites</span>
-<span class="hero-line">qui marquent<span class="pt">.</span></span>
-<span class="hero-line hero-line--accent">Des idées</span>
-<span class="hero-line hero-line--accent">qui avancent<span class="pt">.</span></span>
+<span class="hero-line">Tout votre</span>
+<span class="hero-line">numérique<span class="pt">.</span></span>
+<span class="hero-line hero-line--second">Un seul</span>
+<span class="hero-line hero-line--second">partenaire<span class="pt">.</span></span>
 </h1>
 <div class="hero-side">
-<p class="lead hero-lead">Nous créons des sites web sur mesure pour donner à votre entreprise l’image qu’elle mérite.</p>
+<p class="lead hero-lead">Sites, boutiques en ligne, logiciels, automatisations et IA : conçus, développés et suivis par la même équipe.</p>
 <div class="btn-row">${btn({ href: '/contact?projet=site', label: 'Démarrer un projet', track: 'cta-hero:Démarrer un projet' })}${btn({ href: '/realisations', label: 'Découvrir nos réalisations', variant: 'ghost', track: 'cta-hero:Découvrir nos réalisations' })}</div>
 </div>
-<p class="hero-hint" aria-hidden="true"><span class="hero-hint-dot"></span><span>Une idée. Un échange. Une connexion.</span></p>
 </div>
-<nav class="hero-nodes wrap" aria-label="Nos expertises"><ol role="list">${nodes}</ol><a class="hero-scroll" href="#premiere-impression" aria-label="Défiler vers la suite">${icon('arrow-down')}</a></nav>
+<nav class="hero-nodes wrap" aria-label="Nos expertises"><ol role="list">${nodes}</ol></nav>
 </section>`;
+}
+
+function discovery() {
+  return `<section class="discovery" id="vos-solutions" data-index-label="Solutions"><div class="wrap">
+<div class="discovery-heading"><div><span class="label">Vos besoins</span><h2 class="h2">Que souhaitez-vous créer ?</h2></div>${btn({ href: '/devis?parcours=projet', label: 'J’ai plusieurs besoins', variant: 'ghost' })}</div>
+<div class="discovery-grid">${categories.map((cat) => `<a class="discovery-card" href="${cat.page}"><h3>${cat.name}</h3><p>${cat.intro}</p></a>`).join('')}</div>
+</div></section>`;
+}
+
+/* Logiciels maison : présentés comme un projet à venir, sans statut ni catalogue. */
+function softwarePreview() {
+  return s.soonSection({
+    id: 'nos-logiciels',
+    index: 'Logiciels',
+    kicker: 'Pridano Software · À venir',
+    lead: 'Nous concevons aussi nos propres logiciels. Ils ne sont pas encore disponibles.',
+    items: products.map((p) => ({ title: p.category, meta: p.name, href: p.page || `/logiciels/${p.id}` })),
+    cta: { href: `/contact?projet=crm&sujet=${encodeURIComponent('Pridano Software')}`, label: 'Être tenu informé', track: 'logiciels:etre-informe' },
+    aside: link({ href: '/logiciels', label: 'Découvrir la vision' }),
+  });
+}
+
+function pricePreview() {
+  const featured = pricing.filter((p) => ['landing', 'site', 'refonte', 'saas'].includes(p.id) && Number(p.from) > 0);
+  return `<section class="home-prices" id="prix" data-index-label="Tarifs"><div class="wrap">
+${s.sectionHead({ kicker: 'Repères de prix', title: 'Des repères pour votre budget.', lead: 'Le périmètre exact est précisé dans votre proposition.', aside: `<a class="link" href="/sites-web#prestations">Offres web et maintenance</a>` })}
+<div class="home-price-grid">${featured.map((p) => `<a href="${p.href}" class="home-price"><span>${p.label}</span><strong>Dès ${Number(p.from).toLocaleString('fr-FR')} € <small>${pricingTax}</small></strong><span>Parler de ce projet</span></a>`).join('')}</div>
+</div></section>`;
 }
 
 module.exports = {
   title: 'Création de sites web & logiciels sur mesure à Montpellier',
-  description: 'Pridano crée des sites web sur mesure qui renforcent votre image. Studio à Montpellier : création, refonte, SaaS et logiciels métier.',
+  description: 'Pridano Tech, studio digital à Montpellier : sites web, e-commerce, logiciels sur mesure, automatisations et agents IA. Un seul partenaire pour tout votre numérique.',
   crumb: 'Accueil',
   body: () => `${film()}
 ${hero()}
-${s.firstImpression()}
-${s.nodesSection()}
-${s.transformSection({
-    kicker: 'Représentation de notre approche',
-    title: 'Moins de détours. Plus de possibilités.',
-    lead: 'Votre activité a ses propres règles. Nous créons les logiciels qui les comprennent.',
-    steps: [
-      { title: 'Les fichiers deviennent ingérables.', text: 'L’information existe, mais se disperse.' },
-      { title: 'Vos logiciels ne se parlent pas.', text: 'Relier vos outils existants et automatiser les étapes répétitives, selon les possibilités de chaque service.' },
-      { title: 'Un outil commun.', text: 'Votre métier. Sur mesure. Informations reliées · Actions simplifiées.' },
-    ],
-    before: ['Fichiers Excel', 'Double saisie', 'Processus manuels', 'Fichiers ingérables', 'Outils qui ne se parlent plus', 'Information dispersée'],
-    after: ['Vos données', 'Votre logiciel', 'Vos équipes', 'Vos clients'],
-    caption: 'Représentation de notre approche · visuel d’illustration',
-  })}
-${s.methodSection()}
-${s.workSection({ kicker: 'Une sélection, du concret', title: 'Des idées devenues des présences.' })}
-${s.testimonialsSection()}
-${s.osTeaser()}
-${s.studioSection()}
+${discovery()}
+${softwarePreview()}
+${pricePreview()}
+${s.workSection({ kicker: 'Réalisations', title: 'Des projets concrets.' })}
 ${s.finalCta()}`,
 };

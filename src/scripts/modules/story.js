@@ -61,13 +61,16 @@ function setupTransform(section) {
     return l;
   });
 
-  const place = (g, x, y, dyOffset) => {
+  const viewWidth = svg.viewBox.baseVal?.width || 600;
+  const place = (g, x0, y, dyOffset) => {
     const text = g.querySelector('text');
     const rect = g.querySelector('rect');
     if (!g._w) {
       const box = text.getBBox();
       g._w = box.width + 26;
     }
+    /* L’étiquette reste entière dans le cadre, même quand sa pastille est près du bord. */
+    const x = clamp(x0, g._w / 2 + 6, viewWidth - g._w / 2 - 6);
     text.setAttribute('x', x);
     text.setAttribute('y', y + dyOffset + 5);
     text.setAttribute('text-anchor', 'middle');
@@ -156,16 +159,18 @@ function setupTransform(section) {
     if (pinned()) render(p);
   }, { mode: 'pin' });
 
-  /* Hors épinglage (mobile) : une seule séquence automatique à l’arrivée, puis contrôle manuel. */
-  const once = new IntersectionObserver(([entry]) => {
-    if (!entry.isIntersecting || pinned()) return;
-    once.disconnect();
-    manual = 0;
-    render(0);
-    setTimeout(() => tween(0.52), 900);
-    setTimeout(() => tween(1), 3200);
-  }, { threshold: 0.5 });
-  once.observe($('.transform-figure', section));
+  /*
+   * Hors épinglage (mobile) : la séquence suit le passage du schéma à l’écran (les points se
+   * rassemblent pendant qu’on le voit), tant que les boutons n’ont pas été utilisés.
+   */
+  const figure = $('.transform-figure', section);
+  buttons.forEach((btn) => btn.addEventListener('click', () => { figure.dataset.manual = '1'; }));
+  /* p = 0 quand le schéma entre par le bas, 1 quand il sort par le haut : il se forme pendant qu’il est entièrement visible. */
+  onScroll(figure, (p) => {
+    if (pinned() || figure.dataset.manual) return;
+    manual = smoothstep(0.3, 0.6, p);
+    render(manual);
+  });
   render(0);
 }
 
@@ -333,10 +338,39 @@ export function initBuild() {
     steps.forEach((s, j) => s.classList.toggle('is-active', j === i));
     buttons.forEach((b, j) => b.setAttribute('aria-pressed', String(j === i)));
   };
+  const row = $('.build-steps', section);
+  /* Hors épinglage, la rangée d’étapes défile horizontalement : l’étape active reste visible. */
+  const reveal = (i) => {
+    const btn = buttons[i];
+    if (!row || !btn || row.scrollWidth <= row.clientWidth) return;
+    row.scrollTo({ left: Math.max(0, btn.offsetLeft - row.offsetLeft - 16), behavior: reduceMotion.matches ? 'auto' : 'smooth' });
+  };
+  let timer = 0;
+  let touched = false;
+  const stop = () => {
+    clearInterval(timer);
+    timer = 0;
+  };
   buttons.forEach((b, i) => b.addEventListener('click', () => {
-    if (pinned()) scrollToProgress(section, (i + 0.5) / n);
-    else set(i);
+    if (pinned()) return scrollToProgress(section, (i + 0.5) / n);
+    touched = true;
+    stop();
+    set(i);
+    reveal(i);
   }));
+  /* Mobile : la démonstration avance seule tant qu’elle est à l’écran, jusqu’à ce qu’on touche une étape. */
+  const autoplay = new IntersectionObserver(([entry]) => {
+    if (pinned() || touched || reduceMotion.matches) return stop();
+    if (entry.isIntersecting && !timer) {
+      timer = setInterval(() => {
+        const next = current + 1;
+        if (next >= n) return stop();
+        set(next);
+        reveal(next);
+      }, 1700);
+    } else if (!entry.isIntersecting) stop();
+  }, { threshold: 0.45 });
+  autoplay.observe($('.build-figure', section));
   const mode = () => {
     section.classList.toggle('is-pinned', pinned());
     refresh();
@@ -369,8 +403,12 @@ export function initHeroMedia() {
   const media = $('[data-hm]');
   if (!media || reduceMotion.matches) return;
   const zone = media.closest('section') || media;
-  /* Au défilement, les couches se séparent selon leur profondeur (mouvement de caméra vertical). */
-  onScroll(zone, (p) => media.style.setProperty('--sp', p.toFixed(3)), { start: 0 });
+  /*
+   * Au défilement, les couches se séparent selon leur profondeur (mouvement de caméra vertical).
+   * Grand écran seulement : sur mobile, le visuel est sous le texte et les couches passeraient sous l’en-tête.
+   */
+  const wide = window.matchMedia('(min-width: 901px)');
+  onScroll(zone, (p) => media.style.setProperty('--sp', wide.matches ? p.toFixed(3) : '0'), { start: 0 });
   if (!finePointer.matches) return;
   let frame = 0;
   let x = 0;

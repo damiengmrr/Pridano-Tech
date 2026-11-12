@@ -177,7 +177,54 @@ Défauts trouvés, puis corrigés :
 - film qui pouvait réapparaître si sa mise en scène arrivait après le filet de sécurité ;
 - mots des titres qui chevauchaient le paragraphe suivant pendant leur arrivée.
 
-## 8. Limites et points non vérifiés
+## 8. Passe mobile : affichage et animations (26 octobre 2026)
+
+Méthode :
+
+- toutes les pages capturées écran par écran à 390 px (iPhone 14) et 375 px (iPhone SE), avec contrôles automatiques (débordement, chevauchements, cibles tactiles, texte trop petit) ;
+- animations filmées pendant de vrais glissés au doigt (élan puis ralentissement), carte graphique activée, avec mesure des sauts de mise en page et des images lentes ;
+- Chromium en émulation iPhone : pas de vrai Safari ni de vrai téléphone.
+
+Corrigé, défauts d'affichage :
+
+- symbole 3D sur le sur-titre de l'accueil ;
+- dock du bas qui masquait le haut de page : il est rangé en haut de page, et un bouton Menu dans l'en-tête prend le relais ;
+- liste des offres sous le hero : numéros au lieu de ronds vides ;
+- téléphone collé au bord (« La première impression ») ;
+- schéma des trois nœuds inutile sur mobile (masqué, les numéros des blocs s'allument) ;
+- étiquettes coupées dans « Moins de détours » ;
+- forme décorative derrière le titre de l'appel final ;
+- étapes de la démonstration Sites web hors de l'écran et barre de fenêtre coupée ;
+- pastilles et téléphone qui se chevauchaient dans les en-têtes ;
+- légendes en police machine à écrire alignées à droite ;
+- « Montpellier, France » recouvert sur la page Studio ;
+- bande vide sous le pied de page ;
+- liens trop petits pour le doigt (pied de page, contacts, fil d'Ariane, étapes, devis guidé, case de consentement) ;
+- menu mobile serré contre les flèches et coupé sur iPhone SE.
+
+Corrigé, animations :
+
+- en-tête qui ne se rangeait pas en défilement lent ;
+- carrés bleus des points finaux qui flottaient avant leurs mots ;
+- couches des visuels d'en-tête qui se décollaient au défilement (effet réservé aux grands écrans) ;
+- démos de « Ce qui fait un bon site » figées au doigt (elles se jouent à l'écran) ;
+- démonstration couche par couche qui ne réagissait pas au défilement sur mobile (elle avance seule, et le texte invite à toucher les étapes) ;
+- schéma « Moins de détours » qui se formait hors de l'écran (il se forme pendant qu'on le regarde) ;
+- saccades des captures des réalisations ;
+- sauts de mise en page du point de la méthode ;
+- blocs qui pouvaient rester invisibles après un glissé rapide (filet de sécurité).
+
+Défaut trouvé par les tests pendant les corrections : le dock rangé restait atteignable au clavier hors de l'écran. Corrigé.
+
+Vérifié après corrections :
+
+- `npm run lint` ✅ ;
+- `npm test` 24/24 ✅ ;
+- `npm run test:frontend` 17/17 ✅, dont un nouveau test mobile : en-tête rangé en défilement lent puis revenu en remontant, dock rangé en haut de page avec un seul bouton Menu, aucun carré bleu hors de son mot, démos jouées à l'écran, démonstration qui avance seule ;
+- `npm run qa:visual` : 77 captures, 0 débordement ✅ ;
+- Lighthouse : inchangé (100 sur les pages intérieures, 99 en performance sur l'accueil avec le film) ✅.
+
+## 9. Limites et points non vérifiés
 
 - **Navigateurs** : seul Chromium a été testé. Safari (iOS/macOS) et Firefox doivent être vérifiés en recette. Points d'attention :
   - transitions de page (View Transitions entre documents) : Chrome/Edge 126+, Safari 18.2+, sinon navigation classique ;
@@ -193,3 +240,7 @@ Défauts trouvés, puis corrigés :
 - **Assistant IA du brief** : testé en mode local (sans clé Groq). Le mode connecté n'a pas été appelé.
 - **Fonctions Netlify** : adaptateurs testés unitairement, aucun déploiement Netlify effectué.
 - **Scène 3D** : vérifiée sur GPU Apple Silicon. Sur d'autres GPU, la qualité adaptative et l'arrêt automatique (au-delà de 45 ms par image) protègent la fluidité. Le rendu final peut légèrement varier selon les pilotes.
+
+## 10. Évolution « catalogues » (2 novembre 2026)
+
+Les tests de cette évolution, leurs résultats et leurs limites sont décrits dans TESTS.md. La comparaison avec le ZIP d'origine est dans NON-REGRESSION.md.

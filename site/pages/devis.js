@@ -5,6 +5,17 @@
  */
 const { icon, pt, label } = require('../lib/html');
 const { breadcrumb } = require('../components/sections');
+const { needs } = require('../data/needs');
+
+/*
+ * Besoins (plusieurs choix possibles) : pastilles du formulaire de contact, en cases à cocher.
+ * Présélection par l’adresse : /devis?besoins=site-vitrine,agent-ia ou /devis?parcours=projet.
+ * Lus par quote.js (data-need) et envoyés au moteur, qui pose une question adaptée à chacun.
+ */
+const needsPicker = `<fieldset class="choices devis-needs" data-needs>
+<legend>Vos besoins <span class="devis-needs-hint">· plusieurs choix possibles, facultatif</span></legend>
+${needs.map((n) => `<label class="choice"><input type="checkbox" name="needs" value="${n.id}" data-need><span>${n.label}</span></label>`).join('')}
+</fieldset>`;
 
 const briefField = (id, key, text, { input = false, placeholder = '' } = {}) => `<div class="brief-field">
 <label for="${id}">${text}</label>
@@ -27,6 +38,8 @@ ${label('Devis guidé')}
 <h1 class="h1">${pt('Décrivez le projet. Le brief se construit en quelques échanges.')}</h1>
 <p class="lead">Une phrase suffit pour démarrer. L’assistant clarifie le besoin, structure le brief, puis vous relisez avant l’envoi.</p>
 <ol class="devis-steps" role="list"><li><span>01</span>Décrire</li><li><span>02</span>Préciser</li><li><span>03</span>Relire</li><li><span>04</span>Envoyer</li></ol>
+${needsPicker}
+<p class="devis-parcours" data-parcours-note hidden>Construire mon projet numérique : décrivez votre entreprise ou votre idée, cochez les besoins qui vous intéressent, puis laissez-vous guider. Une seule demande pour l’ensemble.</p>
 </header>
 <div class="quote-assistant" data-quote-app>
 <div class="quote-body">
@@ -100,6 +113,9 @@ ${briefField('briefAutomationNeeds', 'automationNeeds', 'Automatisations / inté
 <fieldset class="brief-group"><legend>Cadre</legend>
 ${briefField('briefConstraints', 'constraints', 'Contraintes')}
 <div class="form-row">${briefField('briefTimeline', 'timeline', 'Délai', { input: true })}${briefField('briefBudget', 'budget', 'Budget indicatif', { input: true })}</div>
+</fieldset>
+<fieldset class="brief-group brief-group--wide" data-service-group hidden><legend>Vos besoins</legend>
+<div class="review-services" data-service-fields></div>
 </fieldset>
 <fieldset class="brief-group brief-group--wide"><legend>Synthèse</legend>
 ${briefField('briefSummary', 'summary', 'Résumé global éditable')}

@@ -8,15 +8,34 @@ export function initReveal() {
     items.forEach((el) => el.classList.add('is-in'));
     return;
   }
+  const pending = new Set(items);
+  const show = (el) => {
+    el.classList.add('is-in');
+    pending.delete(el);
+    io.unobserve(el);
+  };
   const io = new IntersectionObserver((entries) => {
-    for (const entry of entries) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-in');
-        io.unobserve(entry.target);
-      }
-    }
+    for (const entry of entries) if (entry.isIntersecting) show(entry.target);
   }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
   items.forEach((el) => io.observe(el));
+  /*
+   * Filet de sécurité : un glissé rapide au doigt peut faire traverser l’écran à un bloc entre
+   * deux mesures de l’observateur. Tout bloc déjà passé au-dessus du bas de l’écran est affiché.
+   */
+  let queued = false;
+  const sweep = () => {
+    queued = false;
+    const limit = window.innerHeight * 0.94;
+    for (const el of pending) if (el.getBoundingClientRect().top < limit) show(el);
+    if (!pending.size) window.removeEventListener('scroll', onScroll);
+  };
+  const onScroll = () => {
+    if (!queued) {
+      queued = true;
+      requestAnimationFrame(sweep);
+    }
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
   /* Filet de sécurité : rien ne doit rester invisible (impression, ancres, agents). */
   window.addEventListener('beforeprint', () => items.forEach((el) => el.classList.add('is-in')));
   window.addEventListener('hashchange', () => items.forEach((el) => el.classList.add('is-in')), { once: true });
@@ -50,8 +69,21 @@ export function initMagnetic() {
   }
 }
 
+/*
+ * Démos au survol (qualités d’un site) : sur un écran tactile il n’y a pas de survol,
+ * la démo se joue donc quand la carte est bien visible à l’écran.
+ */
+export function initPlayInView() {
+  const tiles = $$('.q-tile');
+  if (!tiles.length || finePointer.matches || reduceMotion.matches || !('IntersectionObserver' in window)) return;
+  const io = new IntersectionObserver((entries) => {
+    for (const entry of entries) entry.target.classList.toggle('is-play', entry.isIntersecting);
+  }, { threshold: 0.6 });
+  tiles.forEach((tile) => io.observe(tile));
+}
+
 /* Lumière au survol : la position du pointeur est transmise à la carte survolée (--lx, --ly). */
-const GLOW = '.path-card, .price-card, .care-card, .quote-card, .principle, .module';
+const GLOW = '.parcours-card, .quote-card';
 
 export function initGlow() {
   if (!finePointer.matches || reduceMotion.matches || !document.querySelector(GLOW)) return;

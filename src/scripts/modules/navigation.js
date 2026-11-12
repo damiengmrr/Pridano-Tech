@@ -5,15 +5,26 @@ export function initHeader() {
   const header = $('[data-header]');
   if (!header) return;
   let lastY = window.scrollY;
+  /* Point où le sens de défilement a changé : on compare la distance parcourue depuis ce point,
+     pas d’une image à l’autre (sinon un défilement lent au doigt ne cache jamais l’en-tête). */
+  let anchor = lastY;
+  let goingDown = true;
   let queued = false;
+  const threshold = () => Math.min(480, window.innerHeight * 0.5);
 
   const update = () => {
     queued = false;
     const y = window.scrollY;
     header.classList.toggle('is-scrolled', y > 24);
+    const down = y > lastY;
+    if (y !== lastY && down !== goingDown) {
+      goingDown = down;
+      anchor = lastY;
+    }
     const menuOpen = document.documentElement.classList.contains('menu-open');
-    if (y > 480 && y > lastY + 6 && !menuOpen && !header.contains(document.activeElement)) header.classList.add('is-hidden');
-    else if (y < lastY - 6 || y <= 480) header.classList.remove('is-hidden');
+    if (y <= threshold()) header.classList.remove('is-hidden');
+    else if (goingDown && y - anchor > 12 && !menuOpen && !header.contains(document.activeElement)) header.classList.add('is-hidden');
+    else if (!goingDown && anchor - y > 24) header.classList.remove('is-hidden');
     lastY = y;
   };
   window.addEventListener('scroll', () => {
@@ -29,7 +40,8 @@ export function initHeader() {
   const dot = nav && $('.nav-dot', nav);
   if (!nav || !dot) return;
   const links = $$('a', nav);
-  const current = links.find((a) => a.getAttribute('aria-current') === 'page');
+  /* Lien courant : la page elle-même, ou sa rubrique (pages des catalogues). */
+  const current = links.find((a) => a.getAttribute('aria-current') === 'page') || links.find((a) => a.getAttribute('aria-current') === 'true');
   let timer;
   const moveTo = (link, animate = true) => {
     const r = link.getBoundingClientRect();
@@ -95,9 +107,34 @@ export function initDock() {
   const dock = $('[data-dock]');
   if (!dock) return;
   const footer = $('.site-footer');
+  const html = document.documentElement;
   let footerVisible = false;
   let typing = false;
-  const sync = () => dock.classList.toggle('is-tucked', footerVisible || typing);
+  let atTop = true;
+  /* En haut de page, le dock est rangé : il ne masque ni le titre ni les boutons du haut de page.
+     Le bouton Menu de l’en-tête prend le relais jusqu’à ce que le dock sorte. */
+  const sync = () => {
+    const tucked = footerVisible || typing || atTop;
+    dock.classList.toggle('is-tucked', tucked);
+    html.classList.toggle('dock-on', !tucked);
+  };
+  let queued = false;
+  const onScroll = () => {
+    queued = false;
+    const top = window.scrollY < window.innerHeight * 0.55;
+    if (top !== atTop) {
+      atTop = top;
+      sync();
+    }
+  };
+  window.addEventListener('scroll', () => {
+    if (!queued) {
+      queued = true;
+      requestAnimationFrame(onScroll);
+    }
+  }, { passive: true });
+  onScroll();
+  sync();
   if (footer && 'IntersectionObserver' in window) {
     new IntersectionObserver(([entry]) => {
       footerVisible = entry.isIntersecting;
@@ -156,7 +193,7 @@ export function initIndexRail() {
  *  - appel à l’action et autres liens : ouverture circulaire depuis le point cliqué ;
  *  - précédent / suivant du navigateur : fondu court (data-vt="fade", par défaut).
  */
-const ORDER = ['/', '/sites-web', '/realisations', '/saas', '/crm', '/a-propos', '/contact', '/devis'];
+const ORDER = ['/', '/sites-web', '/prestations', '/saas', '/logiciels', '/crm', '/realisations', '/a-propos', '/contact', '/devis'];
 
 export function initPageTransitions() {
   document.addEventListener('click', (e) => {

@@ -16,6 +16,8 @@ const routes = require('../site/pages');
 const { chrome, defaultCta } = require('../site/components/layout');
 const { graph } = require('../site/seo');
 const { brand } = require('../site/data/brand');
+const catalog = require('../site/data/catalog');
+const software = require('../site/data/software');
 const { esc } = require('../site/lib/html');
 
 const root = path.resolve(__dirname, '..');
@@ -125,6 +127,8 @@ ${canonical}
 <meta name="author" content="${brand.name}">
 <link rel="preload" href="/assets/fonts/archivo-latin-wght.woff2" as="font" type="font/woff2" crossorigin>
 <style>${styles.main}${extraCss}${quoteCss}</style>
+<link rel="stylesheet" href="/assets/css/refonte.css">
+<script defer src="/assets/js/refonte.js"></script>
 <script>${BOOT}</script>
 <script type="module" src="${scripts.main}"></script>
 ${analytics}
@@ -179,7 +183,7 @@ function seoFiles(indexed, { origin, blockIndexing }) {
     ],
   }, null, 2));
   /* Résumé factuel pour les agents et assistants (format llms.txt, non normalisé : aucune garantie d’usage). */
-  files.set('llms.txt', `# ${brand.name}\n\n> ${brand.description}\n\nVariantes du nom : ${brand.alternateNames.join(', ')}. Site officiel : ${origin}/\n\n## Pages principales\n\n- [Sites web : création et refonte](${origin}/sites-web)\n- [Logiciels métier, SaaS et automatisation](${origin}/saas)\n- [Réalisations](${origin}/realisations)\n- [Pridano Business OS, produit en développement](${origin}/crm)\n- [Le studio : Damien Gamarra et Noah Lemoing](${origin}/a-propos)\n- [Contact](${origin}/contact) · [Brief guidé](${origin}/devis)\n\n## Contact\n\n- Email : ${brand.email}\n- Ville : ${brand.city}, ${brand.country}\n`);
+  files.set('llms.txt', `# ${brand.name}\n\n> ${brand.description}\n\nVariantes du nom : ${brand.alternateNames.join(', ')}. Site officiel : ${origin}/\n\n## Pages principales\n\n- [Sites web : création et refonte](${origin}/sites-web)\n- [Logiciels métier, SaaS et automatisation](${origin}/saas)\n- [Catalogue des prestations](${origin}/prestations) : ${catalog.categories.map((c) => `[${c.name}](${origin}${c.page})`).join(', ')}\n- [Nos logiciels : catalogue et statut de chaque produit](${origin}/logiciels)\n${software.products.map((p) => `- [${p.name} (${software.statuses[p.status].label})](${origin}${p.page || '/logiciels'})`).join('\n')}\n- [Réalisations](${origin}/realisations)\n- [Pridano CRM, produit en développement](${origin}/crm)\n- [Le studio : Damien Gamarra et Noah Lemoing](${origin}/a-propos)\n- [Contact](${origin}/contact) · [Brief guidé](${origin}/devis)\n\n## Contact\n\n- Email : ${brand.email}\n- Ville : ${brand.city}, ${brand.country}\n`);
   return files;
 }
 

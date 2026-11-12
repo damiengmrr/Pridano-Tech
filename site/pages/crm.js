@@ -3,7 +3,7 @@ const s = require('../components/sections');
 const { heroMedia } = require('../components/hero-media');
 
 const screens = [
-  { id: 'dashboard', tab: 'Pilotez', title: 'Le quotidien, en plus clair.', text: 'Clients, devis, projets et montants à encaisser : une vue pour retrouver le fil de votre activité.', alt: 'Vue d’ensemble réelle de Pridano Business OS, avec les indicateurs et les connexions entre clients, devis et projets.' },
+  { id: 'dashboard', tab: 'Pilotez', title: 'Le quotidien, en plus clair.', text: 'Clients, devis, projets et montants à encaisser : une vue pour retrouver le fil de votre activité.', alt: 'Vue d’ensemble réelle de Pridano CRM, avec les indicateurs et les connexions entre clients, devis et projets.' },
   { id: 'factures', tab: 'Facturez', title: 'De l’accord au règlement.', text: 'Retrouvez les factures issues des devis acceptés et les montants restant à régler, dans la continuité du travail engagé.', alt: 'Écran réel des factures Pridano montrant une facture et son montant restant dû.' },
   { id: 'planning', tab: 'Planifiez', title: 'Le travail trouve sa place.', text: 'Rendez-vous, interventions et équipes se retrouvent dans un planning relié à votre activité.', alt: 'Planning réel de Pridano, avec les filtres d’équipe et une intervention dans le calendrier.' },
   { id: 'login', tab: 'Centralisez', title: 'Toutes les bonnes connexions.', text: 'Un espace pour reprendre le fil. Du premier contact au projet livré, Pridano porte une même idée : garder le contexte.', alt: 'Écran de connexion Pridano : « Votre entreprise. Toutes les bonnes connexions. »' },
@@ -18,7 +18,7 @@ function theater() {
   return `<section class="theater section--dark" id="produit" data-index-label="Le produit" data-index-dark data-theater>
 <div class="wrap">
 <div class="theater-head"><h2 class="label">Le produit, de l’intérieur</h2><p class="theater-note"><span class="badge badge--dev">Captures de développement · données de démonstration</span></p></div>
-<div class="theater-tabs" role="tablist" aria-label="Écrans de Pridano Business OS">${tabs}</div>
+<div class="theater-tabs" role="tablist" aria-label="Écrans de Pridano CRM">${tabs}</div>
 ${panels}
 </div>
 </section>`;
@@ -47,7 +47,7 @@ function modules() {
   return `<section class="modules" id="modules" data-index-label="Modules">
 <div class="wrap">
 ${s.sectionHead({ kicker: 'La vision des modules', title: 'Relier les étapes. Garder le contexte.', lead: 'Les domaines ci-dessous décrivent l’ambition du produit. Ils ne constituent pas une liste de fonctionnalités commercialisées.' })}
-<ul class="modules-grid" role="list">${items.map(([t, p], i) => `<li class="module" data-reveal style="--d:${i}"><span class="index-num">${String(i + 1).padStart(2, '0')} · Vision produit</span><h3 class="h3">${t}</h3><p>${p}</p></li>`).join('')}</ul>
+<ul class="modules-grid" role="list">${items.map(([t, p], i) => `<li class="module" data-reveal style="--d:${i}"><span class="index-num">Vision produit</span><h3 class="h3">${t}</h3><p>${p}</p></li>`).join('')}</ul>
 </div>
 </section>`;
 }
@@ -59,7 +59,7 @@ function ask() {
 <div class="ask-copy" data-reveal>
 ${label('Ask · Piste d’exploration')}
 <h2 class="h2">${pt('Demandez à votre entreprise.')}</h2>
-<p class="lead">Et si retrouver une information commençait par une question ? Nous explorons cette idée dans le cadre du Business OS.</p>
+<p class="lead">Et si retrouver une information commençait par une question ? Nous explorons cette idée dans le cadre du CRM.</p>
 <p class="fine-print">Les exemples illustrent une intention de conception. Aucun assistant opérationnel n’est proposé sur cette page.</p>
 </div>
 <div class="ask-demo" aria-hidden="true">
@@ -72,12 +72,12 @@ ${qs.map((q, i) => `<p class="ask-q" style="--d:${i}">${q}</p>`).join('')}
 }
 
 module.exports = {
-  title: 'Pridano Business OS — Notre CRM en développement',
-  description: 'Découvrez la vision de Pridano Business OS, notre produit maison en développement : réunir le parcours commercial et opérationnel dans un seul système.',
+  title: 'Pridano CRM — Notre logiciel en développement',
+  description: 'Découvrez la vision de Pridano CRM, notre produit maison en développement : réunir le parcours commercial et opérationnel dans un seul système.',
   crumb: 'Le produit Pridano',
   body: () => `${s.pageHero({
     crumb: 'Le produit Pridano',
-    kicker: '03 Pridano · Business OS en développement',
+    kicker: '03 Pridano · CRM en développement',
     title: 'Votre entreprise. Un seul logiciel.',
     lead: 'Notre produit maison porte une idée simple : relier la relation client et le travail qui en découle.',
     actions: `${btn({ href: '/contact?projet=crm', label: 'Échanger sur le produit' })}<span class="badge badge--dev">En développement · périmètre et accès à confirmer</span>`,
@@ -87,5 +87,5 @@ ${theater()}
 ${workflow()}
 ${modules()}
 ${ask()}
-${s.finalCta({ kicker: 'Pridano · Business OS', title: 'Parlons de votre usage.', primary: { href: '/contact?projet=crm', label: 'Échanger sur Pridano' }, note: 'Un échange pour découvrir la vision du produit, <br>son avancement et les possibilités de démonstration.', tagline: null, aside: null })}`,
+${s.finalCta({ kicker: 'Pridano · CRM', title: 'Parlons de votre usage.', primary: { href: '/contact?projet=crm', label: 'Échanger sur Pridano' }, note: 'Un échange pour découvrir la vision du produit, <br>son avancement et les possibilités de démonstration.', tagline: null, aside: null })}`,
 };

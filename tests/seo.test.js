@@ -99,7 +99,13 @@ test('données structurées cohérentes avec le contenu visible', async () => {
   const faq = graph('sites-web.html').find((n) => n['@type'] === 'FAQPage');
   assert.equal(faq.mainEntity.length, 5);
   for (const q of faq.mainEntity) assert.ok(files.get('sites-web.html').includes(q.name), `question visible ${q.name}`);
-  for (const file of ['index.html', 'saas.html', 'crm.html']) assert.ok(!graph(file).some((n) => n['@type'] === 'FAQPage'), file);
+  for (const file of ['index.html', 'saas.html', 'crm.html', 'prestations.html', 'logiciels.html']) assert.ok(!graph(file).some((n) => n['@type'] === 'FAQPage'), file);
+  /* Pages de catégorie du catalogue : FAQ visible, donc FAQPage identique au texte affiché. */
+  for (const file of ['prestations-e-commerce.html', 'prestations-agents-ia.html']) {
+    const page = graph(file).find((n) => n['@type'] === 'FAQPage');
+    assert.ok(page, file);
+    for (const q of page.mainEntity) assert.ok(files.get(file).includes(q.name), `${file} : ${q.name}`);
+  }
   const works = graph('realisations.html').find((n) => n['@type'] === 'CollectionPage').mainEntity.itemListElement.map((i) => i.item.name);
   assert.deepEqual(works, ['Solaria Média', 'Prévenir Pour Gagner']);
 });

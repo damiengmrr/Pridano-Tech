@@ -170,8 +170,8 @@
   display: flex;
   flex-direction: column;
   font-size: clamp(3.05rem, 0.9rem + 7.2vw, 9.6rem);
-  line-height: 0.86;
-  letter-spacing: -0.062em;
+  line-height: 0.9;
+  letter-spacing: -0.05em;
   font-weight: 820;
 }
 
@@ -183,6 +183,7 @@
 
 .hero-line {
   display: block;
+  word-spacing: 0.06em;
   animation: hero-rise 1100ms var(--ease-out) both;
 }
 
@@ -190,8 +191,13 @@
 .hero-line:nth-child(4) { animation-delay: 140ms; }
 .hero-line:nth-child(5) { animation-delay: 210ms; }
 
-.hero-line--accent {
-  padding-left: clamp(0rem, -1rem + 6vw, 6rem);
+/* Deuxième phrase alignée sur la première, distinguée par le bleu Pridano plutôt que par un décalage. */
+.hero-line--second {
+  color: var(--c-ultra);
+}
+
+.hero-line--second:nth-child(4) {
+  margin-top: 0.12em;
 }
 
 @keyframes hero-rise {
@@ -206,35 +212,6 @@
 
 .hero-lead {
   max-width: 34ch;
-}
-
-.hero-hint {
-  grid-column: 8 / -1;
-  align-self: end;
-  justify-self: end;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  font-size: var(--fs-xs);
-  font-weight: 560;
-  color: var(--c-muted);
-}
-
-.hero-hint-dot {
-  width: 0.6rem;
-  height: 0.6rem;
-  border-radius: 50%;
-  background: var(--c-azure);
-  box-shadow: 0 0 0 0 rgb(8 162 255 / 0.4);
-  animation: hint-ping 2.2s var(--ease-out) 3;
-}
-
-.hero.is-connected .hero-hint-dot {
-  background: var(--c-ultra);
-}
-
-@keyframes hint-ping {
-  70%, 100% { box-shadow: 0 0 0 12px rgb(8 162 255 / 0); }
 }
 
 .hero-fig {
@@ -317,29 +294,6 @@
   transform: scale(1.35);
 }
 
-.hero-scroll {
-  display: grid;
-  place-items: center;
-  align-self: center;
-  width: 3.25rem;
-  height: 3.25rem;
-  flex: none;
-  border-radius: 50%;
-  box-shadow: inset 0 0 0 1px var(--c-line-strong);
-  color: var(--c-ink);
-  transition: background-color var(--dur-2), color var(--dur-2);
-}
-
-.hero-scroll svg {
-  width: 1.15rem;
-  height: 1.15rem;
-}
-
-.hero-scroll:hover {
-  background: var(--c-ink);
-  color: var(--c-white);
-}
-
 @media (max-width: 1080px) {
   .hero-title {
     grid-column: 1 / -1;
@@ -348,22 +302,19 @@
   .hero-side {
     grid-column: 1 / span 8;
   }
-
-  .hero-hint {
-    display: none;
-  }
 }
 
 @media (max-width: 760px) {
   .hero {
     min-height: auto;
-    padding-top: calc(var(--header-h) + 66vw);
+    padding-top: calc(var(--header-h) + 68vw);
   }
 
+  /* Symbole un peu plus petit et plus haut : il ne recouvre plus le sur-titre. */
   .hero-stage {
-    top: calc(var(--header-h) - 6vw);
-    right: -12vw;
-    width: 84vw;
+    top: calc(var(--header-h) - 8vw);
+    right: -10vw;
+    width: 74vw;
     transform: none;
   }
 
@@ -373,10 +324,6 @@
 
   .hero-title {
     font-size: clamp(2.7rem, 0.9rem + 9.6vw, 4.6rem);
-  }
-
-  .hero-line--accent {
-    padding-left: 0;
   }
 
   .hero-side {
@@ -393,11 +340,23 @@
   }
 
   .hero-node {
+    align-items: center;
+    padding-right: 0;
     border-bottom: 1px solid var(--c-line);
+    border-radius: 0;
   }
 
-  .hero-scroll {
+  /* Sur mobile, le numéro de l’offre remplace le rond vide (qui ressemblait à une case à cocher). */
+  .hero-node-dot {
     display: none;
+  }
+
+  .hero-node-index {
+    display: block;
+    grid-row: 1 / span 2;
+    font-family: var(--f-mono);
+    font-size: var(--fs-xs);
+    color: var(--c-ultra);
   }
 }
 
@@ -535,6 +494,13 @@
 
   .first-visual {
     grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    gap: 1.25rem;
+    padding: 0.75rem 0 0.75rem 0.5rem;
+  }
+
+  /* Téléphone presque droit : son coin ne touche plus le bord de l’écran. */
+  .first-phone {
+    rotate: -2deg;
   }
 
   .first-steps {
@@ -698,9 +664,10 @@
     grid-template-columns: 1fr;
   }
 
+  /* Sur mobile, le schéma ne peut pas rester à l’écran pendant la lecture des blocs :
+     chaque bloc porte déjà son numéro, qui s’allume quand on le lit. */
   .nodes-figure {
-    position: relative;
-    top: 0;
+    display: none;
   }
 
   .nodes-svg {
@@ -953,16 +920,29 @@
   background: var(--g-brand);
 }
 
+/* Le conteneur couvre toute la piste et glisse d’une fraction de sa propre hauteur : le point
+   se déplace par transformation, sans recalcul de mise en page à chaque image. */
 .method-traveller {
   position: absolute;
   left: 50%;
-  top: calc(var(--progress, 0) * 100%);
+  top: 0;
+  width: 1.1rem;
+  height: 100%;
+  transform: translate(-50%, calc(var(--progress, 0) * 100%));
+  pointer-events: none;
+}
+
+.method-traveller::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
   width: 1.1rem;
   height: 1.1rem;
   border-radius: 50%;
   background: var(--c-ultra);
   box-shadow: 0 0 0 6px rgb(27 69 255 / 0.15);
-  transform: translate(-50%, -50%);
+  transform: translateY(-50%);
 }
 
 .method-step {
@@ -1042,7 +1022,14 @@
 
 .method.is-horizontal .method-traveller {
   top: 50%;
-  left: calc(var(--progress, 0) * 100%);
+  left: 0;
+  width: 100%;
+  height: 1.1rem;
+  transform: translate(calc(var(--progress, 0) * 100%), -50%);
+}
+
+.method.is-horizontal .method-traveller::before {
+  transform: translateX(-50%);
 }
 
 .method.is-horizontal .method-step {
@@ -1571,11 +1558,18 @@
 }
 
 @media (max-width: 760px) {
+  /* Sur mobile, la forme se place en bas à droite : elle ne passe plus derrière les mots du titre. */
   .final-orbit {
-    top: 2rem;
-    right: -30vw;
-    width: 90vw;
+    top: auto;
+    bottom: -14vw;
+    right: -34vw;
+    width: 82vw;
     transform: none;
+  }
+
+  /* Sans survol au doigt, le point ne « rejoint » rien : seule la forme discrète reste. */
+  .final-dot {
+    display: none;
   }
 }
 
@@ -2074,6 +2068,29 @@
   .hm--saas .hm-c2 { left: 13%; }
   .hm--saas .hm-c4 { left: 84%; }
   .hm--saas .hm-c3 { left: 82%; }
+
+  /* Sites web : deux pastilles suffisent sur mobile, elles ne recouvrent plus les captures. */
+  .hm--sites .hm-c2,
+  .hm--sites .hm-c3 {
+    display: none;
+  }
+
+  .hm--sites .hm-c1 { top: 1%; }
+  .hm--sites .hm-c4 { left: 4%; bottom: 0; }
+
+  /* Légendes : texte courant, aligné à gauche, lisible. */
+  .hm figcaption {
+    justify-self: start;
+    text-align: left;
+    font-family: var(--f-sans);
+    font-size: var(--fs-xs);
+    line-height: 1.5;
+  }
+
+  /* Studio : la pastille des coordonnées dit déjà « Montpellier », la légende est inutile sur mobile. */
+  .hm--studio figcaption {
+    display: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -2479,4 +2496,34 @@
   .film-hud-bar {
     width: 70px;
   }
+}
+
+/* ================= VISUELS D’EN-TÊTE DES CATALOGUES ================= */
+/* Fenêtre de code ou planche d’illustration au centre, pastilles autour (classes .mk-* existantes). */
+.hm--code .hm-a { left: 9%; top: 15%; width: 74%; }
+.hm--code .hm-c1 { left: 0; top: 2%; }
+.hm--code .hm-c2 { right: 0; top: 9%; }
+.hm--code .hm-c3 { left: 2%; bottom: 13%; }
+.hm--code .hm-c4 { right: 4%; bottom: 2%; }
+
+.hm--code .mk-code pre {
+  font-size: clamp(0.72rem, 0.55rem + 0.42vw, 0.95rem);
+}
+
+.hm--catalog .hm-a { right: 0; top: 6%; width: 68%; }
+.hm--catalog .hm-b { left: 0; top: 32%; width: 72%; }
+.hm--catalog .hm-c1 { left: 3%; top: 20%; }
+.hm--catalog .hm-c2 { right: 2%; top: -3%; }
+.hm--catalog .hm-c3 { right: 0; bottom: 10%; }
+.hm--catalog .hm-c4 { left: 8%; bottom: 0; }
+
+.hm--software .hm-a { left: 10%; top: 20%; width: 78%; }
+.hm--software .hm-c1 { left: 0; top: 3%; }
+.hm--software .hm-c2 { right: 0; top: 10%; }
+.hm--software .hm-c3 { left: 2%; bottom: 6%; }
+.hm--software .hm-c4 { right: 3%; bottom: 0; }
+
+@media (max-width: 900px) {
+  .hm--catalog .hm-c3 { display: none; }
+  .hm--code .hm-c2 { top: 4%; }
 }

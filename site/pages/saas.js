@@ -1,6 +1,7 @@
 const { softwareMethod } = require('../data/brand');
-const { icon, pt, btn, label } = require('../lib/html');
+const { pt, btn, label } = require('../lib/html');
 const s = require('../components/sections');
+const { serviceSection } = require('../components/catalog');
 const { heroMedia } = require('../components/hero-media');
 
 const problems = [
@@ -11,9 +12,8 @@ const problems = [
 ];
 
 function problemList() {
-  const rows = problems.map(([problem, kind, answer], i) => `<li class="ps-row" data-reveal>
-<div class="ps-problem"><span class="index-num">${String(i + 1).padStart(2, '0')}</span><h3 class="h3">${problem}</h3></div>
-<span class="ps-arrow" aria-hidden="true">${icon('arrow')}</span>
+  const rows = problems.map(([problem, kind, answer]) => `<li class="ps-row" data-reveal>
+<div class="ps-problem"><h3 class="h3">${problem}</h3></div>
 <div class="ps-answer"><p class="label label--plain">${kind}</p><p>${answer}</p></div>
 </li>`).join('');
   return `<section class="ps" id="besoins" data-index-label="Besoins">
@@ -60,7 +60,7 @@ module.exports = {
     media: heroMedia.saas(),
   })}
 ${problemList()}
-${s.pricingSection({ ids: ['saas'], title: 'Combien coûte un logiciel ?', cta: 'Parler de mon logiciel' })}
+${serviceSection('applications-logiciels', { kicker: 'Dans le catalogue', lead: 'Chaque prestation se demande seule ou avec d’autres, dans un seul devis.' })}
 ${hub()}
 ${s.methodSection({ steps: softwareMethod, kicker: 'De la question à l’usage', title: 'Construire le bon outil. Dans le bon ordre.', id: 'methode-logiciel' })}
 ${s.osTeaser({ kicker: 'Le savoir-faire, mis en pratique', title: 'Nous développons notre propre produit.', lead: 'Pridano porte cette même conviction : un logiciel doit s’organiser autour de l’entreprise.', cta: 'Découvrir le projet Pridano' })}

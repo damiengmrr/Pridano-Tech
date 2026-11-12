@@ -17,7 +17,7 @@ const { icon } = require('../lib/html');
 /* Projets réels projetés pendant l’acte III (captures des sites livrés et du produit maison). */
 const panels = [
   { id: 'top', src: '/assets/img/solaria-site-640.webp', label: 'Solaria Média' },
-  { id: 'right', src: '/assets/img/dashboard-640.webp', label: 'Pridano Business OS' },
+  { id: 'right', src: '/assets/img/dashboard-640.webp', label: 'Pridano CRM' },
   { id: 'bottom', src: '/assets/img/ppg-site-640.webp', label: 'Prévenir Pour Gagner' },
 ];
 

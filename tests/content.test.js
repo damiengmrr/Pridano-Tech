@@ -34,10 +34,12 @@ test('sans données : ni prix, ni maintenance, ni témoignages, ni téléphone, 
   restore();
   for (const [name, html] of files) {
     if (!name.endsWith('.html')) continue;
-    assert.ok(!html.includes('price-card'), `${name} : prix`);
+    /* Aucun montant « à partir de » sans prix renseigné (les cartes « Sur devis » restent possibles). */
+    assert.ok(!/À partir de<\/span>/.test(html), `${name} : prix`);
     assert.ok(!html.includes('care-card'), `${name} : maintenance`);
     assert.ok(!html.includes('quote-card'), `${name} : témoignage`);
     assert.ok(!html.includes('href="tel:'), `${name} : téléphone`);
+    assert.ok(!html.includes('footer-social'), `${name} : réseaux sociaux`);
     assert.ok(!/À compléter|À confirmer/.test(html), `${name} : champ à compléter visible`);
   }
   assert.ok(!files.get('sites-web.html').includes('"offers"'));
@@ -61,6 +63,28 @@ test('données publiées : prix, délai, maintenance, téléphone, rendez-vous, 
   assert.deepEqual(org.sameAs, data.brand.sameAs);
   const service = graph('sites-web.html').find((n) => n['@type'] === 'Service');
   assert.deepEqual(service.offers.map((o) => o.priceSpecification.minPrice ?? o.priceSpecification.price), [990, 790, 29, 59, 119]);
+});
+
+test('pied de page : lien Instagram de sameAs sur chaque page, LinkedIn seulement en page entreprise', async () => {
+  const footer = (html) => html.match(/<footer class="site-footer[\s\S]*?<\/footer>/)[0];
+  const anchor = (html, href) => html.match(new RegExp(`<a [^>]*href="${href.replace(/[.?]/g, '\\$&')}"[^>]*>.*?</a>`))?.[0];
+  const instagram = data.brand.sameAs.find((url) => url.includes('instagram.com/'));
+  assert.ok(instagram, 'URL Instagram attendue dans brand.sameAs');
+  let { files } = await fresh();
+  for (const [name, html] of files) {
+    if (!name.endsWith('.html')) continue;
+    const a = anchor(footer(html), instagram);
+    assert.ok(a, `${name} : lien Instagram absent du pied de page`);
+    assert.match(a, /class="link link--ext"/, `${name} : composant .link`);
+    assert.match(a, /target="_blank" rel="noopener noreferrer"/, `${name} : ouverture externe`);
+    assert.match(a, />Instagram<span class="visually-hidden"> \(nouvel onglet\)<\/span>/, `${name} : nouvel onglet annoncé`);
+    assert.ok(!footer(html).includes('linkedin.com'), `${name} : profil LinkedIn personnel affiché`);
+  }
+  const company = 'https://www.linkedin.com/company/pridano-tech/';
+  data.brand.sameAs.push(company);
+  ({ files } = await fresh());
+  restore();
+  assert.match(anchor(footer(files.get('index.html')), company), />LinkedIn<span class="visually-hidden"> \(nouvel onglet\)/);
 });
 
 test('avec données de test : témoignages et identité légale', async () => {

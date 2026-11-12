@@ -289,6 +289,9 @@
 }
 
 .brief-inline-link {
+  min-height: 2.75rem;
+  padding: 0 0.4rem;
+  margin: -0.6rem -0.4rem;
   border: 0;
   background: none;
   color: var(--c-cyan);

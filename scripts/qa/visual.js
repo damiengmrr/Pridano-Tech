@@ -14,7 +14,7 @@ const { createApp } = require('../../server');
 const root = path.resolve(__dirname, '../..');
 const out = path.join(root, '.qa/visual');
 const widths = (process.argv[2] || '320,375,390,768,1024,1440,1920').split(',').map(Number);
-const routes = process.argv.slice(3).length ? process.argv.slice(3) : ['/', '/sites-web', '/saas', '/realisations', '/crm', '/a-propos', '/contact', '/devis', '/mentions-legales', '/confidentialite', '/page-inexistante'];
+const routes = process.argv.slice(3).length ? process.argv.slice(3) : ['/', '/sites-web', '/saas', '/prestations', '/prestations/e-commerce', '/prestations/agents-ia', '/prestations/automatisations', '/prestations/maintenance', '/logiciels', '/realisations', '/crm', '/a-propos', '/contact', '/devis', '/mentions-legales', '/confidentialite', '/page-inexistante'];
 
 (async () => {
   fs.mkdirSync(out, { recursive: true });

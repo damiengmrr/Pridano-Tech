@@ -77,7 +77,8 @@ async function handleQuoteChat({ body }) {
   }
 
   if (action === "start") {
-    const result = await startBriefConversation(projectDescription);
+    /* Besoins cochés dans le sélecteur de la page (facultatif). */
+    const result = await startBriefConversation(projectDescription, Array.isArray(body?.services) ? body.services : []);
     return json(200, { ok: true, ...result });
   }
 

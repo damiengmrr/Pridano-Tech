@@ -41,7 +41,7 @@ Les Deploy Previews et les déploiements de branche restent automatiquement non 
 2. Créer une Deploy Preview et tester le contact et le brief guidé avec une adresse interne.
 3. Vérifier dans Resend le domaine expéditeur (DNS SPF et DKIM sur pridanotech.fr) si vous changez `RESEND_FROM_EMAIL`.
 4. Publier en production.
-5. Dans Google Search Console et Bing Webmaster Tools, soumettre `https://pridanotech.fr/sitemap.xml`, puis inspecter `/` et `/sites-web`.
+5. Dans Google Search Console et Bing Webmaster Tools, soumettre `https://pridanotech.fr/sitemap.xml`, puis inspecter `/`, `/sites-web`, `/prestations` et `/logiciels`.
 
 ### Domaines historiques
 
@@ -74,7 +74,7 @@ Tout se renseigne dans `site/data/brand.js` (détail dans README.md, section « 
 
 ## 4. Après la mise en ligne
 
-- **Google Business Profile** : créer ou revendiquer la fiche (catégorie « Concepteur de sites Web », Montpellier), avec le lien vers le site. Voir SEO-AUDIT.md §8.
+- **Google Business Profile** : créer ou revendiquer la fiche (catégorie « Concepteur de sites Web », Montpellier), avec le lien vers le site. Voir SEO-AUDIT.md §9.
 - **Annuaires** : La Fabrique du Net, Malt, page entreprise LinkedIn. Mêmes nom, ville, email et téléphone partout, puis ajouter les URL dans `brand.sameAs`.
 - **Avis** : demander un avis Google à chaque client livré.
 - **Mesure d'audience** : Umami (sans cookie, uniquement sur pridanotech.fr). Événements envoyés, visibles dans Umami → Events :

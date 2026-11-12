@@ -11,6 +11,8 @@ Seules différences admises :
 
 La source unique des faits dans le code est `site/data/brand.js`.
 
+> **Évolution du 2 novembre 2026 (catalogues).** Cette évolution a demandé des **textes nouveaux** : vos textes existants ne décrivaient pas ces prestations. Ils sont listés au §8 et sont **à relire et valider** avant la mise en ligne. Les règles du §1 s'appliquent toujours aux pages existantes, dont les textes n'ont pas été réécrits, à l'exception de l'accueil (titre principal, chapô et description, demandés pour le nouveau positionnement ; le sur-titre est inchangé).
+
 ## 1. Contrôle automatique
 
 Chaque fragment de texte visible du nouveau site a été comparé au corpus du site existant :
@@ -98,7 +100,7 @@ Informations fournies par l'équipe et publiées :
 |---|---|
 | Téléphone 07 78 70 25 18 | Contact, menu, pied de page, mentions légales, JSON-LD |
 | Prise de rendez-vous `calendly.com/pridanotech` | Bouton « Prendre rendez-vous » : Contact, appel final, menu, pied de page |
-| LinkedIn et Instagram | JSON-LD `sameAs` |
+| LinkedIn et Instagram | JSON-LD `sameAs` ; Instagram aussi en lien dans le pied de page de toutes les pages (30 octobre 2026) |
 | Prix « à partir de » (formule « Accessible », HT) : site 990 €, refonte 790 €, logiciel 3 900 € | Sites web, SaaS, accueil, FAQ, JSON-LD |
 | Délai : livré en 3 à 5 jours (sites) | Cartes de prix, accueil, nouvelle question de FAQ |
 | Maintenance sans engagement : Essentiel 29 €, Sérénité 59 €, Croissance 119 € HT par mois | Nouvelle section sur Sites web, FAQ, JSON-LD |
@@ -139,10 +141,32 @@ Engagements confirmés par l'équipe : CMS livré aux clients, assistance 7j/7 a
 1. **Mentions légales** (en attente) : dénomination juridique, forme sociale, siège, numéro d'immatriculation (SIREN/SIRET, RCS), TVA intracommunautaire, directeur de la publication → `brand.legal`. Les prix sont affichés HT : la société facture donc la TVA, et son numéro de TVA devra figurer dans les mentions.
 2. **Témoignages réels** (en attente des réponses clients) avec accord écrit → `testimonials`.
 3. **Fiche Google Business Profile** : à ajouter dans `brand.sameAs` une fois créée.
+   **Page entreprise LinkedIn** : remplacer le profil personnel (`/in/…`) par l'URL `linkedin.com/company/…` dans `brand.sameAs`. Le lien « LinkedIn » apparaît alors dans le pied de page ; le profil personnel n'y est jamais affiché.
 4. **Politique de confidentialité** : confirmer la liste des sous-traitants (Netlify, Resend, Groq, Umami, et Calendly pour la prise de rendez-vous) et la date de version.
 5. **Liens externes** à revérifier à la publication : `solariamedia.netlify.app`, `prevenirpourgagner.com`, `calendly.com/pridanotech`.
 
-## 8. Ressources
+## 8. Textes nouveaux à relire (évolution du 2 novembre 2026)
+
+Ces textes ont été écrits pour les catalogues et le devis multi-besoins. Ils ne contiennent :
+
+- aucun chiffre commercial, aucun client, aucun avis et aucune certification ;
+- aucun prix non validé ;
+- aucune promesse de délai en dehors des délais déjà publiés.
+
+| Où | Fichier | Textes |
+|---|---|---|
+| Accueil | `site/pages/home.js`, `site/data/brand.js` | Titre principal « Tout votre numérique. Un seul partenaire. » (remplace « Des sites qui marquent. Des idées qui avancent. », 3 novembre 2026) ; description de marque (`brand.description`) ; chapô « Sites, identité visuelle, logiciels, automatisations et IA : un seul partenaire pour tout votre numérique. » ; description de la page ; section « Un seul partenaire » |
+| Catalogue des prestations | `site/data/catalog.js`, `site/pages/prestations.js` | Résumés des 6 catégories ; nom, accroche, description, public, avantages et livrables des 40 prestations ; parcours « Construire mon projet numérique » |
+| Pages de catégorie | `site/data/catalog.js` | Pour chaque catégorie générée : hero, bénéfices, cas d'usage, déroulement, FAQ, titres et descriptions SEO ; bloc « Une IA utile. Et encadrée. » (Agents IA) |
+| Catalogue des logiciels | `site/data/software.js`, `site/pages/logiciels.js` | Définition des statuts ; nom de travail, accroche, description et fonctionnalités des 7 concepts ; note de Pridano Finance (« pas un logiciel de comptabilité… ») ; bloc « logiciel sur mesure » |
+| Devis guidé | `site/data/needs.js`, `site/pages/devis.js`, `src/scripts/quote/quote.js` | Libellés des 10 besoins, question ciblée, exemple et réponses rapides de chacun ; message d'ouverture du parcours « projet complet » |
+| Contact | `src/scripts/modules/pages.js` | Message prérempli « Bonjour, je souhaite être informé(e) du lancement de … » |
+| Navigation | `site/components/layout.js` | Entrées « Prestations » et « Nos produits » |
+| Confidentialité | `site/pages/legal.js` | Paragraphe sur le brouillon du devis guidé |
+
+Les noms des logiciels (Pridano Finance, CRM, Booking) viennent de votre brief. Ce sont des noms de travail : aucune recherche d'antériorité de marque n'a été faite.
+
+## 9. Ressources
 
 | Ressource | Statut |
 |---|---|

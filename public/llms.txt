@@ -1,17 +1,22 @@
 # Pridano Tech
 
-> Pridano crée des sites web sur mesure qui renforcent votre image. Studio à Montpellier : création, refonte, SaaS et logiciels métier.
+> Pridano Tech, studio digital à Montpellier : sites web, e-commerce, logiciels sur mesure, automatisations et agents IA. Un seul partenaire pour tout votre numérique.
 
-Variantes du nom : Pridano, PridanoTech, Pridanotech. Site officiel : https://pridanotech.fr/
+Variantes du nom : Pridano, PridanoTech, Pridanotech. Site officiel : http://localhost:3000/
 
 ## Pages principales
 
-- [Sites web : création et refonte](https://pridanotech.fr/sites-web)
-- [Logiciels métier, SaaS et automatisation](https://pridanotech.fr/saas)
-- [Réalisations](https://pridanotech.fr/realisations)
-- [Pridano Business OS, produit en développement](https://pridanotech.fr/crm)
-- [Le studio : Damien Gamarra et Noah Lemoing](https://pridanotech.fr/a-propos)
-- [Contact](https://pridanotech.fr/contact) · [Brief guidé](https://pridanotech.fr/devis)
+- [Sites web : création et refonte](http://localhost:3000/sites-web)
+- [Logiciels métier, SaaS et automatisation](http://localhost:3000/saas)
+- [Catalogue des prestations](http://localhost:3000/prestations) : [Sites web](http://localhost:3000/sites-web), [E-commerce](http://localhost:3000/prestations/e-commerce), [Agents IA](http://localhost:3000/prestations/agents-ia), [Automatisations](http://localhost:3000/prestations/automatisations), [Applications & logiciels](http://localhost:3000/saas), [Maintenance & accompagnement](http://localhost:3000/prestations/maintenance)
+- [Nos logiciels : catalogue et statut de chaque produit](http://localhost:3000/logiciels)
+- [Pridano CRM (À venir)](http://localhost:3000/crm)
+- [Pridano Finance (À venir)](http://localhost:3000/logiciels/finance)
+- [Pridano Booking (À venir)](http://localhost:3000/logiciels/booking)
+- [Réalisations](http://localhost:3000/realisations)
+- [Pridano CRM, produit en développement](http://localhost:3000/crm)
+- [Le studio : Damien Gamarra et Noah Lemoing](http://localhost:3000/a-propos)
+- [Contact](http://localhost:3000/contact) · [Brief guidé](http://localhost:3000/devis)
 
 ## Contact
 

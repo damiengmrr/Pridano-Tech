@@ -58,9 +58,15 @@ export function initContactForm() {
   const status = $('[data-form-status]', form);
   submit.disabled = false;
 
-  const projet = new URLSearchParams(location.search).get('projet');
+  const query = new URLSearchParams(location.search);
+  const projet = query.get('projet');
   const preset = projet && form.querySelector(`input[name="projectType"][value="${CSS.escape(projet)}"]`);
   if (preset) preset.checked = true;
+  /* Catalogue des logiciels : « Être informé du lancement » préremplit le message (texte modifiable). */
+  const sujet = (query.get('sujet') || '').replace(/[^\p{L}\p{N} &'’-]/gu, '').trim().slice(0, 60);
+  if (sujet && form.elements.message && !form.elements.message.value) {
+    form.elements.message.value = `Bonjour, je souhaite être informé(e) du lancement de ${sujet}. Mon activité : `;
+  }
 
   const setError = (name, message) => {
     const el = $(`#${name}-error`, form);

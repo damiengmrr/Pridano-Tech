@@ -1,10 +1,11 @@
 /* Pages intérieures : démonstrations, produit, réalisations, studio, contact, légal, 404 */
 
 /* ---------- Création / refonte ---------- */
+/* Deux colonnes séparées par un filet. Seul le bloc sombre du parcours « projet complet » reste un panneau. */
 .paths-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: var(--s-5);
+  gap: var(--s-7) clamp(2.5rem, 5vw, 5rem);
 }
 
 .path-card {
@@ -12,26 +13,13 @@
   gap: var(--s-5);
   align-content: start;
   justify-items: start;
-  padding: clamp(2rem, 1.2rem + 3vw, 4rem);
-  border-radius: var(--r-xl);
-  background: var(--c-white);
-  box-shadow: var(--sh-1);
+  padding-top: var(--s-6);
+  border-top: 1px solid var(--c-line-strong);
 }
 
 .path-card .h2 {
   font-size: clamp(2rem, 1.3rem + 2.6vw, 3.6rem);
   max-width: 13ch;
-}
-
-.path-num {
-  font-size: clamp(4rem, 3rem + 4vw, 7rem);
-  font-weight: 820;
-  letter-spacing: -0.07em;
-  line-height: 0.8;
-  background: var(--g-brand);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
 }
 
 .path-text {
@@ -40,6 +28,9 @@
 }
 
 .path-card--dark {
+  padding: clamp(2rem, 1.2rem + 3vw, 4rem);
+  border-top: 0;
+  border-radius: var(--r-xl);
   background: var(--g-ink);
   color: var(--c-on-dark);
   box-shadow: var(--sh-2);
@@ -170,6 +161,20 @@
   overflow: hidden;
   font-size: clamp(0.5rem, 0.3rem + 0.55vw, 0.85rem);
   transition: width 900ms var(--ease-in-out), aspect-ratio 900ms var(--ease-in-out), border-radius 900ms var(--ease-in-out), box-shadow 600ms;
+}
+
+.build-device .bd-bar {
+  height: 2.6em;
+  padding: 0 1.3em;
+  font-size: 1em;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.build-device .bd-bar span {
+  flex: none;
+  width: 0.75em;
+  height: 0.75em;
 }
 
 .bd-screen {
@@ -485,12 +490,21 @@
     grid-template-areas: 'copy' 'steps' 'figure';
   }
 
+  /* Rangée d’étapes qui défile au doigt : un fondu indique qu’il y en a d’autres à droite. */
   .build-steps {
     display: flex;
     gap: 0.4rem;
+    margin-right: calc(-1 * var(--gutter));
+    padding: 0.2rem var(--gutter) 0.5rem 0.1rem;
     overflow-x: auto;
-    padding-bottom: 0.5rem;
-    scroll-snap-type: x mandatory;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+    -webkit-mask-image: linear-gradient(to right, #000 82%, transparent);
+    mask-image: linear-gradient(to right, #000 82%, transparent);
+  }
+
+  .build-steps::-webkit-scrollbar {
+    display: none;
   }
 
   .build-step {
@@ -526,20 +540,17 @@
 .q-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--s-4);
+  gap: var(--s-7) clamp(2rem, 3vw, 3rem);
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
+/* Sans carte : l’illustration porte le cadre, le texte se lit dessous. */
 .q-tile {
   display: grid;
   gap: var(--s-3);
   align-content: start;
-  padding: var(--s-5);
-  border-radius: var(--r-lg);
-  background: var(--c-white);
-  box-shadow: var(--sh-1);
 }
 
 .q-tile p {
@@ -556,7 +567,7 @@
   height: 9rem;
   margin-bottom: var(--s-3);
   border-radius: var(--r-md);
-  background: var(--c-paper);
+  background: var(--c-white);
   overflow: hidden;
 }
 
@@ -567,7 +578,7 @@
   transition: font-weight 900ms var(--ease-out), color 600ms;
 }
 
-.q-tile:hover .q-type span {
+.q-tile:is(:hover, .is-play) .q-type span {
   font-weight: 900;
   color: var(--c-ultra);
 }
@@ -600,7 +611,7 @@
   transition: background 500ms, color 500ms, transform 500ms var(--ease-back);
 }
 
-.q-tile:hover .q-btn {
+.q-tile:is(:hover, .is-play) .q-btn {
   background: var(--g-brand);
   color: var(--c-ink);
   transform: scale(1.08);
@@ -614,12 +625,12 @@
   font-weight: 600;
 }
 
-.q-tile:hover .q-focus span {
+.q-tile:is(:hover, .is-play) .q-focus span {
   animation: q-focus 2.4s steps(1) 1;
 }
 
-.q-tile:hover .q-focus span:nth-child(2) { animation-delay: 0.8s; }
-.q-tile:hover .q-focus span:nth-child(3) { animation-delay: 1.6s; }
+.q-tile:is(:hover, .is-play) .q-focus span:nth-child(2) { animation-delay: 0.8s; }
+.q-tile:is(:hover, .is-play) .q-focus span:nth-child(3) { animation-delay: 1.6s; }
 
 @keyframes q-focus {
   0% { box-shadow: 0 0 0 3px var(--c-paper), 0 0 0 6px var(--c-ultra); }
@@ -651,7 +662,7 @@
   translate: calc(15% * 1) 0;
 }
 
-.q-tile:hover .q-ease-dot {
+.q-tile:is(:hover, .is-play) .q-ease-dot {
   animation: q-ease 1.4s var(--ease-out) forwards;
 }
 
@@ -681,9 +692,9 @@
   transition: width 1.2s var(--ease-out);
 }
 
-.q-tile:hover .q-bar i { width: 100%; }
-.q-tile:hover .q-bar:nth-child(2) i { transition-delay: 0.15s; }
-.q-tile:hover .q-bar:nth-child(3) i { transition-delay: 0.3s; }
+.q-tile:is(:hover, .is-play) .q-bar i { width: 100%; }
+.q-tile:is(:hover, .is-play) .q-bar:nth-child(2) i { transition-delay: 0.15s; }
+.q-tile:is(:hover, .is-play) .q-bar:nth-child(3) i { transition-delay: 0.3s; }
 
 .q-serp {
   flex-direction: column;
@@ -736,7 +747,7 @@
 
 .ps-row {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: var(--s-6);
   align-items: center;
   padding: clamp(1.5rem, 1rem + 2vw, 2.75rem) 0;
@@ -759,27 +770,6 @@
   color: var(--c-muted);
 }
 
-.ps-arrow {
-  display: grid;
-  place-items: center;
-  width: 3rem;
-  height: 3rem;
-  border-radius: 50%;
-  box-shadow: inset 0 0 0 1px var(--c-line-strong);
-  transition: background var(--dur-2), color var(--dur-2), transform var(--dur-3) var(--ease-out);
-}
-
-.ps-arrow svg {
-  width: 1.1rem;
-  height: 1.1rem;
-}
-
-.ps-row:hover .ps-arrow {
-  background: var(--c-ink);
-  color: #fff;
-  transform: translateX(0.4rem);
-}
-
 .ps-answer {
   display: grid;
   gap: 0.5rem;
@@ -794,16 +784,6 @@
   .ps-row {
     grid-template-columns: 1fr;
     gap: var(--s-3);
-  }
-
-  .ps-arrow {
-    transform: rotate(90deg);
-    width: 2.4rem;
-    height: 2.4rem;
-  }
-
-  .ps-row:hover .ps-arrow {
-    transform: rotate(90deg);
   }
 }
 
@@ -1093,20 +1073,19 @@
 .modules-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--s-4);
+  gap: var(--s-7) clamp(2rem, 3vw, 3rem);
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
+/* Colonnes séparées par un filet, sans cartes (prestations, logiciels, modules). */
 .module {
   display: grid;
   gap: var(--s-4);
   align-content: start;
-  padding: clamp(1.5rem, 1rem + 2vw, 2.5rem);
-  border-radius: var(--r-lg);
-  background: var(--c-white);
-  box-shadow: var(--sh-1);
+  padding-top: var(--s-5);
+  border-top: 1px solid var(--c-line-strong);
 }
 
 .module p {
@@ -1438,9 +1417,8 @@
 .contact-next {
   display: grid;
   gap: var(--s-3);
-  padding: var(--s-5);
-  border-radius: var(--r-lg);
-  background: var(--c-white);
+  padding-top: var(--s-4);
+  border-top: 1px solid var(--c-line-strong);
 }
 
 .contact-next ol {
@@ -1627,21 +1605,20 @@
 .price-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
-  gap: var(--s-4);
+  gap: var(--s-7) clamp(2rem, 3vw, 3rem);
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
+/* Offres en colonnes séparées par un filet, sans cartes. */
 .price-card {
   display: grid;
   gap: var(--s-4);
   align-content: start;
   justify-items: start;
-  padding: clamp(1.5rem, 1rem + 2vw, 2.5rem);
-  border-radius: var(--r-lg);
-  background: var(--c-white);
-  box-shadow: var(--sh-1);
+  padding-top: var(--s-5);
+  border-top: 1px solid var(--c-line-strong);
 }
 
 .price-from {
@@ -1668,9 +1645,6 @@
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
-  padding: 0.35rem 0.75rem 0.35rem 0.55rem;
-  border-radius: var(--r-pill);
-  background: var(--c-paper);
   font-size: var(--fs-small);
   font-weight: 600;
 }
@@ -1698,26 +1672,23 @@
 .care-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
-  gap: var(--s-4);
+  gap: var(--s-7) clamp(2rem, 3vw, 3rem);
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
+/* Formules en colonnes à filet ; la formule conseillée a un filet plus marqué. */
 .care-card {
   display: grid;
   gap: var(--s-4);
   align-content: start;
-  padding: clamp(1.5rem, 1rem + 2vw, 2.5rem);
-  border-radius: var(--r-lg);
-  background: var(--c-white);
-  box-shadow: var(--sh-1);
+  padding-top: var(--s-5);
+  border-top: 1px solid var(--c-line-strong);
 }
 
 .care-card--featured {
-  background: var(--c-ink);
-  color: var(--c-on-dark);
-  box-shadow: var(--sh-float);
+  border-top: 2px solid var(--c-ink);
 }
 
 .care-head {
@@ -1728,20 +1699,9 @@
 }
 
 .care-tag {
-  padding: 0.25rem 0.65rem;
-  border-radius: var(--r-pill);
-  background: var(--g-brand);
-  color: var(--c-ink);
-  font-size: var(--fs-xs);
+  color: var(--c-ultra);
+  font-size: var(--fs-small);
   font-weight: 700;
-}
-
-.care-card--featured .price-from {
-  color: var(--c-on-dark-muted);
-}
-
-.care-card--featured .price-from strong {
-  color: var(--c-white);
 }
 
 .care-list {
@@ -1751,10 +1711,6 @@
   padding: var(--s-4) 0 0;
   border-top: 1px solid var(--c-line);
   list-style: none;
-}
-
-.care-card--featured .care-list {
-  border-color: var(--c-line-dark);
 }
 
 .care-list li {
@@ -1769,10 +1725,6 @@
   height: 1.1rem;
   margin-top: 0.1rem;
   color: var(--c-ultra);
-}
-
-.care-card--featured .care-list .icon {
-  color: var(--c-cyan);
 }
 
 .care-foot {
@@ -1924,7 +1876,7 @@
 
 .case-browser,
 .case-phone {
-  transition: transform 120ms linear;
+  will-change: transform;
 }
 
 .case-browser {
@@ -1956,4 +1908,183 @@
 .case-visual:hover .case-browser img,
 .case-visual:hover .case-phone img {
   transform: none;
+}
+
+/* ---------- Catalogues (prestations, logiciels) : cartes .module, mêmes jetons ---------- */
+.svc {
+  padding-block: var(--section-y);
+}
+
+.svc--index + .svc--index {
+  padding-top: 0;
+}
+
+.svc-card {
+  align-content: start;
+}
+
+.svc-audience {
+  font-size: var(--fs-small);
+  color: var(--c-ink-3);
+}
+
+.svc-audience strong {
+  color: var(--c-ink);
+  font-weight: 620;
+}
+
+.svc-card .node-points {
+  font-size: var(--fs-small);
+}
+
+.svc-price {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.35rem;
+  margin-top: var(--s-2);
+  font-size: var(--fs-small);
+  color: var(--c-muted);
+}
+
+.svc-price strong {
+  font-size: 1.35rem;
+  font-weight: 760;
+  letter-spacing: -0.03em;
+  color: var(--c-ink);
+}
+
+.svc-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-4);
+}
+
+/* Catégorie à deux prestations (E-commerce) : deux colonnes plutôt qu'une colonne vide. */
+@media (min-width: 901px) {
+  .svc-grid:has(> :nth-child(2):last-child) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Catalogue complet, une colonne (tablette, mobile) : une ligne par prestation, toute la carte
+   cliquable ; la description et les livrables restent sur la page de la catégorie. */
+@media (max-width: 900px) {
+  .svc--index .svc-grid {
+    gap: var(--s-2);
+  }
+
+  .svc--index .svc-card {
+    position: relative;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-areas:
+      'num name go'
+      '. price go';
+    align-items: center;
+    gap: 0.2rem var(--s-3);
+    padding: var(--s-4) var(--s-5);
+  }
+
+  .svc--index .svc-card > .index-num {
+    grid-area: num;
+  }
+
+  .svc--index .svc-card > .h3 {
+    grid-area: name;
+    font-size: 1.125rem;
+  }
+
+  .svc--index .svc-card > p:not(.svc-price) {
+    display: none;
+  }
+
+  .svc--index .svc-card > .svc-price {
+    grid-area: price;
+    margin: 0;
+  }
+
+  .svc--index .svc-card > .svc-price strong {
+    font-size: 1rem;
+  }
+
+  .svc--index .svc-actions {
+    grid-area: go;
+  }
+
+  /* Le libellé « Voir le détail » reste le nom accessible du lien ; seule la flèche est affichée. */
+  .svc--index .svc-actions .link {
+    font-size: 0;
+    padding: 0;
+    background: none;
+  }
+
+  .svc--index .svc-actions .link svg {
+    width: 1.15rem;
+    height: 1.15rem;
+  }
+
+  .svc--index .svc-actions .link::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+  }
+}
+
+/* Navigation par catégorie, sous le titre du catalogue. */
+.cat-nav {
+  grid-column: 1 / -1;
+}
+
+.cat-nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Logiciels : catégorie et statut en tête de carte. */
+.soft-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3);
+}
+
+.badge--developpement::before {
+  background: #f5a524;
+  box-shadow: 0 0 0 4px rgb(245 165 36 / 0.2);
+}
+
+.badge--concept::before {
+  background: var(--c-muted-2);
+  box-shadow: 0 0 0 4px rgb(122 130 145 / 0.18);
+}
+
+.badge--disponible::before {
+  background: #1fbf75;
+  box-shadow: 0 0 0 4px rgb(31 191 117 / 0.18);
+}
+
+/* Parcours « Construire mon projet numérique » : carte sombre des parcours Sites web. */
+.parcours-card {
+  max-width: 56rem;
+}
+
+.parcours-card .path-num .icon {
+  width: 1.4rem;
+  height: 1.4rem;
+  color: var(--c-cyan);
+}
+
+.parcours-steps li {
+  align-items: baseline;
+}
+
+.parcours-steps .index-num {
+  min-width: 1.9rem;
+  color: var(--c-cyan);
 }

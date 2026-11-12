@@ -15,7 +15,7 @@ function people() {
 <div class="wrap founders-grid">
 ${brand.founders.map((f, i) => `<article class="founder" id="${f.id}"${i === 0 ? '' : ' data-reveal'} style="--d:${i}">
 ${picture(f.image, { alt: `Portrait de ${f.name}`, sizes: '(min-width: 900px) 40vw, 92vw', cls: 'founder-photo' })}
-<p class="index-num">${String(i + 1).padStart(2, '0')} / ${f.role}</p>
+<p class="index-num">${f.role}</p>
 <h2 class="h2">${f.name}</h2>
 <p class="founder-bio">${f.bio}</p>
 ${f.url ? link({ href: f.url, label: 'Découvrir le portfolio' }) : ''}
@@ -28,7 +28,7 @@ function principlesSection() {
   return `<section class="principles" id="facon-de-faire" data-index-label="Notre façon de faire">
 <div class="wrap">
 ${s.sectionHead({ kicker: 'Notre façon de faire', title: 'Prendre le projet au sérieux. Rendre les échanges simples.' })}
-<ol class="principles-grid" role="list">${principles.map(([t, p], i) => `<li class="principle" data-reveal style="--d:${i}"><span class="principle-num">${String(i + 1).padStart(2, '0')}</span><h3 class="h3">${pt(t)}</h3><p>${p}</p></li>`).join('')}</ol>
+<ol class="principles-grid" role="list">${principles.map(([t, p], i) => `<li class="principle" data-reveal style="--d:${i}"><h3 class="h3">${pt(t)}</h3><p>${p}</p></li>`).join('')}</ol>
 </div>
 </section>`;
 }
@@ -51,7 +51,7 @@ ${principlesSection()}
 <div class="wrap studio-product-inner" data-reveal>
 ${label('Notre produit maison')}
 <h2 class="h2">${pt('Nous créons pour vous. Et nous construisons aussi.')}</h2>
-<p class="lead">Notre propre Business OS prolonge notre travail sur les logiciels métier. Un terrain concret pour penser les parcours, les connexions et la continuité d’un produit.</p>
+<p class="lead">Notre propre CRM prolonge notre travail sur les logiciels métier. Un terrain concret pour penser les parcours, les connexions et la continuité d’un produit.</p>
 <div class="btn-row">${btn({ href: '/crm', label: 'Découvrir notre produit maison', variant: 'light' })}</div>
 </div>
 </section>

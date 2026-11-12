@@ -1,20 +1,22 @@
 /* Sections réutilisables. Tout le contenu essentiel est du HTML lisible, sans dépendre du JS. */
-const { brand, expertises, method, projects, pricing, pricingTax, pricingNote, maintenance, maintenanceNote, testimonials } = require('../data/brand');
+const { brand, expertises, method, projects, pricing, pricingTax, maintenance, maintenanceNote, testimonials } = require('../data/brand');
 const { nodeMap, mark, ICON_BOX, nodes } = require('../lib/logo');
 const { esc, icon, pt, words, btn, link, label, picture, extAttrs, newTab, price } = require('../lib/html');
 
-function breadcrumb(name) {
-  return `<nav class="breadcrumb" aria-label="Fil d’Ariane"><ol><li><a href="/">Accueil</a></li><li><span aria-current="page">${name}</span></li></ol></nav>`;
+/* Fil d’Ariane ; `parent` ({ href, label }) ajoute un niveau intermédiaire (pages des catalogues). */
+function breadcrumb(name, parent = null) {
+  const middle = parent ? `<li><a href="${parent.href}">${parent.label}</a></li>` : '';
+  return `<nav class="breadcrumb" aria-label="Fil d’Ariane"><ol><li><a href="/">Accueil</a></li>${middle}<li><span aria-current="page">${name}</span></li></ol></nav>`;
 }
 
 /* En-tête de page intérieure : le symbole sert de plan, le nœud de la page s’allume. */
-function pageHero({ crumb, kicker, title, lead, actions = '', node = null, caption = '', index = 'Introduction', extra = '', media = '' }) {
+function pageHero({ crumb, parent = null, kicker, title, lead, actions = '', node = null, caption = '', index = 'Introduction', extra = '', media = '' }) {
   return `<section class="page-hero${media ? ' page-hero--media' : ''}" data-index-label="${index}">
 <div class="wrap page-hero-grid">
-<div class="page-hero-top">${breadcrumb(crumb)}</div>
+<div class="page-hero-top">${breadcrumb(crumb, parent)}</div>
 <div class="page-hero-copy">
 ${label(kicker)}
-<h1 class="h1 page-title split">${words(pt(title))}</h1>
+<h1 class="h1 page-title split">${pt(words(title))}</h1>
 ${lead ? `<p class="lead page-lead">${lead}</p>` : ''}
 ${actions ? `<div class="btn-row">${actions}</div>` : ''}
 </div>
@@ -27,7 +29,7 @@ ${extra}
 
 function sectionHead({ kicker, title, lead = '', cls = '', level = 2, aside = '' }) {
   return `<header class="section-head ${cls}" data-reveal>
-<div class="section-head-main">${label(kicker)}<h${level} class="h2 split">${words(pt(title))}</h${level}>${lead ? `<p class="lead">${lead}</p>` : ''}</div>
+<div class="section-head-main">${label(kicker)}<h${level} class="h2 split">${pt(words(title))}</h${level}>${lead ? `<p class="lead">${lead}</p>` : ''}</div>
 ${aside ? `<div class="section-head-aside">${aside}</div>` : ''}
 </header>`;
 }
@@ -176,7 +178,7 @@ ${picture(p.site || p.image, { alt: p.site ? p.siteAlt : p.alt, sizes: '(min-wid
 </li>`).join('');
   return `<section class="work" id="realisations" data-index-label="Réalisations" data-work>
 <div class="wrap">
-${head ? sectionHead({ kicker, title, aside: link({ href: '/realisations', label: 'Toutes les réalisations' }) }) : ''}
+${head ? sectionHead({ kicker, title, aside: link({ href: '/realisations', label: 'Toutes les réalisations', arrow: true }) }) : ''}
 <ol class="work-list" role="list">${rows}</ol>
 </div>
 <div class="work-preview" aria-hidden="true" data-work-preview>${list.map((p) => picture(p.site || p.image, { decorative: true, sizes: '420px', cls: 'work-preview-img', attrs: `data-preview="${p.id}"` })).join('')}</div>
@@ -266,57 +268,40 @@ ${tagline || aside ? `<div class="final-bottom">${tagline ? `<span>${tagline}</s
 }
 
 /*
- * Prix d’appel « à partir de » : rendu uniquement pour les offres dont le montant
- * est renseigné dans site/data/brand.js (pricing). Sinon, rien n’est affiché.
+ * Bloc « à venir » (logiciels maison, agents IA) : ce que Pridano prépare, présenté comme un projet,
+ * sans statut, prix ni date. Bandeau sombre, liste à filets, un bouton « Être tenu informé ».
  */
-function pricingSection({ ids, title = 'Combien coûte un site web ?', cta = 'Démarrer un projet' }) {
-  const items = pricing.filter((p) => ids.includes(p.id) && Number(p.from) > 0);
-  if (!items.length) return '';
-  const cards = items.map((p) => `<li class="price-card" data-reveal>
-<p class="label label--plain">${p.label}</p>
-<p class="price-from"><span>À partir de</span> <strong>${price(p.from)}</strong> <span>${pricingTax}</span></p>
-${p.delivery ? `<p class="price-delay">${icon('clock')}Livré en ${p.delivery}</p>` : ''}
-${p.perks?.length ? `<ul class="care-list price-perks" role="list">${p.perks.map((f) => `<li>${icon('check')}${f}</li>`).join('')}</ul>` : ''}
-${p.note ? `<p class="fine-print">${esc(p.note)}</p>` : ''}
-${btn({ href: p.href, label: cta, variant: 'ghost', size: 'sm', track: `cta-tarif:${p.id}` })}
-</li>`).join('');
-  return `<section class="pricing" id="tarifs" data-index-label="Tarifs">
-<div class="wrap">
-${sectionHead({ kicker: 'Parlons concrètement', title, lead: 'Le prix dépend du nombre de pages, du travail de design, des contenus et des fonctionnalités. Nous définissons le périmètre avec vous avant de préparer une proposition adaptée.' })}
-<ul class="price-grid" role="list">${cards}</ul>
-${pricingNote ? `<p class="fine-print price-note">${esc(pricingNote)}</p>` : ''}
+function soonSection({ id, index, kicker, title = 'Ce que nous préparons.', lead = '', items, cta, aside = '' }) {
+  const rows = items.map((it) => {
+    const inner = `<span class="soon-title">${esc(it.title)}</span><span class="soon-meta">${esc(it.meta)}</span>`;
+    return `<li>${it.href ? `<a class="soon-row" href="${esc(it.href)}">${inner}</a>` : `<div class="soon-row">${inner}</div>`}</li>`;
+  }).join('');
+  return `<section class="soon section--dark" id="${id}" data-index-label="${esc(index)}" data-index-dark><div class="wrap soon-grid">
+<div class="soon-copy">
+${label(kicker)}
+<h2 class="h2">${pt(title)}</h2>
+${lead ? `<p class="lead">${lead}</p>` : ''}
+<div class="soon-actions">${btn({ ...cta, variant: 'light' })}${aside}</div>
 </div>
-</section>`;
+<ul class="soon-list" role="list">${rows}</ul>
+</div></section>`;
 }
 
 /* Maintenance après la mise en ligne : trois formules sans engagement, si renseignées. */
 function maintenanceSection() {
   if (!maintenance.length) return '';
-  const cards = maintenance.map((m, i) => `<li class="care-card${m.featured ? ' care-card--featured on-dark' : ''}" data-reveal style="--d:${i}">
+  const cards = maintenance.map((m, i) => `<li class="care-card${m.featured ? ' care-card--featured' : ''}" data-reveal style="--d:${i}">
 <p class="care-head"><span class="label label--plain">${m.name}</span>${m.featured ? '<span class="care-tag">Conseillé</span>' : ''}</p>
 <p class="price-from"><strong>${price(m.price)}</strong> <span>${pricingTax} / mois</span></p>
 <ul class="care-list" role="list">${m.features.map((f) => `<li>${icon('check')}${f}</li>`).join('')}</ul>
 </li>`).join('');
   return `<section class="care" id="maintenance" data-index-label="Maintenance">
 <div class="wrap">
-${sectionHead({ kicker: 'Après la mise en ligne', title: 'Un site suivi. Sans engagement.', lead: 'Hébergement, sécurité et mises à jour : choisissez le suivi qui correspond à votre activité, et changez de formule quand vous le souhaitez.' })}
+${sectionHead({ kicker: 'Après la mise en ligne', title: 'Un site suivi. Sans engagement.', lead: 'Changez de formule quand vous le souhaitez.' })}
 <ul class="care-grid" role="list">${cards}</ul>
 <div class="care-foot">${btn({ href: '/contact?projet=site', label: 'Parler du suivi de mon site', variant: 'ghost', track: 'cta-maintenance' })}<p class="fine-print">${maintenanceNote ? `${esc(maintenanceNote)} ` : ''}Prix ${pricingTax} par mois, sans durée minimale.</p></div>
 </div>
 </section>`;
-}
-
-/* Repère de maintenance pour la FAQ. */
-function maintenanceHint() {
-  if (!maintenance.length) return '';
-  return ` Pour repère : la première année d’hébergement est offerte, puis la maintenance est sans engagement, à partir de ${price(Math.min(...maintenance.map((m) => m.price)))} ${pricingTax} par mois.`;
-}
-
-/* Phrase de repère ajoutée à la réponse « Combien coûte un site web ? » quand des prix existent. */
-function pricingHint(ids) {
-  const items = pricing.filter((p) => ids.includes(p.id) && Number(p.from) > 0);
-  if (!items.length) return '';
-  return ` Pour repère : ${items.map((p) => `${p.label.toLowerCase()} à partir de ${price(p.from)} ${pricingTax}`).join(', ')}.`;
 }
 
 /* Témoignages réels (brand.js → testimonials). Section absente tant qu’il n’y en a pas. */
@@ -335,4 +320,4 @@ ${sectionHead({ kicker: 'Témoignages', title: 'Ce qu’en disent nos clients.' 
 </section>`;
 }
 
-module.exports = { pricingSection, pricingHint, maintenanceSection, maintenanceHint, testimonialsSection, breadcrumb, pageHero, sectionHead, firstImpression, nodesSection, transformSection, methodSection, workSection, osTeaser, studioSection, faqSection, finalCta };
+module.exports = { soonSection, maintenanceSection, testimonialsSection, breadcrumb, pageHero, sectionHead, firstImpression, nodesSection, transformSection, methodSection, workSection, osTeaser, studioSection, faqSection, finalCta };

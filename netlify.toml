@@ -9,7 +9,6 @@
   NODE_ENV = "production"
   PUBLIC_SITE_URL = "https://pridanotech.fr"
   NODE_VERSION = "22"
-  NPM_FLAGS = "--include=dev"
 
 [functions]
   directory = "netlify/functions"
@@ -139,6 +138,60 @@
 [[redirects]]
   from = "/realisations"
   to = "/realisations.html"
+  status = 200
+
+# Catalogues (mêmes routes que site/pages/index.js ; vérifié par tests/routes.test.js)
+[[redirects]]
+  from = "/prestations"
+  to = "/prestations.html"
+  status = 200
+
+[[redirects]]
+  from = "/prestations/e-commerce"
+  to = "/prestations-e-commerce.html"
+  status = 200
+
+[[redirects]]
+  from = "/prestations/branding-ui-ux"
+  to = "/prestations"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/prestations/agents-ia"
+  to = "/prestations-agents-ia.html"
+  status = 200
+
+[[redirects]]
+  from = "/prestations/automatisations"
+  to = "/prestations-automatisations.html"
+  status = 200
+
+[[redirects]]
+  from = "/prestations/maintenance"
+  to = "/prestations-maintenance.html"
+  status = 200
+
+[[redirects]]
+  from = "/logiciels"
+  to = "/logiciels.html"
+  status = 200
+
+# Fiches Pridano Software : concepts clairement identifiés, sans prix.
+[[redirects]]
+  from = "/logiciels/finance"
+  to = "/logiciels-finance.html"
+  status = 200
+
+# Ancienne fiche « Pridano CRM » (concept) : le CRM est désormais le produit présenté sur /crm.
+[[redirects]]
+  from = "/logiciels/crm"
+  to = "/crm"
+  status = 301
+
+[[redirects]]
+  from = "/logiciels/booking"
+  to = "/logiciels-booking.html"
   status = 200
 
 [[redirects]]

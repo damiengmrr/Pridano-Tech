@@ -33,8 +33,10 @@ function createApp() {
   app.use(express.urlencoded({ extended: false }));
 
   /* Anciennes URLs : redirections permanentes (miroir de netlify.toml). */
-  const aliases = { '/index.html': '/', '/services.html': '/sites-web', '/projets.html': '/realisations', '/about.html': '/a-propos', '/confidentialite.html': '/confidentialite' };
+  const aliases = { '/index.html': '/', '/services.html': '/sites-web', '/projets.html': '/realisations', '/about.html': '/a-propos', '/confidentialite.html': '/confidentialite', '/prestations/branding-ui-ux': '/prestations', '/logiciels/crm': '/crm' };
   const pages = ['sites-web', 'realisations', 'saas', 'crm', 'a-propos', 'contact', 'devis', 'mentions-legales', 'confidentialite'];
+  /* URLs propres de toutes les pages, y compris celles générées par les catalogues (site/pages/index.js). */
+  const routes = require('./site/pages');
   app.use((request, response, next) => {
     const target = aliases[request.path];
     if (target) return response.redirect(301, target + (request.originalUrl.includes('?') ? request.originalUrl.slice(request.originalUrl.indexOf('?')) : ''));
@@ -42,8 +44,11 @@ function createApp() {
   });
   pages.forEach(page => {
     app.get(`/${page}.html`, (request, response) => response.redirect(301, `/${page}` + (request.originalUrl.includes('?') ? request.originalUrl.slice(request.originalUrl.indexOf('?')) : '')));
-    app.get(`/${page}`, (request, response) => response.sendFile(path.join(publicDir, `${page}.html`)));
   });
+  for (const [route, { file }] of Object.entries(routes)) {
+    if (route === '/' || route === '/404') continue;
+    app.get(route, (request, response) => response.sendFile(path.join(publicDir, file)));
+  }
   app.use('/assets/js/build', express.static(path.join(publicDir, 'assets', 'js', 'build'), { immutable: true, maxAge: '1y' }));
   app.use('/assets/fonts', express.static(path.join(publicDir, 'assets', 'fonts'), { immutable: true, maxAge: '1y' }));
   app.use('/assets/img', express.static(path.join(publicDir, 'assets', 'img'), { maxAge: '30d' }));

@@ -11,12 +11,13 @@
     "dev": "node scripts/dev.js",
     "start": "node server.js",
     "lint": "node scripts/check.js && eslint .",
-    "test": "node --test tests/contact.test.js tests/routes.test.js tests/seo.test.js tests/content.test.js",
+    "test": "node --test tests/contact.test.js tests/routes.test.js tests/seo.test.js tests/content.test.js tests/catalog.test.js tests/devis.test.js",
     "test:frontend": "playwright test",
     "qa:visual": "node scripts/qa/visual.js",
     "qa:lighthouse": "node scripts/qa/lighthouse.js",
     "package": "node scripts/package.js",
-    "captures": "node scripts/assets/capture-realisations.js"
+    "captures": "node scripts/assets/capture-realisations.js",
+    "sync:preview": "node scripts/render-local-no-deps.js"
   },
   "repository": {
     "type": "git",

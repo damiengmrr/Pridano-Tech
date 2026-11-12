@@ -1,6 +1,6 @@
 const { sendBriefEmail } = require('../lib/resend');
 const { json } = require('./http');
-const projectTypes = {site:'Création de site web',refonte:'Refonte de site web',saas:'SaaS / logiciel sur mesure',automatisation:'Automatisation / intégration',crm:'Pridano Business OS'};
+const projectTypes = {site:'Création de site web',refonte:'Refonte de site web',saas:'SaaS / logiciel sur mesure',automatisation:'Automatisation / intégration',crm:'Pridano CRM'};
 const escape = value => String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 function validateContact(body) {
   if(!body || typeof body !== 'object' || Array.isArray(body)) return {error:'Le formulaire est incomplet.'};

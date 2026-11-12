@@ -41,13 +41,13 @@ const media = {
   /* SaaS : le produit maison au centre, relié aux cinq éléments du schéma « Votre logiciel. Vos règles. ». */
   saas: () => wrap('saas', [
     `<svg class="hm-links" viewBox="0 0 100 80" preserveAspectRatio="none">${[[14, 12], [6, 44], [88, 10], [94, 58], [24, 74]].map(([x, y]) => `<line x1="50" y1="42" x2="${x}" y2="${y}"/>`).join('')}</svg>`,
-    layer('hm-a', 0.5, `<div class="mk-app">${bar('Pridano Business OS')}${shot('dashboard', big, true)}</div>`),
+    layer('hm-a', 0.5, `<div class="mk-app">${bar('Pridano CRM')}${shot('dashboard', big, true)}</div>`),
     layer('hm-c1', 1.6, chip('Vos données')),
     layer('hm-c2', 1.2, chip('Vos équipes')),
     layer('hm-c3', 1.8, chip('Vos outils')),
     layer('hm-c4', 1.4, chip('Vos clients')),
     layer('hm-c5', 2, chip('Vos règles', 'mk-chip--accent')),
-  ].join(''), 'Un outil commun · Informations reliées · Actions simplifiées<br>Pridano Business OS · Captures de développement · Données de démonstration'),
+  ].join(''), 'Un outil commun · Informations reliées · Actions simplifiées<br>Pridano CRM · Captures de développement · Données de démonstration'),
 
   /* Produit Pridano : trois écrans réels du Business OS, en éventail. */
   os: () => wrap('os', [
@@ -67,5 +67,49 @@ const media = {
     layer('hm-c', 1.7, chip(`${icon('pin')}${coordinates}`, 'mk-chip--mono')),
   ].join(''), `${city}, ${country}`),
 };
+
+/*
+ * Pages du catalogue : sans capture réelle à montrer (e-commerce, IA, automatisations, maintenance),
+ * une fenêtre de code d’illustration et des pastilles, marquées « Illustration ». Aucune fausse capture.
+ */
+const code = (file, lines) => `<div class="mk-code">${bar(file)}<pre><code>${lines.map(([k, v]) => (v === undefined ? k : `  <span class="p">${k}</span>: ${v}`)).join('\n')}<span class="caret"></span></code></pre></div>`;
+const str = (text) => `<span class="s">'${text}'</span>`;
+const codeScene = (variant, file, lines, chips) => wrap(`code hm--${variant}`, [
+  layer('hm-a', 0.5, code(file, lines)),
+  ...chips.map(([text, cls = ''], i) => layer(`hm-c${i + 1}`, [1.4, 1.8, 1.2, 2][i % 4], chip(text, cls))),
+].join(''), 'Illustration');
+
+Object.assign(media, {
+  /* Catalogue des prestations : un site livré, le produit maison, et les familles de prestations. */
+  catalog: () => wrap('catalog', [
+    layer('hm-a', 0.3, browser('solaria-site', { url: 'solariamedia.netlify.app', sizes: big, priority: true })),
+    layer('hm-b', 0.8, `<div class="mk-app">${bar('Pridano CRM')}${shot('dashboard', big)}</div>`),
+    layer('hm-c1', 1.6, chip('Sites web', 'mk-chip--dot')),
+    layer('hm-c2', 1.2, chip('E-commerce', 'mk-chip--dot')),
+    layer('hm-c3', 1.8, chip('Agents IA', 'mk-chip--dot')),
+    layer('hm-c4', 2, chip(`${icon('spark')}Un seul partenaire`, 'mk-chip--accent')),
+  ].join(''), 'Solaria Média · site livré<br>Pridano CRM · Captures de développement · Données de démonstration'),
+
+  /* Catalogue des logiciels : le seul produit réellement en développement, et ceux en préparation. */
+  software: () => wrap('software', [
+    layer('hm-a', 0.5, `<div class="mk-app">${bar('Pridano CRM')}${shot('dashboard', big, true)}</div>`),
+    layer('hm-c1', 1.6, chip('CRM · à venir', 'mk-chip--accent')),
+    layer('hm-c2', 1.2, chip('Finance · à venir', 'mk-chip--dot')),
+    layer('hm-c3', 1.8, chip('Booking · à venir', 'mk-chip--dot')),
+  ].join(''), 'Pridano CRM · Captures de développement · Données de démonstration'),
+
+  'e-commerce': () => codeScene('ecommerce', 'commande', [['commande {'], ['statut', str('payée')], ['livraison', str('retrait en boutique')], ['articles', '<span class="v">2</span>'], ['}']],
+    [['Fiches produits'], ['Paiement en ligne'], ['Livraison'], [`${icon('spark')}Un parcours simple`, 'mk-chip--accent']]),
+
+
+  'agents-ia': () => codeScene('agents', 'agent', [['agent {'], ['mission', str('répondre aux clients')], ['sources', `[${str('faq')}, ${str('catalogue')}]`], ['validation', str('humaine')], ['}']],
+    [['Vos informations'], ['Vos outils'], ['Vos règles'], [`${icon('spark')}Validation humaine`, 'mk-chip--accent']]),
+
+  automatisations: () => codeScene('automations', 'workflow', [['workflow {'], ['quand', str('devis signé')], ['alors', `[${str('créer le client')},`], ['', `${str('préparer la facture')}]`], ['}']],
+    [['CRM'], ['Facturation'], ['Email'], [`${icon('spark')}Moins de saisie`, 'mk-chip--accent']]),
+
+  maintenance: () => codeScene('care', 'suivi', [['site {'], ['hebergement', str('https')], ['sauvegardes', '<span class="v">true</span>'], ['formule', str('sans engagement')], ['}']],
+    [['Sauvegardes'], ['Mises à jour'], ['Assistance'], [`${icon('spark')}Un interlocuteur`, 'mk-chip--accent']]),
+});
 
 module.exports = { heroMedia: media };

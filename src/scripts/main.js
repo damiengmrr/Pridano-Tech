@@ -4,7 +4,7 @@
  * sont chargés à la demande (chunks séparés).
  */
 import { initHeader, initMenu, initDock, initIndexRail, initPageTransitions } from './modules/navigation.js';
-import { initReveal, initMagnetic, initCursor, initGlow } from './modules/interactions.js';
+import { initReveal, initMagnetic, initCursor, initGlow, initPlayInView } from './modules/interactions.js';
 import { initFirst, initNodes, initTransform, initMethod, initWork, initTilt, initFlow, initHub, initBuild, initFinal, initHeroMedia, initDepth } from './modules/story.js';
 import { initTheater, initContactForm, initQuote, initLost } from './modules/pages.js';
 import { initHero } from './modules/hero.js';
@@ -12,7 +12,7 @@ import { initFilm } from './modules/film.js';
 
 const tasks = [
   initFilm, initHeader, initMenu, initDock, initPageTransitions,
-  initReveal, initMagnetic, initCursor, initGlow,
+  initReveal, initMagnetic, initCursor, initGlow, initPlayInView,
   initHero, initHeroMedia, initDepth, initFirst, initNodes, initTransform, initMethod, initWork, initTilt, initFlow, initHub, initBuild, initFinal,
   initTheater, initContactForm, initQuote, initLost,
   initIndexRail,

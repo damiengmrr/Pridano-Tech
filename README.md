@@ -2,7 +2,12 @@
 
 Site de **Pridano Tech** (pridanotech.fr). Les textes sont ceux du site existant ; la refonte porte sur le design, l'expérience et la technique (voir CONTENT-VERIFICATION.md).
 
-Le site présente le studio digital indépendant de Montpellier. Il couvre les sites web sur mesure, les logiciels métier et SaaS, l'automatisation, et le produit maison Pridano Business OS.
+Le site présente le studio digital indépendant de Montpellier comme **un seul partenaire pour tout le numérique d'une entreprise**. Il s'organise autour de deux catalogues :
+
+- **Prestations** (`/prestations`) : sites web, e-commerce, agents IA, automatisations, applications et logiciels, maintenance ;
+- **Nos produits** (`/logiciels`) : le produit maison Pridano Business OS (en développement) et les logiciels en préparation, chacun avec son statut réel.
+
+Le devis guidé (`/devis`) permet de combiner plusieurs besoins dans une seule demande. Voir CATALOGUES.md pour l'organisation des données et COMMERCIAL.md pour les tarifs.
 
 L'idée directrice est **« Le point rejoint le réseau »**. Le symbole officiel associe un point isolé à une forme où trois nœuds sont reliés. Sur ce site, il devient le fil conducteur :
 
@@ -27,6 +32,16 @@ Puis ouvrir http://localhost:3000 (le port se change avec la variable `PORT`).
 
 `npm run build` régénère les pages HTML, les bundles JS/CSS, le sitemap, robots.txt, le manifeste et `llms.txt` dans `public/`. Relancez-le après toute modification de `site/` ou `src/`.
 
+## Configuration et déploiement
+
+- **Variables d'environnement** (fichier `.env` en local, jamais versionné ; réglages du site sur Netlify) :
+  - `RESEND_API_KEY` : envoi des emails du contact et du devis ;
+  - `RESEND_FROM_EMAIL`, `LEAD_NOTIFICATION_EMAIL` : expéditeur et destinataire ;
+  - `GROQ_API_KEY` : facultatif, active le mode IA du devis guidé ; sans clé, le devis fonctionne en mode local.
+  Aucune clé n'est incluse dans l'archive.
+- **Netlify** : `netlify.toml` contient tout. Commande `npm run build`, dossier publié `public/`, fonctions dans `netlify/functions/`, Node 22, redirections, en-têtes de sécurité et de cache. Les nouvelles pages n'ajoutent aucune variable ni aucun service.
+- **Procédure complète** (Deploy Preview, tests du contact et du devis avec une adresse interne, mise en production) : DEPLOYMENT.md.
+
 ## Scripts
 
 | Commande | Rôle |
@@ -38,7 +53,7 @@ Puis ouvrir http://localhost:3000 (le port se change avec la variable `PORT`).
 | `npm run og` | Compose l'image de partage 1200 × 630. |
 | `npm run captures` | Capture les sites livrés des réalisations (desktop et mobile) dans `brand-source/realisations/`, sans interagir avec eux. Lancer ensuite `npm run assets`. |
 | `npm run lint` | Contrôles de syntaxe, des H1, des ressources locales, des métadonnées et des secrets, puis ESLint. |
-| `npm test` | Tests Node : contact, routes, redirections, 404, API, SEO, données structurées, contenus pilotés par `brand.js` (rien d'affiché sans donnée). |
+| `npm test` | Tests Node : contact, routes, redirections, 404, API, SEO, données structurées, contenus pilotés par `brand.js`, catalogues (prix validés seuls, statuts, routes Express et Netlify), devis multi-besoins et anti-doublon. |
 | `npm run test:frontend` | Tests navigateur Playwright : 5 largeurs, clavier, menu, formulaire, onglets, démos, mouvement réduit, liens. |
 | `npm run qa:visual` | Captures pleine page de chaque route à 320, 375, 390, 768, 1024, 1440 et 1920 px (`.qa/visual/`). |
 | `npm run qa:lighthouse` | Audits Lighthouse mobile et desktop sur un build de production servi localement (`.qa/lighthouse/`). |
@@ -50,18 +65,22 @@ La première exécution des tests navigateur peut demander `npx playwright insta
 
 ```
 site/                  Gabarits et contenus (HTML prérendu au build)
-  data/brand.js        Source unique des informations factuelles (voir CONTENT-VERIFICATION.md)
+  data/brand.js        Source unique des informations factuelles et des prix validés (voir CONTENT-VERIFICATION.md)
+  data/catalog.js      Catalogue des prestations : catégories et prestations (voir CATALOGUES.md)
+  data/software.js     Catalogue des logiciels : produits et statuts
+  data/needs.js        Besoins du devis guidé (partagé avec le serveur)
   data/logo-geometry.json  Tracés vectoriels issus des logos officiels
   lib/                 Outils de gabarit, déclinaisons SVG du logo
   components/          En-tête, menu, dock mobile, pied de page, sections partagées
-  pages/               Une page par fichier + index des routes
+  components/catalog.js  Cartes et sections des catalogues
+  pages/               Une page par fichier + index des routes (les pages de catégorie et de produit y sont générées)
   seo.js               Graphe JSON-LD par page
 src/
   styles/              Design system (tokens, base, composants, sections, pages)
   scripts/             JS natif en modules : navigation, interactions, récit, pages
   scripts/gl/          Scène WebGL du logo (raymarching, ambiances nuit et jour) + champ de distance en Web Worker
   scripts/modules/film*.js  Film d'ouverture (chargé à part, seulement quand il est joué)
-  scripts/quote/       Moteur du brief guidé existant (conservé)
+  scripts/quote/       Moteur du brief guidé (conservé, étendu aux besoins multiples)
 server/, server.js     Express : pages, API /api/contact, /api/quote/*, /api/send-brief
 netlify/functions/     Mêmes API en fonctions Netlify
 scripts/               Build, contrôles, génération d'assets, QA visuelle et Lighthouse
@@ -85,6 +104,11 @@ Le site ne dépend d'aucun framework ni d'aucune bibliothèque côté navigateur
 | Changer une information d'entreprise (email, ville, fondateurs, réalisations) | `site/data/brand.js` |
 | Afficher des prix, des témoignages, un téléphone, un lien de rendez-vous, les mentions légales | `site/data/brand.js`, voir « Informations à compléter » ci-dessous |
 | Changer la navigation ou le pied de page | `site/components/layout.js` |
+| Ajouter ou modifier une prestation, une catégorie | `site/data/catalog.js` (procédure : CATALOGUES.md) |
+| Ajouter un logiciel ou changer son statut | `site/data/software.js` (règles de statut : CATALOGUES.md) |
+| Ajouter un besoin au devis guidé | `site/data/needs.js` |
+| Publier un nouveau tarif validé | `site/data/brand.js` puis `site/data/catalog.js` (procédure : COMMERCIAL.md §5) |
+| Ajouter une page | `site/pages/<page>.js`, la table `site/pages/index.js` **et** une règle dans `netlify.toml` (le test « routes » vérifie que les deux correspondent) |
 | Ajuster couleurs, typographie, espacements | `src/styles/tokens.css` (voir DESIGN-SYSTEM.md) |
 | Ajuster le rendu 3D | `src/scripts/gl/logo-scene.js` (matériau, lumière) et `src/scripts/modules/hero.js` (physique, interactions) |
 | Ajouter une réalisation | `site/data/brand.js` → `projects`, puis l'image source dans `brand-source/photos/` et une entrée dans `scripts/assets/build-assets.js` |
@@ -100,7 +124,7 @@ Le site n'affiche que des faits fournis par l'équipe. Chaque bloc ci-dessous re
 |---|---|
 | `brand.phone` (ex. `'06 12 34 56 78'`) | Lien `tel:` dans le contact, le menu, le pied de page et les mentions légales ; `telephone` dans le JSON-LD |
 | `brand.bookingUrl` (lien Calendly, Cal.com, Google Agenda…) | Bouton « Prendre rendez-vous » : page Contact, appel final, menu, pied de page |
-| `brand.sameAs` (URL LinkedIn, Instagram, Google Business Profile…) | Profils officiels dans le JSON-LD `Organization` |
+| `brand.sameAs` (URL LinkedIn, Instagram, Google Business Profile…) | Profils officiels dans le JSON-LD `Organization` ; lien « Instagram ↗ » dans le pied de page, et « LinkedIn ↗ » seulement pour une page entreprise (`linkedin.com/company/…`) |
 | `brand.legal` (dénomination, forme, siège, SIREN, RCS, TVA, directeur de publication) | Mentions légales complètes ; la page passe en `index, follow` dès que les champs obligatoires sont remplis. Les champs de la politique de confidentialité sont remplis automatiquement. |
 | `pricing[].from` (montant en euros, nombre) et `pricing[].delivery` | Section « Combien coûte… ? » sur Sites web et SaaS, délai « Livré en … », repère de prix dans la FAQ et sur l'accueil, `offers` dans le JSON-LD `Service` |
 | `maintenance` (nom, prix mensuel, contenu de chaque formule) | Section « Un site suivi. Sans engagement. » sur Sites web, repère dans la FAQ, offres mensuelles dans le JSON-LD |
@@ -129,7 +153,39 @@ Les captures des sites livrés (`npm run captures`) sont à refaire quand un cli
 
 - **Formulaire de contact** : `/api/contact`, validation serveur, envoi via Resend. Le contrat JSON est inchangé.
 - **Brief guidé assisté par IA** : `/devis`, avec les routes `/api/quote/*` et `/api/send-brief`. Le moteur `quote.js` est conservé ; l'interface est redessinée et les accents corrigés.
+  - **Plusieurs besoins** : le visiteur coche un ou plusieurs des 10 besoins (facultatif) et reçoit une question ciblée pour chacun. Sans besoin coché, le parcours d'origine est inchangé.
+  - **Liens directs** : `/devis?besoins=site-vitrine,agent-ia` coche des besoins à l'ouverture ; `/devis?parcours=projet` ouvre le parcours « Construire mon projet numérique ».
+  - **Brouillon** : les réponses sont conservées dans l'onglet (24 h au plus, sans les coordonnées) et effacées à l'envoi.
+  - **Anti-doublon** : chaque demande porte un identifiant ; un second envoi identique dans les 30 minutes ne renvoie pas d'email. La mémoire est propre à chaque instance du serveur (voir TESTS.md).
 - **Pages historiques** : `/portfolio-noah.html` et `/portfolio-dada.html` restent servies, avec les chemins d'images réparés. Elles sont exclues des moteurs de recherche (`noindex, nofollow` dans la page et en-tête `X-Robots-Tag`).
 - **Anciennes URLs** : toutes redirigées en 301, aussi bien dans Express que dans `netlify.toml`.
 
-Voir DIRECTION-CREATIVE.md pour le concept, le film d'ouverture, le langage 3D et les transitions ; DEPLOYMENT.md pour la mise en ligne et les variables d'environnement, et QA-REPORT.md, PERFORMANCE-REPORT.md, SEO-AUDIT.md et CONTENT-VERIFICATION.md pour les vérifications effectuées.
+## Pages et routes
+
+| Route | Page |
+|---|---|
+| `/` | Accueil |
+| `/sites-web` | Sites web (catégorie 01 du catalogue) |
+| `/prestations` | Catalogue des prestations |
+| `/prestations/e-commerce`, `/agents-ia`, `/automatisations`, `/maintenance` | Pages de catégorie générées (`/prestations/branding-ui-ux`, retirée, redirige vers `/prestations`) |
+| `/saas` | SaaS & logiciels (catégorie 06 du catalogue) |
+| `/logiciels` | Catalogue des logiciels |
+| `/crm` | Pridano Business OS |
+| `/realisations`, `/a-propos`, `/contact`, `/devis` | Pages existantes |
+| `/mentions-legales`, `/confidentialite` | Pages légales |
+
+En local, Express sert chaque route de `site/pages/index.js`. Sur Netlify, chaque route a une règle de réécriture `200` dans `netlify.toml` ; `tests/catalog.test.js` vérifie que les deux listes correspondent.
+
+## Documentation
+
+| Fichier | Contenu |
+|---|---|
+| CHANGELOG.md | Modifications apportées |
+| CATALOGUES.md | Organisation des catalogues, modèle de données, ajout d'une prestation, d'une catégorie ou d'un logiciel |
+| COMMERCIAL.md | Prix publiés, tarifs envisagés (non publiés), risques et conditions à valider |
+| TESTS.md | Tests exécutés, résultats et limites |
+| NON-REGRESSION.md | Contrôles avant/après sur la DA, les animations et les fonctionnalités |
+| ROADMAP.md | Évolution des logiciels, abonnements, espaces clients |
+| DEPLOYMENT.md | Mise en ligne Netlify et variables d'environnement |
+
+Voir aussi DIRECTION-CREATIVE.md pour le concept, le film d'ouverture, le langage 3D et les transitions ; DEPLOYMENT.md pour la mise en ligne et les variables d'environnement, et QA-REPORT.md, PERFORMANCE-REPORT.md, SEO-AUDIT.md et CONTENT-VERIFICATION.md pour les vérifications effectuées.

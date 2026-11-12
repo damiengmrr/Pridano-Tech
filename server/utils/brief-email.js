@@ -1,3 +1,5 @@
+const { needById, normalizeNeeds } = require("../../site/data/needs");
+
 const REQUIRED_BRIEF_FIELDS = [
   "projectType",
   "primaryGoal",
@@ -58,7 +60,18 @@ function normalizeBrief(rawBrief = {}) {
     timeline: normalizeText(rawBrief.timeline),
     budget: normalizeText(rawBrief.budget),
     summary: normalizeText(rawBrief.summary),
+    ...normalizeServices(rawBrief),
   };
+}
+
+/* Besoins cochés dans le devis guidé et précision donnée pour chacun. */
+function normalizeServices(rawBrief = {}) {
+  const services = normalizeNeeds(rawBrief.services);
+  const source = rawBrief.serviceDetails && typeof rawBrief.serviceDetails === "object" ? rawBrief.serviceDetails : {};
+  const serviceDetails = Object.fromEntries(
+    services.filter((id) => typeof source[id] === "string").map((id) => [id, normalizeText(source[id]).slice(0, 2000)]),
+  );
+  return { services, serviceDetails };
 }
 
 function normalizeContact(rawContact = {}) {
@@ -170,7 +183,20 @@ function buildNeedStatus(detail, emptyDetail) {
   };
 }
 
-function buildBriefEmail({ brief, contact, projectDescription, conversation = [] }) {
+function buildBriefEmail({ brief, contact, projectDescription, conversation = [], submissionId = "" }) {
+  const services = brief.services || [];
+  const servicesBlock = services.length
+    ? renderSection(
+        "Besoins selectionnes",
+        `
+            <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:collapse;">
+              <tbody>
+                ${services.map((id) => renderFieldRow(needById[id].label, brief.serviceDetails?.[id] || "Precision non renseignee")).join("")}
+              </tbody>
+            </table>
+          `,
+      )
+    : "";
   const subjectLabel = brief.projectType || contact.company || contact.name || "Projet";
   const aiStatus = buildNeedStatus(brief.aiNeeds, "Aucune integration IA demandee a ce stade.");
   const backOfficeStatus = buildNeedStatus(
@@ -199,6 +225,7 @@ function buildBriefEmail({ brief, contact, projectDescription, conversation = []
                 quickSummary.join("  |  "),
               )}</div>`
             : ""}
+          ${submissionId ? `<div style="margin-top:10px;font-size:12px;opacity:0.78;">Reference : ${escapeHtml(submissionId)}</div>` : ""}
         </div>
 
         ${renderSection(
@@ -211,6 +238,8 @@ function buildBriefEmail({ brief, contact, projectDescription, conversation = []
             </div>
           `,
         )}
+
+        ${servicesBlock}
 
         ${renderSection(
           "Contact",
@@ -302,6 +331,7 @@ function buildBriefEmail({ brief, contact, projectDescription, conversation = []
     contact.phone ? `Telephone: ${contact.phone}` : "",
     "",
     `Type de projet: ${brief.projectType || "Non renseigne"}`,
+    ...(services.length ? ["", "Besoins selectionnes:", ...services.map((id) => `- ${needById[id].label}: ${brief.serviceDetails?.[id] || "precision non renseignee"}`), ""] : []),
     `Secteur d'activite: ${brief.sector || "Non renseigne"}`,
     `Objectif principal: ${brief.primaryGoal || "Non renseigne"}`,
     `Cible: ${brief.targetAudience || "Non renseigne"}`,
@@ -322,6 +352,8 @@ function buildBriefEmail({ brief, contact, projectDescription, conversation = []
     conversationDigest.length ? "" : null,
     conversationDigest.length ? "Synthese conversation:" : null,
     ...(conversationDigest.length ? conversationDigest : []),
+    submissionId ? "" : null,
+    submissionId ? `Reference de la demande: ${submissionId}` : null,
   ]
     .filter(Boolean)
     .join("\n");
@@ -338,6 +370,8 @@ function parseBriefSubmission(body = {}) {
   const contact = normalizeContact(body.contact || {});
   const projectDescription = normalizeText(body.projectDescription);
   const conversation = Array.isArray(body.conversation) ? body.conversation : [];
+  /* Identifiant unique de la demande, créé par la page : sert à ignorer un second envoi identique. */
+  const submissionId = /^[a-z0-9-]{8,64}$/i.test(String(body.submissionId || "")) ? String(body.submissionId) : "";
   const missingFields = getMissingFields(brief, contact, projectDescription);
 
   if (!validateEmail(contact.email)) {
@@ -349,6 +383,7 @@ function parseBriefSubmission(body = {}) {
     contact,
     projectDescription,
     conversation,
+    submissionId,
     missingFields: [...new Set(missingFields)],
   };
 }

@@ -8,7 +8,7 @@ Les titres, descriptions et H1 sont **ceux du site existant**. La refonte n'a pa
 
 | URL | Intention principale | H1 visible (texte du site existant) |
 |---|---|---|
-| `/` | Création de sites web et logiciels sur mesure à Montpellier | « Création de sites web & logiciels sur mesure · Montpellier — Des sites qui marquent. Des idées qui avancent. » (sur-titre repris du titre d'onglet d'origine : la requête principale figure dans le H1) |
+| `/` | Création de sites web et logiciels sur mesure à Montpellier | « Création de sites web & logiciels sur mesure · Montpellier — Tout votre numérique. Un seul partenaire. » (depuis le 3 novembre 2026 ; avant : « … Des sites qui marquent. Des idées qui avancent. ») (sur-titre repris du titre d'onglet d'origine : la requête principale figure dans le H1) |
 | `/sites-web` | Création et refonte de site web sur mesure | « Votre entreprise fait la différence. Votre site aussi. » |
 | `/saas` | SaaS, applications et logiciels métier sur mesure | « Moins de détours. Plus de possibilités. » |
 | `/realisations` | Références réelles | « Le travail parle. Regardez de plus près. » |
@@ -25,7 +25,7 @@ Aucune page locale artificielle ni page « mot-clé » n'a été créée.
 
 | URL | `<title>` (longueur) | Description | Robots | Graphe JSON-LD |
 |---|---|---|---|---|
-| `/` | Création de sites web & logiciels sur mesure à Montpellier · Pridano (68) | 133 car. | index | Organization, WebSite, WebPage, ItemList |
+| `/` | Création de sites web & logiciels sur mesure à Montpellier · Pridano (68) | 165 car. (mise à jour le 3 novembre 2026 : « … sites web, e-commerce, logiciels sur mesure, automatisations et agents IA. Un seul partenaire pour tout votre numérique. ») | index | Organization, WebSite, WebPage, ItemList |
 | `/sites-web` | Création & refonte de sites web sur mesure · Pridano (52) | 140 car. | index | + BreadcrumbList, Service avec 5 `offers` (création dès 990 €, refonte dès 790 €, maintenance 29 / 59 / 119 € par mois, HT), FAQPage (5 questions) |
 | `/saas` | SaaS, applications & logiciels métier sur mesure · Pridano (58) | 138 car. | index | + BreadcrumbList, Service avec `offers` (dès 3 900 € HT) |
 | `/realisations` | Réalisations — Sites web · Pridano (36) | 116 car. | index | CollectionPage (ItemList de 2 CreativeWork), BreadcrumbList |
@@ -53,14 +53,14 @@ Chaque page comporte :
   - `url`, `logo` (PNG carré 512 px), `email`, `contactPoint` (service client, français) ;
   - `telephone` (07 78 70 25 18, aussi dans `contactPoint`) et `sameAs` (LinkedIn, Instagram), renseignés le 22 octobre 2026 ;
   - ajoutés automatiquement dès qu'ils seront renseignés dans `site/data/brand.js` : `legalName`, `identifier` (SIREN) ;
-  - `description` : la description de l'accueil du site existant ;
+  - `description` : depuis le 3 novembre 2026, le nouveau positionnement (« Pridano Tech, studio digital à Montpellier : sites web, e-commerce, logiciels sur mesure, automatisations et agents IA. Un seul partenaire pour tout votre numérique. ») ;
   - `slogan` : « Des sites qui marquent. Des outils qui font avancer. » ;
   - `address` réduite à ce qui est confirmé : `addressLocality: Montpellier`, `addressCountry: FR` ;
   - `knowsAbout` (les prestations visibles sur le site) et `member` → les deux personnes présentées sur `/a-propos`.
 - Une entité **WebSite** (`#website`), avec le même nom et les mêmes variantes, reliée à l'Organization par `publisher`.
 - Chaque **WebPage** est reliée au WebSite (`isPartOf`) et à l'Organization (`about`), avec un `BreadcrumbList` sur les pages intérieures.
 - Les **Service** de `/sites-web` et `/saas` reprennent les descriptions et prestations publiées sur ces pages. Chaque prix affiché a son `Offer` : `PriceSpecification` (`minPrice`, `EUR`, `valueAddedTaxIncluded: false`) pour les prix « à partir de », `UnitPriceSpecification` mensuelle (`unitCode: MON`) pour la maintenance. Les montants du JSON-LD sont ceux de la page (vérifié par test). Chaque offre porte aussi une `description` qui reprend la liste des avantages affichée sur la carte.
-- **FAQPage** : uniquement sur `/sites-web`, la seule page du site existant qui publie une FAQ. Questions et réponses identiques au texte visible (vérifié par test).
+- **FAQPage** : sur `/sites-web` et, depuis le 2 novembre 2026, sur les pages de catégorie qui publient une FAQ (voir §8). Questions et réponses identiques au texte visible (vérifié par test).
 - Les **Person** (Damien Gamarra, Noah Lemoing) reprennent rôle, bio, `worksFor` et `sameAs` uniquement s'ils sont confirmés (`damiengamarra.com`).
 
 ### Variantes de nom
@@ -126,7 +126,34 @@ Ce qu'un agent navigateur peut faire (couvert par les tests Playwright) :
 - soumettre le sitemap dans Search Console et Bing Webmaster Tools ;
 - inspecter l'accueil.
 
-## 8. Référencement local et notoriété (hors site)
+## 8. Catalogues (évolution du 2 novembre 2026)
+
+Les URL existantes, leurs canonicals, leurs titres et leurs données structurées sont conservés. Sur l'accueil, la description, le chapô et le titre principal ont été mis à jour (« Tout votre numérique. Un seul partenaire. »). Le sur-titre, qui fait partie du H1 et porte la requête principale, n'a pas changé. La description de l'`Organization` (`brand.description`) reprend le nouveau positionnement. Sept pages ont été ajoutées.
+
+| URL | `<title>` (longueur, sans « · Pridano ») | Description | H1 | Graphe JSON-LD |
+|---|---|---|---|---|
+| `/prestations` | Prestations — Sites, logiciels, IA et automatisations (53) | 145 car. | « Votre entreprise. Toutes vos solutions numériques. » | CollectionPage + ItemList des 31 prestations, BreadcrumbList |
+| `/prestations/e-commerce` | Création de site e-commerce et boutique en ligne sur mesure (59) | 151 car. (texte revu le 3 novembre 2026, sans intégrations) | « Vendre en ligne. Simplement. » | Service + OfferCatalog, BreadcrumbList (3 niveaux), FAQPage |
+| ~~`/prestations/branding-ui-ux`~~ (retirée le 3 novembre 2026, redirigée en 301 vers `/prestations`) | Création de logo, identité visuelle et design UI/UX (51) | 149 car. | « Une identité. Une interface. Un même langage. » | idem |
+| `/prestations/agents-ia` | Agents IA et chatbots sur mesure pour entreprises (49) | 160 car. | « Des assistants IA. Au service de votre équipe. » | idem |
+| `/prestations/automatisations` | Automatisation des processus et intégrations API pour entreprises (65) | 150 car. | « Moins de saisie. Plus de temps utile. » | idem |
+| `/prestations/maintenance` | Maintenance, hébergement et suivi de site web sans engagement (61) | 154 car. | « Un site suivi. Un partenaire disponible. » | idem + une Offer mensuelle par formule validée |
+| `/logiciels` | Nos logiciels — Pridano Software (32) | 142 car. | « Nos logiciels. Construits pour les entreprises. » | CollectionPage + ItemList « nom (statut) », BreadcrumbList |
+
+Principes appliqués :
+
+- **Pas de doublon.** Les catégories Sites web et Applications & logiciels gardent leurs pages existantes (`/sites-web`, `/saas`) au lieu d'en créer de nouvelles qui leur feraient concurrence.
+- **Maillage interne.**
+  - Liens vers `/prestations` et `/logiciels` sur toutes les pages : en-tête, menu, pied de page.
+  - Liens réciproques entre catégories (« Services complémentaires »).
+  - Ancres `#prestation-<id>` depuis le catalogue.
+  - Liens de chaque page de catégorie vers le devis.
+- **Offres structurées.** Une `Offer` n'existe que pour un prix validé et affiché. Les prestations « Sur devis » figurent dans l'`OfferCatalog` sans prix.
+- **FAQ.** `FAQPage` seulement sur les pages qui affichent leur FAQ (pas sur `/prestations` ni `/logiciels`).
+- **Sitemap et `llms.txt`** générés à partir de la table des routes : les 6 nouvelles URL y figurent (la page Branding & UI/UX, retirée le 3 novembre 2026, n'y est plus). Au total, 15 URL indexables : les mentions légales restent `noindex` tant que les informations légales sont incomplètes.
+- **Pas de garantie.** Aucun classement Google ni aucune citation par un moteur IA n'est garanti. Les nouvelles pages devront être indexées, puis suivies dans Search Console.
+
+## 9. Référencement local et notoriété (hors site)
 
 Ce qui pèse le plus pour « création site web Montpellier » se joue en dehors du code :
 

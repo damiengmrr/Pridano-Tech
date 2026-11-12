@@ -12,7 +12,7 @@
   justify-content: center;
   gap: 0.85rem;
   min-height: 3.5rem;
-  padding: 0.5rem 0.6rem 0.5rem 1.6rem;
+  padding: 0.5rem 1.6rem;
   border: 0;
   border-radius: var(--r-pill);
   background: var(--bg);
@@ -52,8 +52,9 @@
   transform: translate3d(var(--mx, 0), var(--my, 0), 0) scale(0.97);
 }
 
+/* Icône des boutons de formulaire : masquée, elle ne sert que d’indicateur pendant l’envoi. */
 .btn-icon {
-  display: grid;
+  display: none;
   place-items: center;
   width: 2.4rem;
   height: 2.4rem;
@@ -138,7 +139,7 @@
 
 .btn--sm {
   min-height: 2.75rem;
-  padding: 0.35rem 0.4rem 0.35rem 1.2rem;
+  padding: 0.35rem 1.2rem;
   font-size: 0.9375rem;
   gap: 0.6rem;
 }
@@ -150,11 +151,15 @@
 
 .btn--block {
   width: 100%;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .btn[aria-busy='true'] {
   pointer-events: none;
+}
+
+.btn[aria-busy='true'] .btn-icon {
+  display: grid;
 }
 
 .btn[aria-busy='true'] .btn-icon svg {
@@ -363,7 +368,8 @@
 }
 
 .main-nav a:hover,
-.main-nav a[aria-current='page'] {
+.main-nav a[aria-current='page'],
+.main-nav a[aria-current='true'] {
   color: var(--c-ink);
 }
 
@@ -401,6 +407,44 @@
   }
 }
 
+/* Bouton Menu de l’en-tête (mobile et tablette), tant que le dock du bas est rangé. */
+.header-menu {
+  display: none;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: 2.75rem;
+  padding: 0 1.05rem;
+  border: 0;
+  border-radius: var(--r-pill);
+  background: var(--c-ink);
+  color: var(--c-white);
+  font: inherit;
+  font-size: 0.9375rem;
+  font-weight: 620;
+  cursor: pointer;
+  transition: opacity var(--dur-2), transform var(--dur-3) var(--ease-out);
+}
+
+@media (max-width: 1080px) {
+  .header-menu {
+    display: inline-flex;
+  }
+
+  .dock-on .header-menu {
+    visibility: hidden;
+    opacity: 0;
+    transform: scale(0.85);
+    transition: opacity var(--dur-2), transform var(--dur-3) var(--ease-out), visibility 0s linear var(--dur-2);
+  }
+
+  /* Sur petit écran, la pastille de l’en-tête passe au-dessus de grands titres : fond plus couvrant,
+     qui s’installe tout de suite (sinon les titres transparaissent pendant la transition). */
+  .site-header.is-scrolled .header-inner {
+    background: rgb(242 243 245 / 0.94);
+    transition-duration: var(--dur-1);
+  }
+}
+
 /* ---------- Dock mobile (zone du pouce) ---------- */
 .dock {
   view-transition-name: dock;
@@ -422,8 +466,15 @@
   transition: transform var(--dur-3) var(--ease-out), opacity var(--dur-2);
 }
 
+.dock {
+  transition: transform var(--dur-3) var(--ease-out), opacity var(--dur-2), visibility 0s;
+}
+
+/* Rangé : hors de l’écran et hors du clavier (le bouton Menu de l’en-tête prend le relais). */
 .dock.is-tucked {
+  visibility: hidden;
   transform: translate(-50%, 160%);
+  transition: transform var(--dur-3) var(--ease-out), opacity var(--dur-2), visibility 0s linear var(--dur-3);
 }
 
 .dock-menu,
@@ -501,9 +552,6 @@
     display: flex;
   }
 
-  body {
-    padding-bottom: calc(5rem + env(safe-area-inset-bottom));
-  }
 }
 
 /* ---------- Menu (feuille modale, natif <dialog>) ---------- */
@@ -589,11 +637,13 @@
 
 .menu-links a {
   display: grid;
-  grid-template-columns: 2.2rem 1fr auto;
+  grid-template-columns: 2.2rem 1fr;
+  column-gap: 0.75rem;
   align-items: center;
   padding: 0.75rem 0;
   border-bottom: 1px solid var(--c-line-dark);
-  font-size: clamp(1.75rem, 1.2rem + 3vw, 2.6rem);
+  /* Taille limitée par la largeur et la hauteur : les 8 liens et les coordonnées tiennent sur un iPhone SE. */
+  font-size: clamp(1.5rem, min(1rem + 3.4vw, 3.6vh), 2.6rem);
   font-weight: 760;
   letter-spacing: -0.04em;
   line-height: 1.05;
@@ -609,14 +659,9 @@
   color: var(--c-on-dark-muted);
 }
 
-.menu-links a[aria-current='page'] {
+.menu-links a[aria-current='page'],
+.menu-links a[aria-current='true'] {
   color: var(--c-cyan);
-}
-
-.menu-links a svg {
-  width: 1.2rem;
-  height: 1.2rem;
-  color: var(--c-on-dark-muted);
 }
 
 .menu[open] .menu-links li {
@@ -637,6 +682,22 @@
 
 .menu-foot a {
   color: var(--c-on-dark);
+}
+
+/* Écrans courts (iPhone SE) : liens plus serrés, tout le menu tient sans défiler. */
+@media (max-height: 740px) {
+  .menu-sheet {
+    gap: var(--s-4);
+    padding-block: var(--s-4);
+  }
+
+  .menu-links a {
+    padding-block: 0.45rem;
+  }
+
+  .menu-foot {
+    gap: var(--s-2);
+  }
 }
 
 /* ---------- Fil d’Ariane ---------- */
@@ -881,14 +942,39 @@
   }
 }
 
-/* ---------- Lumière au survol : un reflet suit le pointeur sur les cartes ---------- */
+/* ---------- Cibles tactiles : au moins 44 px de haut au doigt, sans changer l’apparence ---------- */
+@media (pointer: coarse) {
+  .link {
+    min-height: 2.75rem;
+  }
+
+  .footer-col a,
+  .tf-step-btn {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+  }
+
+  /* Fil d’Ariane : zone de toucher agrandie sans décaler la ligne. */
+  .breadcrumb ol {
+    align-items: center;
+  }
+
+  .breadcrumb a {
+    display: inline-block;
+    padding: 0.85rem 0.3rem;
+    margin: -0.85rem -0.3rem;
+  }
+}
+
+/* ---------- Lumière au survol : un reflet suit le pointeur sur les blocs sombres restants ---------- */
 @media (hover: hover) and (pointer: fine) {
-  :is(.path-card, .price-card, .care-card, .quote-card, .principle, .module) {
+  :is(.parcours-card, .quote-card) {
     position: relative;
     isolation: isolate;
   }
 
-  :is(.path-card, .price-card, .care-card, .quote-card, .principle, .module)::after {
+  :is(.parcours-card, .quote-card)::after {
     content: '';
     position: absolute;
     inset: 0;
@@ -900,7 +986,7 @@
     pointer-events: none;
   }
 
-  :is(.path-card, .price-card, .care-card, .quote-card, .principle, .module):hover::after {
+  :is(.parcours-card, .quote-card):hover::after {
     opacity: 1;
   }
 }
@@ -1075,8 +1161,8 @@ select.input {
 }
 
 .check input {
-  width: 1.35rem;
-  height: 1.35rem;
+  width: 1.5rem;
+  height: 1.5rem;
   margin: 0.1rem 0 0;
   accent-color: var(--c-ultra);
 }
@@ -1256,7 +1342,7 @@ select.input {
 /* Moyens de contact directs (email, téléphone, rendez-vous) */
 .direct-contacts {
   display: grid;
-  gap: 0.6rem;
+  gap: 0.15rem;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -1266,6 +1352,7 @@ select.input {
   display: inline-flex;
   align-items: center;
   gap: 0.7rem;
+  min-height: 2.75rem;
   font-weight: 600;
   text-decoration: none;
 }
@@ -1289,6 +1376,20 @@ select.input {
 .footer-contacts a {
   color: var(--c-white);
   font-size: var(--fs-h4);
+}
+
+/* Réseaux sociaux : liens externes (↗), cible d’au moins 44 px comme les contacts au-dessus */
+.footer-social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-5);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.footer-social .link {
+  min-height: 2.75rem;
 }
 
 .menu-foot .direct-contacts a {
@@ -1319,6 +1420,9 @@ select.input {
 }
 
 .footer-bottom a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
   color: var(--c-on-dark-muted);
   text-decoration: none;
 }

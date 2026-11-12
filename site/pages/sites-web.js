@@ -1,13 +1,14 @@
 const { icon, pt, btn, label } = require('../lib/html');
 const s = require('../components/sections');
+const { serviceSection } = require('../components/catalog');
 const { heroMedia } = require('../components/hero-media');
 
 const faq = [
-  ['Combien coûte un site web ?', `Le prix dépend du nombre de pages, du travail de design, des contenus et des fonctionnalités. Nous définissons le périmètre avec vous avant de préparer une proposition adaptée.${s.pricingHint(['site', 'refonte'])}`],
+  ['Combien coûte un site web ?', `Le prix dépend du nombre de pages, du travail de design, des contenus et des fonctionnalités. Nous définissons le périmètre avec vous avant de préparer une proposition adaptée.`],
   ['En combien de temps mon site est-il livré ?', 'Votre site est livré en 3 à 5 jours. Le planning exact est précisé dans la proposition.'],
   ['Pouvez-vous reprendre mon site actuel ?', 'Oui. La refonte commence par l’existant : contenus, URLs, identité, outils et éléments à conserver. La nouvelle version est construite autour des besoins actuels de votre activité.'],
   ['Faut-il avoir tous les contenus prêts ?', 'Pas nécessairement. Un premier échange permet de lister les textes, photos et informations utiles, puis de définir ce qui doit être préparé et par qui.'],
-  ['Que se passe-t-il après la mise en ligne ?', `Nous définissons ensemble le cadre du suivi, de la maintenance et des évolutions. Ces éléments sont précisés dans la proposition, selon votre besoin.${s.maintenanceHint()}`],
+  ['Que se passe-t-il après la mise en ligne ?', `Nous définissons ensemble le cadre du suivi, de la maintenance et des évolutions. Ces éléments sont précisés dans la proposition, selon votre besoin.`],
 ];
 
 /* Étapes et légendes de la scène de construction du site existant. */
@@ -34,7 +35,6 @@ function buildDemo() {
 <div class="build-copy">
 ${label('De l’idée au dernier pixel')}
 <h2 class="h2">${pt('Un bon site. Rien au hasard.')}</h2>
-<p class="lead">Faites défiler pour voir <br>notre approche prendre forme.</p>
 </div>
 <ol class="build-steps" role="list">${steps}</ol>
 <figure class="build-figure">
@@ -72,24 +72,24 @@ function qualities() {
   return `<section class="qualities" id="qualites" data-index-label="Qualités">
 <div class="wrap">
 ${s.sectionHead({ kicker: 'Ce qui fait un bon site', title: 'Beau au premier regard. Juste à chaque usage.' })}
-<ul class="q-grid" role="list">${tiles.map(([t, p, demo], i) => `<li class="q-tile" data-reveal style="--d:${i % 3}">${demo}<span class="index-num">${String(i + 1).padStart(2, '0')}</span><h3 class="h4">${t}</h3><p>${p}</p></li>`).join('')}</ul>
+<ul class="q-grid" role="list">${tiles.map(([t, p, demo], i) => `<li class="q-tile" data-reveal style="--d:${i % 3}">${demo}<h3 class="h4">${t}</h3><p>${p}</p></li>`).join('')}</ul>
 </div>
 </section>`;
 }
 
+/* Création et refonte : deux colonnes séparées par un filet, sans cartes ni grands numéros. */
 function paths() {
-  const card = (cls, num, kicker, title, text, points, href, cta) => `<article class="path-card ${cls}" data-reveal>
-<p class="path-num">${num}</p>
+  const column = (kicker, title, text, points, href, cta, variant) => `<article class="path-card" data-reveal>
 ${label(kicker, 'label--plain')}
 <h2 class="h2">${pt(title)}</h2>
 <p class="path-text">${text}</p>
 <ul class="node-points" role="list">${points.map((p) => `<li>${icon('check')}${p}</li>`).join('')}</ul>
-${btn({ href, label: cta, variant: cls === 'path-card--dark' ? 'light' : 'primary' })}
+${btn({ href, label: cta, variant })}
 </article>`;
   return `<section class="paths" id="creation-refonte" data-index-label="Création & refonte">
 <div class="wrap paths-grid">
-${card('', '01', 'Création', 'Tout commence par une présence.', 'Vous lancez une activité ou vous avez besoin d’un vrai site professionnel. Nous construisons une vitrine claire, distinctive et adaptée à vos objectifs.', ['Votre offre et vos messages structurés', 'Une identité digitale cohérente', 'Des pages pensées pour la prise de contact'], '/contact?projet=site', 'Créer mon site')}
-${card('path-card--dark section--dark', '02', 'Refonte', 'Vous avez évolué. Votre site, moins.', 'Votre activité mérite mieux qu’une présence devenue floue ou datée. Nous reprenons l’existant, conservons ce qui compte et repensons l’expérience.', ['Analyse des contenus et parcours existants', 'URLs utiles et référencement pris en compte', 'Une nouvelle direction, une transition préparée'], '/contact?projet=refonte', 'Repenser mon site')}
+${column('Création', 'Tout commence par une présence.', 'Vous lancez une activité ou vous avez besoin d’un vrai site professionnel. Nous construisons une vitrine claire, distinctive et adaptée à vos objectifs.', ['Votre offre et vos messages structurés', 'Une identité digitale cohérente', 'Des pages pensées pour la prise de contact'], '/contact?projet=site', 'Créer mon site', 'primary')}
+${column('Refonte', 'Vous avez évolué. Votre site, moins.', 'Votre activité mérite mieux qu’une présence devenue floue ou datée. Nous reprenons l’existant, conservons ce qui compte et repensons l’expérience.', ['Analyse des contenus et parcours existants', 'URLs utiles et référencement pris en compte', 'Une nouvelle direction, une transition préparée'], '/contact?projet=refonte', 'Repenser mon site', 'ghost')}
 </div>
 </section>`;
 }
@@ -109,8 +109,8 @@ module.exports = {
     media: heroMedia.sites(),
   })}
 ${paths()}
-${s.pricingSection({ ids: ['site', 'refonte'] })}
 ${s.maintenanceSection()}
+${serviceSection('sites-web', { kicker: 'Dans le catalogue', lead: 'Chaque prestation se demande seule ou avec d’autres, dans un seul devis.' })}
 ${buildDemo()}
 ${qualities()}
 ${s.methodSection()}

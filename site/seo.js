@@ -3,6 +3,9 @@
  * puis un graphe par page qui ne décrit que ce qui est visible sur la page.
  */
 const { brand, expertises, projects, pricing, pricingTax, maintenance } = require('./data/brand');
+const { categories, services, servicesOf, categoryById } = require('./data/catalog');
+const { products, statuses } = require('./data/software');
+const { servicePrice } = require('./components/catalog');
 
 function graph({ origin, route, page }) {
   const url = origin + (route === '/' ? '/' : route);
@@ -22,7 +25,7 @@ function graph({ origin, route, page }) {
     description: brand.description,
     slogan: brand.tagline,
     address: { '@type': 'PostalAddress', addressLocality: brand.city, addressCountry: brand.countryCode },
-    knowsAbout: ['Création de sites web', 'Refonte de sites web', 'Logiciels métier sur mesure', 'SaaS et applications web', 'Automatisation et intégrations API', 'Tableaux de bord'],
+    knowsAbout: ['Création de sites web', 'Refonte de sites web', 'Logiciels métier sur mesure', 'SaaS et applications web', 'Automatisation et intégrations API', 'Tableaux de bord', 'Sites e-commerce', 'Agents IA et chatbots', 'Maintenance et hébergement de sites web'],
     member: people.map((id) => ({ '@id': id })),
     contactPoint: { '@type': 'ContactPoint', contactType: 'customer service', email: brand.email, areaServed: 'FR', availableLanguage: 'fr', ...(brand.phone ? { telephone: brand.phone } : {}) },
     /* Ajoutés seulement s’ils sont renseignés dans brand.js. */
@@ -47,7 +50,8 @@ function graph({ origin, route, page }) {
     '@id': `${url}#breadcrumb`,
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${origin}/` },
-      { '@type': 'ListItem', position: 2, name: page.crumb || page.title, item: url },
+      ...(page.parent ? [{ '@type': 'ListItem', position: 2, name: page.parent.label, item: origin + page.parent.href }] : []),
+      { '@type': 'ListItem', position: page.parent ? 3 : 2, name: page.crumb || page.title, item: url },
     ],
   };
 
@@ -67,7 +71,32 @@ function graph({ origin, route, page }) {
   const nodes = [organization, website, webpage];
   if (crumbs) nodes.push(crumbs);
 
-  if (page.service) {
+  /* Pages de catégorie du catalogue : prestations de la catégorie, et seulement les prix validés. */
+  if (page.service?.categoryId) {
+    const list = servicesOf(page.service.categoryId).filter((s) => !s.upcoming);
+    const offers = [];
+    for (const s of list) {
+      const p = servicePrice(s);
+      if (!p || s.price.ref === 'maintenance') continue;
+      offers.push({ '@type': 'Offer', name: s.name, description: s.short, url: `${url}#prestation-${s.id}`, priceSpecification: { '@type': 'PriceSpecification', minPrice: p.from, priceCurrency: 'EUR', valueAddedTaxIncluded: pricingTax !== 'HT' } });
+    }
+    if (page.service.categoryId === 'maintenance') {
+      for (const m of maintenance) offers.push({ '@type': 'Offer', name: `Maintenance ${m.name}`, description: m.features.join(' · '), url: `${url}#maintenance`, priceSpecification: { '@type': 'UnitPriceSpecification', price: m.price, priceCurrency: 'EUR', unitCode: 'MON', unitText: 'mois', valueAddedTaxIncluded: pricingTax !== 'HT' } });
+    }
+    nodes.push({
+      '@type': 'Service',
+      '@id': `${url}#service`,
+      name: page.service.name,
+      serviceType: page.service.type,
+      description: page.service.description,
+      url,
+      provider: { '@id': org },
+      areaServed: 'FR',
+      hasOfferCatalog: { '@type': 'OfferCatalog', name: page.service.name, itemListElement: list.map((s) => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name: s.name, description: s.short } })) },
+      ...(offers.length ? { offers } : {}),
+    });
+    webpage.mainEntity = { '@id': `${url}#service` };
+  } else if (page.service) {
     nodes.push({
       '@type': 'Service',
       '@id': `${url}#service`,
@@ -114,6 +143,25 @@ function graph({ origin, route, page }) {
         ...(f.url ? { url: f.url, sameAs: [f.url] } : {}),
       });
     }
+  }
+
+  /* Catalogue des prestations : liste des prestations, chacune vers sa page de catégorie. */
+  if (page.catalog === 'services') {
+    webpage.mainEntity = {
+      '@type': 'ItemList',
+      name: 'Prestations Pridano Tech',
+      itemListElement: services.filter((s) => !s.upcoming).map((s, i) => ({ '@type': 'ListItem', position: i + 1, name: s.name, url: `${origin}${categoryById[s.category].page}#prestation-${s.id}` })),
+    };
+    webpage.hasPart = categories.map((c) => ({ '@type': 'WebPage', name: c.name, url: origin + c.page }));
+  }
+
+  /* Catalogue des logiciels : noms et statuts réels, sans données commerciales (aucun produit vendu). */
+  if (page.catalog === 'software') {
+    webpage.mainEntity = {
+      '@type': 'ItemList',
+      name: 'Logiciels Pridano',
+      itemListElement: products.map((p, i) => ({ '@type': 'ListItem', position: i + 1, name: `${p.name} (${statuses[p.status].label})`, url: p.page ? origin + p.page : `${url}#logiciel-${p.id}` })),
+    };
   }
 
   if (route === '/realisations') {

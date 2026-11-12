@@ -13,7 +13,7 @@ const root = path.resolve(__dirname, '../..');
 const out = path.join(root, '.qa/lighthouse');
 const PORT = 4180;
 const origin = `http://127.0.0.1:${PORT}`;
-const routes = process.argv.slice(2).length ? process.argv.slice(2) : ['/', '/sites-web', '/saas', '/crm', '/realisations', '/a-propos', '/contact', '/devis'];
+const routes = process.argv.slice(2).length ? process.argv.slice(2) : ['/', '/sites-web', '/saas', '/prestations', '/prestations/agents-ia', '/prestations/maintenance', '/logiciels', '/crm', '/realisations', '/a-propos', '/contact', '/devis'];
 
 (async () => {
   fs.mkdirSync(out, { recursive: true });
@@ -39,8 +39,8 @@ const routes = process.argv.slice(2).length ? process.argv.slice(2) : ['/', '/si
         const failing = Object.values(lhr.audits).filter((a) => a.score !== null && a.score < 0.9 && a.scoreDisplayMode !== 'informative' && a.scoreDisplayMode !== 'notApplicable' && a.scoreDisplayMode !== 'manual').map((a) => `${a.id} (${a.score})`);
         const row = { formFactor, route, performance: score('performance'), accessibility: score('accessibility'), bestPractices: score('best-practices'), seo: score('seo'), FCP: metric('first-contentful-paint'), LCP: metric('largest-contentful-paint'), TBT: metric('total-blocking-time'), CLS: metric('cumulative-layout-shift'), SI: metric('speed-index'), failing };
         rows.push(row);
-        fs.writeFileSync(path.join(out, `${formFactor}-${route === '/' ? 'accueil' : route.slice(1)}.json`), result.report);
-        console.log(`${formFactor.padEnd(7)} ${route.padEnd(14)} P${row.performance} A${row.accessibility} BP${row.bestPractices} SEO${row.seo} · LCP ${row.LCP} · TBT ${row.TBT} · CLS ${row.CLS}${failing.length ? ` · à revoir : ${failing.join(', ')}` : ''}`);
+        fs.writeFileSync(path.join(out, `${formFactor}-${route === '/' ? 'accueil' : route.slice(1).replace(/\//g, '-')}.json`), result.report);
+        console.log(`${formFactor.padEnd(7)} ${route.padEnd(26)} P${row.performance} A${row.accessibility} BP${row.bestPractices} SEO${row.seo} · LCP ${row.LCP} · TBT ${row.TBT} · CLS ${row.CLS}${failing.length ? ` · à revoir : ${failing.join(', ')}` : ''}`);
       }
     }
   } finally {

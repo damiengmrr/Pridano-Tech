@@ -1,3 +1,13 @@
+/*
+ * Besoins multiples (devis guidé) : liste et questions adaptées partagées avec le site.
+ * Sans besoin coché, le moteur se comporte exactement comme avant (un seul type de projet).
+ */
+const { needById, normalizeNeeds, needsLabel } = require("../../site/data/needs");
+
+const SERVICE_PREFIX = "service:";
+const isServiceField = (field) => typeof field === "string" && field.startsWith(SERVICE_PREFIX);
+const serviceIdOf = (field) => field.slice(SERVICE_PREFIX.length);
+
 const PROJECT_TYPE_OPTIONS = [
   {
     id: "site_vitrine",
@@ -12,7 +22,7 @@ const PROJECT_TYPE_OPTIONS = [
   {
     id: "refonte",
     label: "Refonte d'existant",
-    keywords: ["refonte", "refaire", "reprise", "migration", "moderniser", "existant"],
+    keywords: ["refonte", "refaire", " reprise", "migration", "moderniser", "existant"],
   },
   {
     id: "saas",
@@ -134,6 +144,24 @@ function isFilled(value) {
   return String(value || "").trim().length > 0;
 }
 
+/* Un champ du brief est-il renseigné ? Les champs « service:<id> » vivent dans serviceDetails. */
+function isFieldFilled(brief = {}, field) {
+  if (isServiceField(field)) {
+    return isFilled(brief.serviceDetails?.[serviceIdOf(field)]);
+  }
+
+  return isFilled(brief[field]);
+}
+
+function normalizeServiceDetails(details, services) {
+  const source = details && typeof details === "object" && !Array.isArray(details) ? details : {};
+  return Object.fromEntries(
+    services
+      .filter((id) => typeof source[id] === "string" && source[id].trim())
+      .map((id) => [id, source[id].trim().slice(0, 2000)]),
+  );
+}
+
 function pickMatches(source, rules) {
   const text = normalizeText(source);
 
@@ -157,7 +185,7 @@ function inferProjectType(projectDescription = "") {
     return "";
   }
 
-  if (/(refonte|refaire|reprise|migration|moderniser|existant)/.test(text)) {
+  if (/(refonte|refaire|\breprise\b|migration|moderniser|existant)/.test(text)) {
     return "Refonte d'existant";
   }
 
@@ -235,7 +263,7 @@ function inferCurrentState(source = "") {
     return "Il existe deja une premiere base ou un prototype";
   }
 
-  if (/(refonte|refaire|reprise|migration|moderniser)/.test(text)) {
+  if (/(refonte|refaire|\breprise\b|migration|moderniser)/.test(text)) {
     return "Il faut refaire ou reprendre un existant";
   }
 
@@ -312,6 +340,12 @@ function inferAutomationNeed(source = "") {
 }
 
 function detectProjectProfile(brief = {}, projectDescription = "") {
+  const services = normalizeNeeds(brief.services);
+  if (services.length) {
+    const first = services.find((id) => id !== "projet-complet");
+    return first ? needById[first].profile : "custom";
+  }
+
   const projectType = normalizeText(brief.projectType || inferProjectType(projectDescription));
 
   if (projectType.includes("saas")) {
@@ -353,9 +387,14 @@ function detectProjectProfile(brief = {}, projectDescription = "") {
   return "custom";
 }
 
-function getSequenceForProfile(profile = "custom") {
+function getSequenceForProfile(profile = "custom", services = []) {
   const sharedStart = ["projectType", "sector", "primaryGoal", "targetAudience", "currentState"];
   const sharedEnd = ["constraints", "timeline", "budget"];
+
+  /* Plusieurs besoins : une question ciblée par besoin, puis délai et budget. Court, sans doublon. */
+  if (services.length) {
+    return [...sharedStart, ...services.map((id) => `${SERVICE_PREFIX}${id}`), "timeline", "budget"];
+  }
 
   switch (profile) {
     case "site_vitrine":
@@ -376,8 +415,11 @@ function getSequenceForProfile(profile = "custom") {
   }
 }
 
-function createEmptyBrief(projectDescription = "") {
+function createEmptyBrief(projectDescription = "", services = []) {
   const seeded = {
+    services: normalizeNeeds(services),
+    serviceDetails: {},
+    projectTypeAuto: false,
     projectType: "",
     sector: "",
     primaryGoal: "",
@@ -397,15 +439,26 @@ function createEmptyBrief(projectDescription = "") {
 }
 
 function sanitizeBrief(brief = {}, projectDescription = "") {
-  const seed = createEmptyBrief(projectDescription);
-
-  return {
+  const services = normalizeNeeds(brief.services);
+  const seed = createEmptyBrief(projectDescription, services);
+  const safe = {
     ...seed,
     ...brief,
+    services,
+    serviceDetails: normalizeServiceDetails(brief.serviceDetails, services),
+    projectTypeAuto: Boolean(brief.projectTypeAuto),
     keyFeatures: Array.isArray(brief.keyFeatures)
       ? uniqueList(brief.keyFeatures.map((item) => String(item || "").trim()).filter(Boolean)).slice(0, 8)
       : splitList(brief.keyFeatures),
   };
+
+  /* Type de projet déduit des besoins cochés, tant que le client ne l’a pas réécrit. */
+  if (services.length && (!isFilled(brief.projectType) || safe.projectTypeAuto || safe.projectType === seed.projectType)) {
+    safe.projectType = needsLabel(services);
+    safe.projectTypeAuto = true;
+  }
+
+  return safe;
 }
 
 function enrichBriefFromText(brief = {}, source = "", options = {}) {
@@ -441,6 +494,10 @@ function enrichBriefFromText(brief = {}, source = "", options = {}) {
 
 function mapFieldValue(field, value, _brief = {}, _projectDescription = "") {
   const cleaned = String(value || "").trim();
+
+  if (isServiceField(field)) {
+    return cleaned;
+  }
 
   if (!cleaned) {
     return field === "keyFeatures" ? [] : "";
@@ -495,6 +552,23 @@ function buildProjectTypeReplies() {
 function buildQuestionMeta(field, brief = {}, projectDescription = "") {
   const safeBrief = sanitizeBrief(brief, projectDescription);
   const profile = detectProjectProfile(safeBrief, projectDescription);
+
+  /* Question adaptée au besoin coché (site/data/needs.js). */
+  if (isServiceField(field)) {
+    const need = needById[serviceIdOf(field)];
+    if (need) {
+      return { ...need.question };
+    }
+  }
+
+  /* Plusieurs besoins ou projet complet : « ce qui existe déjà » plutôt que l'état d'un seul projet. */
+  if (field === "currentState" && (safeBrief.services.length > 1 || safeBrief.services.includes("projet-complet"))) {
+    return {
+      question: "Qu'avez-vous déjà : un nom, un logo, un site, un nom de domaine, des contenus, des outils ?",
+      placeholder: "Ex. un nom et un logo, pas encore de site, des devis faits sur Excel.",
+      quickReplies: ["Rien encore, on part de zéro", "Un nom et un logo", "Un site existant", "Des outils déjà en place", "Des contenus prêts"],
+    };
+  }
   const projectLabel = safeBrief.projectType
     ? safeBrief.projectType.toLowerCase()
     : "ce projet";
@@ -650,25 +724,55 @@ function getFieldPrompt(field, brief = {}, projectDescription = "") {
   return buildQuestionMeta(field, brief, projectDescription).question;
 }
 
+function getBriefSequence(safeBrief, projectDescription = "") {
+  const profile = detectProjectProfile(safeBrief, projectDescription);
+  return getSequenceForProfile(profile, safeBrief.services);
+}
+
 function computeProgress(brief = {}, projectDescription = "") {
   const safeBrief = sanitizeBrief(brief, projectDescription);
-  const filled = REQUIRED_FIELD_SEQUENCE.filter((field) => isFilled(safeBrief[field])).length;
-  return Math.round((filled / REQUIRED_FIELD_SEQUENCE.length) * 100);
+  const required = safeBrief.services.length
+    ? getBriefSequence(safeBrief, projectDescription).filter((field) => field !== "budget")
+    : REQUIRED_FIELD_SEQUENCE;
+  const filled = required.filter((field) => isFieldFilled(safeBrief, field)).length;
+  return Math.round((filled / required.length) * 100);
 }
 
 function getNextMissingField(brief = {}, projectDescription = "") {
   const safeBrief = sanitizeBrief(brief, projectDescription);
-  const profile = detectProjectProfile(safeBrief, projectDescription);
-  const sequence = getSequenceForProfile(profile);
+  const sequence = getBriefSequence(safeBrief, projectDescription);
 
-  return sequence.find((field) => !isFilled(safeBrief[field])) || null;
+  return sequence.find((field) => !isFieldFilled(safeBrief, field)) || null;
+}
+
+/*
+ * Mode IA avec des besoins cochés : la question proposée par le modèle doit appartenir au parcours
+ * et ne pas être déjà renseignée ; sinon, on pose la prochaine question attendue du parcours.
+ */
+function alignNextField(brief = {}, projectDescription = "", proposedField = null) {
+  const safeBrief = sanitizeBrief(brief, projectDescription);
+  if (!safeBrief.services.length) {
+    return { field: proposedField, replaced: false };
+  }
+  const sequence = getBriefSequence(safeBrief, projectDescription);
+  if (proposedField && sequence.includes(proposedField) && !isFieldFilled(safeBrief, proposedField)) {
+    return { field: proposedField, replaced: false };
+  }
+  return { field: getNextMissingField(safeBrief, projectDescription), replaced: true };
 }
 
 function summarizeBriefDraft(brief, projectDescription = "") {
   const safeBrief = sanitizeBrief(brief, projectDescription);
   const parts = [];
 
-  if (safeBrief.projectType) {
+  if (safeBrief.services.length) {
+    const labels = safeBrief.services.map((id) => needById[id].label);
+    parts.push(
+      safeBrief.sector
+        ? `Besoins : ${labels.join(", ")} (secteur : ${safeBrief.sector.toLowerCase()}).`
+        : `Besoins : ${labels.join(", ")}.`,
+    );
+  } else if (safeBrief.projectType) {
     parts.push(
       safeBrief.sector
         ? `Projet de ${safeBrief.projectType.toLowerCase()} dans ${safeBrief.sector.toLowerCase()}.`
@@ -678,6 +782,12 @@ function summarizeBriefDraft(brief, projectDescription = "") {
 
   if (safeBrief.primaryGoal) {
     parts.push(`Objectif principal : ${safeBrief.primaryGoal}.`);
+  }
+
+  for (const id of safeBrief.services) {
+    if (safeBrief.serviceDetails[id]) {
+      parts.push(`${needById[id].label} : ${safeBrief.serviceDetails[id]}.`);
+    }
   }
 
   if (safeBrief.targetAudience || safeBrief.currentState) {
@@ -717,7 +827,12 @@ function applyAnswerToBrief({ brief = {}, activeField, userMessage = "", project
 
   const nextBrief = enrichBriefFromText(safeBrief, value, { fillOnlyEmpty: true });
 
-  if (activeField) {
+  if (isServiceField(activeField)) {
+    const id = serviceIdOf(activeField);
+    if (nextBrief.services.includes(id)) {
+      nextBrief.serviceDetails = { ...nextBrief.serviceDetails, [id]: mapFieldValue(activeField, value) };
+    }
+  } else if (activeField) {
     if (activeField === "keyFeatures") {
       nextBrief.keyFeatures = uniqueList([
         ...nextBrief.keyFeatures,
@@ -740,6 +855,10 @@ function buildAssistantLead(brief = {}, projectDescription = "") {
   const safeBrief = sanitizeBrief(brief, projectDescription);
   const profile = detectProjectProfile(safeBrief, projectDescription);
 
+  if (safeBrief.services.includes("projet-complet") || safeBrief.services.length > 1) {
+    return "Je vois plusieurs besoins. Je pose quelques questions communes, puis une question ciblée pour chacun, avant le délai et le budget.";
+  }
+
   if (profile === "saas" || profile === "plateforme") {
     return "Je vois l'orientation produit. On va cadrer le besoin comme un MVP exploitable, pas comme une liste d'idees.";
   }
@@ -759,8 +878,8 @@ function buildAssistantLead(brief = {}, projectDescription = "") {
   return "Je pose une base de brief exploitable cote dev et produit, puis on affine point par point.";
 }
 
-function buildFallbackConversationStart(projectDescription = "") {
-  const brief = sanitizeBrief(createEmptyBrief(projectDescription), projectDescription);
+function buildFallbackConversationStart(projectDescription = "", services = []) {
+  const brief = sanitizeBrief(createEmptyBrief(projectDescription, services), projectDescription);
   brief.summary = summarizeBriefDraft(brief, projectDescription);
   const nextField = getNextMissingField(brief, projectDescription);
   const meta = nextField ? buildQuestionMeta(nextField, brief, projectDescription) : null;
@@ -912,6 +1031,7 @@ function asList(value) {
 }
 
 module.exports = {
+  alignNextField,
   applyAnswerToBrief,
   buildFallbackConversationStart,
   buildFallbackSummary,

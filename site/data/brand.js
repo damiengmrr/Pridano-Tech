@@ -13,7 +13,7 @@ const brand = {
   countryCode: 'FR',
   coordinates: '43°36′ N · 3°52′ E',
   tagline: 'Des sites qui marquent. Des outils qui font avancer.',
-  description: 'Pridano crée des sites web sur mesure qui renforcent votre image. Studio à Montpellier : création, refonte, SaaS et logiciels métier.',
+  description: 'Pridano Tech, studio digital à Montpellier : sites web, e-commerce, logiciels sur mesure, automatisations et agents IA. Un seul partenaire pour tout votre numérique.',
   logoPng: '/assets/brand/pridano-tech-logo-512.png',
   /*
    * ───── À COMPLÉTER PAR L’ÉQUIPE ─────
@@ -125,6 +125,12 @@ const pricing = [
     perks: ['Atelier de cadrage offert', 'Prix ferme, sans surprise', '3 mois de garantie', 'Le code vous appartient'],
     note: 'Pour un SaaS complet (paiement en ligne, espace client) : sur devis.',
   },
+  /* Validé par les fondateurs le 3 novembre 2026. Affiché sur la carte « Landing page » du catalogue
+     (site/data/catalog.js) ; n'apparaît pas dans la section « Combien coûte un site web ? ». */
+  { id: 'landing', label: 'Landing page', from: 490, href: '/contact?projet=site', perks: [] },
+  /* E-commerce : validé par les fondateurs le 12 novembre 2026, après comparaison des prix du marché. */
+  { id: 'boutique', label: 'Création de boutique', from: 1490, href: '/devis?besoins=e-commerce', perks: [] },
+  { id: 'boutique-refonte', label: 'Refonte de boutique', from: 990, href: '/devis?besoins=e-commerce', perks: [] },
 ];
 const pricingTax = 'HT';
 const pricingNote = 'Le périmètre exact est précisé dans la proposition, avant tout engagement.'; // ex. 'Prix HT, contenu et périmètre précisés dans la proposition.'
