@@ -89,7 +89,7 @@ function csp() {
     "style-src 'self' 'unsafe-inline'",
     "img-src 'self' data: blob:",
     "font-src 'self'",
-    "connect-src 'self' https://cloud.umami.is https://api-gateway.umami.dev",
+    "connect-src 'self' https://cloud.umami.is https://api-gateway.umami.dev https://gateway.umami.is",
     "worker-src 'self'",
     "frame-src 'none'",
     "object-src 'none'",

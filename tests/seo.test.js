@@ -8,6 +8,18 @@ const production = { PUBLIC_SITE_URL: 'https://pridanotech.fr', NODE_ENV: 'produ
 const render = (env) => build({ env, write: false, bundle: false });
 const jsonLd = (html) => [...html.matchAll(/<script type="application\/ld\+json">(.*?)<\/script>/g)].map((m) => JSON.parse(m[1]));
 
+test('Umami : suivi sur chaque page de production et connexions autorisées', async () => {
+  const { files } = await render(production);
+  for (const [route, { file }] of Object.entries(routes)) {
+    const html = files.get(file);
+    assert.equal((html.match(/https:\/\/cloud\.umami\.is\/script\.js/g) || []).length, 1, route);
+    assert.match(html, /data-website-id="8c9f201d-bbd1-46e9-bf2c-cfe5a4a9f71d"/);
+    assert.match(html, /connect-src[^;]*https:\/\/gateway\.umami\.is/);
+  }
+  const preview = await render({ ...production, CONTEXT: 'deploy-preview' });
+  assert.doesNotMatch(preview.files.get('index.html'), /https:\/\/cloud\.umami\.is\/script\.js/);
+});
+
 test('production : indexation, canonical public, sitemap et robots', async () => {
   const { files } = await render(production);
   for (const [route, { file, page }] of Object.entries(routes)) {
